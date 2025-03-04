@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Usuarios-DragonGym</title>
+    <?php include_once("head.php"); ?>
+    <script type="module" src="../asset/js/funcionesGasto.js?v=3.9"></script>
+</head>
+
+<body class="bg-light">
+    <div class="container mt-5">
+        <h2 class="text-center">Gestión de Gastos</h2>
+
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregar">
+            Agregar Gasto
+        </button>
+
+        <!-- Modal AGREGAR -->
+        <div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalAgregarLabel">Agregar Gasto</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formAgregarGasto">
+                            <div class="mb-3">
+                                <label for="Descripcion" class="form-label">Descripción</label>
+                                <input type="text" class="form-control" id="Descripcion" name="Descripcion" maxlength="100" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="Fecha" class="form-label">Fecha</label>
+                                <input type="date" class="form-control" id="Fecha" name="Fecha" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="Precio" class="form-label">Precio</label>
+                                <input type="number" class="form-control" id="Precio" name="Precio" min="0" max="1000000" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal EDITAR -->
+        <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalEditarLabel">Editar Gasto</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formEditarGasto">
+                            <input type="hidden" id="ID_Gasto" name="ID_Gasto">
+                            <div class="mb-3">
+                                <label for="DescripcionEdit" class="form-label">Descripción</label>
+                                <input type="text" class="form-control" id="DescripcionEdit" name="DescripcionEdit" maxlength="100" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="FechaEdit" class="form-label">Fecha</label>
+                                <input type="date" class="form-control" id="FechaEdit" name="FechaEdit" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="PrecioEdit" class="form-label">Precio</label>
+                                <input type="number" class="form-control" id="PrecioEdit" name="PrecioEdit" min="0" max="1000000" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Actualizar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla de Gastos -->
+        <div class="mt-5">
+            <h4 class="text-center">Lista de Gastos</h4>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped" id="ListaGastos">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Fecha</th>
+                            <th>Usuario</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <a class="btn btn-info" href="../salir.php">Cerrar Sesión</a>
+        <a class="btn btn-info" href="vistas/miembros.php">Gastos</a>
+    </div>
+</body>
+</html>
