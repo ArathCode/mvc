@@ -37,6 +37,8 @@
                                 <label for="Precio" class="form-label">Precio</label>
                                 <input type="number" class="form-control" id="Precio" name="Precio" min="0" max="1000000" required>
                             </div>
+                            <input type="hidden" name="ID_Usuario" id="ID_Usuario" value="<?php echo $_SESSION['ID_Usuario']; ?>">
+
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </form>
                     </div>
@@ -67,6 +69,7 @@
                                 <label for="PrecioEdit" class="form-label">Precio</label>
                                 <input type="number" class="form-control" id="PrecioEdit" name="PrecioEdit" min="0" max="1000000" required>
                             </div>
+                            <input type="hidden" name="ID_UsuarioEdit" id="ID_UsuarioEdit" value="<?php echo $_SESSION['ID_Usuario']; ?>">
                             <button type="submit" class="btn btn-primary">Actualizar</button>
                         </form>
                     </div>
@@ -94,9 +97,10 @@
                 </table>
             </div>
         </div>
-
-        <a class="btn btn-info" href="../salir.php">Cerrar Sesión</a>
-        <a class="btn btn-info" href="vistas/miembros.php">Gastos</a>
+        <a class="btn btn-info" href="index.php?pag=gastos">Gastos</a>
+        <a class="btn btn-info" href="index.php?pag=admin">Usuarios</a>
+        <a class="btn btn-error" href="../salir.php">Cerrar Sesión</a>
+        
     </div>
 </body>
 </html>

@@ -238,8 +238,9 @@
                 </table>
             </div>
         </div>
-        <a class="btn btn-info" href="salir.php">Cerrar Sesión</a>
-        <a href="index.php?pag=gastos">Ir a otra página</a>
+        <a class="btn btn-info" href="index.php?pag=gastos">Gastos</a>
+        <a class="btn btn-info" href="index.php?pag=admin">Usuarios</a>
+        <a class="btn btn-error" href="../salir.php">Cerrar Sesión</a>
     </div>
     
 

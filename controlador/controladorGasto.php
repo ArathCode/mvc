@@ -25,11 +25,12 @@ if (isset($_POST["ope"])) {
         }
     }
     // Agregar un gasto
-    elseif ($ope == "AGREGAR" && isset($_POST["Descripcion"], $_POST["Precio"], $_POST["Fecha"])) {
+    elseif ($ope == "AGREGAR" && isset($_POST["Descripcion"], $_POST["Precio"], $_POST["Fecha"], $_POST["ID_Usuario"])) {
         $datos = array(
             "Descripcion" => $_POST["Descripcion"],
             "Precio" => $_POST["Precio"],
             "Fecha" => $_POST["Fecha"],
+            "ID_Usuario" => $_POST["ID_Usuario"]
            
         );
 
@@ -38,12 +39,13 @@ if (isset($_POST["ope"])) {
         echo json_encode($info);
     }
     // Editar un gasto
-    elseif ($ope == "EDITAR" && isset($_POST["ID_Gasto"], $_POST["DescripcionEdit"], $_POST["PrecioEdit"], $_POST["FechaEdit"])) {
+    elseif ($ope == "EDITAR" && isset($_POST["ID_Gasto"], $_POST["DescripcionEdit"], $_POST["PrecioEdit"], $_POST["FechaEdit"], $_POST["ID_UsuarioEdit"])) {
         $datos = array(
             "ID_gasto" => $_POST["ID_Gasto"],
             "Descripcion" => $_POST["DescripcionEdit"],
             "Precio" => $_POST["PrecioEdit"],
-            "Fecha" => $_POST["FechaEdit"]
+            "Fecha" => $_POST["FechaEdit"],
+            "ID_Usuario" => $_POST["ID_UsuarioEdit"]
          
         );
 

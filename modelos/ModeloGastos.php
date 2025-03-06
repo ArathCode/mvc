@@ -22,14 +22,15 @@ class Gastos
     public function Agregar($datos)
     {
         $enlace = dbConectar();
-        $sql = "INSERT INTO gastos (Descripcion, Precio, Fecha) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO gastos (Descripcion, Precio, Fecha, ID_Usuario) VALUES (?, ?, ?, ?)";
         $consulta = $enlace->prepare($sql);
 
         $consulta->bind_param(
-            "sds",
+            "sdsi",
             $datos["Descripcion"],
             $datos["Precio"],
-            $datos["Fecha"]
+            $datos["Fecha"],
+            $datos["ID_Usuario"]
            
         );
 
@@ -39,15 +40,15 @@ class Gastos
     public function Editar($datos)
     {
         $enlace = dbConectar();
-        $sql = "UPDATE gastos SET Descripcion=?, Precio=?, Fecha=? WHERE ID_Gasto=?";
+        $sql = "UPDATE gastos SET Descripcion=?, Precio=?, Fecha=?, ID_Usuario=? WHERE ID_Gasto=?";
         $consulta = $enlace->prepare($sql);
 
         $consulta->bind_param(
-            "sdsi",
+            "sdsii",
             $datos["Descripcion"],
             $datos["Precio"],
             $datos["Fecha"],
-          
+            $datos["ID_Usuario"],
             $datos["ID_gasto"]
         );
 

@@ -6,7 +6,7 @@ class Usuarios
     $enlace = dbConectar();
     session_start();
 
-    $sql = "SELECT Nombre, ApellidoP, ApellidoM, usutip, Contra FROM usuarios WHERE NombreUsu=?";
+    $sql = "SELECT Nombre, ApellidoP, ApellidoM, usutip, Contra, ID_Usuario FROM usuarios WHERE NombreUsu=?";
     $consulta = $enlace->prepare($sql);
     $consulta->bind_param("s", $correo);
     $consulta->execute();
@@ -22,6 +22,7 @@ class Usuarios
             $_SESSION["correo"] = $correo;
             $_SESSION["nombre"] = "{$usuario['Nombre']} {$usuario['ApellidoP']} {$usuario['ApellidoM']}";
             $_SESSION["tipo"] = "{$usuario['usutip']}";
+            $_SESSION["ID_Usuario"] = "{$usuario['ID_Usuario']}";
             $_SESSION["LAST_ACTIVITY"] = time();
             return array(true, $usuario['usutip']);
         } else {
