@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", (event)=>
                                 didOpen: () => {
                                   setTimeout(() => {
                                     window.location.href = data.ruta;
-                                  }, 2000);
+                                  }, 1000);
                                 }
                               });
                               

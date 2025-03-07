@@ -1,7 +1,7 @@
 import { validaLargo, validaRango } from "./validaciones.js?v=3.7";
 document.addEventListener("DOMContentLoaded", () => {
     listarGastos();
-
+    document.getElementById("btnListar").addEventListener("click", listarGastos);
     // Agregar gasto
     const formGasto = document.querySelector("#formAgregarGasto");
     if (formGasto) {
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
            agregarGasto();
         });
     }
-
+    
     // Editar y eliminar
     const listaGastos = document.querySelector("#ListaGastos");
     if (listaGastos) {
@@ -46,28 +46,42 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Función para listar gastos
-function listarGastos() {
+export function listarGastos() {
+    const fechaInicio = document.getElementById("fechaInicio").value;
+    const fechaFin = document.getElementById("fechaFin").value;
+
+    let params = new URLSearchParams({ "ope": "LISTARGASTOS" });
+
+    // Agregar fechas si se seleccionaron
+    if (fechaInicio) params.append("fechaInicio", fechaInicio);
+    if (fechaFin) params.append("fechaFin", fechaFin);
+
     fetch('../controlador/controladorGasto.php', {
         method: 'POST',
-        body: new URLSearchParams({ "ope": "LISTARGASTOS" })
+        body: params
     })
     .then(response => response.json())
     .then(data => {
-        const tbody = document.querySelector("#ListaGastos tbody");
-        tbody.innerHTML = "";
+        const contenedor = document.querySelector("#ListaGastos");
+        contenedor.innerHTML = ""; 
+
+        if (data.lista.length === 0) {
+            contenedor.innerHTML = "<p>No hay gastos en este rango de fechas.</p>";
+            return;
+        }
+
         data.lista.forEach(gasto => {
-            tbody.innerHTML += `
-            <tr>
-                <td>${gasto.ID_Gasto}</td>
-                <td>${gasto.Descripcion}</td>
-                <td>${gasto.Precio}</td>
-                <td>${gasto.Fecha}</td>
-                <td>${gasto.Nombre}</td> <!-- Cambiado de ID_Usuario a Nombre -->
-                <td>
+            contenedor.innerHTML += `
+            <div class="gasto-card">
+                <h3>${gasto.Descripcion}</h3>
+                <p><strong>Monto:</strong> $${gasto.Precio}</p>
+                <p><strong>Fecha:</strong> ${gasto.Fecha}</p>
+                <p><strong>Registrado por:</strong> ${gasto.Nombre}</p>
+                <div class="card-buttons">
                     <button class="btn btn-warning btn-editar" data-id="${gasto.ID_Gasto}" data-bs-toggle="modal" data-bs-target="#modalEditar">Editar</button>
                     <button class="btn btn-danger btn-eliminar" data-id="${gasto.ID_Gasto}">Eliminar</button>
-                </td>
-            </tr>
+                </div>
+            </div>
             `;
         });
     })
@@ -75,6 +89,7 @@ function listarGastos() {
         Swal.fire("Error", "No se pudo cargar la lista de gastos: " + error.message, "error");
     });
 }
+
 
 function agregarGasto() {
     const form = document.querySelector("#formAgregarGasto");

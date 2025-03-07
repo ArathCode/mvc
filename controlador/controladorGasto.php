@@ -8,13 +8,21 @@ if (isset($_POST["ope"])) {
 
     // Listar gastos
     if ($ope == "LISTARGASTOS") {
-        $lista = $gasto->ListarGastos();
+        // Obtener fechas del POST (si existen)
+        $fechaInicio = isset($_POST["fechaInicio"]) ? $_POST["fechaInicio"] : null;
+        $fechaFin = isset($_POST["fechaFin"]) ? $_POST["fechaFin"] : null;
+    
+        // Llamar a la función en el modelo con los filtros de fecha
+        $lista = $gasto->ListarGastos($fechaInicio, $fechaFin);
+    
+        // Devolver la respuesta en JSON
         $info = array(
             "success" => true,
             "lista" => $lista
         );
         echo json_encode($info);
     }
+    
     // Obtener un gasto
     elseif ($ope == "OBTENER" && isset($_POST["ID_Gasto"])) {
         $gastoData = $gasto->ObtenerGasto($_POST["ID_Gasto"]);

@@ -17,15 +17,15 @@
 
       
         if($pag == "admin" && $tipoUsuario == "admin") {
-            include_once("vistas/usuarios.php");
+            include_once("vistas/home.php");
         }
         
-        elseif($pag == "gastos" && $tipoUsuario == "admin") {
+        elseif($pag == "gastos" && ($tipoUsuario == "admin"  )) {
             include_once("vistas/Gastos.php");
         }
         
-        elseif($pag == "user" && $tipoUsuario == "general") {
-            include_once("vistas/usuario.php");
+        elseif($pag == "usuarios" && $tipoUsuario == "admin") {
+            include_once("vistas/usuarios.php");
         }
         else {
             echo "<h2>Acceso denegado. Verifique su usuario.</h2>";

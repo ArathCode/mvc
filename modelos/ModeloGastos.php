@@ -1,23 +1,37 @@
 <?php //modelo 
 class Gastos
 {
-    public function ListarGastos()
-{
-    $enlace = dbConectar();
-    $sql = "SELECT gastos.*, Usuarios.Nombre 
-            FROM gastos 
-            JOIN Usuarios ON gastos.ID_Usuario = Usuarios.ID_Usuario";
-    $consulta = $enlace->prepare($sql);
-    $consulta->execute();
-    $result = $consulta->get_result();
-
-    $gastos = [];
-    while ($gasto = $result->fetch_assoc()) {
-        $gastos[] = $gasto;
+    public function ListarGastos($fechaInicio = null, $fechaFin = null) {
+        $enlace = dbConectar();
+        $sql = "SELECT g.ID_Gasto, g.Descripcion, g.Precio, g.Fecha, u.Nombre 
+                FROM gastos g 
+                JOIN usuarios u ON g.ID_Usuario = u.ID_Usuario";
+        
+        $parametros = [];
+        if ($fechaInicio && $fechaFin) {
+            $sql .= " WHERE g.Fecha BETWEEN ? AND ?";
+            $parametros[] = $fechaInicio;
+            $parametros[] = $fechaFin;
+        }
+    
+        $consulta = $enlace->prepare($sql);
+        
+        if (!empty($parametros)) {
+            $consulta->bind_param("ss", ...$parametros);
+        }
+    
+        $consulta->execute();
+        $result = $consulta->get_result();
+        $gastos = [];
+    
+        while ($row = $result->fetch_assoc()) {
+            $gastos[] = $row;
+        }
+    
+        $enlace->close();
+        return $gastos;
     }
-
-    return $gastos;
-}
+    
 
     public function Agregar($datos)
     {

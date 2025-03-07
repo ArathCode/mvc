@@ -4,7 +4,9 @@
 <head>
     <title>Usuarios-DragonGym</title>
     <?php include_once("head.php"); ?>
-    <script type="module" src="../asset/js/funcionesGasto.js?v=3.9"></script>
+    <script type="module" src="../asset/js/funcionesGasto.js?v=4.4"></script>
+    
+    <link rel="stylesheet" href="../asset/css/gastostarjetas.css">
 </head>
 
 <body class="bg-light">
@@ -14,6 +16,15 @@
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregar">
             Agregar Gasto
         </button>
+        <div class="filtro-fecha">
+        <label for="fechaInicio">Desde:</label>
+        <input type="date" id="fechaInicio">
+        
+        <label for="fechaFin">Hasta:</label>
+        <input type="date" id="fechaFin">
+        
+        <button id="btnListar">Filtrar</button>
+    </div>
 
         <!-- Modal AGREGAR -->
         <div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
@@ -27,7 +38,7 @@
                         <form id="formAgregarGasto">
                             <div class="mb-3">
                                 <label for="Descripcion" class="form-label">Descripción</label>
-                                <input type="text" class="form-control" id="Descripcion" name="Descripcion" maxlength="100" required>
+                                <input type="text" class="form-control" id="Descripcion" name="Descripcion" maxlength="200" required>
                             </div>
                             <div class="mb-3">
                                 <label for="Fecha" class="form-label">Fecha</label>
@@ -59,7 +70,7 @@
                             <input type="hidden" id="ID_Gasto" name="ID_Gasto">
                             <div class="mb-3">
                                 <label for="DescripcionEdit" class="form-label">Descripción</label>
-                                <input type="text" class="form-control" id="DescripcionEdit" name="DescripcionEdit" maxlength="100" required>
+                                <input type="text" class="form-control" id="DescripcionEdit" name="DescripcionEdit" maxlength="200" required>
                             </div>
                             <div class="mb-3">
                                 <label for="FechaEdit" class="form-label">Fecha</label>
@@ -80,27 +91,15 @@
         <!-- Tabla de Gastos -->
         <div class="mt-5">
             <h4 class="text-center">Lista de Gastos</h4>
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped" id="ListaGastos">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>ID</th>
-                            <th>Descripción</th>
-                            <th>Precio</th>
-                            <th>Fecha</th>
-                            <th>Usuario</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+            <div class="table-responsive" id="ListaGastos">
+
             </div>
         </div>
         <a class="btn btn-info" href="index.php?pag=gastos">Gastos</a>
         <a class="btn btn-info" href="index.php?pag=admin">Usuarios</a>
         <a class="btn btn-error" href="../salir.php">Cerrar Sesión</a>
-        
+
     </div>
 </body>
+
 </html>
