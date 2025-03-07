@@ -1,7 +1,7 @@
 import { validaLargo, validaRango } from "./validaciones.js?v=3.7";
 document.addEventListener("DOMContentLoaded", () => {
     listarGastos();
-    document.getElementById("btnListar").addEventListener("click", listarGastos);
+    
     // Agregar gasto
     const formGasto = document.querySelector("#formAgregarGasto");
     if (formGasto) {
@@ -46,13 +46,19 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Función para listar gastos
+let paginaActual = 1;
+const registrosPorPagina = 10;
+
 export function listarGastos() {
     const fechaInicio = document.getElementById("fechaInicio").value;
     const fechaFin = document.getElementById("fechaFin").value;
 
-    let params = new URLSearchParams({ "ope": "LISTARGASTOS" });
+    let params = new URLSearchParams({
+        "ope": "LISTARGASTOS",
+        "pagina": paginaActual,
+        "registrosPorPagina": registrosPorPagina
+    });
 
-    // Agregar fechas si se seleccionaron
     if (fechaInicio) params.append("fechaInicio", fechaInicio);
     if (fechaFin) params.append("fechaFin", fechaFin);
 
@@ -63,32 +69,69 @@ export function listarGastos() {
     .then(response => response.json())
     .then(data => {
         const contenedor = document.querySelector("#ListaGastos");
-        contenedor.innerHTML = ""; 
+        contenedor.innerHTML = "";
 
-        if (data.lista.length === 0) {
+        if (!data.lista || data.lista.length === 0) {
             contenedor.innerHTML = "<p>No hay gastos en este rango de fechas.</p>";
             return;
         }
 
         data.lista.forEach(gasto => {
             contenedor.innerHTML += `
-            <div class="gasto-card">
-                <h3>${gasto.Descripcion}</h3>
-                <p><strong>Monto:</strong> $${gasto.Precio}</p>
-                <p><strong>Fecha:</strong> ${gasto.Fecha}</p>
-                <p><strong>Registrado por:</strong> ${gasto.Nombre}</p>
-                <div class="card-buttons">
-                    <button class="btn btn-warning btn-editar" data-id="${gasto.ID_Gasto}" data-bs-toggle="modal" data-bs-target="#modalEditar">Editar</button>
-                    <button class="btn btn-danger btn-eliminar" data-id="${gasto.ID_Gasto}">Eliminar</button>
+                <div class="gasto-card">
+                    <h3>${gasto.Descripcion}</h3>
+                    <p><strong>Monto:</strong> $${gasto.Precio}</p>
+                    <p><strong>Fecha:</strong> ${gasto.Fecha}</p>
+                    <p><strong>Registrado por:</strong> ${gasto.Nombre}</p>
+                    <div class="card-buttons">
+                        <button class="btn btn-warning btn-editar" data-id="${gasto.ID_Gasto}" data-bs-toggle="modal" data-bs-target="#modalEditar">Editar</button>
+                        <button class="btn btn-danger btn-eliminar" data-id="${gasto.ID_Gasto}">Eliminar</button>
+                    </div>
                 </div>
-            </div>
             `;
         });
+
+        // Actualizar la paginación
+        actualizarPaginacion(data.totalPaginas);
     })
     .catch(error => {
         Swal.fire("Error", "No se pudo cargar la lista de gastos: " + error.message, "error");
     });
 }
+
+// Función para actualizar la paginación
+function actualizarPaginacion(totalPaginas) {
+    const paginacion = document.querySelector("#paginacion");
+
+    if (!paginacion) {
+        console.error("Error: No se encontró el contenedor #paginacion.");
+        return;
+    }
+
+    paginacion.innerHTML = ""; // Limpiar paginación previa
+
+    for (let i = 1; i <= totalPaginas; i++) {
+        let boton = document.createElement("button");
+        boton.classList.add("btn", i === paginaActual ? "btn-primary" : "btn-outline-primary");
+        boton.textContent = i;
+        boton.addEventListener("click", () => cambiarPagina(i)); // ✅ Llamar correctamente la función
+
+        paginacion.appendChild(boton);
+    }
+}
+
+// Función para cambiar de página
+function cambiarPagina(nuevaPagina) {
+    paginaActual = nuevaPagina;
+    listarGastos(paginaActual); // ✅ Pasar la nueva página a la función
+}
+
+// Evento para cambiar página
+document.getElementById("btnListar").addEventListener("click", () => {
+    paginaActual = 1; // Reiniciar a la primera página cuando se filtren los datos
+    listarGastos();
+});
+
 
 
 function agregarGasto() {

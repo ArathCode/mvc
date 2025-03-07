@@ -4,7 +4,7 @@
 <head>
     <title>Usuarios-DragonGym</title>
     <?php include_once("head.php"); ?>
-    <script type="module" src="../asset/js/funcionesGasto.js?v=4.4"></script>
+    <script type="module" src="../asset/js/funcionesGasto.js?v=4.9"></script>
     
     <link rel="stylesheet" href="../asset/css/gastostarjetas.css">
 </head>
@@ -92,9 +92,11 @@
         <div class="mt-5">
             <h4 class="text-center">Lista de Gastos</h4>
             <div class="table-responsive" id="ListaGastos">
-
+            
             </div>
+            <div id="paginacion" class="mt-3"></div>
         </div>
+        
         <a class="btn btn-info" href="index.php?pag=gastos">Gastos</a>
         <a class="btn btn-info" href="index.php?pag=admin">Usuarios</a>
         <a class="btn btn-error" href="../salir.php">Cerrar Sesión</a>
