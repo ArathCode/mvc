@@ -20,13 +20,13 @@ class Gastos
         $parametros = [];
         $tipos = ""; 
     
-        // Si hay filtro de fechas, agregarlo a la consulta
+       
         if (!empty($fechaInicio) && !empty($fechaFin)) {
             $sql .= " WHERE g.Fecha BETWEEN ? AND ?";
             $countSql .= " WHERE g.Fecha BETWEEN ? AND ?";
             $parametros[] = $fechaInicio;
             $parametros[] = $fechaFin;
-            $tipos .= "ss"; // Dos parámetros de tipo string
+            $tipos .= "ss";
         }
     
         // Ordenar y limitar resultados
