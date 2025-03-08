@@ -5,52 +5,54 @@ class Gastos
     public function ListarGastos($fechaInicio = null, $fechaFin = null, $pagina = 1, $registrosPorPagina = 10) {
         $enlace = dbConectar();
     
-        // Calcular OFFSET para la paginación
+       
         $offset = ($pagina - 1) * $registrosPorPagina;
     
-        // Consulta base
+        
         $sql = "SELECT g.ID_Gasto, g.Descripcion, g.Precio, g.Fecha, u.Nombre 
                 FROM gastos g 
                 JOIN usuarios u ON g.ID_Usuario = u.ID_Usuario";
     
-        $countSql = "SELECT COUNT(*) as total FROM gastos g JOIN usuarios u ON g.ID_Usuario = u.ID_Usuario";
+        $countSql = "SELECT COUNT(*) as total 
+                     FROM gastos g 
+                     JOIN usuarios u ON g.ID_Usuario = u.ID_Usuario";
     
         $parametros = [];
-        $tipos = ""; // Para bind_param
+        $tipos = ""; 
     
         // Si hay filtro de fechas, agregarlo a la consulta
-        if ($fechaInicio && $fechaFin) {
+        if (!empty($fechaInicio) && !empty($fechaFin)) {
             $sql .= " WHERE g.Fecha BETWEEN ? AND ?";
             $countSql .= " WHERE g.Fecha BETWEEN ? AND ?";
             $parametros[] = $fechaInicio;
             $parametros[] = $fechaFin;
-            $tipos .= "ss"; // Ambos son strings
+            $tipos .= "ss"; // Dos parámetros de tipo string
         }
     
         // Ordenar y limitar resultados
         $sql .= " ORDER BY g.Fecha DESC LIMIT ?, ?";
         $parametros[] = $offset;
         $parametros[] = $registrosPorPagina;
-        $tipos .= "ii"; // OFFSET y LIMIT son enteros
+        $tipos .= "ii"; 
     
-        // Preparar la consulta principal
-        $consulta = $enlace->prepare($sql);
-        
         // Preparar la consulta de conteo
         $countConsulta = $enlace->prepare($countSql);
-    
-        // Enlazar parámetros dinámicamente
-        if (!empty($parametros)) {
-            $consulta->bind_param($tipos, ...$parametros);
+        if (count($parametros) >= 2) {
+            $countConsulta->bind_param("ss", $parametros[0], $parametros[1]);
         }
-    
-        // Ejecutar la consulta de conteo
         $countConsulta->execute();
         $countResult = $countConsulta->get_result();
         $totalRegistros = $countResult->fetch_assoc()["total"];
         $totalPaginas = ceil($totalRegistros / $registrosPorPagina);
+        $countConsulta->close();
     
-        // Ejecutar la consulta principal
+     
+        $consulta = $enlace->prepare($sql);
+        if (count($parametros) > 0) {
+            $consulta->bind_param($tipos, ...$parametros);
+        }
+    
+        
         $consulta->execute();
         $result = $consulta->get_result();
         $gastos = [];
@@ -59,6 +61,8 @@ class Gastos
             $gastos[] = $row;
         }
     
+       
+        $consulta->close();
         $enlace->close();
     
         return [
@@ -67,6 +71,7 @@ class Gastos
             "paginaActual" => $pagina
         ];
     }
+    
     
 
     public function Agregar($datos)

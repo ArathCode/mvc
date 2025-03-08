@@ -4,7 +4,7 @@
 <head>
     <title>Usuarios-DragonGym</title>
     <?php include_once("head.php"); ?>
-    <script type="module" src="../asset/js/funcionesGasto.js?v=4.9"></script>
+    <script type="module" src="../asset/js/funcionesGasto.js?v=4.9.3"></script>
     
     <link rel="stylesheet" href="../asset/css/gastostarjetas.css">
 </head>

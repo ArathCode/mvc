@@ -7,12 +7,15 @@ if (isset($_POST["ope"])) {
     $gasto = new Gastos();
 
     // Listar gastos
+    header('Content-Type: application/json'); 
+
     if ($ope == "LISTARGASTOS") {
         $pagina = isset($_POST["pagina"]) ? intval($_POST["pagina"]) : 1;
         $registrosPorPagina = isset($_POST["registrosPorPagina"]) ? intval($_POST["registrosPorPagina"]) : 10;
     
-        $fechaInicio = isset($_POST["fechaInicio"]) ? $_POST["fechaInicio"] : null;
-        $fechaFin = isset($_POST["fechaFin"]) ? $_POST["fechaFin"] : null;
+        
+        $fechaInicio = isset($_POST["fechaInicio"]) && !empty($_POST["fechaInicio"]) ? $_POST["fechaInicio"] : "0000-01-01";
+        $fechaFin = isset($_POST["fechaFin"]) && !empty($_POST["fechaFin"]) ? $_POST["fechaFin"] : "2100-01-01";
     
         $lista = $gasto->ListarGastos($fechaInicio, $fechaFin, $pagina, $registrosPorPagina);
     

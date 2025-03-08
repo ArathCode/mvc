@@ -1,6 +1,6 @@
 import { validaLargo, validaRango } from "./validaciones.js?v=3.7";
 document.addEventListener("DOMContentLoaded", () => {
-    listarGastos();
+    
     
     // Agregar gasto
     const formGasto = document.querySelector("#formAgregarGasto");
@@ -49,33 +49,44 @@ document.addEventListener("DOMContentLoaded", () => {
 let paginaActual = 1;
 const registrosPorPagina = 10;
 
+// Función para listar gastos
 export function listarGastos() {
     const fechaInicio = document.getElementById("fechaInicio").value;
     const fechaFin = document.getElementById("fechaFin").value;
 
-    let params = new URLSearchParams({
-        "ope": "LISTARGASTOS",
-        "pagina": paginaActual,
-        "registrosPorPagina": registrosPorPagina
-    });
+    let params = new URLSearchParams();
+    params.append("ope", "LISTARGASTOS");
+    params.append("pagina", paginaActual);
+    params.append("registrosPorPagina", registrosPorPagina);
 
     if (fechaInicio) params.append("fechaInicio", fechaInicio);
     if (fechaFin) params.append("fechaFin", fechaFin);
 
     fetch('../controlador/controladorGasto.php', {
         method: 'POST',
-        body: params
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: params.toString()
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json(); // Convertir la respuesta a JSON
+    })
     .then(data => {
         const contenedor = document.querySelector("#ListaGastos");
         contenedor.innerHTML = "";
+
+        if (!data.success) {
+            throw new Error(data.error || "Error desconocido");
+        }
 
         if (!data.lista || data.lista.length === 0) {
             contenedor.innerHTML = "<p>No hay gastos en este rango de fechas.</p>";
             return;
         }
 
+        // Insertar los gastos en la página
         data.lista.forEach(gasto => {
             contenedor.innerHTML += `
                 <div class="gasto-card">
@@ -95,6 +106,7 @@ export function listarGastos() {
         actualizarPaginacion(data.totalPaginas);
     })
     .catch(error => {
+        console.error("Error en la carga de gastos:", error);
         Swal.fire("Error", "No se pudo cargar la lista de gastos: " + error.message, "error");
     });
 }
@@ -114,7 +126,7 @@ function actualizarPaginacion(totalPaginas) {
         let boton = document.createElement("button");
         boton.classList.add("btn", i === paginaActual ? "btn-primary" : "btn-outline-primary");
         boton.textContent = i;
-        boton.addEventListener("click", () => cambiarPagina(i)); // ✅ Llamar correctamente la función
+        boton.addEventListener("click", () => cambiarPagina(i));
 
         paginacion.appendChild(boton);
     }
@@ -123,16 +135,17 @@ function actualizarPaginacion(totalPaginas) {
 // Función para cambiar de página
 function cambiarPagina(nuevaPagina) {
     paginaActual = nuevaPagina;
-    listarGastos(paginaActual); // ✅ Pasar la nueva página a la función
+    listarGastos(); // Llamar la función para actualizar los datos
 }
 
-// Evento para cambiar página
+// Evento para filtrar por fecha
 document.getElementById("btnListar").addEventListener("click", () => {
     paginaActual = 1; // Reiniciar a la primera página cuando se filtren los datos
     listarGastos();
 });
 
-
+// Cargar gastos al iniciar la página
+listarGastos();
 
 function agregarGasto() {
     const form = document.querySelector("#formAgregarGasto");
