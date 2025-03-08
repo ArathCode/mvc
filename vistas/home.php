@@ -160,8 +160,8 @@
                                     <td>ID_Miembro</td>
                                     <td>Nombre</td>
                                     <td>Hora Entrada</td>
-                                    <td>Hora Salida</td>
-                                    <td>Estado</td>
+                                    <td>Precio</td>
+                                    <td>Fecha</td>
                                 </tr>
                             </thead>
 
@@ -206,7 +206,7 @@
             </div>
 
        <!-- ===== Modal visita ===== -->
-       <div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -214,34 +214,41 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                     </div>
                     <div class="modal-body">
-                        <form>
-                            <!-- ID Miembro (Select) -->
-                            <div class="mb-3">
+                    <form id="formAgregarAcceso">
+                        <div class="mb-3 d-flex align-items-center">
+                            <div class="me-3 flex-grow-1">
                                 <label for="idMiembro" class="form-label">ID Miembro</label>
-                                <select class="form-select" id="idMiembro" required>
-                                    <option value="">Seleccione un miembro</option>
-                                </select>
+                                <input type="number" class="form-control" id="idMiembro" name="ID_Miembro" placeholder="Escriba el ID" required>
                             </div>
-                            <!-- Fecha -->
-                            <div class="mb-3">
-                                <label for="fecha" class="form-label">Fecha</label>
-                                <input type="date" class="form-control" id="fecha" required>
+                            <div class="flex-grow-2">
+                                <label for="nombreMiembro" class="form-label">Nombre del Miembro</label>
+                                <input type="text" class="form-control" id="nombreMiembro" placeholder="Nombre" readonly>
                             </div>
-                            <!-- Hora de Entrada -->
-                            <div class="mb-3">
-                                <label for="horaEntrada" class="form-label">Hora de Entrada</label>
-                                <input type="time" class="form-control" id="horaEntrada" required>
-                            </div>
-                            <!-- Falta precio cawn -->
-                        </form>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fecha" class="form-label">Fecha</label>
+                            <input type="date" class="form-control" id="fecha" name="Fecha" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="horaEntrada" class="form-label">Hora</label>
+                            <input type="time" class="form-control" id="horaEntrada" name="Hora" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="precio" class="form-label">Precio</label>
+                            <input type="number" class="form-control" id="precio" name="Precio" placeholder="Ingrese el precio" required>
+                        </div>
+                    </form>
+
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary" onclick="agregarAcceso()">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="btnGuardarAcceso">Guardar</button>
+
                     </div>
                 </div>
             </div>
         </div>
+
 
 
         <script src="../asset/js/notificaciones.js"></script>

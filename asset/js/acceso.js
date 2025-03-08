@@ -1,18 +1,57 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Listar accesos al cargar la página
     listarAccesos();
 
-    const formAgregar = document.querySelector("#miModal form");
+    // Evento para el formulario de agregar acceso
+    const formAgregar = document.querySelector("#formAgregarAcceso");
     formAgregar.addEventListener("submit", (event) => {
         event.preventDefault();
         agregarAcceso();
     });
 
+    // Evento para el botón de guardar acceso en el modal
+    const btnGuardarAcceso = document.querySelector("#btnGuardarAcceso");
+    btnGuardarAcceso.addEventListener("click", () => {
+        agregarAcceso();
+    });
+
+    // Buscar miembro en el modal
+    const idMiembroInput = document.querySelector("#idMiembro");
+    const nombreMiembroInput = document.querySelector("#nombreMiembro");
+
+    idMiembroInput.addEventListener("input", () => {
+        const idMiembro = idMiembroInput.value.trim();
+        if (idMiembro === "") {
+            nombreMiembroInput.value = ""; 
+            return;
+        }
+
+        fetch('controlador/controladorAcceso.php', {
+            method: 'POST',
+            body: new URLSearchParams({ "ope": "BUSCAR_MIEMBRO", "ID_Miembro": idMiembro })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                nombreMiembroInput.value = `${data.miembro.Nombre} ${data.miembro.ApellidoP} ${data.miembro.ApellidoM}`;
+            } else {
+                nombreMiembroInput.value = "No encontrado"; 
+            }
+        })
+        .catch(error => {
+            console.error("Error al buscar miembro:", error);
+            nombreMiembroInput.value = "Error";
+        });
+    });
+
+    // Buscar miembros con el input general de búsqueda
     const searchInput = document.querySelector("#searchInput");
     searchInput.addEventListener("input", () => {
         buscarMiembro(searchInput.value);
     });
 });
 
+// Función para listar accesos
 function listarAccesos() {
     fetch('controlador/controladorAcceso.php', {
         method: 'POST',
@@ -38,32 +77,66 @@ function listarAccesos() {
             console.error("Error al listar accesos.");
         }
     })
-    .catch(error => console.error("Error:", error));
+    .catch(error => console.error("Error al listar accesos:", error));
 }
-
+// Función para agregar acceso
 function agregarAcceso() {
-    const form = document.querySelector("#miModal form");
+    const form = document.querySelector("#formAgregarAcceso");
     const datos = new FormData(form);
-    datos.append("ope", "AGREGAR_ACCESO");
 
-    fetch('controlador/controladorAcceso.php', {
-        method: 'POST',
-        body: datos
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            Swal.fire("Éxito", "Acceso agregado correctamente", "success");
-            form.reset();
-            document.querySelector("#miModal .btn-close").click();
-            listarAccesos();
-        } else {
-            Swal.fire("Error", "No se pudo agregar el acceso", "error");
+    // Validar que todos los campos estén llenos
+    let camposVacios = false;
+    for (let valor of datos.values()) {
+        if (valor.trim() === "") {
+            camposVacios = true;
+            break;
         }
-    })
-    .catch(error => console.error("Error:", error));
+    }
+
+    if (camposVacios) {
+        Swal.fire({
+            title: "Campos incompletos",
+            text: "Por favor, rellena todos los campos antes de continuar.",
+            icon: "warning",
+            confirmButtonColor: "#108d08"
+        });
+        return;
+    }
+
+    Swal.fire({
+        title: "¿Los datos son correctos?",
+        text: "Esta acción no se puede deshacer",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#108d08",
+        cancelButtonColor: "#8d2e27",
+        confirmButtonText: "Sí, agregar visita"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            datos.append("ope", "AGREGAR_ACCESO");
+
+            fetch('controlador/controladorAcceso.php', {
+                method: 'POST',
+                body: datos
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire("Éxito", "Visita agregada correctamente", "success");
+                    form.reset();
+                    document.querySelector("#miModal .btn-close").click(); 
+                    listarAccesos(); 
+                } else {
+                    Swal.fire("Error", "No se pudo agregar el acceso", "error");
+                }
+            })
+            .catch(error => console.error("Error al agregar acceso:", error));
+        }
+    });
 }
 
+
+// Función para buscar un miembro en el contenedor principal
 function buscarMiembro(id) {
     if (id.trim() === "") return;
 
@@ -86,5 +159,7 @@ function buscarMiembro(id) {
             Swal.fire("Error", data.msg, "error");
         }
     })
-    .catch(error => console.error("Error:", error));
+    .catch(error => console.error("Error al buscar miembro:", error));
 }
+
+

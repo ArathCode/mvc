@@ -14,6 +14,7 @@
   --black1: #222;
   --black2: #999;
   --estado: rgb(40, 99, 46);
+  --verde:#108d08;
 }
 
 body {
@@ -696,6 +697,13 @@ body {
   color: white;
 }
 
+#btnGuardarAcceso {
+  background-color: var(--verde) !important;
+  border-color: var(--verde) !important;
+}
+#btnCerrar{
+  background-color: var(--red);
+}
 
 
 /* Inputs con efecto */
