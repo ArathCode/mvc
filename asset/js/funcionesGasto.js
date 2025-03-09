@@ -1,22 +1,149 @@
 import { validaLargo, validaRango } from "./validaciones.js?v=3.7";
+
 document.addEventListener("DOMContentLoaded", () => {
+    let filtros = document.querySelectorAll(".filter");
+    let filtroFechas = document.querySelector(".filter-fechas");
+    let fechaInicio = document.getElementById("fechaInicio");
+    let fechaFin = document.getElementById("fechaFin");
+    let btnFiltrar = document.getElementById("btnFiltrar");
+
+    let añoSelect = document.getElementById("año");
+    let añoActual = new Date().getFullYear();
+    for (let i = 0; i < 10; i++) {
+        let opcion = document.createElement("option");
+        opcion.textContent = añoActual - i;
+        añoSelect.appendChild(opcion);
+    }
+
+    listarGastos(); 
+
+    // Manejo de selección de filtros
+    filtros.forEach(filtro => {
+        filtro.addEventListener("click", function () {
+            filtros.forEach(f => f.classList.remove("active")); // Desactiva otros filtros
+            this.classList.add("active"); // Activa el filtro seleccionado
+    
+            const today = new Date();
+    
+            // Lógica para cada tipo de filtro
+            if (this.dataset.filter === "hoy") {
+                const hoy = today.toISOString().split("T")[0];
+                fechaInicio.value = hoy;
+                fechaFin.value = hoy;
+    
+                console.log("Filtro 'Hoy' seleccionado. Parámetros enviados:", hoy, hoy);
+                listarGastos(); // Llama a la función con el filtro
+    
+            } else if (this.dataset.filter === "semana") {
+                const primerDiaSemana = new Date(today.setDate(today.getDate() - today.getDay()));
+                const ultimoDiaSemana = new Date(primerDiaSemana);
+                ultimoDiaSemana.setDate(primerDiaSemana.getDate() + 6);
+    
+                fechaInicio.value = primerDiaSemana.toISOString().split("T")[0];
+                fechaFin.value = ultimoDiaSemana.toISOString().split("T")[0];
+    
+                console.log("Filtro 'Semana' seleccionado. Parámetros enviados:", fechaInicio.value, fechaFin.value);
+                listarGastos();
+    
+            } else if (this.dataset.filter === "mes") {
+                const mesSeleccionado = document.getElementById("mes").value || (today.getMonth() + 1); // Mes actual por defecto
+                const añoActual = new Date().getFullYear();
+    
+                const primerDiaMes = new Date(`${añoActual}-${mesSeleccionado}-01`);
+                const ultimoDiaMes = new Date(primerDiaMes.getFullYear(), primerDiaMes.getMonth() + 1, 0);
+    
+                fechaInicio.value = primerDiaMes.toISOString().split("T")[0];
+                fechaFin.value = ultimoDiaMes.toISOString().split("T")[0];
+    
+                console.log("Filtro 'Mes' seleccionado. Parámetros enviados:", fechaInicio.value, fechaFin.value);
+                listarGastos();
+    
+            } else if (this.dataset.filter === "año") {
+                const añoSeleccionado = document.getElementById("año").value || new Date().getFullYear();
+    
+                fechaInicio.value = `${añoSeleccionado}-01-01`;
+                fechaFin.value = `${añoSeleccionado}-12-31`;
+    
+                console.log("Filtro 'Año' seleccionado. Parámetros enviados:", fechaInicio.value, fechaFin.value);
+                listarGastos();
+    
+            } else if (this.dataset.filter === "dia") {
+                const inputFecha = document.getElementById("fecha");
+                const hoy = new Date().toISOString().split("T")[0];
+    
+                // Aseguramos que el input esté visible y tenga un valor predefinido
+                inputFecha.classList.remove("hidden");
+                if (!inputFecha.value) {
+                    inputFecha.value = hoy; 
+                }
+    
+                inputFecha.addEventListener("change", function () {
+                    const diaSeleccionado = inputFecha.value;
+    
+                    if (diaSeleccionado) {
+                        fechaInicio.value = diaSeleccionado;
+                        fechaFin.value = diaSeleccionado;
+    
+                        console.log("Filtro 'Día' seleccionado. Parámetros enviados:", diaSeleccionado);
+                        listarGastos();
+                    } else {
+                        alert("Por favor, selecciona un día válido.");
+                    }
+                });
+    
+                console.log("Filtro 'Día' activado. Día actual predefinido:", hoy);
+            }
+        });
+    });
     
     
+    const limpiarGastos = document.getElementById("limpiarG");
+
+    limpiarGastos.addEventListener("click", function () {
+        filtros.forEach(filtro => filtro.classList.remove("active"));
+
+        document.getElementById("fechaInicio").value = "";
+        document.getElementById("fechaFin").value = "";
+        document.getElementById("fecha").value = "";
+        document.getElementById("mes").value = "";
+        document.getElementById("año").value = "";
+
+        console.log("Filtros limpiados. Mostrando todos los gastos.");
+        listarGastos(); 
+    });
+
+    btnFiltrar.addEventListener("click", function () {
+        let inicio = fechaInicio.value;
+        let fin = fechaFin.value;
+    
+        if (!inicio || !fin) {
+            alert("Por favor, seleccione ambas fechas.");
+            return;
+        }
+    
+        if (inicio > fin) {
+            alert("La fecha de inicio no puede ser mayor que la fecha de fin.");
+            return;
+        }
+    
+        listarGastos(); 
+    });
+    
+
     // Agregar gasto
     const formGasto = document.querySelector("#formAgregarGasto");
     if (formGasto) {
         formGasto.addEventListener("submit", (event) => {
             event.preventDefault();
             let errores = 0;
-            
+
             let descripcion = document.querySelector("#Descripcion");
             let precio = document.querySelector("#Precio");
-   
 
-           agregarGasto();
+            agregarGasto();
         });
     }
-    
+
     // Editar y eliminar
     const listaGastos = document.querySelector("#ListaGastos");
     if (listaGastos) {
@@ -49,18 +176,25 @@ document.addEventListener("DOMContentLoaded", () => {
 let paginaActual = 1;
 const registrosPorPagina = 10;
 
-// Función para listar gastos
+
+// Función para listar los gastos (incluyendo filtros)
 export function listarGastos() {
-    const fechaInicio = document.getElementById("fechaInicio").value;
-    const fechaFin = document.getElementById("fechaFin").value;
+    console.log("listarGastos llamada");
+    
+    const fechaInicio = document.getElementById("fechaInicio").value || "0000-01-01";
+    const fechaFin = document.getElementById("fechaFin").value || "2100-12-31";
 
     let params = new URLSearchParams();
     params.append("ope", "LISTARGASTOS");
     params.append("pagina", paginaActual);
     params.append("registrosPorPagina", registrosPorPagina);
 
-    if (fechaInicio) params.append("fechaInicio", fechaInicio);
-    if (fechaFin) params.append("fechaFin", fechaFin);
+    if (fechaInicio !== "0000-01-01" || fechaFin !== "2100-12-31") {
+        params.append("fechaInicio", fechaInicio);
+        params.append("fechaFin", fechaFin);
+    }
+
+    console.log("Parámetros enviados:", params.toString());
 
     fetch('../controlador/controladorGasto.php', {
         method: 'POST',
@@ -71,45 +205,49 @@ export function listarGastos() {
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        return response.json(); // Convertir la respuesta a JSON
+        return response.json();
     })
     .then(data => {
-        const contenedor = document.querySelector("#ListaGastos");
-        contenedor.innerHTML = "";
-
+        console.log("Respuesta recibida:", data);
         if (!data.success) {
-            throw new Error(data.error || "Error desconocido");
-        }
-
-        if (!data.lista || data.lista.length === 0) {
-            contenedor.innerHTML = "<p>No hay gastos en este rango de fechas.</p>";
+            console.error("Error al cargar gastos:", data.error);
             return;
         }
-
-        // Insertar los gastos en la página
-        data.lista.forEach(gasto => {
-            contenedor.innerHTML += `
-                <div class="gasto-card">
-                    <h3>${gasto.Descripcion}</h3>
-                    <p><strong>Monto:</strong> $${gasto.Precio}</p>
-                    <p><strong>Fecha:</strong> ${gasto.Fecha}</p>
-                    <p><strong>Registrado por:</strong> ${gasto.Nombre}</p>
-                    <div class="card-buttons">
-                        <button class="btn btn-warning btn-editar" data-id="${gasto.ID_Gasto}" data-bs-toggle="modal" data-bs-target="#modalEditar">Editar</button>
-                        <button class="btn btn-danger btn-eliminar" data-id="${gasto.ID_Gasto}">Eliminar</button>
-                    </div>
-                </div>
-            `;
-        });
-
-        // Actualizar la paginación
+        renderizarGastos(data.lista);
         actualizarPaginacion(data.totalPaginas);
     })
     .catch(error => {
         console.error("Error en la carga de gastos:", error);
-        Swal.fire("Error", "No se pudo cargar la lista de gastos: " + error.message, "error");
     });
 }
+
+
+
+function renderizarGastos(lista) {
+    const contenedor = document.querySelector("#ListaGastos");
+    contenedor.innerHTML = "";
+
+    if (!lista || lista.length === 0) {
+        contenedor.innerHTML = "<p>No hay gastos en este rango de fechas.</p>";
+        return;
+    }
+
+    lista.forEach(gasto => {
+        contenedor.innerHTML += `
+            <div class="gasto-card">
+                <h3>${gasto.Descripcion}</h3>
+                <p><strong>Monto:</strong> $${gasto.Precio}</p>
+                <p><strong>Fecha:</strong> ${gasto.Fecha}</p>
+                <p><strong>Registrado por:</strong> ${gasto.Nombre}</p>
+                <div class="card-buttons">
+                    <button class="btn btn-warning btn-editar" data-id="${gasto.ID_Gasto}" data-bs-toggle="modal" data-bs-target="#modalEditar">Editar</button>
+                    <button class="btn btn-danger btn-eliminar" data-id="${gasto.ID_Gasto}">Eliminar</button>
+                </div>
+            </div>
+        `;
+    });
+}
+
 
 // Función para actualizar la paginación
 function actualizarPaginacion(totalPaginas) {
@@ -120,7 +258,7 @@ function actualizarPaginacion(totalPaginas) {
         return;
     }
 
-    paginacion.innerHTML = ""; // Limpiar paginación previa
+    paginacion.innerHTML = ""; 
 
     for (let i = 1; i <= totalPaginas; i++) {
         let boton = document.createElement("button");
@@ -135,18 +273,10 @@ function actualizarPaginacion(totalPaginas) {
 // Función para cambiar de página
 function cambiarPagina(nuevaPagina) {
     paginaActual = nuevaPagina;
-    listarGastos(); // Llamar la función para actualizar los datos
+    listarGastos(); 
 }
 
-// Evento para filtrar por fecha
-document.getElementById("btnListar").addEventListener("click", () => {
-    paginaActual = 1; // Reiniciar a la primera página cuando se filtren los datos
-    listarGastos();
-});
-
-// Cargar gastos al iniciar la página
-listarGastos();
-
+// Funciones para agregar, editar y eliminar gastos
 function agregarGasto() {
     const form = document.querySelector("#formAgregarGasto");
     const datos = new FormData(form);
@@ -245,4 +375,6 @@ function eliminarGasto(id) {
             });
         }
     });
+
+    
 }

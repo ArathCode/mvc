@@ -1,7 +1,7 @@
 
             <ul>
                 <li>
-                    <a href="#">
+                    <a href="">
                         <span class="icon">
                             <img src="imgs/logo.jpg" alt="Logo" class="logo">
                         </span>
@@ -10,7 +10,7 @@
                 </li>
 
                 <li>
-                    <a href="home.php">
+                    <a href="index.php?pag=coach">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>

@@ -753,20 +753,10 @@ body {
 .close:focus {
   color: var(--red);
 }
-
-dialog button {
-  background-color: var(--black1);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
+/* ============ modales================ */
+#modalLabel {
+  color: var(--red);
 }
-
-dialog button:hover {
-  background-color: var(--red);
-}
-
 
 /* ====================== Todo lo responsivo ========================== */
 @media (max-width: 991px) {

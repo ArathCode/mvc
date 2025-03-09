@@ -27,6 +27,9 @@
         elseif($pag == "usuarios" && $tipoUsuario == "admin") {
             include_once("vistas/usuarios.php");
         }
+        elseif($pag == "coach" && $tipoUsuario == "coach") {
+            include_once("vistas/home.php");
+        }
         else {
             echo "<h2>Acceso denegado. Verifique su usuario.</h2>";
             exit();
@@ -39,6 +42,9 @@
             header("Location: index.php?pag=gestor");
         } elseif ($tipoUsuario == "general") {
             header("Location: index.php?pag=user");
+        }
+        elseif ($tipoUsuario == "coach") {
+            header("Location: index.php?pag=coach");
         } else {
             session_unset();
             session_destroy();

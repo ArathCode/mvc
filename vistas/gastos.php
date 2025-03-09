@@ -6,28 +6,135 @@
     <?php include_once("head.php"); ?>
     <script type="module" src="../asset/js/funcionesGasto.js?v=4.9.3"></script>
     
-    <link rel="stylesheet" href="../asset/css/gastostarjetas.css">
+    <link rel="stylesheet" href="../asset/css/gastos.css">
 </head>
 
-<body class="bg-light">
-    <div class="container mt-5">
-        <h2 class="text-center">Gestión de Gastos</h2>
+<body >
 
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregar">
-            Agregar Gasto
-        </button>
-        <div class="filtro-fecha">
-        <label for="fechaInicio">Desde:</label>
-        <input type="date" id="fechaInicio">
-        
-        <label for="fechaFin">Hasta:</label>
-        <input type="date" id="fechaFin">
-        
-        <button id="btnListar">Filtrar</button>
+    <!-- =============== Barra de navegacion ================ -->
+    <div class="navigation">
+        <?php
+            include_once("encabezado.php")
+        ?>
+    </div>
+    <div class="main">
+        <div class="topbar">
+            <div class="toggle">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+            <div class="subMenu">
+                <div class="gastos">
+                    <div class="iconoGa">
+                        <ion-icon name="wallet-outline"></ion-icon>
+                    </div>
+                    <div class="enlace">
+                        <a href="Gastos.php">Gastos</a>
+                    </div>
+                </div>
+                <div class="inventario">
+                    <div class="iconoIn">
+                        <ion-icon name="archive-outline"></ion-icon>
+                    </div>
+                    <div class="enlace">
+                        <a href="inventario.php">Inventario</a>
+                    </div>
+                </div>
+                <div class="adminUsuarios">
+                    <div class="iconoAd">
+                        <ion-icon name="people-outline"></ion-icon>
+                    </div>
+                    <div class="enlace">
+                        <a href="ControlPersonal.php">Usuarios</a>
+                    </div>
+                </div>
+                <div class="reportes">
+                    <div class="iconoRe">
+                    <ion-icon name="document-attach-outline"></ion-icon>
+                    </div>
+                    <div class="enlace">
+                        <a href="Reportes.php">Reportes</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contenedor">
+                <div class="usuario">
+                    <img src="https://i.pinimg.com/originals/a0/14/7a/a0147adf0a983ab87e86626f774785cf.gif" alt="">
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="container mt-5">
+            <div class="gB">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregar">
+                    Agregar Gasto
+                </button>
+            </div>
+           
+            <div class="filter-container">
+                <div class="filter" data-filter="hoy">
+                    <span>Hoy</span> <button class="close">✖</button>
+                </div>
+                <div class="filter" data-filter="semana">
+                    <span>Semana</span> <button class="close">✖</button>
+                </div>
+                <div class="filter" data-filter="dia">
+                    <span>Día</span> <input type="date" id="fecha" class="hidden"> <button class="close">✖</button>
+                </div>
+                <div class="filter" data-filter="mes">
+                    <span>Mes</span> 
+                    <select id="mes" class="hidden">
+                        <option>Enero</option>
+                        <option>Febrero</option>
+                        <option>Marzo</option>
+                        <option>Abril</option>
+                        <option>Mayo</option>
+                        <option>Junio</option>
+                        <option>Julio</option>
+                        <option>Agosto</option>
+                        <option>Septiembre</option>
+                        <option>Octubre</option>
+                        <option>Noviembre</option>
+                        <option>Diciembre</option>
+                    </select> 
+                    <button class="close">✖</button>
+                </div>
+                <div class="filter" data-filter="año">
+                    <span>Año</span> 
+                    <select id="año" class="hidden"></select> 
+                    <button class="close">✖</button>
+                </div>
+
+                <div class="filter filter-fechas" data-filter="rango-fechas">
+                    <span>Desde</span>
+                    <input type="date" id="fechaInicio" class="hidden">
+                    <input type="date" id="fechaFin" class="hidden">
+                    <button id="btnFiltrar" class="hidden">Filtrar</button>
+                    <button class="close">✖</button>
+                </div>
+                <div class="filter-fechas">
+                    <button id="limpiarG" class="btn btn-secondary">Limpiar Filtros</button>
+                </div>
+            </div>
+
+
+            <!-- Tabla de Gastos -->
+            <div class="mt-5">
+                <h4 class="text-center">Lista de Gastos</h4>
+                <div class="table-responsive" id="ListaGastos">
+                
+                </div>
+                <div id="paginacion" class="mt-3"></div>
+            </div>
+            <a class="btn btn-info" href="index.php?pag=gastos">Gastos</a>
+            <a class="btn btn-info" href="index.php?pag=admin">Usuarios</a>
     </div>
 
-        <!-- Modal AGREGAR -->
-        <div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
+    <!-- Modal AGREGAR -->
+    <div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -88,20 +195,8 @@
             </div>
         </div>
 
-        <!-- Tabla de Gastos -->
-        <div class="mt-5">
-            <h4 class="text-center">Lista de Gastos</h4>
-            <div class="table-responsive" id="ListaGastos">
-            
-            </div>
-            <div id="paginacion" class="mt-3"></div>
-        </div>
-        
-        <a class="btn btn-info" href="index.php?pag=gastos">Gastos</a>
-        <a class="btn btn-info" href="index.php?pag=admin">Usuarios</a>
-        <a class="btn btn-error" href="../salir.php">Cerrar Sesión</a>
-
     </div>
+
 </body>
 
 </html>

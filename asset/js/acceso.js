@@ -1,5 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Listar accesos al cargar la página
+     // Asignar la fecha actual
+     const inputFecha = document.getElementById("fecha");
+
+    function establecerFechaActual() {
+        const hoy = new Date();
+        const fechaFormateada = hoy.toISOString().split('T')[0]; 
+        inputFecha.value = fechaFormateada;
+    }
+
+    const modal = document.getElementById("miModal");
+    modal.addEventListener("show.bs.modal", () => {
+        establecerFechaActual();
+    });
+ 
+
     listarAccesos();
 
     // Evento para el formulario de agregar acceso
@@ -79,9 +93,11 @@ function listarAccesos() {
     })
     .catch(error => console.error("Error al listar accesos:", error));
 }
+
 // Función para agregar acceso
 function agregarAcceso() {
     const form = document.querySelector("#formAgregarAcceso");
+    const inputFecha = document.getElementById("fecha");
     const datos = new FormData(form);
 
     // Validar que todos los campos estén llenos
@@ -135,7 +151,6 @@ function agregarAcceso() {
     });
 }
 
-
 // Función para buscar un miembro en el contenedor principal
 function buscarMiembro(id) {
     if (id.trim() === "") return;
@@ -161,5 +176,3 @@ function buscarMiembro(id) {
     })
     .catch(error => console.error("Error al buscar miembro:", error));
 }
-
-

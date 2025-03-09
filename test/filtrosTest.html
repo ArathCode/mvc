@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtro de Fechas</title>
+    <link rel="stylesheet" href="test.css">
+</head>
+<body>
+
+<div class="filter-container">
+    <div class="filter" data-filter="hoy">
+        <span>Hoy</span> <button class="close">✖</button>
+    </div>
+    <div class="filter" data-filter="semana">
+        <span>Semana</span> <button class="close">✖</button>
+    </div>
+    <div class="filter" data-filter="dia">
+        <span>Día</span> <input type="date" id="fecha"> <button class="close">✖</button>
+    </div>
+    <div class="filter" data-filter="mes">
+        <span>Mes</span> 
+        <select id="mes">
+            <option>Enero</option>
+            <option>Febrero</option>
+            <option>Marzo</option>
+            <option>Abril</option>
+            <option>Mayo</option>
+            <option>Junio</option>
+            <option>Julio</option>
+            <option>Agosto</option>
+            <option>Septiembre</option>
+            <option>Octubre</option>
+            <option>Noviembre</option>
+            <option>Diciembre</option>
+        </select> 
+        <button class="close">✖</button>
+    </div>
+    <div class="filter" data-filter="año">
+        <span>Año</span> 
+        <select id="año"></select> 
+        <button class="close">✖</button>
+    </div>
+
+    <div class="filter filter-fechas" data-filter="rango-fechas">
+        <span>Desde</span>
+        <input type="date" id="fechaInicio" class="hidden">
+        <input type="date" id="fechaFin" class="hidden">
+        <button id="btnFiltrar" class="hidden">Filtrar</button>
+        <button class="close">✖</button>
+    </div>
+</div>
+
+<script src="test.js"></script>
+
+</body>
+</html>

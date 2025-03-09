@@ -6,78 +6,85 @@ if (isset($_POST["ope"])) {
     include_once("../modelos/ModeloGastos.php");
     $gasto = new Gastos();
 
-    // Listar gastos
-    header('Content-Type: application/json'); 
+    // Configuración del encabezado para JSON
+    header('Content-Type: application/json');
 
-    if ($ope == "LISTARGASTOS") {
-        $pagina = isset($_POST["pagina"]) ? intval($_POST["pagina"]) : 1;
-        $registrosPorPagina = isset($_POST["registrosPorPagina"]) ? intval($_POST["registrosPorPagina"]) : 10;
-    
-        
-        $fechaInicio = isset($_POST["fechaInicio"]) && !empty($_POST["fechaInicio"]) ? $_POST["fechaInicio"] : "0000-01-01";
-        $fechaFin = isset($_POST["fechaFin"]) && !empty($_POST["fechaFin"]) ? $_POST["fechaFin"] : "2100-01-01";
-    
-        $lista = $gasto->ListarGastos($fechaInicio, $fechaFin, $pagina, $registrosPorPagina);
-    
-        $info = array(
-            "success" => true,
-            "lista" => $lista["gastos"],
-            "totalPaginas" => $lista["totalPaginas"],
-            "paginaActual" => $lista["paginaActual"]
-        );
-    
-        echo json_encode($info);
-    }
-    
-    // Obtener un gasto
-    elseif ($ope == "OBTENER" && isset($_POST["ID_Gasto"])) {
-        $gastoData = $gasto->ObtenerGasto($_POST["ID_Gasto"]);
-        if ($gastoData) {
-            echo json_encode(["success" => true, "gasto" => $gastoData]);
-        } else {
-            echo json_encode(["success" => false, "msg" => "Gasto no encontrado."]);
-        }
-    }
-    // Agregar un gasto
-    elseif ($ope == "AGREGAR" && isset($_POST["Descripcion"], $_POST["Precio"], $_POST["Fecha"], $_POST["ID_Usuario"])) {
-        $datos = array(
-            "Descripcion" => $_POST["Descripcion"],
-            "Precio" => $_POST["Precio"],
-            "Fecha" => $_POST["Fecha"],
-            "ID_Usuario" => $_POST["ID_Usuario"]
-           
-        );
+    switch ($ope) {
+        case "LISTARGASTOS":
+            $pagina = isset($_POST["pagina"]) ? intval($_POST["pagina"]) : 1;
+            $registrosPorPagina = isset($_POST["registrosPorPagina"]) ? intval($_POST["registrosPorPagina"]) : 10;
+            
+            // Manejo de fechas con valores predeterminados
+            $fechaInicio = isset($_POST["fechaInicio"]) && !empty($_POST["fechaInicio"]) ? $_POST["fechaInicio"] : "0000-01-01";
+            $fechaFin = isset($_POST["fechaFin"]) && !empty($_POST["fechaFin"]) ? $_POST["fechaFin"] : "2100-12-31";
 
-        $status = $gasto->Agregar($datos);
-        $info = array("success" => $status);
-        echo json_encode($info);
-    }
-    // Editar un gasto
-    elseif ($ope == "EDITAR" && isset($_POST["ID_Gasto"], $_POST["DescripcionEdit"], $_POST["PrecioEdit"], $_POST["FechaEdit"], $_POST["ID_UsuarioEdit"])) {
-        $datos = array(
-            "ID_gasto" => $_POST["ID_Gasto"],
-            "Descripcion" => $_POST["DescripcionEdit"],
-            "Precio" => $_POST["PrecioEdit"],
-            "Fecha" => $_POST["FechaEdit"],
-            "ID_Usuario" => $_POST["ID_UsuarioEdit"]
-         
-        );
+            $lista = $gasto->ListarGastos($fechaInicio, $fechaFin, $pagina, $registrosPorPagina);
 
-        $status = $gasto->Editar($datos);
-        $info = array("success" => $status);
-        echo json_encode($info);
+            echo json_encode([
+                "success" => true,
+                "lista" => $lista["gastos"],
+                "totalPaginas" => $lista["totalPaginas"],
+                "paginaActual" => $lista["paginaActual"]
+            ]);
+            break;
+
+        case "OBTENER":
+            if (isset($_POST["ID_Gasto"])) {
+                $gastoData = $gasto->ObtenerGasto($_POST["ID_Gasto"]);
+                echo json_encode([
+                    "success" => $gastoData ? true : false,
+                    "gasto" => $gastoData ?? null,
+                    "msg" => $gastoData ? "" : "Gasto no encontrado."
+                ]);
+            } else {
+                echo json_encode(["success" => false, "msg" => "Falta el ID del gasto."]);
+            }
+            break;
+
+        case "AGREGAR":
+            if (isset($_POST["Descripcion"], $_POST["Precio"], $_POST["Fecha"], $_POST["ID_Usuario"])) {
+                $datos = [
+                    "Descripcion" => $_POST["Descripcion"],
+                    "Precio" => $_POST["Precio"],
+                    "Fecha" => $_POST["Fecha"],
+                    "ID_Usuario" => $_POST["ID_Usuario"]
+                ];
+                $status = $gasto->Agregar($datos);
+                echo json_encode(["success" => $status]);
+            } else {
+                echo json_encode(["success" => false, "msg" => "Faltan datos para agregar el gasto."]);
+            }
+            break;
+
+        case "EDITAR":
+            if (isset($_POST["ID_Gasto"], $_POST["DescripcionEdit"], $_POST["PrecioEdit"], $_POST["FechaEdit"], $_POST["ID_UsuarioEdit"])) {
+                $datos = [
+                    "ID_gasto" => $_POST["ID_Gasto"],
+                    "Descripcion" => $_POST["DescripcionEdit"],
+                    "Precio" => $_POST["PrecioEdit"],
+                    "Fecha" => $_POST["FechaEdit"],
+                    "ID_Usuario" => $_POST["ID_UsuarioEdit"]
+                ];
+                $status = $gasto->Editar($datos);
+                echo json_encode(["success" => $status]);
+            } else {
+                echo json_encode(["success" => false, "msg" => "Faltan datos para editar el gasto."]);
+            }
+            break;
+
+        case "ELIMINAR":
+            if (isset($_POST["ID_Gasto"])) {
+                $status = $gasto->Eliminar($_POST["ID_Gasto"]);
+                echo json_encode(["success" => $status]);
+            } else {
+                echo json_encode(["success" => false, "msg" => "Falta el ID del gasto para eliminar."]);
+            }
+            break;
+
+        default:
+            echo json_encode(["success" => false, "msg" => "Operación no válida o parámetros insuficientes"]);
     }
-    // Eliminar un gasto
-    elseif ($ope == "ELIMINAR" && isset($_POST["ID_Gasto"])) {
-        $status = $gasto->Eliminar($_POST["ID_Gasto"]);
-        $info = array("success" => $status);
-        echo json_encode($info);
-    }
-    else {
-        echo json_encode(array("success" => false, "msg" => "Operación no válida o parámetros insuficientes"));
-    }
-} 
-else {
-    echo json_encode(array("success" => false, "msg" => "Sin operación válida"));
+} else {
+    echo json_encode(["success" => false, "msg" => "Sin operación válida"]);
 }
 ?>
