@@ -130,7 +130,9 @@
                 <div id="paginacion" class="mt-3"></div>
             </div>
             <a class="btn btn-info" href="index.php?pag=gastos">Gastos</a>
-            <a class="btn btn-info" href="index.php?pag=admin">Usuarios</a>
+        <a class="btn btn-info" href="index.php?pag=usuarios">Usuarios</a>
+        <a class="btn btn-info" href="index.php?pag=membresias">Miembros</a>
+            
     </div>
 
     <!-- Modal AGREGAR -->
