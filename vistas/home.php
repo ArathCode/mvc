@@ -7,7 +7,7 @@
         include_once("head.php");
         ?>
     <link rel="stylesheet" href="../asset/css/home.css">
-    <script type="module" src="asset/js/acceso.js?v=1.1"></script>
+    <script type="module" src="asset/js/acceso.js?v=1.2"></script>
     </head>
 
     <body>
@@ -229,10 +229,7 @@
                             <label for="fecha" class="form-label">Fecha</label>
                             <input type="date" class="form-control" id="fecha" name="Fecha" required readonly>
                         </div>
-                        <div class="mb-3">
-                            <label for="horaEntrada" class="form-label">Hora</label>
-                            <input type="time" class="form-control" id="horaEntrada" name="Hora" required>
-                        </div>
+                        
                         <div class="mb-3">
                             <label for="precio" class="form-label">Precio</label>
                             <input type="number" class="form-control" id="precio" name="Precio" placeholder="Ingrese el precio" required>

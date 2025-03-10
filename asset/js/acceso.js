@@ -3,10 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
      const inputFecha = document.getElementById("fecha");
 
     function establecerFechaActual() {
-        const hoy = new Date();
-        const fechaFormateada = hoy.toISOString().split('T')[0]; 
-        inputFecha.value = fechaFormateada;
-    }
+    const hoy = new Date();  
+    hoy.setMinutes(hoy.getMinutes() - hoy.getTimezoneOffset());  
+
+    const fechaFormateada = hoy.toISOString().split('T')[0];  
+    document.getElementById("fecha").value = fechaFormateada;  
+}
+
 
     const modal = document.getElementById("miModal");
     modal.addEventListener("show.bs.modal", () => {

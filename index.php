@@ -30,6 +30,9 @@
         elseif($pag == "coach" && $tipoUsuario == "coach") {
             include_once("vistas/home.php");
         }
+        elseif($pag == "home" && $tipoUsuario == "admin") {
+            include_once("vistas/home.php");
+        }
         else {
             echo "<h2>Acceso denegado. Verifique su usuario.</h2>";
             exit();

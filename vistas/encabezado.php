@@ -10,7 +10,7 @@
                 </li>
 
                 <li>
-                    <a href="index.php?pag=coach">
+                    <a href="index.php?pag=home">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>

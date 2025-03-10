@@ -7,25 +7,25 @@ if (isset($_POST["ope"])) {
     $acceso = new Accesos();
 
     if ($ope === "AGREGAR_ACCESO") {
-        // Validar campos requeridos
-        if (!isset($_POST["Hora"], $_POST["Fecha"], $_POST["Precio"], $_POST["ID_Miembro"])) {
+       
+        if (!isset($_POST["Precio"], $_POST["ID_Miembro"])) {
             echo json_encode(["success" => false, "msg" => "Datos incompletos."]);
             exit;
         }
-    
-        // Depurar datos recibidos
-        error_log("Datos recibidos: " . print_r($_POST, true));
-    
+       
+        $hora_actual = date("H:i:s"); 
+        $fecha_actual = date("Y-m-d");  
+        
+        error_log("Datos recibidos: " . print_r($_POST, true)); 
         $datos = array(
-            "Hora" => $_POST["Hora"],
-            "Fecha" => $_POST["Fecha"],
+            "Hora" => $hora_actual,
+            "Fecha" => $fecha_actual,
             "Precio" => $_POST["Precio"],
             "ID_Miembro" => $_POST["ID_Miembro"]
         );
-    
         $status = $acceso->agregarAcceso($datos);
         echo json_encode(["success" => $status]);
-    }    
+    }   
     elseif ($ope === "LISTAR_ACCESOS") {
         $lista = $acceso->listarAccesos();
         echo json_encode(["success" => true, "accesos" => $lista]);
