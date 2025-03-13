@@ -48,7 +48,7 @@
                 </li>
 
                 <li>
-                    <a href="Gastos.php" class="admin">
+                    <a href="index.php?pag=gastos" class="admin">
                         <span class="icon">
                             <ion-icon name="lock-closed-outline"></ion-icon>
                         </span>

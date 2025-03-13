@@ -33,6 +33,12 @@
         elseif($pag == "home" && $tipoUsuario == "admin") {
             include_once("vistas/home.php");
         }
+        elseif($pag == "membresias" && $tipoUsuario == "admin") {
+            include_once("vistas/membresia.php");
+        }
+        elseif($pag == "miembros" && $tipoUsuario == "admin") {
+            include_once("vistas/miembros.php");
+        }
         else {
             echo "<h2>Acceso denegado. Verifique su usuario.</h2>";
             exit();
