@@ -94,6 +94,23 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
     
+    document.querySelectorAll(".filter .close").forEach(button => {
+        button.addEventListener("click", function (event) {
+            event.stopPropagation();
+    
+            let filter = this.parentElement;
+            filter.classList.remove("active"); 
+    
+            let inputs = filter.querySelectorAll("input, select");
+            inputs.forEach(input => {
+                input.classList.add("hidden");
+                input.value = "";
+            });
+    
+            listarGastos(); 
+        });
+    });
+    
     
     const limpiarGastos = document.getElementById("limpiarG");
 
@@ -106,7 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("mes").value = "";
         document.getElementById("año").value = "";
 
-        console.log("Filtros limpiados. Mostrando todos los gastos.");
         listarGastos(); 
     });
 
