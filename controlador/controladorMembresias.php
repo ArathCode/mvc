@@ -4,92 +4,65 @@ include_once("../config.php");
 if (isset($_POST["ope"])) {
     $ope = $_POST["ope"];
     include_once("../modelos/ModeloMembresias.php");
-    $usu = new Membresias();
+    $membresia = new Membresias();
 
-    // Operación de Login
-   
-    // listar 
-    if ($ope == "LISTAUSUARIOS") {
-        $lista = $usu->ListarTODOS();
+    // listar
+    if ($ope == "LISTAMEMBRESIAS") {
+        $lista = $membresia->ListarTODOS();
         $info = array(
             "success" => true,
             "lista" => $lista
         );
         echo json_encode($info);
     }
-    //  obtener 
+    // obtener
     elseif ($ope == "OBTENER") {
-        if (isset($_POST["ID_Usuario"])) {
-            $usuario = $usu->ObtenerUsuario($_POST["ID_Usuario"]);
-            if ($usuario) {
-                echo json_encode(["success" => true, "usuario" => $usuario]);
+        if (isset($_POST["ID_Membresia"])) {
+            $membresiaData = $membresia->ObtenerMembresia($_POST["ID_Membresia"]);
+            if ($membresiaData) {
+                echo json_encode(["success" => true, "membresia" => $membresiaData]);
             } else {
-                echo json_encode(["success" => false, "msg" => "Usuario no encontrado."]);
+                echo json_encode(["success" => false, "msg" => "Membresía no encontrada."]);
             }
         } else {
-            echo json_encode(["success" => false, "msg" => "ID de usuario no proporcionado."]);
+            echo json_encode(["success" => false, "msg" => "ID de membresía no proporcionado."]);
         }
     }
-    // para agregar  
+    // para agregar
     elseif ($ope == "AGREGAR" && isset($_POST["Tipo"], $_POST["Descripcion"], $_POST["Costo"])) {
         $datos = array(
             "Tipo" => $_POST["Tipo"],
             "Descripcion" => $_POST["Descripcion"],
-            "Costo" => $_POST["Costo"],
-            
+            "Costo" => $_POST["Costo"]
         );
 
-        $status = $usu->Agregar($datos);
+        $status = $membresia->Agregar($datos);
         $info = array("success" => $status);
         echo json_encode($info);
     }
-    // editar  usuario 
-    elseif ($ope == "EDITAR" && isset($_POST["ID_Usuario"], $_POST["NombreEdit"], $_POST["ApellidoPEdit"], $_POST["ApellidoMEdit"], $_POST["CorreoUsuEdit"], $_POST["NombreUsuEdit"], $_POST["SalarioEdit"], $_POST["usutipEdit"])) {
+    // editar membresía
+    elseif ($ope == "EDITAR" && isset($_POST["ID_Membresia"], $_POST["TipoEdit"], $_POST["DescripcionEdit"], $_POST["CostoEdit"])) {
         $datos = array(
-            "ID_Usuario" => $_POST["ID_Usuario"],
-            "Nombre" => $_POST["NombreEdit"],
-            "ApellidoP" => $_POST["ApellidoPEdit"],
-            "ApellidoM" => $_POST["ApellidoMEdit"],
-            "CorreoUsu" => $_POST["CorreoUsuEdit"],
-            "NombreUsu" => $_POST["NombreUsuEdit"],
-            
-            "Salario" => $_POST["SalarioEdit"],
-            "usutip" => $_POST["usutipEdit"]
+            "ID_Membresia" => $_POST["ID_Membresia"],
+            "Tipo" => $_POST["TipoEdit"],
+            "Descripcion" => $_POST["DescripcionEdit"],
+            "Costo" => $_POST["CostoEdit"]
         );
 
-      
-        
-
-        $status = $usu->Editar($datos);
+        $status = $membresia->Editar($datos);
         $info = array("success" => $status);
         echo json_encode($info);
     }
-    elseif ($_POST["ope"] == "CAMBIAR_CLAVE") {
-        $idUsuario = $_POST["ID_Usuario"];
-        $claveNueva = $_POST["ClaveNueva"];
-
-        
-        $claveEncriptada = password_hash($claveNueva, PASSWORD_DEFAULT);
-
-    
-        $status = $usu->cambiarClave($idUsuario, $claveEncriptada);
-
-        echo json_encode(["success" => $status]);
-        exit();
-    }
-    
-    // eliminar 
-    elseif ($ope == "ELIMINAR" && isset($_POST["ID_Usuario"])) {
-        $status = $usu->Eliminar($_POST["ID_Usuario"]);
+    // eliminar
+    elseif ($ope == "ELIMINAR" && isset($_POST["ID_Membresia"])) {
+        $status = $membresia->Eliminar($_POST["ID_Membresia"]);
         $info = array("success" => $status);
         echo json_encode($info);
     }
-    
     else {
         echo json_encode(array("success" => false, "msg" => "Operación no válida o parámetros insuficientes"));
     }
 } 
-
 else {
     echo json_encode(array("success" => false, "msg" => "Sin operación válida"));
 }

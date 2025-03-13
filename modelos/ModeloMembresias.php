@@ -1,8 +1,6 @@
 <?php
 class Membresias
 {
-
-
     public function ListarTODOS()
     {
         $enlace = dbConectar();
@@ -11,12 +9,12 @@ class Membresias
         $consulta->execute();
         $result = $consulta->get_result();
 
-        $usuarios = [];
-        while ($usuario = $result->fetch_assoc()) {
-            $usuarios[] = $usuario;
+        $membresias = [];
+        while ($membresia = $result->fetch_assoc()) {
+            $membresias[] = $membresia;
         }
 
-        return $usuarios;
+        return $membresias;
     }
 
     public function Agregar($datos)
@@ -25,82 +23,49 @@ class Membresias
         $sql = "INSERT INTO membresias (Tipo, Descripcion, Costo) VALUES (?, ?, ?)";
         $consulta = $enlace->prepare($sql);
 
-
-    
         $consulta->bind_param(
             "ssi",
             $datos["Tipo"],
             $datos["Descripcion"],
-            $datos["Costo"],
-           
+            $datos["Costo"]
         );
 
         return $consulta->execute();
     }
+
     public function Editar($datos)
     {
         $enlace = dbConectar();
+        $sql = "UPDATE membresias SET Tipo=?, Descripcion=?, Costo=? WHERE ID_Membresia=?";
+        $consulta = $enlace->prepare($sql);
 
-        if (isset($datos["Contra"])) {
-            $sql = "UPDATE usuarios SET Nombre=?, ApellidoP=?, ApellidoM=?, CorreoUsu=?, NombreUsu=?,  Salario=?, usutip=? WHERE ID_Usuario=?";
-            $consulta = $enlace->prepare($sql);
-
-            $consulta->bind_param(
-                "sssssisi",
-                $datos["Nombre"],
-                $datos["ApellidoP"],
-                $datos["ApellidoM"],
-                $datos["CorreoUsu"],
-                $datos["NombreUsu"],
-
-                $datos["Salario"],
-                $datos["usutip"],
-                $datos["ID_Usuario"]
-            );
-        } else {
-            $sql = "UPDATE usuarios SET Nombre=?, ApellidoP=?, ApellidoM=?, CorreoUsu=?, NombreUsu=?, Salario=?, usutip=? WHERE ID_Usuario=?";
-            $consulta = $enlace->prepare($sql);
-            $consulta->bind_param(
-                "sssssisi",
-                $datos["Nombre"],
-                $datos["ApellidoP"],
-                $datos["ApellidoM"],
-                $datos["CorreoUsu"],
-                $datos["NombreUsu"],
-                $datos["Salario"],
-                $datos["usutip"],
-                $datos["ID_Usuario"]
-            );
-        }
+        $consulta->bind_param(
+            "ssii",
+            $datos["Tipo"],
+            $datos["Descripcion"],
+            $datos["Costo"],
+            $datos["ID_Membresia"]
+        );
 
         return $consulta->execute();
     }
-    public function cambiarClave($idUsuario, $claveEncriptada)
-    {
-        $enlace = dbConectar();
-        $sql = "UPDATE usuarios SET Contra=? WHERE ID_Usuario=?";
-        $consulta = $enlace->prepare($sql);
-        $consulta->bind_param("si", $claveEncriptada, $idUsuario);
-        $resultado = $consulta->execute();
-        $enlace->close();
-        return $resultado;
-    }
 
-    public function Eliminar($ID_usuario)
+    public function Eliminar($ID_Membresia)
     {
         $enlace = dbConectar();
-        $sql = "DELETE FROM usuarios WHERE ID_Usuario=?";
+        $sql = "DELETE FROM membresias WHERE ID_Membresia=?";
         $consulta = $enlace->prepare($sql);
-        $consulta->bind_param("i", $ID_usuario);
+        $consulta->bind_param("i", $ID_Membresia);
 
         return $consulta->execute();
     }
-    public function ObtenerUsuario($ID_usuario)
+
+    public function ObtenerMembresia($ID_Membresia)
     {
         $enlace = dbConectar();
-        $sql = "SELECT ID_Usuario, Nombre, ApellidoP, ApellidoM, CorreoUsu, NombreUsu, Contra, Salario, usutip FROM usuarios WHERE ID_Usuario=?";
+        $sql = "SELECT * FROM membresias WHERE ID_Membresia=?";
         $consulta = $enlace->prepare($sql);
-        $consulta->bind_param("i", $ID_usuario);
+        $consulta->bind_param("i", $ID_Membresia);
         $consulta->execute();
         $result = $consulta->get_result();
 
@@ -111,3 +76,4 @@ class Membresias
         }
     }
 }
+?>
