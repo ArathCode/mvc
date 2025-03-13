@@ -17,22 +17,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     listarGastos(); 
 
-    // Manejo de selección de filtros
+    // Filtros
     filtros.forEach(filtro => {
         filtro.addEventListener("click", function () {
-            filtros.forEach(f => f.classList.remove("active")); // Desactiva otros filtros
-            this.classList.add("active"); // Activa el filtro seleccionado
+            filtros.forEach(f => f.classList.remove("active")); 
+            this.classList.add("active"); 
     
             const today = new Date();
     
-            // Lógica para cada tipo de filtro
             if (this.dataset.filter === "hoy") {
                 const hoy = today.toISOString().split("T")[0];
                 fechaInicio.value = hoy;
                 fechaFin.value = hoy;
     
                 console.log("Filtro 'Hoy' seleccionado. Parámetros enviados:", hoy, hoy);
-                listarGastos(); // Llama a la función con el filtro
+                listarGastos(); 
     
             } else if (this.dataset.filter === "semana") {
                 const primerDiaSemana = new Date(today.setDate(today.getDate() - today.getDay()));
@@ -71,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 const inputFecha = document.getElementById("fecha");
                 const hoy = new Date().toISOString().split("T")[0];
     
-                // Aseguramos que el input esté visible y tenga un valor predefinido
                 inputFecha.classList.remove("hidden");
                 if (!inputFecha.value) {
                     inputFecha.value = hoy; 
