@@ -3,7 +3,7 @@
                 <li>
                     <a href="">
                         <span class="icon">
-                            <img src="imgs/logo.jpg" alt="Logo" class="logo">
+                            <img src="../asset/css/images/lg.jpg" alt="Logo" class="logo">
                         </span>
                         <span class="title">Dragon Gym</span>
                     </a>
@@ -19,7 +19,7 @@
                 </li>
 
                 <li>
-                    <a href="Miembros.php">
+                    <a href="index.php?pag=miembros">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
