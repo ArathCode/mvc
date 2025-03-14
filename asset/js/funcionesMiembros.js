@@ -49,12 +49,16 @@ document.addEventListener("DOMContentLoaded", () => {
         listarMiembros();
     });
 });
+let paginaActual = 1;
+const registrosPorPagina = 10;
 
 export function listarMiembros() {
   
 
     let params = new URLSearchParams();
     params.append("ope", "LISTARMIEMBROS");
+    params.append("pagina", paginaActual);
+    params.append("registrosPorPagina", registrosPorPagina);
    
 
     fetch('../controlador/controladorMiembro.php', {
