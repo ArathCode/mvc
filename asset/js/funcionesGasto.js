@@ -107,9 +107,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 input.value = "";
             });
     
+            document.getElementById("fechaInicio").value = "";
+            document.getElementById("fechaFin").value = "";
+    
             listarGastos(); 
         });
     });
+    
     
     
     const limpiarGastos = document.getElementById("limpiarG");
