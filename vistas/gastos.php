@@ -28,7 +28,7 @@
                         <ion-icon name="wallet-outline"></ion-icon>
                     </div>
                     <div class="enlace">
-                        <a href="Gastos.php">Gastos</a>
+                        <a href="index.php?pag=gastos">Gastos</a>
                     </div>
                 </div>
                 <div class="inventario">
@@ -44,7 +44,7 @@
                         <ion-icon name="people-outline"></ion-icon>
                     </div>
                     <div class="enlace">
-                        <a href="ControlPersonal.php">Usuarios</a>
+                        <a href="index.php?pag=usuarios">Usuarios</a>
                     </div>
                 </div>
                 <div class="reportes">
@@ -122,8 +122,7 @@
 
 
             <!-- Tabla de Gastos -->
-            <div class="mt-5">
-                <h4 class="text-center">Lista de Gastos</h4>
+            <div class="mt-3">
                 <div class="table-responsive" id="ListaGastos">
 
                 </div>
@@ -133,8 +132,8 @@
             <a class="btn btn-info" href="index.php?pag=usuarios">Usuarios</a>
             <a class="btn btn-info" href="index.php?pag=membresias">mebresias</a>
             <a class="btn btn-info" href="index.php?pag=miembros">Miembros</a>
-
-        </div>
+            
+    </div>
 
         <!-- Modal AGREGAR -->
         <div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">

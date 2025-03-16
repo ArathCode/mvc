@@ -107,9 +107,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 input.value = "";
             });
     
+            document.getElementById("fechaInicio").value = "";
+            document.getElementById("fechaFin").value = "";
+    
             listarGastos(); 
         });
     });
+    
     
     
     const limpiarGastos = document.getElementById("limpiarG");
@@ -254,8 +258,8 @@ function renderizarGastos(lista) {
                 <p><strong>Fecha:</strong> ${gasto.Fecha}</p>
                 <p><strong>Registrado por:</strong> ${gasto.Nombre}</p>
                 <div class="card-buttons">
-                    <button class="btn btn-warning btn-editar" data-id="${gasto.ID_Gasto}" data-bs-toggle="modal" data-bs-target="#modalEditar">Editar</button>
-                    <button class="btn btn-danger btn-eliminar" data-id="${gasto.ID_Gasto}">Eliminar</button>
+                    <button class="btn btn-warning btn-editar" id="btnEd" data-id="${gasto.ID_Gasto}" data-bs-toggle="modal" data-bs-target="#modalEditar">Editar</button>
+                    <button class="btn btn-danger btn-eliminar" id="btnE" data-id="${gasto.ID_Gasto}">Eliminar</button>
                 </div>
             </div>
         `;
@@ -368,7 +372,10 @@ function eliminarGasto(id) {
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Sí, eliminar",
-        cancelButtonText: "Cancelar"
+        cancelButtonText: "Cancelar",
+        customClass: {
+            confirmButton: 'btn-eliminar' 
+        }
     }).then((result) => {
         if (result.isConfirmed) {
             fetch('../controlador/controladorGasto.php', {
@@ -389,6 +396,4 @@ function eliminarGasto(id) {
             });
         }
     });
-
-    
 }
