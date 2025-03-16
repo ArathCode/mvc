@@ -16,8 +16,6 @@ document.addEventListener("DOMContentLoaded", (event)=>
                 if(!validaRango(clave,8,20))
                     errores++;
                
-
-                //Que pasa cuando no hay errores
                 if(errores==0)
                 {                    
                     let info = new FormData(login);

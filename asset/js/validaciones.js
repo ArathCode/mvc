@@ -12,7 +12,20 @@ export function validaCorreo(elemento) {
         return false;
     }
 }
+export function validaTelefono(elemento) {
+    let validTelefono = /^\d{10}$/; // Solo acepta 10 dígitos numéricos
 
+    if (elemento.value === "") {
+        mostrarMensaje(elemento, "El campo es obligatorio", false);
+        return false;
+    } else if (validTelefono.test(elemento.value.trim())) {
+        mostrarMensaje(elemento, "Número válido!", true);
+        return true;
+    } else {
+        mostrarMensaje(elemento, "El número debe tener exactamente 10 dígitos.", false);
+        return false;
+    }
+}
 export function validaLargo(elemento, largo) {
     if (elemento.value === "") {
         mostrarMensaje(elemento, "El campo es obligatorio", false);
