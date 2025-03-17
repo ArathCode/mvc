@@ -132,6 +132,7 @@
             <a class="btn btn-info" href="index.php?pag=usuarios">Usuarios</a>
             <a class="btn btn-info" href="index.php?pag=membresias">mebresias</a>
             <a class="btn btn-info" href="index.php?pag=miembros">Miembros</a>
+            <a class="btn btn-info" href="index.php?pag=relacion">Relacion</a>
             
     </div>
 
