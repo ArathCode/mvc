@@ -163,17 +163,47 @@ function buscarMiembroModal() {
     });
 }
 // Función para listar usuarios
+let paginaActual = 1;
+const registrosPorPagina = 10;
+
+
+
 function listarUsuarios() {
+    let params = new URLSearchParams();
+    params.append("ope", "LISTAUSUARIOS");
+    params.append("pagina", paginaActual);
+    params.append("registrosPorPagina", registrosPorPagina);
+
     fetch('controlador/controladorRelacionM.php', {
         method: 'POST',
-        body: new URLSearchParams({ "ope": "LISTAUSUARIOS" })
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: params.toString()
     })
-        .then(response => response.json())
-        .then(data => {
-            const tbody = document.querySelector("#ListaUsuarios tbody");
-            tbody.innerHTML = "";
-            data.lista.forEach(item => {
-                tbody.innerHTML += `
+    .then(response => response.json())
+    .then(data => {
+        if (!data.success) {
+            Swal.fire("Error", "No se pudo cargar la lista: " + data.error, "error");
+            return;
+        }
+        renderizarUsuarios(data.lista);
+        actualizarPaginacion(data.totalPaginas);
+    })
+    .catch(error => {
+        Swal.fire("Error", "No se pudo cargar la lista: " + error.message, "error");
+    });
+}
+
+function renderizarUsuarios(lista) {
+    const tbody = document.querySelector("#ListaUsuarios tbody");
+    tbody.innerHTML = "";
+
+    if (!lista || lista.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="10" class="text-center">No hay registros disponibles.</td></tr>`;
+        return;
+    }
+
+    lista.forEach(item => {
+        tbody.innerHTML += `
             <tr>
                 <td>${item.ID_MiemMiembro}</td>
                 <td>${item.NombreMiembro} ${item.ApellidoPMiembro} ${item.ApellidoMMiembro}</td>
@@ -181,8 +211,8 @@ function listarUsuarios() {
                 <td>${item.NombreUsuario}</td>
                 <td>${item.FechaInicio}</td>
                 <td>${item.FechaFin}</td>
-                <td>${item.Costo}</td>
-                <td>${item.Cantidad}</td>
+                <td>$${item.Costo}</td>
+                <td>${item.Cantidad} ${item.Cantidad > 1 ? "meses" : "mes"}</td>
                 <td>${item.FechaPago}</td>
                 <td>
                     <button class="btn btn-warning btn-editar" data-id="${item.ID_MiemMiembro}" data-bs-toggle="modal" data-bs-target="#modalEditar">Editar</button>
@@ -190,13 +220,34 @@ function listarUsuarios() {
                 </td>
             </tr>
         `;
-            });
-        })
-        .catch(error => {
-            Swal.fire("Error", "No se pudo cargar la lista: " + error.message, "error");
-        });
+    });
 }
 
+function actualizarPaginacion(totalPaginas) {
+    const paginacion = document.querySelector("#paginacion");
+
+    if (!paginacion) {
+        console.error("Error: No se encontró el contenedor #paginacion.");
+        return;
+    }
+
+    paginacion.innerHTML = ""; 
+
+    for (let i = 1; i <= totalPaginas; i++) {
+        let boton = document.createElement("button");
+        boton.classList.add("btn", i === paginaActual ? "btn-primary" : "btn-outline-primary");
+        boton.textContent = i;
+        boton.addEventListener("click", () => cambiarPagina(i));
+
+        paginacion.appendChild(boton);
+    }
+}
+
+// Función para cambiar de página
+function cambiarPagina(nuevaPagina) {
+    paginaActual = nuevaPagina;
+    listarUsuarios();
+}
 
 function agregarUsuario() {
     const form = document.querySelector("#formAgregar");

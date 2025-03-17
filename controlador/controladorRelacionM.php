@@ -27,10 +27,14 @@ if (isset($_POST["ope"])) {
     }
     // listar 
     elseif ($ope == "LISTAUSUARIOS") {
-        $lista = $usu->ListarTODOS(); // Llamamos a la nueva función del modelo
+        $pagina = isset($_POST["pagina"]) ? intval($_POST["pagina"]) : 1;
+            $registrosPorPagina = isset($_POST["registrosPorPagina"]) ? intval($_POST["registrosPorPagina"]) : 10;
+        $lista = $usu->ListarTODOS($pagina, $registrosPorPagina); // Llamamos a la nueva función del modelo
         $info = array(
             "success" => true,
-            "lista" => $lista
+                "lista" => $lista["datos"],
+                "totalPaginas" => $lista["totalPaginas"],
+                "paginaActual" => $lista["paginaActual"]
         );
         echo json_encode($info);
     }

@@ -6,7 +6,7 @@
     <?php
     include_once("head.php");
     ?>
-    <script type="module" src="asset/js/funcionesRelacionM.js?v=1.6"></script>
+    <script type="module" src="asset/js/funcionesRelacionM.js?v=1.8"></script>
 
 </head>
 
@@ -235,6 +235,7 @@
 
                     </tbody>
                 </table>
+                <div id="paginacion" class="mt-3"></div>
             </div>
         </div>
         <a class="btn btn-info" href="index.php?pag=gastos">Gastos</a>

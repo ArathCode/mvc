@@ -3,9 +3,11 @@ class Usuarios
 {
 
 
-    public function ListarTODOS()
+    public function ListarTODOS($pagina = 1, $registrosPorPagina = 10)
     {
+
         $enlace = dbConectar();
+        $offset = ($pagina - 1) * $registrosPorPagina;
         $sql = "SELECT 
                 mm.ID_MiemMiembro, 
                 mm.FechaInicio, 
@@ -21,9 +23,22 @@ class Usuarios
             FROM miembro_membresia mm
             JOIN miembros m ON mm.ID_Miembro = m.ID_Miembro
             JOIN membresias mem ON mm.ID_Membresia = mem.ID_Membresia
-            JOIN usuarios u ON mm.ID_Usuario = u.ID_Usuario";
+            JOIN usuarios u ON mm.ID_Usuario = u.ID_Usuario
+             LIMIT ?, ?";
 
+        $countSql = "SELECT COUNT(*) as total FROM miembro_membresia";
+
+        // Obtener total de registros
+        $countConsulta = $enlace->prepare($countSql);
+        $countConsulta->execute();
+        $countResult = $countConsulta->get_result();
+        $totalRegistros = $countResult->fetch_assoc()["total"];
+        $totalPaginas = ceil($totalRegistros / $registrosPorPagina);
+        $countConsulta->close();
+
+        // Ejecutar consulta principal
         $consulta = $enlace->prepare($sql);
+        $consulta->bind_param("ii", $offset, $registrosPorPagina);
         $consulta->execute();
         $result = $consulta->get_result();
 
@@ -32,7 +47,11 @@ class Usuarios
             $datos[] = $fila;
         }
 
-        return $datos;
+        return [
+            "datos" => $datos,
+            "totalPaginas" => $totalPaginas,
+            "paginaActual" => $pagina
+        ];
     }
     public function ObtenerMembresias()
     {
@@ -52,27 +71,27 @@ class Usuarios
 
 
     public function Agregar($datos)
-{
-    $enlace = dbConectar();
-    $sql = "INSERT INTO miembro_membresia (ID_Miembro, ID_Membresia, ID_Usuario, Costo, Cantidad, FechaInicio, FechaFin, FechaPago) 
+    {
+        $enlace = dbConectar();
+        $sql = "INSERT INTO miembro_membresia (ID_Miembro, ID_Membresia, ID_Usuario, Costo, Cantidad, FechaInicio, FechaFin, FechaPago) 
             VALUES (?, ?, ?, ?, ?, ?, ?,?)";
-    
-    $consulta = $enlace->prepare($sql);
 
-    $consulta->bind_param(
-        "iiidisss",
-        $datos["ID_Miembro"],
-        $datos["ID_Membresia"],
-        $datos["ID_Usuario"],
-        $datos["Costo"],
-        $datos["Cantidad"],
-        $datos["FechaInicio"],
-        $datos["FechaFin"],
-        $datos["FechaPago"]
-    );
+        $consulta = $enlace->prepare($sql);
 
-    return $consulta->execute();
-}
+        $consulta->bind_param(
+            "iiidisss",
+            $datos["ID_Miembro"],
+            $datos["ID_Membresia"],
+            $datos["ID_Usuario"],
+            $datos["Costo"],
+            $datos["Cantidad"],
+            $datos["FechaInicio"],
+            $datos["FechaFin"],
+            $datos["FechaPago"]
+        );
+
+        return $consulta->execute();
+    }
     public function Editar($datos)
     {
         $enlace = dbConectar();
