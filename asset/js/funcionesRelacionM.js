@@ -2,6 +2,10 @@ import { validaCorreo, validaLargo, validaRango, validaSoloLetras, validaContras
 document.addEventListener("DOMContentLoaded", () => {
     listarUsuarios();
     buscarMiembroModal();
+    document.querySelector(".btn-success").addEventListener("click", () => filtrarMembresias("vigentes"));
+    document.querySelector(".btn-danger").addEventListener("click", () => filtrarMembresias("vencidas"));
+    document.querySelector(".btn-secondary").addEventListener("click", () => filtrarMembresias("todas"));
+    document.querySelector(".btn-warning").addEventListener("click", () => filtrarMembresias("proximas"));
     document.getElementById("FechaInicio").addEventListener("change", actualizarFechaFin);
     document.getElementById("Cantidad").addEventListener("input", actualizarFechaFin);
     document.getElementById("ID_Membresia").addEventListener("change", actualizarFechaFin);
@@ -12,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const fechaFormateada = hoy.toISOString().split('T')[0];
         document.getElementById("FechaPago").value = fechaFormateada;
     }
-
+    
     const formUsuario = document.querySelector("#formAgregar");
     const modal = document.getElementById("modalAgregar");
     modal.addEventListener("show.bs.modal", () => {
@@ -166,13 +170,14 @@ function buscarMiembroModal() {
 let paginaActual = 1;
 const registrosPorPagina = 10;
 
-
+let filtroActual = "vigentes";
 
 function listarUsuarios() {
     let params = new URLSearchParams();
     params.append("ope", "LISTAUSUARIOS");
     params.append("pagina", paginaActual);
     params.append("registrosPorPagina", registrosPorPagina);
+    params.append("filtro", filtroActual);
 
     fetch('controlador/controladorRelacionM.php', {
         method: 'POST',
@@ -201,10 +206,31 @@ function renderizarUsuarios(lista) {
         tbody.innerHTML = `<tr><td colspan="10" class="text-center">No hay registros disponibles.</td></tr>`;
         return;
     }
+    const hoy = new Date();
+        hoy.setMinutes(hoy.getMinutes() - hoy.getTimezoneOffset());
 
-    lista.forEach(item => {
+        const fechaFormateada = hoy.toISOString().split('T')[0];
+        let listaFiltrada = lista.filter(item => {
+            const fechaFin = new Date(item.FechaFin);
+        const diferenciaDias = Math.floor((fechaFin - hoy) / (1000 * 60 * 60 * 24));
+            if (filtroActual === "vigentes") return item.FechaFin >= fechaFormateada;
+            if (filtroActual === "vencidas") return item.FechaFin < fechaFormateada;
+            if (filtroActual === "proximas") return diferenciaDias > -2 && diferenciaDias <= 5;
+            return true; 
+        });
+        listaFiltrada.forEach(item => {
+        const fechaFin = new Date(item.FechaFin);
+        const diferenciaDias = Math.floor((fechaFin - hoy) / (1000 * 60 * 60 * 24));
+        let estadoClase = "table-success"; 
+        if (item.FechaFin < fechaFormateada) {
+            estadoClase = "table-danger"; 
+        } else if (diferenciaDias > -2 && diferenciaDias <= 5) {
+            estadoClase = "table-warning"; 
+        }
+
+        
         tbody.innerHTML += `
-            <tr>
+            <tr class="${estadoClase}">
                 <td>${item.ID_MiemMiembro}</td>
                 <td>${item.NombreMiembro} ${item.ApellidoPMiembro} ${item.ApellidoMMiembro}</td>
                 <td>${item.TipoMembresia}</td>
@@ -246,6 +272,10 @@ function actualizarPaginacion(totalPaginas) {
 // Función para cambiar de página
 function cambiarPagina(nuevaPagina) {
     paginaActual = nuevaPagina;
+    listarUsuarios();
+}
+export function filtrarMembresias(filtro) {
+    filtroActual = filtro;
     listarUsuarios();
 }
 

@@ -6,7 +6,7 @@
     <?php
     include_once("head.php");
     ?>
-    <script type="module" src="asset/js/funcionesRelacionM.js?v=1.9.1"></script>
+    <script type="module" src="asset/js/funcionesRelacionM.js?v=1.9.4"></script>
 
 </head>
 
@@ -16,10 +16,17 @@
         <h2 class="text-center">Relacion de membresias</h2>
 
 
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregar">
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalAgregar">
             Agregar Usuario
         </button>
-
+        <div class="d-flex justify-content-between mb-3">
+    <div>
+        <button class="btn btn-success" >Vigentes</button>
+        <button class="btn btn-danger" >Vencidas</button>
+        <button class="btn btn-warning" >Proximas a vencer</button>
+        <button class="btn btn-secondary" >Todas</button>
+    </div>
+</div>
         <!-- Modal AGREGAR -->
         <div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
             <div class="modal-dialog">
