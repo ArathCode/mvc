@@ -39,6 +39,9 @@
         elseif($pag == "miembros" && $tipoUsuario == "admin") {
             include_once("vistas/miembros.php");
         }
+        elseif($pag == "relacion" && $tipoUsuario == "admin") {
+            include_once("vistas/relacionMembresias.php");
+        }
         else {
             echo "<h2>Acceso denegado. Verifique su usuario.</h2>";
             exit();

@@ -3,7 +3,7 @@
                 <li>
                     <a href="">
                         <span class="icon">
-                            <img src="../asset/css/images/lg.jpg" alt="Logo" class="logo">
+                            <img src="../asset/images/lg.jpg" alt="Logo" class="logo">
                         </span>
                         <span class="title">Dragon Gym</span>
                     </a>

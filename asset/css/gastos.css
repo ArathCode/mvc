@@ -340,6 +340,12 @@ body {
     gap: 20px;
     justify-content: center;
 }
+#ListaMiembros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
 
 .gasto-card {
     background: #ffffff;

@@ -5,16 +5,16 @@
     <title>Usuarios-DragonGym</title>
     <?php include_once("head.php"); ?>
     <script type="module" src="../asset/js/funcionesGasto.js?v=4.9.3"></script>
-    
+
     <link rel="stylesheet" href="../asset/css/gastos.css">
 </head>
 
-<body >
+<body>
 
     <!-- =============== Barra de navegacion ================ -->
     <div class="navigation">
         <?php
-            include_once("encabezado.php")
+        include_once("encabezado.php")
         ?>
     </div>
     <div class="main">
@@ -49,14 +49,14 @@
                 </div>
                 <div class="reportes">
                     <div class="iconoRe">
-                    <ion-icon name="document-attach-outline"></ion-icon>
+                        <ion-icon name="document-attach-outline"></ion-icon>
                     </div>
                     <div class="enlace">
                         <a href="Reportes.php">Reportes</a>
                     </div>
                 </div>
             </div>
-            
+
             <div class="contenedor">
                 <div class="usuario">
                     <img src="https://i.pinimg.com/originals/a0/14/7a/a0147adf0a983ab87e86626f774785cf.gif" alt="">
@@ -73,7 +73,7 @@
                     Agregar Gasto
                 </button>
             </div>
-           
+
             <div class="filter-container">
                 <div class="filter" data-filter="hoy">
                     <span>Hoy</span> <button class="close">✖</button>
@@ -85,7 +85,7 @@
                     <span>Día</span> <input type="date" id="fecha" class="hidden"> <button class="close">✖</button>
                 </div>
                 <div class="filter" data-filter="mes">
-                    <span>Mes</span> 
+                    <span>Mes</span>
                     <select id="mes" class="hidden">
                         <option>Enero</option>
                         <option>Febrero</option>
@@ -99,12 +99,12 @@
                         <option>Octubre</option>
                         <option>Noviembre</option>
                         <option>Diciembre</option>
-                    </select> 
+                    </select>
                     <button class="close">✖</button>
                 </div>
                 <div class="filter" data-filter="año">
-                    <span>Año</span> 
-                    <select id="año" class="hidden"></select> 
+                    <span>Año</span>
+                    <select id="año" class="hidden"></select>
                     <button class="close">✖</button>
                 </div>
 
@@ -124,15 +124,20 @@
             <!-- Tabla de Gastos -->
             <div class="mt-3">
                 <div class="table-responsive" id="ListaGastos">
-                
+
                 </div>
                 <div id="paginacion" class="mt-3"></div>
             </div>
+            <a class="btn btn-info" href="index.php?pag=gastos">Gastos</a>
+            <a class="btn btn-info" href="index.php?pag=usuarios">Usuarios</a>
+            <a class="btn btn-info" href="index.php?pag=membresias">mebresias</a>
+            <a class="btn btn-info" href="index.php?pag=miembros">Miembros</a>
+            <a class="btn btn-info" href="index.php?pag=relacion">Relacion</a>
             
     </div>
 
-    <!-- Modal AGREGAR -->
-    <div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
+        <!-- Modal AGREGAR -->
+        <div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -143,7 +148,7 @@
                         <form id="formAgregarGasto">
                             <div class="mb-3">
                                 <label for="Descripcion" class="form-label">Descripción</label>
-                                <input type="text" class="form-control" id="Descripcion" name="Descripcion" maxlength="200" required>
+                                <textarea class="form-control" id="Descripcion" name="Descripcion" maxlength="200" rows="4" required></textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="Fecha" class="form-label">Fecha</label>
@@ -175,7 +180,7 @@
                             <input type="hidden" id="ID_Gasto" name="ID_Gasto">
                             <div class="mb-3">
                                 <label for="DescripcionEdit" class="form-label">Descripción</label>
-                                <input type="text" class="form-control" id="DescripcionEdit" name="DescripcionEdit" maxlength="200" required>
+                                <textarea class="form-control" id="DescripcionEdit" name="DescripcionEdit" maxlength="200" rows="4" required></textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="FechaEdit" class="form-label">Fecha</label>

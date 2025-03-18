@@ -6,65 +6,14 @@
     <?php
     include_once("head.php");
     ?>
-    <script type="module" src="asset/js/funcionesUsu.js?v=3.5"></script>
-    <link rel="stylesheet" href="../asset/css/gastos.css">
+    <script type="module" src="asset/js/funcionesRelacionM.js?v=1.9.1"></script>
+
 </head>
 
 <body class="bg-light">
-<div class="navigation">
-        <?php
-        include_once("encabezado.php")
-        ?>
-    </div>
-    <div class="main">
-        <div class="topbar">
-            <div class="toggle">
-                <ion-icon name="menu-outline"></ion-icon>
-            </div>
-            <div class="subMenu">
-                <div class="gastos">
-                    <div class="iconoGa">
-                        <ion-icon name="wallet-outline"></ion-icon>
-                    </div>
-                    <div class="enlace">
-                        <a href="index.php?pag=gastos">Gastos</a>
-                    </div>
-                </div>
-                <div class="inventario">
-                    <div class="iconoIn">
-                        <ion-icon name="archive-outline"></ion-icon>
-                    </div>
-                    <div class="enlace">
-                        <a href="inventario.php">Inventario</a>
-                    </div>
-                </div>
-                <div class="adminUsuarios">
-                    <div class="iconoAd">
-                        <ion-icon name="people-outline"></ion-icon>
-                    </div>
-                    <div class="enlace">
-                        <a href="index.php?pag=usuarios">Usuarios</a>
-                    </div>
-                </div>
-                <div class="reportes">
-                    <div class="iconoRe">
-                        <ion-icon name="document-attach-outline"></ion-icon>
-                    </div>
-                    <div class="enlace">
-                        <a href="Reportes.php">Reportes</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="contenedor">
-                <div class="usuario">
-                    <img src="https://i.pinimg.com/originals/a0/14/7a/a0147adf0a983ab87e86626f774785cf.gif" alt="">
-                </div>
-            </div>
-        </div>
 
     <div class="container mt-5">
-        <h2 class="text-center">Gestión de Usuarios</h2>
+        <h2 class="text-center">Relacion de membresias</h2>
 
 
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregar">
@@ -81,88 +30,53 @@
                     </div>
                     <div class="modal-body">
                         <form id="formAgregar">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="Nombre" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="Nombre" name="Nombre" maxlength="30" required>
-                                    <div class="invalid-feedback">
-                                        Password is required
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
+                            <div class="mb-3 d-flex align-items-center">
+                                <div class="me-3 flex-grow-1">
+                                    <label for="ID_Miembro" class="form-label">ID Miembro</label>
+                                    <input type="number" class="form-control" id="ID_Miembro" name="ID_Miembro" placeholder="Escriba el ID" required>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="ApellidoP" class="form-label">Apellido Paterno</label>
-                                    <input type="text" class="form-control" id="ApellidoP" name="ApellidoP" maxlength="30" required>
-                                    <div class="invalid-feedback">
-                                        Password is required
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="ApellidoM" class="form-label">Apellido Materno</label>
-                                    <input type="text" class="form-control" id="ApellidoM" name="ApellidoM" maxlength="30" required>
-                                    <div class="invalid-feedback">
-                                        Password is required
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <label for="CorreoUsu" class="form-label">Correo</label>
-                                    <input type="email" class="form-control" id="CorreoUsu" name="CorreoUsu" maxlength="70" required>
-                                    <div class="invalid-feedback">
-                                        Password is required
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="NombreUsu" class="form-label">Usuario</label>
-                                    <input type="text" class="form-control" id="NombreUsu" name="NombreUsu" maxlength="50" required>
-                                    <div class="invalid-feedback">
-                                        Password is required
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="Contra" class="form-label">Contraseña</label>
-                                    <input type="password" class="form-control" id="Contra" name="Contra" maxlength="16" required>
-                                    <div class="invalid-feedback">
-                                        Password is required
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="Salario" class="form-label">Salario</label>
-                                    <input type="number" class="form-control" id="Salario" name="Salario" min="0" max="1000000" placeholder="Ingrese un número" required>
-                                    <div class="invalid-feedback">
-                                        Password is required
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="usutip" class="form-label">Tipo de Usuario</label>
-                                    <select class="form-control" id="usutip" name="usutip">
-                                        <option value="admin">Admin</option>
-                                        <option value="coach">Coach</option>
-                                    </select>
+                                <div class="flex-grow-2">
+                                    <label for="nombreMiembro" class="form-label">Nombre del Miembro</label>
+                                    <input type="text" class="form-control" id="nombreMiembro" placeholder="Nombre" readonly>
                                 </div>
                             </div>
-                            <div class="text-end mt-3">
-                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            <div class="mb-3">
+                                <label for="ID_Membresia" class="form-label">Tipo de Membresía</label>
+                                <select class="form-control" id="ID_Membresia" name="ID_Membresia" required>
+                                    <!-- Las opciones se llenarán dinámicamente con JS -->
+                                </select>
                             </div>
+
+                            
+                                <input type="hidden" name="ID_Usuario" id="ID_Usuario" value="<?php echo $_SESSION['ID_Usuario']; ?>">
+                        
+
+                            <div class="mb-3">
+                                <label for="FechaInicio" class="form-label">Fecha de Inicio</label>
+                                <input type="date" class="form-control" id="FechaInicio" name="FechaInicio" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="FechaFin" class="form-label">Fecha de Fin</label>
+                                <input type="date" class="form-control" id="FechaFin" name="FechaFin" readonly>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="Costo" class="form-label">Costo</label>
+                                <input type="number" class="form-control" id="Costo" name="Costo" min="1"  readonly>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="Cantidad" class="form-label">Cantidad</label>
+                                <input type="number" class="form-control" id="Cantidad" name="Cantidad" min="1" value="1" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="FechaPago" class="form-label">Fecha de Pago</label>
+                                <input type="date" class="form-control" id="FechaPago" name="FechaPago" readonly>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Guardar</button>
                         </form>
                     </div>
                 </div>
@@ -179,7 +93,7 @@
                     </div>
                     <div class="modal-body">
                         <form id="formEditar">
-                            <input type="hidden" id="ID_Usuario" name="ID_Usuario">
+                            <input type="hidden" id="ID_MiemMem" name="ID_MiemMem">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="NombreEdit" class="form-label">Nombre</label>
@@ -299,19 +213,21 @@
 
         <!-- Tabla de Usuarios -->
         <div class="mt-5">
-            <h4 class="text-center">Lista de Usuarios</h4>
+            <h4 class="text-center">Membresias Asignadas</h4>
             <div class="table-responsive">
                 <table class="table table-bordered table-striped" id="ListaUsuarios">
                     <thead class="table-dark">
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
-                            <th>Apellido Paterno</th>
-                            <th>Apellido Materno</th>
-                            <th>Usuario</th>
+                            <th>Tipo Membresia</th>
+                            <th>Usuario Asignado</th>
+                            <th>Fecha Inicio</th>
 
-                            <th>Salario</th>
-                            <th>Tipo</th>
+                            <th>Fecha FIn</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Fecha Pago</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -319,6 +235,7 @@
 
                     </tbody>
                 </table>
+                <div id="paginacion" class="mt-3"></div>
             </div>
         </div>
         <a class="btn btn-info" href="index.php?pag=gastos">Gastos</a>
