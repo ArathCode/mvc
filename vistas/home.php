@@ -185,15 +185,15 @@
 
                     </div>
                     <div class="contenidoM">
-                        <p>#32</p>
-                        <h3>Jorge Solis</h2>
-                            <p>2 Meses continuos</p>
+                        <p>#ID de miembro</p>
+                        <h3>Nombre</h2>
+                            <p>Número: </p>
                             <div class="fechas">
                                 <div class="fechaI">
-                                    24/9/2024
+                                    dd/mm/yyyy
                                 </div>
                                 <div class="fechaF">
-                                    24/10/2024
+                                    dd/mm/yyyy
                                 </div>
                             </div>
                             <div class="estadoM">
