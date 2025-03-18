@@ -7,10 +7,61 @@
     include_once("head.php");
     ?>
     <script type="module" src="asset/js/funcionesUsu.js?v=3.5"></script>
-
+    <link rel="stylesheet" href="../asset/css/gastos.css">
 </head>
 
 <body class="bg-light">
+<div class="navigation">
+        <?php
+        include_once("encabezado.php")
+        ?>
+    </div>
+    <div class="main">
+        <div class="topbar">
+            <div class="toggle">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+            <div class="subMenu">
+                <div class="gastos">
+                    <div class="iconoGa">
+                        <ion-icon name="wallet-outline"></ion-icon>
+                    </div>
+                    <div class="enlace">
+                        <a href="index.php?pag=gastos">Gastos</a>
+                    </div>
+                </div>
+                <div class="inventario">
+                    <div class="iconoIn">
+                        <ion-icon name="archive-outline"></ion-icon>
+                    </div>
+                    <div class="enlace">
+                        <a href="inventario.php">Inventario</a>
+                    </div>
+                </div>
+                <div class="adminUsuarios">
+                    <div class="iconoAd">
+                        <ion-icon name="people-outline"></ion-icon>
+                    </div>
+                    <div class="enlace">
+                        <a href="index.php?pag=usuarios">Usuarios</a>
+                    </div>
+                </div>
+                <div class="reportes">
+                    <div class="iconoRe">
+                        <ion-icon name="document-attach-outline"></ion-icon>
+                    </div>
+                    <div class="enlace">
+                        <a href="Reportes.php">Reportes</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contenedor">
+                <div class="usuario">
+                    <img src="https://i.pinimg.com/originals/a0/14/7a/a0147adf0a983ab87e86626f774785cf.gif" alt="">
+                </div>
+            </div>
+        </div>
 
     <div class="container mt-5">
         <h2 class="text-center">Gestión de Usuarios</h2>

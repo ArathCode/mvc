@@ -212,7 +212,7 @@ function renderizarUsuarios(lista) {
                 <td>${item.FechaInicio}</td>
                 <td>${item.FechaFin}</td>
                 <td>$${item.Costo}</td>
-                <td>${item.Cantidad} ${item.Cantidad > 1 ? "meses" : "mes"}</td>
+                <td>${item.Cantidad} </td>
                 <td>${item.FechaPago}</td>
                 <td>
                     <button class="btn btn-warning btn-editar" data-id="${item.ID_MiemMiembro}" data-bs-toggle="modal" data-bs-target="#modalEditar">Editar</button>
