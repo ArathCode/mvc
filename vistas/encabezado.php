@@ -28,7 +28,7 @@
                 </li>
 
                 <li>
-                    <a href="index.php?pag=gastos">
+                    <a href="#">
                         <span class="icon">
                             <ion-icon name="pricetag-outline"></ion-icon>
                         </span>
@@ -39,7 +39,7 @@
 
 
                 <li>
-                    <a href="index.php?pag=membresias">
+                    <a href="#">
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>

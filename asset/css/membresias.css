@@ -190,7 +190,7 @@ body {
     gap: 15px;
   }
   .gastos, .inventario, 
-  .adminUsuarios, .reportes{
+  .adminUsuarios, .reportes, .membresias{
     padding: 10px 15px;
     border-radius: 30px;
     background-color: var(--black1);
@@ -198,9 +198,12 @@ body {
     gap: 5px;
     transition: .2s ease all;
   }
-  .gastos{
+  .membresias{
     background-color: var(--red);
     color: white;
+  }
+  .gastos{
+    color: rgb(12, 189, 80);
   }
   .inventario{
     color: rgb(241, 241, 18);
@@ -226,9 +229,9 @@ body {
     background-color:  rgb(187, 187, 187);
     color: var(--red);
   }
-  .gastos:hover{
+  .membresias:hover{
     background-color: var(--black1);
-    color: rgb(12, 189, 80);
+    color:  #999;
   }
   .contenedor{
     display: flex;
@@ -256,11 +259,12 @@ body {
     object-fit: cover;
   }
 
-  /*  ================= Boton de gastos =======*/
+  /*  ================= Boton de membresias =======*/
 .gB{
     margin: auto;
     width: 150px;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 .gB button{
     padding: 10px;
@@ -334,7 +338,7 @@ body {
 }
 
 
-#ListaGastos {
+#ListaMembresias{
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -385,4 +389,67 @@ body {
     background-color: #e74c3c;
     color: white;
     border: none;
+}
+
+/* ===========Boton de editar ===============*/
+.btn-editar{
+  background-color: black;
+}
+.btn-editar:hover{
+  background-color: rgb(77, 76, 76);
+  color: white;
+}
+.btn-eliminar{
+  background-color: var(--red);
+}
+
+/* ====================== Todo lo responsivo ========================== */
+@media (max-width: 991px) {
+  .navigation {
+    left: -300px;
+  }
+  .navigation.active {
+    width: 300px;
+    left: 0;
+  }
+  .main {
+    width: 100%;
+    left: 0;
+  }
+  .main.active {
+    left: 300px;
+  }
+
+}
+
+
+
+@media (max-width: 480px) {
+  .contadores {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .cardHeader h2 {
+    font-size: 20px;
+  }
+  .usuario {
+    min-width: 40px;
+  }
+  .navigation {
+    width: 100%;
+    left: -100%;
+    z-index: 1000;
+  }
+  .navigation.active {
+    width: 100%;
+    left: 0;
+  }
+  .toggle {
+    z-index: 10001;
+  }
+  .main.active .toggle {
+    color: #fff;
+    position: fixed;
+    right: 0;
+    left: initial;
+  }
 }

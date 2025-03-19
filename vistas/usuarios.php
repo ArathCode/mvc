@@ -7,7 +7,7 @@
     include_once("head.php");
     ?>
     <script type="module" src="asset/js/funcionesUsu.js?v=3.5"></script>
-    <link rel="stylesheet" href="../asset/css/gastos.css">
+    <link rel="stylesheet" href="../asset/css/usuarios.css">
 </head>
 
 <body class="bg-light">
@@ -22,38 +22,9 @@
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
             <div class="subMenu">
-                <div class="gastos">
-                    <div class="iconoGa">
-                        <ion-icon name="wallet-outline"></ion-icon>
-                    </div>
-                    <div class="enlace">
-                        <a href="index.php?pag=gastos">Gastos</a>
-                    </div>
-                </div>
-                <div class="inventario">
-                    <div class="iconoIn">
-                        <ion-icon name="archive-outline"></ion-icon>
-                    </div>
-                    <div class="enlace">
-                        <a href="inventario.php">Inventario</a>
-                    </div>
-                </div>
-                <div class="adminUsuarios">
-                    <div class="iconoAd">
-                        <ion-icon name="people-outline"></ion-icon>
-                    </div>
-                    <div class="enlace">
-                        <a href="index.php?pag=usuarios">Usuarios</a>
-                    </div>
-                </div>
-                <div class="reportes">
-                    <div class="iconoRe">
-                        <ion-icon name="document-attach-outline"></ion-icon>
-                    </div>
-                    <div class="enlace">
-                        <a href="Reportes.php">Reportes</a>
-                    </div>
-                </div>
+                <?php
+                    include_once("submenu.php")
+                ?>
             </div>
 
             <div class="contenedor">
@@ -64,12 +35,13 @@
         </div>
 
     <div class="container mt-5">
-        <h2 class="text-center">Gestión de Usuarios</h2>
 
-
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregar">
-            Agregar Usuario
-        </button>
+        <div class="gB">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregar">
+                Agregar Usuario
+            </button>
+        </div>
+        
 
         <!-- Modal AGREGAR -->
         <div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
@@ -321,14 +293,11 @@
                 </table>
             </div>
         </div>
-        <a class="btn btn-info" href="index.php?pag=gastos">Gastos</a>
-        <a class="btn btn-info" href="index.php?pag=usuarios">Usuarios</a>
-        <a class="btn btn-info" href="index.php?pag=membresias">Miembros</a>
-        <a class="btn btn-error" href="../salir.php">Cerrar Sesión</a>
+
     </div>
 
 
-
+    <script src="../asset/js/main.js"></script>
 </body>
 
 </html>

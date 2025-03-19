@@ -25,38 +25,9 @@
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
             <div class="subMenu">
-                <div class="gastos">
-                    <div class="iconoGa">
-                        <ion-icon name="wallet-outline"></ion-icon>
-                    </div>
-                    <div class="enlace">
-                        <a href="index.php?pag=gastos">Gastos</a>
-                    </div>
-                </div>
-                <div class="inventario">
-                    <div class="iconoIn">
-                        <ion-icon name="archive-outline"></ion-icon>
-                    </div>
-                    <div class="enlace">
-                        <a href="inventario.php">Inventario</a>
-                    </div>
-                </div>
-                <div class="adminUsuarios">
-                    <div class="iconoAd">
-                        <ion-icon name="people-outline"></ion-icon>
-                    </div>
-                    <div class="enlace">
-                        <a href="index.php?pag=usuarios">Usuarios</a>
-                    </div>
-                </div>
-                <div class="reportes">
-                    <div class="iconoRe">
-                        <ion-icon name="document-attach-outline"></ion-icon>
-                    </div>
-                    <div class="enlace">
-                        <a href="Reportes.php">Reportes</a>
-                    </div>
-                </div>
+                <?php
+                    include_once("submenu.php")
+                ?>
             </div>
 
             <div class="contenedor">
@@ -66,14 +37,12 @@
             </div>
         </div>
 
-
-        <h2 class="text-center">Gestión de Membresias</h2>
-
-
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregar">
-            Nueva Membresia
-        </button>
-
+        <div class="gB">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregar">
+                    Nueva Membresia
+            </button>
+        </div>
+        
         <!-- Modal AGREGAR -->
         <div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -166,11 +135,12 @@
 
         <!-- Tabla de Usuarios -->
         <div class="mt-5">
-                <h4 class="text-center">Lista de Gastos</h4>
+                <h4 class="text-center">Lista de Membresías</h4>
                 <div class="row" id="ListaMembresias"></div>  
         </div>
 
     </div>
+    <script src="../asset/js/main.js"></script>
 
 </body>
 

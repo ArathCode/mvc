@@ -235,8 +235,6 @@ body {
 .gB{
     margin: auto;
     width: 150px;
-    margin-bottom: 20px;
-    margin-top: 20px;
 }
 .gB button{
     padding: 10px;
@@ -253,7 +251,7 @@ body {
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-    max-height: 450px; 
+    max-height: 485px; 
     overflow-y: auto; 
   }
 
@@ -388,6 +386,9 @@ body {
 }
 
 /* ============== Paginacion =================*/
+#paginacion button{
+  margin: 2px;
+}
 #paginacion .btn-outline-primary{
   color: var(--black1);
   border: solid 1px black;

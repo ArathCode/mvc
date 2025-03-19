@@ -190,51 +190,51 @@ body {
     gap: 15px;
   }
   .gastos, .inventario, 
-  .adminUsuarios, .reportes, .membresias{
-    padding: 10px 15px;
-    border-radius: 30px;
-    background-color: var(--black1);
-    display: flex;
-    gap: 5px;
-    transition: .2s ease all;
-  }
-  .gastos{
-    background-color: var(--red);
-    color: white;
-  }
-  .inventario{
-    color: rgb(241, 241, 18);
-  }
-  .adminUsuarios{
-    color: rgb(49, 133, 229);
-  }
-  .reportes{
-    color: rgb(248, 144, 32);
-  }
-  .subMenu .enlace a{
-    text-decoration: none;
-    color: white;
-  }
-  .membresias{
-    color: #999;
-  }
-  
-  .inventario:hover .enlace a,
-  .adminUsuarios:hover .enlace a,
-  .reportes:hover .enlace a,
-  .membresias:hover .enlace a{
-    color: black;
-  }
-  .inventario:hover, 
-  .adminUsuarios:hover, .reportes:hover,
-  .membresias:hover{
-    background-color:  rgb(187, 187, 187);
-    color: var(--red);
-  }
-  .gastos:hover{
-    background-color: var(--black1);
-    color: rgb(12, 189, 80);
-  }
+.adminUsuarios, .reportes, .membresias{
+  padding: 10px 15px;
+  border-radius: 30px;
+  background-color: var(--black1);
+  display: flex;
+  gap: 5px;
+  transition: .2s ease all;
+}
+.gastos{
+  color: rgb(12, 189, 80);
+}
+.inventario{
+  color: rgb(241, 241, 18);
+}
+.adminUsuarios{
+  background-color: var(--red);
+  color: white;
+}
+.reportes{
+  color: rgb(248, 144, 32);
+}
+.subMenu .enlace a{
+  text-decoration: none;
+  color: white;
+}
+.membresias{
+  color: #999;
+}
+.inventario:hover .enlace a,
+.gastos:hover .enlace a,
+.reportes:hover .enlace a,
+.membresias:hover .enlace a{
+  color: black;
+}
+.inventario:hover, 
+.gastos:hover, .reportes:hover,
+.membresias:hover{
+  background-color:  rgb(187, 187, 187);
+  color: var(--red);
+}
+.adminUsuarios:hover{
+  background-color: var(--black1);
+  color: rgb(49, 133, 229);
+
+}
   .contenedor{
     display: flex;
     align-items: center;
@@ -265,7 +265,7 @@ body {
 .gB{
     margin: auto;
     width: 150px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 .gB button{
     padding: 10px;
@@ -412,7 +412,7 @@ body {
 }
 
 #ListaGastos {
-  max-height: 490px; 
+  max-height: 450px; 
   overflow-y: auto; 
 }
 .btn-eliminar {
@@ -426,9 +426,6 @@ body {
   border-color: #721f1a !important;
 }
 /* ============== Paginacion =================*/
-#paginacion button{
-  margin: 2px;
-}
 #paginacion .btn-outline-primary{
   color: var(--black1);
   border: solid 1px black;
@@ -446,4 +443,11 @@ body {
   background-color: black;
   border: solid 1px black;
 }
-
+/* ===========Boton de editar ===============*/
+.btn-editar{
+  background-color: black;
+}
+.btn-editar:hover{
+  background-color: rgb(77, 76, 76);
+  color: white;
+}
