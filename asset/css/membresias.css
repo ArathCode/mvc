@@ -276,6 +276,16 @@ body {
     border: transparent;
     cursor: pointer;
 }
+.btn .btn-primary,#act{
+  padding: 10px;
+  background-color:var(--red);
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 20px;
+  border: transparent;
+  cursor: pointer;
+}
 /* =============== Filtros para gastos ==============*/
 
 .filter-container {

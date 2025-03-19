@@ -124,7 +124,7 @@
                                 <label for="CostoEdit" class="form-label">Costo</label>
                                 <input type="number" class="form-control" id="CostoEdit" name="CostoEdit" min="0" max="1000000" placeholder="Ingrese un número" required>
                             </div>
-                            <button type="submit" class="btn btn-primary">Actualizar</button>
+                            <button type="submit" id ="act" class="btn btn-primary">Actualizar</button>
                         </form>
                     </div>
                 </div>
