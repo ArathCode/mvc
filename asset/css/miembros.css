@@ -1,4 +1,3 @@
-
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
 
 * {
@@ -15,7 +14,7 @@
   --black1: #222;
   --black2: #999;
   --estado: rgb(40, 99, 46);
-  --verde:#108d08;
+  --verde:#2a7a24;
 }
 
 body {
@@ -151,116 +150,93 @@ body {
   left: 80px;
 }
 
-.main {
-    position: absolute;
-    width: calc(100% - 300px);
-    left: 300px;
-    min-height: 100vh;
-    background: var(--white);
-    transition: 0.5s;
-  }
-  .main.active {
-    width: calc(100% - 80px);
-    left: 80px;
-  }
-  
-  .topbar {
-    width: 100%;
-    height: 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 40px;
-  }
-  
-  .toggle {
-    position: relative;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2.5rem;
-    cursor: pointer;
-  }
-  .subMenu{
-    display: flex;
-    width: 550px;
-    justify-content: space-around;
-    gap: 15px;
-  }
-  .gastos, .inventario, 
-  .adminUsuarios, .reportes{
-    padding: 10px 15px;
-    border-radius: 30px;
-    background-color: var(--black1);
-    display: flex;
-    gap: 5px;
-    transition: .2s ease all;
-  }
-  .gastos{
-    background-color: var(--red);
-    color: white;
-  }
-  .inventario{
-    color: rgb(241, 241, 18);
-  }
-  .adminUsuarios{
-    color: rgb(49, 133, 229);
-  }
-  .reportes{
-    color: rgb(248, 144, 32);
-  }
-  .subMenu .enlace a{
-    text-decoration: none;
-    color: white;
-  }
-  
-  .inventario:hover .enlace a,
-  .adminUsuarios:hover .enlace a,
-  .reportes:hover .enlace a{
-    color: black;
-  }
-  .inventario:hover, 
-  .adminUsuarios:hover, .reportes:hover{
-    background-color:  rgb(187, 187, 187);
-    color: var(--red);
-  }
-  .gastos:hover{
-    background-color: var(--black1);
-    color: rgb(12, 189, 80);
-  }
-  .contenedor{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    
-  }
-  .usuario {
-    position: relative;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    overflow: hidden;
-    cursor: pointer;
-    margin-left: 20px;
-  }
-  
-  .usuario img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+.topbar {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+}
 
-  /*  ================= Boton de gastos =======*/
+.toggle {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+.search {
+  position: relative;
+  width: 400px;
+  margin: 0 10px;
+}
+
+.search label {
+  position: relative;
+  width: 100%;
+}
+
+.search label input {
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+  padding: 5px 20px;
+  padding-left: 35px;
+  font-size: 18px;
+  outline: none;
+  border: 1px solid var(--black2);
+}
+
+.search label ion-icon {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  font-size: 1.2rem;
+}
+.contenedor{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  
+}
+.notificacion{
+  cursor: pointer;
+  padding-top: 10px;
+}
+.notificacion:hover{
+  color: var(--red);
+}
+.usuario {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.usuario img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+  /*  ================= Boton de miembros =======*/
 .gB{
     margin: auto;
     width: 150px;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 .gB button{
     padding: 10px;
@@ -272,81 +248,16 @@ body {
     border: transparent;
     cursor: pointer;
 }
-/* =============== Filtros para gastos ==============*/
-
-.filter-container {
-    display: flex;
-    gap: 10px;
-    padding: 10px;
-}
-
-.filter {
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    cursor: pointer;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.filter.active {
-    background-color: var(--red);
-    color: white;
-    border-color: var(--red);
-}
-
-.filter .close {
-    display: none;
-    font-size: 14px;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: inherit;
-}
-
-.filter.active .close {
-    display: inline;
-}
-
-.filter-container .filter select, 
-.filter-container .filter input[type="date"],
-.filter-container .filter #btnFiltrar {
-    color: white;
-    margin-left: 5px;
-    border: none;
-    outline: none;
-    background: var(--red);
-    font-size: 14px;
-    display: none; 
-}
-
-.filter-container .filter.active select, 
-.filter-container .filter.active input[type="date"],
-.filter-container .filter.active #btnFiltrar {
-    display: inline-block; 
-}
-
-
-.filter.active select, .filter.active input {
-    display: inline-block;
-}
-
-
-#ListaGastos {
+#ListaMiembros {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-}
-#ListaMiembros {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
+    max-height: 450px; 
+    overflow-y: auto; 
+  }
 
+  
 .gasto-card {
     background: #ffffff;
     padding: 15px;
@@ -381,35 +292,18 @@ body {
     cursor: pointer;
 }
 
-.btn-warning {
-    background-color: #f39c12;
-    color: white;
-    border: none;
-}
-
-.btn-danger {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-}
-#limpiarG{
-  background-color: rgb(82, 82, 82);
-  color: white;
-}
-
 #btnEd{
   background-color: rgb(185, 186, 188);
   color: black;
+  border: none;
+
 
 }
 #btnE{
   background-color: rgb(134, 24, 24);
 }
 
-#ListaGastos {
-  max-height: 450px; 
-  overflow-y: auto; 
-}
+
 .btn-eliminar {
   background-color: var(--red) !important;
   color: white !important;
@@ -420,6 +314,79 @@ body {
   background-color: #721f1a !important; 
   border-color: #721f1a !important;
 }
+
+.mt-3{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+/* =============== Filtros para gastos ==============*/
+
+.filter-container {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    width: 100%;
+}
+
+.filter {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+}
+
+.filter.active {
+    background-color: var(--red);
+    color: white;
+    border-color: var(--red);
+}
+
+.filter .close {
+    display: none;
+    font-size: 14px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: inherit;
+}
+
+.filter.active .close {
+    display: inline;
+}
+
+.filter-container .filter select, 
+.filter-container .filter input[type="text"],
+.filter-container .filter input[type="number"],
+.filter-container .filter #btnFiltrar {
+    color: white;
+    margin-left: 5px;
+    border: none;
+    outline: none;
+    background: var(--red);
+    font-size: 14px;
+    display: none; 
+}
+
+.filter-container .filter.active select, 
+.filter-container .filter.active input[type="text"],
+.filter-container .filter.active input[type="number"],
+.filter-container .filter.active #btnFiltrar {
+    display: inline-block; 
+}
+
+
+.filter.active select, .filter.active input {
+    display: inline-block;
+}
+.filter-container input::placeholder{
+  color: rgb(193, 190, 190);
+}
+
 /* ============== Paginacion =================*/
 #paginacion .btn-outline-primary{
   color: var(--black1);

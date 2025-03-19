@@ -39,7 +39,7 @@
 
 
                 <li>
-                    <a href="index.php?pag=usuarios">
+                    <a href="index.php?pag=membresias">
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>

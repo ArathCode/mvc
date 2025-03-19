@@ -2,10 +2,7 @@ import { validaLargo, validaRango, validaSoloLetras, validaTelefono } from "./va
 
 document.addEventListener("DOMContentLoaded", () => {
     let filtros = document.querySelectorAll(".filter");
-    let fechaInicio = document.getElementById("fechaInicio");
-    let fechaFin = document.getElementById("fechaFin");
-    let btnFiltrar = document.getElementById("btnFiltrar");
-     const listaUsuarios = document.querySelector("#ListaMiembros");
+    const listaUsuarios = document.querySelector("#ListaMiembros");
         if (listaUsuarios) {
             listaUsuarios.addEventListener("click", (event) => {
                 event.preventDefault();
@@ -72,46 +69,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         agregarUsuario();
             });
         }
-    filtros.forEach(filtro => {
-        filtro.addEventListener("click", function () {
-            filtros.forEach(f => f.classList.remove("active"));
-            this.classList.add("active");
     
-            const today = new Date();
+
+
     
-            if (this.dataset.filter === "hoy") {
-                const hoy = today.toISOString().split("T")[0];
-                fechaInicio.value = hoy;
-                fechaFin.value = hoy;
-                listarMiembros();
-            } else if (this.dataset.filter === "mes") {
-                const año = new Date().getFullYear();
-                const mes = (today.getMonth() + 1).toString().padStart(2, "0");
-                fechaInicio.value = `${año}-${mes}-01`;
-                fechaFin.value = new Date(año, mes, 0).toISOString().split("T")[0];
-                listarMiembros();
-            }
-        });
-    });
-
-    document.getElementById("limpiarM").addEventListener("click", function () {
-        filtros.forEach(filtro => filtro.classList.remove("active"));
-        fechaInicio.value = "";
-        fechaFin.value = "";
-        listarMiembros();
-    });
-
-    btnFiltrar.addEventListener("click", function () {
-        if (!fechaInicio.value || !fechaFin.value) {
-            alert("Por favor, seleccione ambas fechas.");
-            return;
-        }
-        if (fechaInicio.value > fechaFin.value) {
-            alert("La fecha de inicio no puede ser mayor que la fecha de fin.");
-            return;
-        }
-        listarMiembros();
-    });
 });
 let paginaActual = 1;
 const registrosPorPagina = 10;
@@ -160,8 +121,8 @@ function renderizarMiembros(lista) {
                 <p><strong>Teléfono:</strong> ${miembro.Telefono}</p>
                 <p><strong>Sexo:</strong> ${miembro.Sexo}</p>
                 <div class="card-buttons">
-                    <button class="btn btn-warning btn-editar" data-id="${miembro.ID_Miembro}" data-bs-toggle="modal" data-bs-target="#modalEditar">Editar</button>
-                    <button class="btn btn-danger btn-eliminar" data-id="${miembro.ID_Miembro}">Eliminar</button>
+                    <button class="btn btn-warning btn-editar" id="btnEd" data-id="${miembro.ID_Miembro}" data-bs-toggle="modal" data-bs-target="#modalEditar">Editar</button>
+                    <button class="btn btn-danger btn-eliminar" id="btnE" data-id="${miembro.ID_Miembro}">Eliminar</button>
                 </div>
             </div>
         `;
@@ -186,6 +147,77 @@ function actualizarPaginacion(totalPaginas) {
         paginacion.appendChild(boton);
     }
 }
+//Limpiar filtros
+    
+document.querySelectorAll(".filter").forEach(filter => {
+    filter.addEventListener("click", function (event) {
+        let isActive = this.classList.contains("active");
+
+        document.querySelectorAll(".filter").forEach(otherFilter => {
+            otherFilter.classList.remove("active");
+            let inputs = otherFilter.querySelectorAll("input, select");
+            inputs.forEach(input => {
+                input.classList.add("hidden");
+                input.value = "";
+            });
+        });
+
+        if (!isActive) {
+            this.classList.add("active");
+            let input = this.querySelector("input, select");
+            if (input) input.classList.remove("hidden");
+        }
+    });
+});
+
+document.querySelectorAll(".filter .close").forEach(button => {
+    button.addEventListener("click", function (event) {
+        event.stopPropagation(); 
+        let filter = this.parentElement;
+        filter.classList.remove("active");
+
+        let inputs = filter.querySelectorAll("input, select");
+        inputs.forEach(input => {
+            input.classList.add("hidden");
+            input.value = "";
+        });
+    });
+});
+
+document.getElementById("limpiarM").addEventListener("click", function () {
+    document.querySelectorAll(".filter").forEach(filter => {
+        filter.classList.remove("active");
+        let inputs = filter.querySelectorAll("input, select");
+        inputs.forEach(input => {
+            input.classList.add("hidden");
+            input.value = "";
+        });
+    });
+});
+
+
+document.getElementById("limpiarM").addEventListener("click", function () {
+    document.querySelectorAll(".filter").forEach(filter => {
+        let input = filter.querySelector("input");
+        input.classList.add("hidden");
+        input.value = "";
+        filter.classList.remove("active");
+    });
+});
+
+
+// Evento para limpiar todos los filtros al hacer clic en "Limpiar Filtros"
+document.getElementById("limpiarM").addEventListener("click", function () {
+    document.querySelectorAll(".filter").forEach(filter => {
+        let input = filter.querySelector("input");
+        input.classList.add("hidden");
+        input.value = "";
+        filter.classList.remove("active");
+    });
+});
+
+
+
 
 // Función para cambiar de página
 function cambiarPagina(nuevaPagina) {

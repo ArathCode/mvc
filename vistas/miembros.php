@@ -6,16 +6,71 @@
     <?php include_once("head.php"); ?>
     <script type="module" src="../asset/js/funcionesMiembros.js?v=1.0.3"></script>
     
-    <link rel="stylesheet" href="../asset/css/gastos.css">
+    <link rel="stylesheet" href="../asset/css/miembros.css">
 </head>
 
-<body class="bg-light">
-    <div class="container mt-5">
-        <h2 class="text-center">Gestión de Miembros</h2>
+<body >
 
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregar">
-            Agregar Miembro
-        </button>
+    <!-- =============== Barra de navegacion ================ -->
+    <div class="navigation">
+        <?php
+        include_once("encabezado.php")
+            ?>
+    </div>
+
+    <div class="main">
+        <div class="topbar">
+            <div class="toggle">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+
+            <div class="search">
+                <label>
+                    <input type="text" id="searchInput" placeholder="Buscar miembro" oninput="filtrarAccesos()">
+                </label>
+            </div>
+
+
+            <div class="contenedor">
+                <div class="usuario">
+                    <img src="https://i.pinimg.com/originals/a0/14/7a/a0147adf0a983ab87e86626f774785cf.gif" alt="">
+                </div>
+                
+            </div>
+        </div>
+
+
+        <div class="gB">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregar">
+                Agregar Miembro
+            </button>
+        </div>
+        
+        <div class="filter-container">
+            <div class="filter" data-filter="id">
+                <span>ID</span><input type="number" id="idM" class="hidden" placeholder="Escribe aquí.."> <button class="close"></button> <button class="close">✖</button>
+            </div>
+            <div class="filter" data-filter="nombre">
+                <span>Nombre</span> <input type="text" id="nombreM" class="hidden" placeholder="Escribe aquí.."> <button class="close"></button> <button class="close">✖</button>
+            </div>
+            <div class="filter" data-filter="nombre">
+                <span>Apellidos </span> <input type="text" id="apeP" placeholder="Escribe aquí.." class="hidden">   <button class="close">✖</button>
+            </div>
+            <div class="filter" data-filter="numero">
+                <span>Télefono</span> <input type="text" id="numM" class="hidden" placeholder="Escribe aquí.."> <button class="close"></button> <button class="close">✖</button>
+            </div>
+            <div class="filter-miembros">
+                <button id="limpiarM" class="btn btn-secondary">Limpiar Filtros</button>
+            </div>
+        </div>
+
+         <!-- Tabla de Miembros -->
+        <div class="mt-3">
+            <h4 class="text-center">Lista de Miembros</h4>
+            <div class="row" id="ListaMiembros">
+            </div>
+            <div id="paginacion" class="mt-3"></div>
+        </div>
 
         <!-- Modal AGREGAR -->
         <div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
@@ -148,18 +203,9 @@
             </div>
         </div>
 
-        <!-- Tabla de Miembros -->
-        <div class="mt-5">
-            <h4 class="text-center">Lista de Miembros</h4>
-            <div class="row" id="ListaMiembros">
-            </div>
-            <div id="paginacion" class="mt-3"></div>
-        </div>
+       
         
-        <a class="btn btn-info" href="index.php?pag=miembros">Miembros</a>
-        <a class="btn btn-info" href="index.php?pag=admin">Usuarios</a>
-        <a class="btn btn-info" href="index.php?pag=inventario">Inventario</a>
-        <a class="btn btn-error" href="../salir.php">Cerrar Sesión</a>
+    
     </div>
 </body>
 

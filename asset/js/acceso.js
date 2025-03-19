@@ -67,7 +67,26 @@ document.addEventListener("DOMContentLoaded", () => {
         buscarMiembro(searchInput.value);
     });
 });
+//Limpiar filtros
+document.querySelectorAll(".filter .close").forEach(button => {
+    button.addEventListener("click", function (event) {
+        event.stopPropagation();
 
+        let filter = this.parentElement;
+        filter.classList.remove("active"); 
+
+        let inputs = filter.querySelectorAll("input, select");
+        inputs.forEach(input => {
+            input.classList.add("hidden");
+            input.value = "";
+        });
+
+        document.getElementById("fechaInicio").value = "";
+        document.getElementById("fechaFin").value = "";
+
+        listarGastos(); 
+    });
+});
 // Función para listar accesos
 function listarAccesos() {
     fetch('controlador/controladorAcceso.php', {
