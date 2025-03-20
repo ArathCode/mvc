@@ -7,7 +7,7 @@
         include_once("head.php");
         ?>
     <link rel="stylesheet" href="../asset/css/home.css">
-    <script type="module" src="asset/js/acceso.js?v=1.2"></script>
+    <script type="module" src="asset/js/acceso.js?v=1.3"></script>
     </head>
 
     <body>

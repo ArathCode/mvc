@@ -117,6 +117,7 @@ function renderizarMiembros(lista) {
     lista.forEach(miembro => {
         contenedor.innerHTML += `
             <div class="gasto-card">
+                <p># ${miembro.ID_Miembro}</p>
                 <h3>${miembro.Nombre} ${miembro.ApellidoP} ${miembro.ApellidoM}</h3>
                 <p><strong>Teléfono:</strong> ${miembro.Telefono}</p>
                 <p><strong>Sexo:</strong> ${miembro.Sexo}</p>

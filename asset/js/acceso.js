@@ -1,21 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
-     // Asignar la fecha actual
-     const inputFecha = document.getElementById("fecha");
+    // Asignar la fecha actual
+    const inputFecha = document.getElementById("fecha");
 
     function establecerFechaActual() {
-    const hoy = new Date();  
-    hoy.setMinutes(hoy.getMinutes() - hoy.getTimezoneOffset());  
+        const hoy = new Date();
+        hoy.setMinutes(hoy.getMinutes() - hoy.getTimezoneOffset());
 
-    const fechaFormateada = hoy.toISOString().split('T')[0];  
-    document.getElementById("fecha").value = fechaFormateada;  
-}
+        const fechaFormateada = hoy.toISOString().split('T')[0];
+        document.getElementById("fecha").value = fechaFormateada;
+    }
 
 
     const modal = document.getElementById("miModal");
     modal.addEventListener("show.bs.modal", () => {
         establecerFechaActual();
     });
- 
+
 
     listarAccesos();
 
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     idMiembroInput.addEventListener("input", () => {
         const idMiembro = idMiembroInput.value.trim();
         if (idMiembro === "") {
-            nombreMiembroInput.value = ""; 
+            nombreMiembroInput.value = "";
             return;
         }
 
@@ -47,18 +47,18 @@ document.addEventListener("DOMContentLoaded", () => {
             method: 'POST',
             body: new URLSearchParams({ "ope": "BUSCAR_MIEMBRO", "ID_Miembro": idMiembro })
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                nombreMiembroInput.value = `${data.miembro.Nombre} ${data.miembro.ApellidoP} ${data.miembro.ApellidoM}`;
-            } else {
-                nombreMiembroInput.value = "No encontrado"; 
-            }
-        })
-        .catch(error => {
-            console.error("Error al buscar miembro:", error);
-            nombreMiembroInput.value = "Error";
-        });
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    nombreMiembroInput.value = `${data.miembro.Nombre} ${data.miembro.ApellidoP} ${data.miembro.ApellidoM}`;
+                } else {
+                    nombreMiembroInput.value = "No encontrado";
+                }
+            })
+            .catch(error => {
+                console.error("Error al buscar miembro:", error);
+                nombreMiembroInput.value = "Error";
+            });
     });
 
     // Buscar miembros con el input general de búsqueda
@@ -73,7 +73,7 @@ document.querySelectorAll(".filter .close").forEach(button => {
         event.stopPropagation();
 
         let filter = this.parentElement;
-        filter.classList.remove("active"); 
+        filter.classList.remove("active");
 
         let inputs = filter.querySelectorAll("input, select");
         inputs.forEach(input => {
@@ -84,7 +84,7 @@ document.querySelectorAll(".filter .close").forEach(button => {
         document.getElementById("fechaInicio").value = "";
         document.getElementById("fechaFin").value = "";
 
-        listarGastos(); 
+        listarGastos();
     });
 });
 // Función para listar accesos
@@ -93,13 +93,13 @@ function listarAccesos() {
         method: 'POST',
         body: new URLSearchParams({ "ope": "LISTAR_ACCESOS" })
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            const tbody = document.querySelector("#tablaAccesos tbody");
-            tbody.innerHTML = "";
-            data.accesos.forEach(acceso => {
-                tbody.innerHTML += `
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const tbody = document.querySelector("#tablaAccesos tbody");
+                tbody.innerHTML = "";
+                data.accesos.forEach(acceso => {
+                    tbody.innerHTML += `
                 <tr>
                     <td>${acceso.ID_Miembro}</td>
                     <td>${acceso.Nombre} ${acceso.ApellidoP} ${acceso.ApellidoM}</td>
@@ -108,12 +108,12 @@ function listarAccesos() {
                     <td>${acceso.Fecha}</td>
                 </tr>
                 `;
-            });
-        } else {
-            console.error("Error al listar accesos.");
-        }
-    })
-    .catch(error => console.error("Error al listar accesos:", error));
+                });
+            } else {
+                console.error("Error al listar accesos.");
+            }
+        })
+        .catch(error => console.error("Error al listar accesos:", error));
 }
 
 // Función para agregar acceso
@@ -157,18 +157,18 @@ function agregarAcceso() {
                 method: 'POST',
                 body: datos
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    Swal.fire("Éxito", "Visita agregada correctamente", "success");
-                    form.reset();
-                    document.querySelector("#miModal .btn-close").click(); 
-                    listarAccesos(); 
-                } else {
-                    Swal.fire("Error", "No se pudo agregar el acceso", "error");
-                }
-            })
-            .catch(error => console.error("Error al agregar acceso:", error));
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire("Éxito", "Visita agregada correctamente", "success");
+                        form.reset();
+                        document.querySelector("#miModal .btn-close").click();
+                        listarAccesos();
+                    } else {
+                        Swal.fire("Error", "No se pudo agregar el acceso", "error");
+                    }
+                })
+                .catch(error => console.error("Error al agregar acceso:", error));
         }
     });
 }
@@ -179,22 +179,34 @@ function buscarMiembro(id) {
 
     fetch('controlador/controladorAcceso.php', {
         method: 'POST',
-        body: new URLSearchParams({ "ope": "BUSCAR_MIEMBRO", "ID_Miembro": id })
+        body: new URLSearchParams({ "ope": "BUSCAR_MIEMBROActivo", "ID_Miembro": id })
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            const miembro = data.miembro;
-            const contenidoM = document.querySelector(".contenidoM");
-            contenidoM.innerHTML = `
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const miembro = data.miembro;
+                const contenidoM = document.querySelector(".contenidoM");
+                contenidoM.innerHTML = `
                 <p>#${miembro.ID_Miembro}</p>
                 <h3>${miembro.Nombre} ${miembro.ApellidoP} ${miembro.ApellidoM}</h3>
                 <p>Teléfono: ${miembro.Telefono}</p>
                 <p>Sexo: ${miembro.Sexo}</p>
+                
+                <div class="fechas">
+                    <div class="fechaI">
+                        F.Inicio: ${miembro.FechaInicio}
+                    </div>
+                    <div class="fechaF">
+                        F.Fin: ${miembro.FechaFin}
+                    </div>
+                </div>
+                <div class="estadoM">
+                     Membresía Activa
+                </div>
             `;
-        } else {
-            Swal.fire("Error", data.msg, "error");
-        }
-    })
-    .catch(error => console.error("Error al buscar miembro:", error));
+            } else {
+                Swal.fire("Sin Membresia", data.msg, "error");
+            }
+        })
+        .catch(error => console.error("Error al buscar miembro:", error));
 }

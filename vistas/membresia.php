@@ -6,7 +6,7 @@
     <?php
     include_once("head.php");
     ?>
-    <script type="module" src="asset/js/funcionesMembresia.js?v=1.8.1"></script>
+    <script type="module" src="asset/js/funcionesMembresia.js?v=1.8.2"></script>
     <link rel="stylesheet" href="../asset/css/membresias.css">
 </head>
 

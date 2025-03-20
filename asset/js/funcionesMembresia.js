@@ -57,7 +57,7 @@ function listarMembresias() {
                             <p class="card-text">Duracion: ${membresia.Duracion}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button class="btn btn-sm btn-warning btn-editar" data-id="${membresia.ID_Membresia}" data-bs-toggle="modal" data-bs-target="#modalEditar">Editar</button>
+                                    <button class="btn btn-sm btn-warning btn-editar" data-id="${membresia.ID_Membresia}" data-bs-toggle="modal" data-bs-target="#modalEditar">Editar</button><br>
                                     <button class="btn btn-sm btn-danger btn-eliminar" data-id="${membresia.ID_Membresia}">Eliminar</button>
                                 </div>
                             </div>
