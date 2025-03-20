@@ -54,6 +54,7 @@ function listarMembresias() {
                             <h5 class="card-title">${membresia.Tipo}</h5>
                             <p class="card-text">Descripción: ${membresia.Descripcion}</p>
                             <p class="card-text">Costo: $${membresia.Costo}</p>
+                            <p class="card-text">Duracion: ${membresia.Duracion}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <button class="btn btn-sm btn-warning btn-editar" data-id="${membresia.ID_Membresia}" data-bs-toggle="modal" data-bs-target="#modalEditar">Editar</button>
@@ -109,6 +110,7 @@ function cargarMembresia(id) {
             document.querySelector("#TipoEdit").value = data.membresia.Tipo;
             document.querySelector("#DescripcionEdit").value = data.membresia.Descripcion;
             document.querySelector("#CostoEdit").value = data.membresia.Costo;
+            document.querySelector("#DuracionEdit").value = data.membresia.Duracion;
         } else {
             Swal.fire("Error", "No se pudo obtener la información de la membresía", "error");
         }

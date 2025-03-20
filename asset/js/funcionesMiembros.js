@@ -1,4 +1,4 @@
-import { validaLargo, validaRango, validaSoloLetras, validaTelefono } from "./validaciones.js?v=3.8";
+import { validaLargo, validaRango, validaSoloLetras, validaTelefono } from "./validaciones.js?v=3.9";
 
 document.addEventListener("DOMContentLoaded", () => {
     let filtros = document.querySelectorAll(".filter");
