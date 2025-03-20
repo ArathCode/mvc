@@ -1,4 +1,4 @@
-import { validaLargo, validaRango, validaSoloLetras, validaTelefono } from "./validaciones.js?v=3.8";
+import { validaLargo, validaRango, validaSoloLetras, validaTelefono } from "./validaciones.js?v=3.9";
 
 document.addEventListener("DOMContentLoaded", () => {
     let filtros = document.querySelectorAll(".filter");
@@ -117,6 +117,7 @@ function renderizarMiembros(lista) {
     lista.forEach(miembro => {
         contenedor.innerHTML += `
             <div class="gasto-card">
+                <p># ${miembro.ID_Miembro}</p>
                 <h3>${miembro.Nombre} ${miembro.ApellidoP} ${miembro.ApellidoM}</h3>
                 <p><strong>Teléfono:</strong> ${miembro.Telefono}</p>
                 <p><strong>Sexo:</strong> ${miembro.Sexo}</p>

@@ -14,9 +14,21 @@ class Accesos
         error_log("Error al preparar la consulta: " . $enlace->error); 
         return false;
     }
+        $enlace = dbConectar();
+        if (!$enlace) { // Si hay un error en la conexión
+            error_log("Error de conexión: " . mysqli_connect_error());
+            return false;
+        }
 
-    $consulta->bind_param("ssdi", $datos["Hora"], $datos["Fecha"], $datos["Precio"], $datos["ID_Miembro"]);
-    return $consulta->execute();
+        $sql = "INSERT INTO accesos (Hora, Fecha, Precio, ID_Miembro) VALUES (?, ?, ?, ?)";
+        $consulta = $enlace->prepare($sql);
+        if (!$consulta) {
+            error_log("Error al preparar la consulta: " . $enlace->error); // Log de error
+            return false;
+        }
+
+        $consulta->bind_param("ssdi", $datos["Hora"], $datos["Fecha"], $datos["Precio"], $datos["ID_Miembro"]);
+        return $consulta->execute();
     }
     public function listarAccesos()
     {
@@ -47,6 +59,30 @@ class Accesos
 
         return $result->fetch_assoc();
     }
-}
+    public function buscarMiembroPorID2($ID_Miembro)
+    {
+        $enlace = dbConectar();
+        $sql = "SELECT 
+                mm.ID_Miembro, 
+                m.Nombre, 
+                m.ApellidoP, 
+                m.ApellidoM, 
+                m.Telefono, 
+                m.Sexo,
+                mm.ID_MiemMiembro,
+                mm.FechaInicio,
+                mm.FechaFin,
+                mm.Costo,
+                mm.Cantidad,
+                mm.FechaPago
+            FROM vista_membresias_vigentes mm
+            JOIN miembros m ON mm.ID_Miembro = m.ID_Miembro
+            WHERE mm.ID_Miembro = ?";
+        $consulta = $enlace->prepare($sql);
+        $consulta->bind_param("i", $ID_Miembro);
+        $consulta->execute();
+        $result = $consulta->get_result();
 
-?>
+        return $result->fetch_assoc();
+    }
+}

@@ -29,11 +29,12 @@ if (isset($_POST["ope"])) {
         }
     }
     // para agregar
-    elseif ($ope == "AGREGAR" && isset($_POST["Tipo"], $_POST["Descripcion"], $_POST["Costo"])) {
+    elseif ($ope == "AGREGAR" && isset($_POST["Tipo"], $_POST["Descripcion"], $_POST["Costo"],$_POST["Duracion"])) {
         $datos = array(
             "Tipo" => $_POST["Tipo"],
             "Descripcion" => $_POST["Descripcion"],
-            "Costo" => $_POST["Costo"]
+            "Costo" => $_POST["Costo"],
+            "Duracion" => $_POST["Duracion"]
         );
 
         $status = $membresia->Agregar($datos);
@@ -41,12 +42,13 @@ if (isset($_POST["ope"])) {
         echo json_encode($info);
     }
     // editar membresía
-    elseif ($ope == "EDITAR" && isset($_POST["ID_Membresia"], $_POST["TipoEdit"], $_POST["DescripcionEdit"], $_POST["CostoEdit"])) {
+    elseif ($ope == "EDITAR" && isset($_POST["ID_Membresia"], $_POST["TipoEdit"], $_POST["DescripcionEdit"], $_POST["CostoEdit"], $_POST["DuracionEdit"])) {
         $datos = array(
             "ID_Membresia" => $_POST["ID_Membresia"],
             "Tipo" => $_POST["TipoEdit"],
             "Descripcion" => $_POST["DescripcionEdit"],
-            "Costo" => $_POST["CostoEdit"]
+            "Costo" => $_POST["CostoEdit"],
+            "Duracion" => $_POST["DuracionEdit"]
         );
 
         $status = $membresia->Editar($datos);

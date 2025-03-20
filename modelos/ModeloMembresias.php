@@ -20,14 +20,15 @@ class Membresias
     public function Agregar($datos)
     {
         $enlace = dbConectar();
-        $sql = "INSERT INTO membresias (Tipo, Descripcion, Costo) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO membresias (Tipo, Descripcion, Costo, Duracion ) VALUES (?, ?, ?, ?)";
         $consulta = $enlace->prepare($sql);
 
         $consulta->bind_param(
-            "ssi",
+            "ssis",
             $datos["Tipo"],
             $datos["Descripcion"],
-            $datos["Costo"]
+            $datos["Costo"],
+            $datos["Duracion"]
         );
 
         return $consulta->execute();
@@ -36,14 +37,15 @@ class Membresias
     public function Editar($datos)
     {
         $enlace = dbConectar();
-        $sql = "UPDATE membresias SET Tipo=?, Descripcion=?, Costo=? WHERE ID_Membresia=?";
+        $sql = "UPDATE membresias SET Tipo=?, Descripcion=?, Costo=?, Duracion =? WHERE ID_Membresia=?";
         $consulta = $enlace->prepare($sql);
 
         $consulta->bind_param(
-            "ssii",
+            "ssisi",
             $datos["Tipo"],
             $datos["Descripcion"],
             $datos["Costo"],
+            $datos["Duracion"],
             $datos["ID_Membresia"]
         );
 

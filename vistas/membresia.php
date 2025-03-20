@@ -6,7 +6,7 @@
     <?php
     include_once("head.php");
     ?>
-    <script type="module" src="asset/js/funcionesMembresia.js?v=1.8"></script>
+    <script type="module" src="asset/js/funcionesMembresia.js?v=1.8.2"></script>
     <link rel="stylesheet" href="../asset/css/membresias.css">
 </head>
 
@@ -79,6 +79,13 @@
                                 <label for="Costo" class="form-label">Costo</label>
                                 <input type="number" class="form-control" id="Costo" name="Costo" min="0" max="1000000" placeholder="Ingrese un número" required>
                             </div>
+                            <div class="mb-3">
+                                    <label for="Duracion" class="form-label">Duracion</label>
+                                    <select class="form-control" id="Duracion" name="Duracion">
+                                        <option value="mes">Mes</option>
+                                        <option value="semana">Semana</option>
+                                    </select>
+                                </div>
                             
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </form>
@@ -124,6 +131,13 @@
                                 <label for="CostoEdit" class="form-label">Costo</label>
                                 <input type="number" class="form-control" id="CostoEdit" name="CostoEdit" min="0" max="1000000" placeholder="Ingrese un número" required>
                             </div>
+                            <div class="mb-3">
+                                    <label for="DuracionEdit" class="form-label">Duracion</label>
+                                    <select class="form-control" id="DuracionEdit" name="DuracionEdit">
+                                        <option value="mes">Mes</option>
+                                        <option value="semana">Semana</option>
+                                    </select>
+                                </div>
                             <button type="submit" id ="act" class="btn btn-primary">Actualizar</button>
                         </form>
                     </div>
