@@ -24,11 +24,7 @@
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
 
-            <div class="search">
-                <label>
-                    <input type="text" id="searchInput" placeholder="Buscar miembro" oninput="filtrarAccesos()">
-                </label>
-            </div>
+
 
 
             <div class="contenedor">
