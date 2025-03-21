@@ -141,12 +141,12 @@ class Usuarios
         return $resultado;
     }
 
-    public function Eliminar($ID_usuario)
+    public function Eliminar($id)
     {
         $enlace = dbConectar();
-        $sql = "DELETE FROM usuarios WHERE ID_Usuario=?";
+        $sql = "DELETE FROM miembro_membresia WHERE ID_MiemMiembro=?";
         $consulta = $enlace->prepare($sql);
-        $consulta->bind_param("i", $ID_usuario);
+        $consulta->bind_param("i", $id);
 
         return $consulta->execute();
     }
