@@ -140,7 +140,7 @@
                     <!-- ================ Modal de estadísticas ================= -->
                     <dialog id="modalEstadisticas">
                         <div class="modal-content">
-
+<!-- si-->
                             <canvas id="myChart"></canvas>
                             <div>
                                 <label for="filtro">Filtrar por:</label>

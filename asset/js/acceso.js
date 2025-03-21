@@ -256,7 +256,7 @@ function buscarMiembro(id) {
     fetch('controlador/controladorAcceso.php', {
         method: 'POST',
         body: new URLSearchParams({ "ope": "BUSCAR_MIEMBROActivo", "ID_Miembro": id })
-    })
+    })//si
         .then(response => response.json())
         .then(data => {
             if (data.success) {

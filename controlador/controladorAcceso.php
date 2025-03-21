@@ -84,6 +84,6 @@ if (isset($_POST["ope"])) {
     else {
         echo json_encode(["success" => false, "msg" => "Operación no válida."]);
     }
-}
+}//si
 
 ?>
