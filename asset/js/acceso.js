@@ -192,6 +192,37 @@ function agregarAcceso() {
         }
     });
 }
+function registrarAcceso() {
+    const ID_Miembro = document.getElementById("miembroID").value;
+    const Precio = document.getElementById("precio").value;
+    const Tipo = document.getElementById("tipo").value;
+
+    if (!ID_Miembro) {
+        Swal.fire("Error", "No se encontró el ID del miembro", "error");
+        return;
+    }
+
+    let datos = new FormData();
+    datos.append("ope", "AGREGAR_ACCESOM");
+    datos.append("ID_Miembro", ID_Miembro);
+    datos.append("Precio", Precio);
+    datos.append("Tipo", Tipo);
+
+    fetch('controlador/controladorAcceso.php', {
+        method: 'POST',
+        body: datos
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            Swal.fire("Éxito", "Acceso registrado correctamente", "success");
+            listarAccesos();
+        } else {
+            Swal.fire("Error", "No se pudo registrar el acceso", "error");
+        }
+    })
+    .catch(error => console.error("Error al registrar acceso:", error));
+}
 
 // Función para buscar un miembro en el contenedor principal
 function buscarMiembro(id) {
@@ -223,7 +254,21 @@ function buscarMiembro(id) {
                 <div class="estadoM">
                      Membresía Activa
                 </div>
+                <input type="hidden" id="miembroID" value="${miembro.ID_Miembro}">
+                <input type="hidden" id="precio" value="${0}">
+                <input type="hidden" id="tipo" value="Miembro">
+                 <button id="btnRegistrarAcceso" class="btn btn-success">
+                    Registrar Acceso
+                </button>
             `;
+            setTimeout(() => {
+                const btnAcceso = document.getElementById("btnRegistrarAcceso");
+                if (btnAcceso) {
+                    btnAcceso.addEventListener("click", function() {
+                        registrarAcceso();
+                    });
+                }
+            }, 100);
             } else {
                 Swal.fire("Sin Membresia", data.msg, "error");
             }

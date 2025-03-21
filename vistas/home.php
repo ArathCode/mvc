@@ -7,7 +7,7 @@
         include_once("head.php");
         ?>
     <link rel="stylesheet" href="../asset/css/home.css">
-    <script type="module" src="asset/js/acceso.js?v=1.6"></script>
+    <script type="module" src="asset/js/acceso.js?v=1.7"></script>
     </head>
 
     <body>
@@ -27,7 +27,7 @@
 
                 <div class="search">
                     <label>
-                        <input type="text" id="searchInput" placeholder="Buscar miembro" oninput="filtrarAccesos()">
+                        <input type="text" id="searchInput" placeholder="Buscar miembro" >
                     </label>
                 </div>
 
@@ -134,7 +134,7 @@
             <div class="details">
                 <div class="registro">
                     <div class="cardHeader">
-                        <h2>Lista de visitas</h2>
+                        <h2>Lista de accesos</h2>
                         <a href="#" id="estadisticasBtn" class="btn">Gráfica</a>
                     </div>
                     <!-- ================ Modal de estadísticas ================= -->
@@ -240,6 +240,7 @@
                                     Looks good!
                                 </div>
                         </div>
+                        <input type="hidden" value="Visita" id="Tipo" name="Tipo">
                     </form>
 
                     </div>

@@ -9,14 +9,14 @@ class Accesos
             return false;
         }
 
-        $sql = "INSERT INTO accesos (Hora, Fecha, Precio, ID_Miembro) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO accesos (Hora, Fecha, Precio, ID_Miembro, Tipo) VALUES (?, ?, ?, ?,?)";
         $consulta = $enlace->prepare($sql);
         if (!$consulta) {
             error_log("Error al preparar la consulta: " . $enlace->error); // Log de error
             return false;
         }
 
-        $consulta->bind_param("ssdi", $datos["Hora"], $datos["Fecha"], $datos["Precio"], $datos["ID_Miembro"]);
+        $consulta->bind_param("ssdis", $datos["Hora"], $datos["Fecha"], $datos["Precio"], $datos["ID_Miembro"] , $datos["Tipo"]);
         return $consulta->execute();
     }
 
