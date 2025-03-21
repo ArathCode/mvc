@@ -14,7 +14,7 @@
   --black1: #222;
   --black2: #999;
   --estado: rgb(40, 99, 46);
-  --verde:#2a7a24;
+  --verde:#108d08;
 }
 
 body {
@@ -234,8 +234,9 @@ body {
   /*  ================= Boton de miembros =======*/
 .gB{
     margin: auto;
-    width: 150px;
-
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
     
 }
 .gB button{
@@ -247,7 +248,9 @@ body {
     border: transparent;
     cursor: pointer;
 }
-.adminUsuarios{
+
+
+.adminMemb{
   padding: 8px 12px;
   color: white;
   border-radius: 20px;
@@ -259,7 +262,7 @@ body {
   justify-content: space-around;
   gap: 5px;
 }
-.adminMemb{
+.adminUsuarios{
   padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 20px;
@@ -274,176 +277,14 @@ body {
 .adminUsuarios a, .adminMemb a{
   text-decoration: none;
 }
-.adminUsuarios a{
-  color: white;
-  
-}
 .adminMemb a{
-  color: black;
-}
-.adminMemb:hover,.adminMemb:hover a {
-  background-color: black;
   color: white;
-}
-
-#ListaMiembros {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    max-height: 485px; 
-    overflow-y: auto; 
-  }
-
   
-.gasto-card {
-    background: #ffffff;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 250px;
-    text-align: center;
-    transition: transform 0.3s;
 }
-
-.gasto-card:hover {
-    transform: scale(1.05);
-}
-
-.gasto-card h3 {
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.gasto-card p {
-    margin: 5px 0;
-}
-
-.card-buttons {
-    margin-top: 10px;
-}
-
-.card-buttons .btn {
-    margin: 5px;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#btnEd{
-  background-color: rgb(185, 186, 188);
+.adminUsuarios a{
   color: black;
-  border: none;
-
-
 }
-#btnE{
-  background-color: rgb(134, 24, 24);
-}
-
-
-.btn-eliminar {
-  background-color: var(--red) !important;
-  color: white !important;
-  border-color: var(--red) !important;
-}
-
-.btn-eliminar:hover {
-  background-color: #721f1a !important; 
-  border-color: #721f1a !important;
-}
-
-.mt-3{
-  padding-left: 10px;
-  padding-right: 10px;
-}
-/* =============== Filtros para gastos ==============*/
-
-.filter-container {
-    display: flex;
-    gap: 10px;
-    padding: 10px;
-    width: 100%;
-}
-
-.filter {
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    cursor: pointer;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 13px;
-}
-
-.filter.active {
-    background-color: var(--red);
-    color: white;
-    border-color: var(--red);
-}
-
-.filter .close {
-    display: none;
-    font-size: 14px;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: inherit;
-}
-
-.filter.active .close {
-    display: inline;
-}
-
-.filter-container .filter select, 
-.filter-container .filter input[type="text"],
-.filter-container .filter input[type="number"],
-.filter-container .filter #btnFiltrar {
-    color: white;
-    margin-left: 5px;
-    border: none;
-    outline: none;
-    background: var(--red);
-    font-size: 14px;
-    display: none; 
-}
-
-.filter-container .filter.active select, 
-.filter-container .filter.active input[type="text"],
-.filter-container .filter.active input[type="number"],
-.filter-container .filter.active #btnFiltrar {
-    display: inline-block; 
-}
-
-
-.filter.active select, .filter.active input {
-    display: inline-block;
-}
-.filter-container input::placeholder{
-  color: rgb(193, 190, 190);
-}
-
-/* ============== Paginacion =================*/
-#paginacion button{
-  margin: 2px;
-}
-#paginacion .btn-outline-primary{
-  color: var(--black1);
-  border: solid 1px black;
-}
-#paginacion .btn-outline-primary:hover{
-  background-color: var(--red);
-  color: white;
-}
-.btn-primary{
-  background-color: var(--red);
-  color: white;
-  border: solid 1px var(--red);
-}
-.btn-primary:hover{
+.adminUsuarios:hover,.adminUsuarios:hover a {
   background-color: black;
-  border: solid 1px black;
+  color: white;
 }
-

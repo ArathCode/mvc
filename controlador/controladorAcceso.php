@@ -41,7 +41,19 @@ if (isset($_POST["ope"])) {
         } else {
             echo json_encode(["success" => false, "msg" => "ID de miembro no proporcionado."]);
         }
-    } 
+    }
+    elseif ($ope === "BUSCAR_MIEMBROActivo") {
+        if (isset($_POST["ID_Miembro"])) {
+            $miembro = $acceso->buscarMiembroPorID2($_POST["ID_Miembro"]);
+            if ($miembro) {
+                echo json_encode(["success" => true, "miembro" => $miembro]);
+            } else {
+                echo json_encode(["success" => false, "msg" => "Miembro no activo."]);
+            }
+        } else {
+            echo json_encode(["success" => false, "msg" => "ID de miembro no proporcionado."]);
+        }
+    }  
     else {
         echo json_encode(["success" => false, "msg" => "Operación no válida."]);
     }
