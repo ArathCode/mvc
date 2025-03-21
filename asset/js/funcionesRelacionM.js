@@ -241,7 +241,7 @@ function renderizarUsuarios(lista) {
                 <td>${item.Cantidad} </td>
                 <td>${item.FechaPago}</td>
                 <td>
-                    <button class="btn btn-warning btn-editar" data-id="${item.ID_MiemMiembro}" data-bs-toggle="modal" data-bs-target="#modalEditar">Editar</button>
+                  <!--<button class="btn btn-warning btn-editar" data-id="${item.ID_MiemMiembro}" data-bs-toggle="modal" data-bs-target="#modalEditar">Editar</button>-->
                     <button class="btn btn-danger btn-eliminar" data-id="${item.ID_MiemMiembro}">Eliminar</button>
                 </td>
             </tr>
@@ -401,19 +401,19 @@ function eliminarUsuario(id) {
         if (result.isConfirmed) {
             fetch('controlador/controladorRelacionM.php', {
                 method: 'POST',
-                body: new URLSearchParams({ "ope": "ELIMINAR", "ID_Usuario": id })
+                body: new URLSearchParams({ "ope": "ELIMINAR", "ID_MiemMem": id })
             })
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        Swal.fire("Eliminado", "Usuario eliminado correctamente", "success");
+                        Swal.fire("Eliminado", "Membresia eliminada correctamente", "success");
                         listarUsuarios();
                     } else {
                         Swal.fire("Error", data.msg, "error");
                     }
                 })
                 .catch(error => {
-                    Swal.fire("Error", "No se pudo eliminar el usuario: " + error.message, "error");
+                    Swal.fire("Error", "No se pudo eliminar la membresias: " + error.message, "error");
                 });
         }
     });

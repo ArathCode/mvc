@@ -104,8 +104,8 @@ if (isset($_POST["ope"])) {
     }
     
     // eliminar 
-    elseif ($ope == "ELIMINAR" && isset($_POST["ID_Usuario"])) {
-        $status = $usu->Eliminar($_POST["ID_Usuario"]);
+    elseif ($ope == "ELIMINAR" && isset($_POST["ID_MiemMem"])) {
+        $status = $usu->Eliminar($_POST["ID_MiemMem"]);
         $info = array("success" => $status);
         echo json_encode($info);
     }

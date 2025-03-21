@@ -1,7 +1,8 @@
+import { validaNumero } from "./validaciones.js?v=4.8";
 document.addEventListener("DOMContentLoaded", () => {
     // Asignar la fecha actual
     const inputFecha = document.getElementById("fecha");
-
+    actualizarContadores();
     function establecerFechaActual() {
         const hoy = new Date();
         hoy.setMinutes(hoy.getMinutes() - hoy.getTimezoneOffset());
@@ -21,16 +22,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Evento para el formulario de agregar acceso
     const formAgregar = document.querySelector("#formAgregarAcceso");
+    if(formAgregar){
     formAgregar.addEventListener("submit", (event) => {
         event.preventDefault();
-        agregarAcceso();
+        let errores = 0; 
+        let Precio = document.getElementById("precio");
+        if (!validaNumero(Precio)) {
+            errores++; // Sumar error si la validación falla
+            return;  // Opcional: para evitar que siga ejecutándose el código
+        }
+        if(errores==0){
+            agregarAcceso();}
     });
-
+    }
     // Evento para el botón de guardar acceso en el modal
     const btnGuardarAcceso = document.querySelector("#btnGuardarAcceso");
+    if(btnGuardarAcceso){
     btnGuardarAcceso.addEventListener("click", () => {
-        agregarAcceso();
+        event.preventDefault();
+        let errores = 0; 
+        let Precio = document.getElementById("precio");
+        if (!validaNumero(Precio)) {
+            errores++; // Sumar error si la validación falla
+            return;  // Opcional: para evitar que siga ejecutándose el código
+        }
+        if(errores==0){
+            agregarAcceso();}
     });
+    }
+  
 
     // Buscar miembro en el modal
     const idMiembroInput = document.querySelector("#idMiembro");
@@ -164,6 +184,7 @@ function agregarAcceso() {
                         form.reset();
                         document.querySelector("#miModal .btn-close").click();
                         listarAccesos();
+                        actualizarContadores();
                     } else {
                         Swal.fire("Error", "No se pudo agregar el acceso", "error");
                     }
@@ -171,6 +192,61 @@ function agregarAcceso() {
                 .catch(error => console.error("Error al agregar acceso:", error));
         }
     });
+}
+function actualizarContadores() {
+    fetch('controlador/controladorAcceso.php', {
+        method: 'POST',
+        body: new URLSearchParams({ "ope": "CONTAR_ACCESOS" })
+    })
+    .then(response => response.json())
+    .then(data => {
+        let visitas = 0;
+        let membresias = 0;
+
+        data.forEach(item => {
+            if (item.Tipo === "Visita") {
+                visitas = item.cantidad;
+            } else if (item.Tipo === "Miembro") {
+                membresias = item.cantidad;
+            }
+        });
+
+        document.querySelector(".contadores .card:nth-child(1) .numbers").textContent = visitas;
+        document.querySelector(".contadores .card:nth-child(2) .numbers").textContent = membresias;
+    })
+    .catch(error => console.error("Error al obtener conteo:", error));
+}
+function registrarAcceso() {
+    const ID_Miembro = document.getElementById("miembroID").value;
+    const Precio = document.getElementById("precio").value;
+    const Tipo = document.getElementById("tipo").value;
+
+    if (!ID_Miembro) {
+        Swal.fire("Error", "No se encontró el ID del miembro", "error");
+        return;
+    }
+
+    let datos = new FormData();
+    datos.append("ope", "AGREGAR_ACCESOM");
+    datos.append("ID_Miembro", ID_Miembro);
+    datos.append("Precio", Precio);
+    datos.append("Tipo", Tipo);
+
+    fetch('controlador/controladorAcceso.php', {
+        method: 'POST',
+        body: datos
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            Swal.fire("Éxito", "Acceso registrado correctamente", "success");
+            listarAccesos();
+            actualizarContadores();
+        } else {
+            Swal.fire("Error", "No se pudo registrar el acceso", "error");
+        }
+    })
+    .catch(error => console.error("Error al registrar acceso:", error));
 }
 
 // Función para buscar un miembro en el contenedor principal
@@ -203,7 +279,21 @@ function buscarMiembro(id) {
                 <div class="estadoM">
                      Membresía Activa
                 </div>
+                <input type="hidden" id="miembroID" value="${miembro.ID_Miembro}">
+                <input type="hidden" id="precio" value="${0}">
+                <input type="hidden" id="tipo" value="Miembro">
+                 <button id="btnRegistrarAcceso" class="btn btn-success">
+                    Registrar Acceso
+                </button>
             `;
+            setTimeout(() => {
+                const btnAcceso = document.getElementById("btnRegistrarAcceso");
+                if (btnAcceso) {
+                    btnAcceso.addEventListener("click", function() {
+                        registrarAcceso();
+                    });
+                }
+            }, 100);
             } else {
                 Swal.fire("Sin Membresia", data.msg, "error");
             }

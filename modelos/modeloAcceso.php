@@ -20,22 +20,24 @@ class Accesos
             return false;
         }
 
-        $sql = "INSERT INTO accesos (Hora, Fecha, Precio, ID_Miembro) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO accesos (Hora, Fecha, Precio, ID_Miembro, Tipo) VALUES (?, ?, ?, ?,?)";
         $consulta = $enlace->prepare($sql);
         if (!$consulta) {
             error_log("Error al preparar la consulta: " . $enlace->error); 
             return false;
         }
 
-        $consulta->bind_param("ssdi", $datos["Hora"], $datos["Fecha"], $datos["Precio"], $datos["ID_Miembro"]);
+        $consulta->bind_param("ssdis", $datos["Hora"], $datos["Fecha"], $datos["Precio"], $datos["ID_Miembro"] , $datos["Tipo"]);
         return $consulta->execute();
     }
+
+
     public function listarAccesos()
     {
         $enlace = dbConectar();
         $sql = "SELECT a.ID_Acceso, a.Hora, a.Fecha, a.Precio, a.ID_Miembro, 
                        m.Nombre, m.ApellidoP, m.ApellidoM 
-                FROM accesos a 
+                FROM vista_accesos_hoy a 
                 JOIN miembros m ON a.ID_Miembro = m.ID_Miembro";
         $consulta = $enlace->prepare($sql);
         $consulta->execute();

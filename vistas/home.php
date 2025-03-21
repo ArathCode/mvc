@@ -7,7 +7,7 @@
         include_once("head.php");
         ?>
     <link rel="stylesheet" href="../asset/css/home.css">
-    <script type="module" src="asset/js/acceso.js?v=1.3"></script>
+    <script type="module" src="asset/js/acceso.js?v=1.8"></script>
     </head>
 
     <body>
@@ -27,7 +27,7 @@
 
                 <div class="search">
                     <label>
-                        <input type="text" id="searchInput" placeholder="Buscar miembro" oninput="filtrarAccesos()">
+                        <input type="text" id="searchInput" placeholder="Buscar miembro" >
                     </label>
                 </div>
 
@@ -134,7 +134,7 @@
             <div class="details">
                 <div class="registro">
                     <div class="cardHeader">
-                        <h2>Lista de visitas</h2>
+                        <h2>Lista de accesos</h2>
                         <a href="#" id="estadisticasBtn" class="btn">Gráfica</a>
                     </div>
                     <!-- ================ Modal de estadísticas ================= -->
@@ -232,8 +232,15 @@
                         
                         <div class="mb-3">
                             <label for="precio" class="form-label">Precio</label>
-                            <input type="number" class="form-control" id="precio" name="Precio" placeholder="Ingrese el precio" required>
+                            <input type="number" class="form-control" id="precio" name="Precio" placeholder="Ingrese el precio" min="0" max="300" required>
+                            <div class="invalid-feedback">
+                                    Password is required
+                                </div>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                         </div>
+                        <input type="hidden" value="Visita" id="Tipo" name="Tipo">
                     </form>
 
                     </div>
