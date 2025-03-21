@@ -15,7 +15,6 @@
         }
         if($conexion === false) 
         {
-            // Manejo de error - notificamos al administrador, creamos un archivo log, mostramos un error en pantalla, etc.
             return mysqli_connect_error(); 
         }
         return $conexion;

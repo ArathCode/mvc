@@ -23,14 +23,18 @@
             <div class="toggle">
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
-
-            <div class="search">
-                <label>
-                    <input type="text" id="searchInput" placeholder="Buscar miembro" oninput="filtrarAccesos()">
-                </label>
+            <div class="adminUsuarios" >
+                <a href="index.php?pag=miembros">
+                    <ion-icon name="people-outline"></ion-icon>
+                    <span>Miembros</span>
+                </a>
             </div>
-
-
+            <div class="adminMemb" >
+                <a href="index.php?pag=relacion">
+                    <ion-icon name="card-outline"></ion-icon>
+                    <span>Membresías</span>
+                </a>
+            </div>
             <div class="contenedor">
                 <div class="usuario">
                     <img src="https://i.pinimg.com/originals/a0/14/7a/a0147adf0a983ab87e86626f774785cf.gif" alt="">
@@ -39,18 +43,15 @@
             </div>
         </div>
 
-        <div class="adminUsuarios">
-            <div class="iconoAd">
-                <ion-icon name="people-outline"></ion-icon>
-            </div>
-            <div class="enlace">
-                <a href="index.php?pag=relacion">Relacion</a>
-            </div>
-        </div>
+        
         <div class="gB">
+            
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregar">
                 Agregar Miembro
             </button>
+
+            
+
         </div>
 
         <div class="filter-container">

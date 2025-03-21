@@ -3,8 +3,19 @@ class Accesos
 {
     public function agregarAcceso($datos)
     {
+    $enlace = dbConectar();
+    if (!$enlace) { 
+        error_log("Error de conexión: " . mysqli_connect_error());
+        return false;
+    }
+    $sql = "INSERT INTO accesos (Hora, Fecha, Precio, ID_Miembro) VALUES (?, ?, ?, ?)";
+    $consulta = $enlace->prepare($sql);
+    if (!$consulta) {
+        error_log("Error al preparar la consulta: " . $enlace->error); 
+        return false;
+    }
         $enlace = dbConectar();
-        if (!$enlace) { // Si hay un error en la conexión
+        if (!$enlace) { 
             error_log("Error de conexión: " . mysqli_connect_error());
             return false;
         }
@@ -12,13 +23,14 @@ class Accesos
         $sql = "INSERT INTO accesos (Hora, Fecha, Precio, ID_Miembro, Tipo) VALUES (?, ?, ?, ?,?)";
         $consulta = $enlace->prepare($sql);
         if (!$consulta) {
-            error_log("Error al preparar la consulta: " . $enlace->error); // Log de error
+            error_log("Error al preparar la consulta: " . $enlace->error); 
             return false;
         }
 
         $consulta->bind_param("ssdis", $datos["Hora"], $datos["Fecha"], $datos["Precio"], $datos["ID_Miembro"] , $datos["Tipo"]);
         return $consulta->execute();
     }
+
     public function contarAccesos()
 {
     $enlace = dbConectar();
@@ -56,7 +68,6 @@ class Accesos
 
         return $accesos;
     }
-
     public function buscarMiembroPorID($ID_Miembro)
     {
         $enlace = dbConectar();

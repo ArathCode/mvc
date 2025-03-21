@@ -41,9 +41,9 @@
                 <li>
                     <a href="#">
                         <span class="icon">
-                            <ion-icon name="settings-outline"></ion-icon>
+                            <ion-icon name="newspaper-outline"></ion-icon>
                         </span>
-                        <span class="title">Ajustes</span>
+                        <span class="title">Corte de cuenta</span>
                     </a>
                 </li>
 

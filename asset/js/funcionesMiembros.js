@@ -280,6 +280,7 @@ function eliminarMiembro(id) {
         text: "¡Esta acción no se puede deshacer!",
         icon: "warning",
         showCancelButton: true,
+        confirmButtonColor: "#8d2e27",
         confirmButtonText: "Sí, eliminar",
         cancelButtonText: "Cancelar"
     }).then((result) => {

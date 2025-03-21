@@ -42,7 +42,6 @@
             );
 
             echo json_encode($info);
-           // echo $lista;
         }
         else
         {

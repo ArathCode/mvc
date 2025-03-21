@@ -10,9 +10,42 @@
 
 </head>
 
-<body class="bg-light">
+<body >
 
-    <div class="container mt-5">
+<!-- =============== Barra de navegacion ================ -->
+    <div class="navigation">
+        <?php
+        include_once("encabezado.php")
+        ?>
+        <link rel="stylesheet" href="../asset/css/relacionM.css">
+    </div>
+
+    <div class="main">
+
+        <div class="topbar">
+            <div class="toggle">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+            <div class="adminUsuarios" >
+                <a href="index.php?pag=miembros">
+                    <ion-icon name="people-outline"></ion-icon>
+                    <span>Miembros</span>
+                </a>
+            </div>
+            <div class="adminMemb" >
+                <a href="index.php?pag=relacion">
+                    <ion-icon name="card-outline"></ion-icon>
+                    <span>Membresías</span>
+                </a>
+            </div>
+            <div class="contenedor">
+                <div class="usuario">
+                    <img src="https://i.pinimg.com/originals/a0/14/7a/a0147adf0a983ab87e86626f774785cf.gif" alt="">
+                </div>
+
+            </div>
+        </div>
+
         <h2 class="text-center">Relacion de membresias</h2>
 
 
@@ -20,13 +53,14 @@
             Agregar Usuario
         </button>
         <div class="d-flex justify-content-between mb-3">
-    <div>
-        <button class="btn btn-success" >Vigentes</button>
-        <button class="btn btn-danger" >Vencidas</button>
-        <button class="btn btn-warning" >Proximas a vencer</button>
-        <button class="btn btn-secondary" >Todas</button>
-    </div>
-</div>
+            <div>
+                <button class="btn btn-success" >Vigentes</button>
+                <button class="btn btn-danger" >Vencidas</button>
+                <button class="btn btn-warning" >Proximas a vencer</button>
+                <button class="btn btn-secondary" >Todas</button>
+            </div>
+        </div>
+
         <!-- Modal AGREGAR -->
         <div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -245,13 +279,8 @@
                 <div id="paginacion" class="mt-3"></div>
             </div>
         </div>
-        <a class="btn btn-info" href="index.php?pag=gastos">Gastos</a>
-        <a class="btn btn-info" href="index.php?pag=usuarios">Usuarios</a>
-        <a class="btn btn-info" href="index.php?pag=membresias">Miembros</a>
-        <a class="btn btn-error" href="../salir.php">Cerrar Sesión</a>
+            
     </div>
-
-
 
 </body>
 
