@@ -2,7 +2,7 @@ import { validaNumero } from "./validaciones.js?v=4.8";
 document.addEventListener("DOMContentLoaded", () => {
     // Asignar la fecha actual
     const inputFecha = document.getElementById("fecha");
-
+    actualizarContadores();
     function establecerFechaActual() {
         const hoy = new Date();
         hoy.setMinutes(hoy.getMinutes() - hoy.getTimezoneOffset());
@@ -184,6 +184,7 @@ function agregarAcceso() {
                         form.reset();
                         document.querySelector("#miModal .btn-close").click();
                         listarAccesos();
+                        actualizarContadores();
                     } else {
                         Swal.fire("Error", "No se pudo agregar el acceso", "error");
                     }
@@ -191,6 +192,29 @@ function agregarAcceso() {
                 .catch(error => console.error("Error al agregar acceso:", error));
         }
     });
+}
+function actualizarContadores() {
+    fetch('controlador/controladorAcceso.php', {
+        method: 'POST',
+        body: new URLSearchParams({ "ope": "CONTAR_ACCESOS" })
+    })
+    .then(response => response.json())
+    .then(data => {
+        let visitas = 0;
+        let membresias = 0;
+
+        data.forEach(item => {
+            if (item.Tipo === "Visita") {
+                visitas = item.cantidad;
+            } else if (item.Tipo === "Miembro") {
+                membresias = item.cantidad;
+            }
+        });
+
+        document.querySelector(".contadores .card:nth-child(1) .numbers").textContent = visitas;
+        document.querySelector(".contadores .card:nth-child(2) .numbers").textContent = membresias;
+    })
+    .catch(error => console.error("Error al obtener conteo:", error));
 }
 function registrarAcceso() {
     const ID_Miembro = document.getElementById("miembroID").value;
@@ -217,6 +241,7 @@ function registrarAcceso() {
         if (data.success) {
             Swal.fire("Éxito", "Acceso registrado correctamente", "success");
             listarAccesos();
+            actualizarContadores();
         } else {
             Swal.fire("Error", "No se pudo registrar el acceso", "error");
         }

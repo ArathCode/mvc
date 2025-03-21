@@ -27,6 +27,10 @@ if (isset($_POST["ope"])) {
         $status = $acceso->agregarAcceso($datos);
         echo json_encode(["success" => $status]);
     }
+    elseif ($ope === "CONTAR_ACCESOS") {
+        $conteo = $acceso->contarAccesos();
+        echo json_encode($conteo);
+    }
     elseif ($ope === "AGREGAR_ACCESOM") {
         if (!isset($_POST["Precio"], $_POST["ID_Miembro"], $_POST["Tipo"])) {
             echo json_encode(["success" => false, "msg" => "Datos incompletos."]);

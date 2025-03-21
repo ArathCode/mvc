@@ -19,7 +19,24 @@ class Accesos
         $consulta->bind_param("ssdis", $datos["Hora"], $datos["Fecha"], $datos["Precio"], $datos["ID_Miembro"] , $datos["Tipo"]);
         return $consulta->execute();
     }
+    public function contarAccesos()
+{
+    $enlace = dbConectar();
+    $sql = "SELECT a.Tipo, COUNT(*) as cantidad 
+            FROM vista_accesos_hoy a 
+            GROUP BY a.Tipo";
+    
+    $consulta = $enlace->prepare($sql);
+    $consulta->execute();
+    $result = $consulta->get_result();
 
+    $conteo = [];
+    while ($fila = $result->fetch_assoc()) {
+        $conteo[] = $fila;
+    }
+
+    return $conteo;
+}
 
     public function listarAccesos()
     {
