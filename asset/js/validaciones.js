@@ -12,7 +12,23 @@ export function validaCorreo(elemento) {
         return false;
     }
 }
+export function validaNumero(elemento) {
+    let numero = parseFloat(elemento.value.trim()); // Convertir a número
 
+    if (elemento.value === "") {
+        mostrarMensaje(elemento, "El campo es obligatorio", false);
+        return false;
+    } else if (isNaN(numero)) {
+        mostrarMensaje(elemento, "Debe ser un número válido.", false);
+        return false;
+    } else if (numero <= 0 || numero >= 10000) {
+        mostrarMensaje(elemento, "Debe ser mayor a 0 y menor a 10,000.", false);
+        return false;
+    } else {
+        mostrarMensaje(elemento, "Número válido!", true);
+        return true;
+    }
+}
 export function validaTelefono(elemento) {
     let validTelefono = /^\d{10}$/; // Solo acepta 10 dígitos numéricos
     let repetidos = /^(\d)\1{9}$/; // Detecta números con todos los dígitos iguales

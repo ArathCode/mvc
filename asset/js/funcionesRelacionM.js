@@ -241,7 +241,7 @@ function renderizarUsuarios(lista) {
                 <td>${item.Cantidad} </td>
                 <td>${item.FechaPago}</td>
                 <td>
-                    <button class="btn btn-warning btn-editar" data-id="${item.ID_MiemMiembro}" data-bs-toggle="modal" data-bs-target="#modalEditar">Editar</button>
+                  <!--<button class="btn btn-warning btn-editar" data-id="${item.ID_MiemMiembro}" data-bs-toggle="modal" data-bs-target="#modalEditar">Editar</button>-->
                     <button class="btn btn-danger btn-eliminar" data-id="${item.ID_MiemMiembro}">Eliminar</button>
                 </td>
             </tr>

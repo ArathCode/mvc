@@ -1,3 +1,4 @@
+import { validaNumero } from "./validaciones.js?v=4.8";
 document.addEventListener("DOMContentLoaded", () => {
     // Asignar la fecha actual
     const inputFecha = document.getElementById("fecha");
@@ -21,16 +22,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Evento para el formulario de agregar acceso
     const formAgregar = document.querySelector("#formAgregarAcceso");
+    if(formAgregar){
     formAgregar.addEventListener("submit", (event) => {
         event.preventDefault();
-        agregarAcceso();
+        let errores = 0; 
+        let Precio = document.getElementById("precio");
+        if (!validaNumero(Precio)) {
+            errores++; // Sumar error si la validación falla
+            return;  // Opcional: para evitar que siga ejecutándose el código
+        }
+        if(errores==0){
+            agregarAcceso();}
     });
-
+    }
     // Evento para el botón de guardar acceso en el modal
     const btnGuardarAcceso = document.querySelector("#btnGuardarAcceso");
+    if(btnGuardarAcceso){
     btnGuardarAcceso.addEventListener("click", () => {
-        agregarAcceso();
+        event.preventDefault();
+        let errores = 0; 
+        let Precio = document.getElementById("precio");
+        if (!validaNumero(Precio)) {
+            errores++; // Sumar error si la validación falla
+            return;  // Opcional: para evitar que siga ejecutándose el código
+        }
+        if(errores==0){
+            agregarAcceso();}
     });
+    }
+  
 
     // Buscar miembro en el modal
     const idMiembroInput = document.querySelector("#idMiembro");

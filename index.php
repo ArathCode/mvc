@@ -18,12 +18,10 @@
       
         if($pag == "admin" && $tipoUsuario == "admin") {
             include_once("vistas/home.php");
-        }
-        
+        }       
         elseif($pag == "gastos" && ($tipoUsuario == "admin"  )) {
             include_once("vistas/Gastos.php");
         }
-        
         elseif($pag == "usuarios" && $tipoUsuario == "admin") {
             include_once("vistas/usuarios.php");
         }

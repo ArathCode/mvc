@@ -7,7 +7,7 @@
         include_once("head.php");
         ?>
     <link rel="stylesheet" href="../asset/css/home.css">
-    <script type="module" src="asset/js/acceso.js?v=1.3"></script>
+    <script type="module" src="asset/js/acceso.js?v=1.6"></script>
     </head>
 
     <body>
@@ -232,7 +232,13 @@
                         
                         <div class="mb-3">
                             <label for="precio" class="form-label">Precio</label>
-                            <input type="number" class="form-control" id="precio" name="Precio" placeholder="Ingrese el precio" required>
+                            <input type="number" class="form-control" id="precio" name="Precio" placeholder="Ingrese el precio" min="0" max="300" required>
+                            <div class="invalid-feedback">
+                                    Password is required
+                                </div>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                         </div>
                     </form>
 

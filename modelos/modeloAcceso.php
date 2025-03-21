@@ -26,7 +26,7 @@ class Accesos
         $enlace = dbConectar();
         $sql = "SELECT a.ID_Acceso, a.Hora, a.Fecha, a.Precio, a.ID_Miembro, 
                        m.Nombre, m.ApellidoP, m.ApellidoM 
-                FROM accesos a 
+                FROM vista_accesos_hoy a 
                 JOIN miembros m ON a.ID_Miembro = m.ID_Miembro";
         $consulta = $enlace->prepare($sql);
         $consulta->execute();
