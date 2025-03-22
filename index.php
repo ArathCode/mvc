@@ -5,7 +5,7 @@
 
     // Si la sesión NO está iniciada, ir al login
     if (!isset($_SESSION["sistema"]) || $_SESSION["sistema"] !== "DragonGym") {
-        include_once("vistas/login copy.php");
+        include_once("vistas/login.php");
         exit(); 
     }
 

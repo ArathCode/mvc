@@ -247,6 +247,7 @@ body {
     border-radius: 20px;
     border: transparent;
     cursor: pointer;
+    margin: 5px 0px;
 }
 .gb button:hover{
   background-color: var(--verde);
