@@ -161,7 +161,7 @@ function actualizarPaginacion(totalPaginas) {
         return;
     }
 
-    paginacion.innerHTML = ""; // Limpiar paginación previa
+    paginacion.innerHTML = ""; 
 
     for (let i = 1; i <= totalPaginas; i++) {
         let boton = document.createElement("button");
@@ -169,14 +169,13 @@ function actualizarPaginacion(totalPaginas) {
         boton.textContent = i;
         boton.addEventListener("click", () => {
             paginaActual = i;
-            listarMiembros(); // Llamar a listar miembros para cambiar de página
+            listarMiembros(); 
         });
 
         paginacion.appendChild(boton);
     }
 }
 
-// Aplicar filtros al escribir en los inputs
 function aplicarFiltros() {
     const filtros = {
         ID_Miembro: document.getElementById("idM").value.trim(),
@@ -185,11 +184,10 @@ function aplicarFiltros() {
         Telefono: document.getElementById("numM").value.trim(),
     };
 
-    paginaActual = 1; // Reinicia la paginación a la primera página
-    listarMiembros(filtros); // Aplicar filtros
+    paginaActual = 1; 
+    listarMiembros(filtros); 
 }
 
-// Configuración de eventos después de cargar el DOM
 document.addEventListener("DOMContentLoaded", () => {
     const filtersContainer = document.querySelector(".filter-container");
 
@@ -198,23 +196,19 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    // Evento para manejar la aplicación de filtros dinámicos
     filtersContainer.addEventListener("input", aplicarFiltros);
 
-    // Cargar todos los miembros inicialmente
     listarMiembros();
 });
 
-// Botón para limpiar filtros
 document.getElementById("limpiarM").addEventListener("click", function () {
     document.querySelectorAll(".filter input").forEach((input) => {
-        input.value = ""; // Limpia los valores de los filtros
+        input.value = "";
     });
 
-    aplicarFiltros(); // Vuelve a cargar la lista sin filtros
+    aplicarFiltros(); 
 });
 
-// Eventos en filtros individuales
 document.querySelectorAll(".filter").forEach(filter => {
     filter.addEventListener("click", function (event) {
         let isActive = this.classList.contains("active");
@@ -242,7 +236,6 @@ document.querySelectorAll(".filter input").forEach(input => {
     });
 });
 
-// Cerrar filtros individualmente
 document.querySelectorAll(".filter .close").forEach(button => {
     button.addEventListener("click", function (event) {
         event.stopPropagation();
@@ -258,7 +251,6 @@ document.querySelectorAll(".filter .close").forEach(button => {
 });
 
 
-// Evento para limpiar todos los filtros al hacer clic en "Limpiar Filtros"
 document.getElementById("limpiarM").addEventListener("click", function () {
     document.querySelectorAll(".filter").forEach(filter => {
         let input = filter.querySelector("input");
@@ -272,7 +264,6 @@ document.getElementById("limpiarM").addEventListener("click", function () {
 
 
 
-// Función para cambiar de página
 function cambiarPagina(nuevaPagina) {
     paginaActual = nuevaPagina;
     listarMiembros(); 
