@@ -1,30 +1,46 @@
 <?php 
 class Miembros {
 
-    public function ListarMiembros($pagina = 1, $registrosPorPagina = 10) {
+    public function ListarMiembros($pagina = 1, $registrosPorPagina = 10, $filtros = []) {
         $enlace = dbConectar();
         $offset = ($pagina - 1) * $registrosPorPagina;
 
-        // Consulta para obtener los miembros
-        $sql = "SELECT ID_Miembro, Nombre, ApellidoP, ApellidoM, Sexo, Telefono 
-                FROM miembros 
-                ORDER BY ID_Miembro DESC 
-                LIMIT ?, ?";
-        
-        // Consulta para obtener el total de registros
-        $countSql = "SELECT COUNT(*) as total FROM miembros";
+        $sql = "SELECT ID_Miembro, Nombre, ApellidoP, ApellidoM, Sexo, Telefono FROM miembros WHERE 1=1";
 
-        // Obtener total de registros
-        $countConsulta = $enlace->prepare($countSql);
-        $countConsulta->execute();
-        $countResult = $countConsulta->get_result();
-        $totalRegistros = $countResult->fetch_assoc()["total"];
-        $totalPaginas = ceil($totalRegistros / $registrosPorPagina);
-        $countConsulta->close();
+        if (isset($filtros['ID_Miembro'])) {
+            $sql .= " AND ID_Miembro LIKE ?";
+        }
+        if (isset($filtros['Nombre'])) {
+            $sql .= " AND Nombre LIKE ?";
+        }
+        if (isset($filtros['Apellidos'])) {
+            $sql .= " AND CONCAT(ApellidoP, ' ', ApellidoM) LIKE ?";
+        }
+        if (isset($filtros['Telefono'])) {
+            $sql .= " AND Telefono LIKE ?";
+        }
 
-        // Ejecutar consulta principal
+        $sql .= " ORDER BY ID_Miembro DESC LIMIT ?, ?";
+
+        $values = [];
+        if (isset($filtros['ID_Miembro'])) {
+            $values[] = "%" . $filtros['ID_Miembro'] . "%";
+        }
+        if (isset($filtros['Nombre'])) {
+            $values[] = "%" . $filtros['Nombre'] . "%";
+        }
+        if (isset($filtros['Apellidos'])) {
+            $values[] = "%" . $filtros['Apellidos'] . "%";
+        }
+        if (isset($filtros['Telefono'])) {
+            $values[] = "%" . $filtros['Telefono'] . "%";
+        }
+        $values[] = $offset;
+        $values[] = $registrosPorPagina;
+
+        // Preparar y ejecutar la consulta
         $consulta = $enlace->prepare($sql);
-        $consulta->bind_param("ii", $offset, $registrosPorPagina);
+        $consulta->bind_param(str_repeat("s", count($values) - 2) . "ii", ...$values);
         $consulta->execute();
         $result = $consulta->get_result();
 
@@ -33,13 +49,22 @@ class Miembros {
             $miembros[] = $row;
         }
 
+        // Obtener el total de registros sin filtros
+        $countSql = "SELECT COUNT(*) as total FROM miembros WHERE 1=1";
+        $countConsulta = $enlace->prepare($countSql);
+        $countConsulta->execute();
+        $countResult = $countConsulta->get_result();
+        $totalRegistros = $countResult->fetch_assoc()["total"];
+        $totalPaginas = ceil($totalRegistros / $registrosPorPagina);
+        $countConsulta->close();
+
         $consulta->close();
         $enlace->close();
 
         return [
             "miembros" => $miembros,
             "totalPaginas" => $totalPaginas,
-            "paginaActual" => $pagina
+            "paginaActual" => $pagina,
         ];
     }
 
@@ -117,4 +142,5 @@ class Miembros {
         return $miembro;
     }
 }
+
 ?>

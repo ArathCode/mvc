@@ -70,51 +70,63 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     
-
-
-    
 });
+
+
 let paginaActual = 1;
 const registrosPorPagina = 10;
 
-export function listarMiembros() {
-  
-
+// Función para listar miembros (con o sin filtros)
+export function listarMiembros(filtros = {}) {
     let params = new URLSearchParams();
     params.append("ope", "LISTARMIEMBROS");
     params.append("pagina", paginaActual);
     params.append("registrosPorPagina", registrosPorPagina);
-   
 
-    fetch('../controlador/controladorMiembro.php', {
-        method: 'POST',
+    // Añadir filtros si están activos
+    if (filtros.ID_Miembro) params.append("id", filtros.ID_Miembro);
+    if (filtros.Nombre) params.append("nombre", filtros.Nombre);
+    if (filtros.Apellidos) params.append("apellidos", filtros.Apellidos);
+    if (filtros.Telefono) params.append("telefono", filtros.Telefono);
+
+    fetch("../controlador/controladorMiembro.php", {
+        method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: params.toString()
+        body: params.toString(),
     })
-    .then(response => response.json())
-    .then(data => {
-        if (!data.success) {
-            console.error("Error al cargar miembros:", data.error);
-            return;
-        }
-        renderizarMiembros(data.lista);
-        actualizarPaginacion(data.totalPaginas);
-    })
-    .catch(error => {
-        console.error("Error en la carga de miembros:", error);
-    });
+        .then((response) => response.json())
+        .then((data) => {
+            if (!data.success) {
+                console.error("Error al cargar miembros:", data.msg);
+                renderizarError("No se pudieron cargar los miembros.");
+                return;
+            }
+            renderizarMiembros(data.lista); // Renderizar lista
+            actualizarPaginacion(data.totalPaginas); // Actualizar paginación
+        })
+        .catch((error) => {
+            console.error("Error en la solicitud:", error);
+            renderizarError("Error al conectarse con el servidor.");
+        });
 }
 
+// Renderizar miembros o mostrar mensaje si no hay resultados
 function renderizarMiembros(lista) {
     const contenedor = document.querySelector("#ListaMiembros");
     contenedor.innerHTML = "";
 
     if (!lista || lista.length === 0) {
-        contenedor.innerHTML = "<p>No hay miembros en este rango de fechas.</p>";
+        // Mostrar mensaje de "No se encuentra ningún miembro"
+        contenedor.innerHTML = `
+            <div class="no-results">
+                <p>No se encuentra ningún miembro con los filtros aplicados.</p>
+            </div>
+        `;
         return;
     }
 
-    lista.forEach(miembro => {
+    // Renderizar las tarjetas de los miembros
+    lista.forEach((miembro) => {
         contenedor.innerHTML += `
             <div class="gasto-card">
                 <p># ${miembro.ID_Miembro}</p>
@@ -129,6 +141,18 @@ function renderizarMiembros(lista) {
         `;
     });
 }
+
+// Renderizar mensaje de error
+function renderizarError(mensaje) {
+    const contenedor = document.querySelector("#ListaMiembros");
+    contenedor.innerHTML = `
+        <div class="error-message">
+            <p>${mensaje}</p>
+        </div>
+    `;
+}
+
+// Actualizar la paginación
 function actualizarPaginacion(totalPaginas) {
     const paginacion = document.querySelector("#paginacion");
 
@@ -137,19 +161,60 @@ function actualizarPaginacion(totalPaginas) {
         return;
     }
 
-    paginacion.innerHTML = ""; 
+    paginacion.innerHTML = ""; // Limpiar paginación previa
 
     for (let i = 1; i <= totalPaginas; i++) {
         let boton = document.createElement("button");
         boton.classList.add("btn", i === paginaActual ? "btn-primary" : "btn-outline-primary");
         boton.textContent = i;
-        boton.addEventListener("click", () => cambiarPagina(i));
+        boton.addEventListener("click", () => {
+            paginaActual = i;
+            listarMiembros(); // Llamar a listar miembros para cambiar de página
+        });
 
         paginacion.appendChild(boton);
     }
 }
-    
-// Filtros
+
+// Aplicar filtros al escribir en los inputs
+function aplicarFiltros() {
+    const filtros = {
+        ID_Miembro: document.getElementById("idM").value.trim(),
+        Nombre: document.getElementById("nombreM").value.trim(),
+        Apellidos: document.getElementById("apeP").value.trim(),
+        Telefono: document.getElementById("numM").value.trim(),
+    };
+
+    paginaActual = 1; // Reinicia la paginación a la primera página
+    listarMiembros(filtros); // Aplicar filtros
+}
+
+// Configuración de eventos después de cargar el DOM
+document.addEventListener("DOMContentLoaded", () => {
+    const filtersContainer = document.querySelector(".filter-container");
+
+    if (!filtersContainer) {
+        console.error("Error: No se encontró el contenedor de filtros.");
+        return;
+    }
+
+    // Evento para manejar la aplicación de filtros dinámicos
+    filtersContainer.addEventListener("input", aplicarFiltros);
+
+    // Cargar todos los miembros inicialmente
+    listarMiembros();
+});
+
+// Botón para limpiar filtros
+document.getElementById("limpiarM").addEventListener("click", function () {
+    document.querySelectorAll(".filter input").forEach((input) => {
+        input.value = ""; // Limpia los valores de los filtros
+    });
+
+    aplicarFiltros(); // Vuelve a cargar la lista sin filtros
+});
+
+// Eventos en filtros individuales
 document.querySelectorAll(".filter").forEach(filter => {
     filter.addEventListener("click", function (event) {
         let isActive = this.classList.contains("active");
@@ -177,10 +242,10 @@ document.querySelectorAll(".filter input").forEach(input => {
     });
 });
 
-// Botón de cerrar filtro
+// Cerrar filtros individualmente
 document.querySelectorAll(".filter .close").forEach(button => {
     button.addEventListener("click", function (event) {
-        event.stopPropagation(); 
+        event.stopPropagation();
         let filter = this.parentElement;
         filter.classList.remove("active");
 
@@ -191,6 +256,7 @@ document.querySelectorAll(".filter .close").forEach(button => {
         });
     });
 });
+
 
 // Evento para limpiar todos los filtros al hacer clic en "Limpiar Filtros"
 document.getElementById("limpiarM").addEventListener("click", function () {

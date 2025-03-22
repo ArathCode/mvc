@@ -6,7 +6,6 @@ if (isset($_POST["ope"])) {
     include_once("../modelos/ModeloMiembros.php");
     $miembro = new Miembros();
 
-    // Configuración del encabezado para JSON
     header('Content-Type: application/json');
 
     switch ($ope) {
@@ -14,13 +13,20 @@ if (isset($_POST["ope"])) {
             $pagina = isset($_POST["pagina"]) ? intval($_POST["pagina"]) : 1;
             $registrosPorPagina = isset($_POST["registrosPorPagina"]) ? intval($_POST["registrosPorPagina"]) : 10;
 
-            $lista = $miembro->ListarMiembros($pagina, $registrosPorPagina);
+            $filtros = [
+                "ID_Miembro" => $_POST["id"] ?? null,
+                "Nombre" => $_POST["nombre"] ?? null,
+                "Apellidos" => $_POST["apellidos"] ?? null,
+                "Telefono" => $_POST["telefono"] ?? null,
+            ];
+
+            $lista = $miembro->ListarMiembros($pagina, $registrosPorPagina, $filtros);
 
             echo json_encode([
                 "success" => true,
                 "lista" => $lista["miembros"],
                 "totalPaginas" => $lista["totalPaginas"],
-                "paginaActual" => $lista["paginaActual"]
+                "paginaActual" => $lista["paginaActual"],
             ]);
             break;
 
@@ -30,7 +36,7 @@ if (isset($_POST["ope"])) {
                 echo json_encode([
                     "success" => $miembroData ? true : false,
                     "miembro" => $miembroData ?? null,
-                    "msg" => $miembroData ? "" : "Miembro no encontrado."
+                    "msg" => $miembroData ? "" : "Miembro no encontrado.",
                 ]);
             } else {
                 echo json_encode(["success" => false, "msg" => "Falta el ID del miembro."]);
@@ -44,7 +50,7 @@ if (isset($_POST["ope"])) {
                     "ApellidoP" => $_POST["ApellidoP"],
                     "ApellidoM" => $_POST["ApellidoM"],
                     "Sexo" => $_POST["Sexo"],
-                    "Telefono" => $_POST["Telefono"]
+                    "Telefono" => $_POST["Telefono"],
                 ];
                 $status = $miembro->Agregar($datos);
                 echo json_encode(["success" => $status]);
@@ -61,7 +67,7 @@ if (isset($_POST["ope"])) {
                     "ApellidoP" => $_POST["ApellidoPEdit"],
                     "ApellidoM" => $_POST["ApellidoMEdit"],
                     "Sexo" => $_POST["SexoEdit"],
-                    "Telefono" => $_POST["TelefonoEdit"]
+                    "Telefono" => $_POST["TelefonoEdit"],
                 ];
                 $status = $miembro->Editar($datos);
                 echo json_encode(["success" => $status]);
@@ -79,10 +85,24 @@ if (isset($_POST["ope"])) {
             }
             break;
 
+        case "BUSCARMIEMBROS":
+            if (isset($_POST["criterio"])) {
+                $criterio = $_POST["criterio"];
+                $resultados = $miembro->BuscarMiembros($criterio);
+                echo json_encode([
+                    "success" => true,
+                    "resultados" => $resultados,
+                ]);
+            } else {
+                echo json_encode(["success" => false, "msg" => "Falta el criterio de búsqueda."]);
+            }
+            break;
+
         default:
             echo json_encode(["success" => false, "msg" => "Operación no válida o parámetros insuficientes"]);
     }
 } else {
     echo json_encode(["success" => false, "msg" => "Sin operación válida"]);
 }
+
 ?>
