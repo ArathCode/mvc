@@ -47,19 +47,22 @@
         </div>
 
         <h2 class="text-center">Relacion de membresias</h2>
-
-
-        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalAgregar">
-            Agregar Usuario
-        </button>
-        <div class="d-flex justify-content-between mb-3">
+            
+        <div class="gB">
+            <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#modalAgregar">
+                Agregar Usuario
+            </button>
+        </div>
+        
+        <div class="filter-container">
             <div>
-                <button class="btn btn-success" >Vigentes</button>
-                <button class="btn btn-danger" >Vencidas</button>
-                <button class="btn btn-warning" >Proximas a vencer</button>
-                <button class="btn btn-secondary" >Todas</button>
+                <button class="btn btn-success filter-button">Vigentes</button>
+                <button class="btn btn-danger filter-button">Vencidas</button>
+                <button class="btn btn-warning filter-button">Proximas a vencer</button>
+                <button class="btn btn-secondary filter-button">Todas</button>
             </div>
         </div>
+
 
         <!-- Modal AGREGAR -->
         <div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
@@ -253,8 +256,7 @@
         </div>
 
         <!-- Tabla de Usuarios -->
-        <div class="mt-5">
-            <h4 class="text-center">Membresias Asignadas</h4>
+        <div class="mt-3" id="relT">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped" id="ListaUsuarios">
                     <thead class="table-dark">
@@ -276,8 +278,9 @@
 
                     </tbody>
                 </table>
-                <div id="paginacion" class="mt-3"></div>
+                
             </div>
+            <div id="paginacion" class="mt-3"></div>
         </div>
             
     </div>

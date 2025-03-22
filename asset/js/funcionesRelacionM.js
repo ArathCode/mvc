@@ -17,6 +17,17 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("FechaPago").value = fechaFormateada;
     }
     
+        const buttons = document.querySelectorAll('.filter-button');
+    
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                buttons.forEach(btn => btn.classList.remove('active'));
+                
+                button.classList.add('active');
+            });
+        });
+    
+    
     const formUsuario = document.querySelector("#formAgregar");
     const modal = document.getElementById("modalAgregar");
     modal.addEventListener("show.bs.modal", () => {

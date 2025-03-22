@@ -248,8 +248,48 @@ body {
     border: transparent;
     cursor: pointer;
 }
+.gb button:hover{
+  background-color: var(--verde);
 
+}
+.btn-primary, .btn-outline-primary{
+  border: 1px solid #ccc;
+  color: white;
+}
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
 
+.filter-container button {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: black;
+}
+
+.filter-container button.active {
+  border: 1px solid #ccc;
+
+}
+
+/* ================Tabla miembros ===================*/
+
+#relT{
+  margin: 0px 15px; 
+   
+}
+.table-responsive{
+  max-height: 490px; 
+  min-height: 490px; 
+  overflow-y: auto;
+}
+#relT button{
+  background-color: var(--red);
+}
 .adminMemb{
   padding: 8px 12px;
   color: white;
