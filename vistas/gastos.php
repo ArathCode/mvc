@@ -126,7 +126,7 @@
                                 <input type="number" class="form-control" id="Precio" name="Precio" min="0" max="1000000" required>
                             </div>
                             <input type="hidden" name="ID_Usuario" id="ID_Usuario" value="<?php echo $_SESSION['ID_Usuario']; ?>">
-
+                            
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </form>
                     </div>

@@ -28,20 +28,20 @@
         elseif($pag == "coach" && $tipoUsuario == "coach") {
             include_once("vistas/home.php");
         }
-        elseif($pag == "home" && $tipoUsuario == "admin") {
+        elseif($pag == "home" && ($tipoUsuario == "admin" || $tipoUsuario == "coach")) {
             include_once("vistas/home.php");
         }
-        elseif($pag == "membresias" && $tipoUsuario == "admin") {
+        elseif($pag == "membresias" && ($tipoUsuario == "admin")) {
             include_once("vistas/membresia.php");
         }
-        elseif($pag == "miembros" && $tipoUsuario == "admin") {
+        elseif($pag == "miembros" && ($tipoUsuario == "admin" || $tipoUsuario == "coach")) {
             include_once("vistas/miembros.php");
         }
-        elseif($pag == "relacion" && $tipoUsuario == "admin") {
+        elseif($pag == "relacion" && ($tipoUsuario == "admin" || $tipoUsuario == "coach")) {
             include_once("vistas/relacionMembresias.php");
         }
         else {
-            echo "<h2>Acceso denegado. Verifique su usuario.</h2>";
+            include_once("vistas/acceso_denegado.php");
             exit();
         }
     } else {
