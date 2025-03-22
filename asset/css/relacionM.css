@@ -258,6 +258,7 @@ body {
 }
 .filter-container {
   display: flex;
+  padding-left: 20px;
   justify-content: space-between;
   gap: 10px;
 }
