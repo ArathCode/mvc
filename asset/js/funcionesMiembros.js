@@ -148,8 +148,8 @@ function actualizarPaginacion(totalPaginas) {
         paginacion.appendChild(boton);
     }
 }
-//Limpiar filtros
     
+// Filtros
 document.querySelectorAll(".filter").forEach(filter => {
     filter.addEventListener("click", function (event) {
         let isActive = this.classList.contains("active");
@@ -171,6 +171,13 @@ document.querySelectorAll(".filter").forEach(filter => {
     });
 });
 
+document.querySelectorAll(".filter input").forEach(input => {
+    input.addEventListener("click", function (event) {
+        event.stopPropagation();
+    });
+});
+
+// Botón de cerrar filtro
 document.querySelectorAll(".filter .close").forEach(button => {
     button.addEventListener("click", function (event) {
         event.stopPropagation(); 
@@ -185,28 +192,6 @@ document.querySelectorAll(".filter .close").forEach(button => {
     });
 });
 
-document.getElementById("limpiarM").addEventListener("click", function () {
-    document.querySelectorAll(".filter").forEach(filter => {
-        filter.classList.remove("active");
-        let inputs = filter.querySelectorAll("input, select");
-        inputs.forEach(input => {
-            input.classList.add("hidden");
-            input.value = "";
-        });
-    });
-});
-
-
-document.getElementById("limpiarM").addEventListener("click", function () {
-    document.querySelectorAll(".filter").forEach(filter => {
-        let input = filter.querySelector("input");
-        input.classList.add("hidden");
-        input.value = "";
-        filter.classList.remove("active");
-    });
-});
-
-
 // Evento para limpiar todos los filtros al hacer clic en "Limpiar Filtros"
 document.getElementById("limpiarM").addEventListener("click", function () {
     document.querySelectorAll(".filter").forEach(filter => {
@@ -216,6 +201,7 @@ document.getElementById("limpiarM").addEventListener("click", function () {
         filter.classList.remove("active");
     });
 });
+
 
 
 
