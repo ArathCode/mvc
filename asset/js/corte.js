@@ -1,14 +1,70 @@
 document.addEventListener("DOMContentLoaded", () => {
     const btnCorte = document.getElementById("btnCorte");
+    const btnCortePdf = document.getElementById("btnCortePdf");
 
     if (btnCorte) {
         btnCorte.addEventListener("click", () => {
-            obtenerDatosYCorte();
+            obtenerDatosYCorte("txt"); // Llamamos a la función con "txt" para generar el archivo de texto
         });
     }
+
+    if (btnCortePdf) {
+        btnCortePdf.addEventListener("click", () => {
+            obtenerDatosYCorte("pdf"); // Llamamos a la función con "pdf" para generar el archivo PDF
+        });
+    }
+
+    // Para cambiar la imagen en el hover
+    const notepadImg = document.getElementById("notepadImg");
+    const pdfImg = document.getElementById("pdfImg");
+
+    btnCorte.addEventListener("mouseenter", function () {
+        cambiarImagen(notepadImg, "../asset/images/notepad.png");
+    });
+
+    btnCorte.addEventListener("mouseleave", function () {
+        cambiarImagen(notepadImg, "../asset/images/notepadO.png");
+    });
+
+    btnCortePdf.addEventListener("mouseenter", function () {
+        cambiarImagen(pdfImg, "../asset/images/pdf.png");
+    });
+
+    btnCortePdf.addEventListener("mouseleave", function () {
+        cambiarImagen(pdfImg, "../asset/images/pdfO.png");
+    });
+
+    function cambiarImagen(img, nuevaSrc) {
+        img.style.transition = "transform 0.2s ease-in-out";
+        img.style.transform = "translateY(-7px)";
+        setTimeout(() => {
+            img.src = nuevaSrc;
+            img.style.transform = "translateY(0)";
+        }, 200);
+    }
+
+    const fechayHora = () => {
+        const fecha = new Date();
+
+        const opcionesMes = { month: 'long', year: 'numeric' };
+        let mesAño = fecha.toLocaleString("es-ES", opcionesMes);
+        mesAño = mesAño.charAt(0).toUpperCase() + mesAño.slice(1); 
+
+        const opcionesDia = { weekday: 'long', day: 'numeric' };
+        const dia = fecha.toLocaleString("es-ES", opcionesDia);
+
+        const opcionesHora = { hour: '2-digit', minute: '2-digit', hour12: true };
+        const hora = fecha.toLocaleString("es-ES", opcionesHora);
+
+        document.getElementById("MesAct").textContent = mesAño;
+        document.getElementById("DiaAct").textContent = dia;
+        document.getElementById("horaAct").textContent = hora;
+    };
+    setInterval(fechayHora, 1000);
+    fechayHora();
 });
 
-async function obtenerDatosYCorte() {
+async function obtenerDatosYCorte(tipo) {
     try {
         const response = await fetch("../controlador/controladorCorte.php", {
             method: "POST",
@@ -46,8 +102,12 @@ async function obtenerDatosYCorte() {
             }
         });
 
-        // Llamamos a la función que genera el archivo de corte
-        generarCorteCaja(ventaProductos, ventaVisitas, ventaMembresias, totalVisitas, totalVentas, totalMembresias);
+        // Dependiendo del tipo, generamos el corte correspondiente
+        if (tipo === "txt") {
+            generarCorteCaja(ventaProductos, ventaVisitas, ventaMembresias, totalVisitas, totalVentas, totalMembresias);
+        } else if (tipo === "pdf") {
+            generarReportePdf(ventaProductos, ventaVisitas, ventaMembresias, totalVisitas, totalVentas, totalMembresias);
+        }
     } catch (error) {
         console.error("Error:", error);
         alert("Ocurrió un error al obtener los datos del corte.");
@@ -85,4 +145,29 @@ function generarCorteCaja(ventaProductos, ventaVisitas, ventaMembresias, totalVi
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+}
+
+function generarReportePdf(ventaProductos, ventaVisitas, ventaMembresias, totalVisitas, totalVentas, totalMembresias) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    const fecha = new Date().toLocaleDateString("es-ES").replace(/\//g, "-"); 
+    const gananciaTotal = ventaProductos + ventaVisitas + ventaMembresias;
+
+    doc.text(`Corte de cuenta \nDragon's Gym Día (${fecha})`, 10, 10);
+    doc.text('---------------------------------------------', 10, 20);
+    doc.text('                 Corte general', 10, 30);
+    doc.text(`Venta de productos $${ventaProductos.toFixed(2)}`, 10, 40);
+    doc.text(`Venta de visitas $${ventaVisitas.toFixed(2)}`, 10, 50);
+    doc.text(`Venta de membresias $${ventaMembresias.toFixed(2)}`, 10, 60);
+    doc.text('----------------------------------------------', 10, 70);
+    doc.text(`Ganancia total: $${gananciaTotal.toFixed(2)}`, 10, 80);
+    doc.text('----------------------------------------------', 10, 90);
+    doc.text(`Total visitas: ${totalVisitas}`, 10, 100);
+    doc.text(`Total ventas: ${totalVentas}`, 10, 110);
+    doc.text(`Total membresías: ${totalMembresias}`, 10, 120);
+    doc.text('----------------------------------------------', 10, 130);
+    doc.text('FIN DE CORTE', 10, 140);
+
+    doc.save(`CorteCajaDragonGym_${fecha}.pdf`);
 }
