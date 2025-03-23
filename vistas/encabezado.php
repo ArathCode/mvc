@@ -39,7 +39,7 @@
 
 
                 <li>
-                    <a href="#">
+                    <a href="index.php?pag=corte">
                         <span class="icon">
                             <ion-icon name="newspaper-outline"></ion-icon>
                         </span>
