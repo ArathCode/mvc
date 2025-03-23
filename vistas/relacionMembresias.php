@@ -50,7 +50,7 @@
             
         <div class="gB">
             <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#modalAgregar">
-                Agregar Usuario
+                Asignar Membresia
             </button>
         </div>
         
@@ -69,7 +69,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalAgregarLabel">Agregar Usuario</h5>
+                        <h5 class="modal-title" id="modalAgregarLabel">Asignar membresia</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                     </div>
                     <div class="modal-body">
@@ -216,45 +216,7 @@
             </div>
         </div>
 
-        <!-- Modal para cambiar contraseña -->
-        <div class="modal fade" id="modalEditarClave" tabindex="-1" aria-labelledby="modalEditarClaveLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalEditarClaveLabel">Cambiar Contraseña</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="formEditarClave">
-                            <input type="hidden" id="ID_UsuarioClave" name="ID_Usuario">
-
-                            <div class="mb-3">
-                                <label for="ClaveNueva" class="form-label">Nueva Contraseña</label>
-                                <input type="password" class="form-control" id="ClaveNueva" name="ClaveNueva" maxlength="16" required>
-                                <div class="invalid-feedback">
-                                    Password is required
-                                </div>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="ConfirmarClave" class="form-label">Confirmar Contraseña</label>
-                                <input type="password" class="form-control" id="ConfirmarClave" name="ConfirmarClave" maxlength="16" required>
-                                <div class="invalid-feedback">
-                                    Password is required
-                                </div>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+      
         <!-- Tabla de Usuarios -->
         <div class="mt-3" id="relT">
             <div class="table-responsive">
