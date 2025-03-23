@@ -4,17 +4,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (btnCorte) {
         btnCorte.addEventListener("click", () => {
-            obtenerDatosYCorte("txt"); // Llamamos a la función con "txt" para generar el archivo de texto
+            obtenerDatosYCorte("txt"); 
         });
     }
 
     if (btnCortePdf) {
         btnCortePdf.addEventListener("click", () => {
-            obtenerDatosYCorte("pdf"); // Llamamos a la función con "pdf" para generar el archivo PDF
+            obtenerDatosYCorte("pdf"); 
         });
     }
 
-    // Para cambiar la imagen en el hover
     const notepadImg = document.getElementById("notepadImg");
     const pdfImg = document.getElementById("pdfImg");
 
@@ -102,7 +101,6 @@ async function obtenerDatosYCorte(tipo) {
             }
         });
 
-        // Dependiendo del tipo, generamos el corte correspondiente
         if (tipo === "txt") {
             generarCorteCaja(ventaProductos, ventaVisitas, ventaMembresias, totalVisitas, totalVentas, totalMembresias);
         } else if (tipo === "pdf") {
