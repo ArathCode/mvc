@@ -18,10 +18,34 @@ class Usuarios
 
         return $usuarios;
     }
+    public function validarNombreUsuario($nombreUsu)
+    {
+        $enlace = dbConectar();
+        $sql = "SELECT COUNT(*) AS total FROM usuarios WHERE NombreUsu = ?";
+        $consulta = $enlace->prepare($sql);
+        $consulta->bind_param("s", $nombreUsu);
+        $consulta->execute();
+        $resultado = $consulta->get_result()->fetch_assoc();
+        $enlace->close();
 
+        return $resultado['total'] > 0; // Retorna true si hay al menos un usuario con ese nombre
+    }
+    public function validarCorreoUsuario($correoUsu)
+    {
+        $enlace = dbConectar();
+        $sql = "SELECT COUNT(*) AS total2 FROM usuarios WHERE CorreoUsu = ?";
+        $consulta = $enlace->prepare($sql);
+        $consulta->bind_param("s", $correoUsu);
+        $consulta->execute();
+        $resultado = $consulta->get_result()->fetch_assoc();
+        $enlace->close();
+
+        return $resultado['total2'] > 0; 
+    }
     public function Agregar($datos)
     {
         $enlace = dbConectar();
+
         $sql = "INSERT INTO usuarios (Nombre, ApellidoP, ApellidoM, CorreoUsu, NombreUsu, Contra, Salario, usutip) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $consulta = $enlace->prepare($sql);
 

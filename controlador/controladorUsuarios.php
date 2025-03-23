@@ -25,6 +25,30 @@ if (isset($_POST["ope"])) {
         }
         echo json_encode($info);
     }
+    elseif ($ope == "VERIFICAR_NOMBREUSU") {
+        $nombreUsu = trim($_POST['nombreUsu']);
+        $existe = $usu->validarNombreUsuario($nombreUsu);
+    
+        $info = array(
+            "success" => true,
+            "existe" => $existe 
+        );
+    
+        echo json_encode($info);
+        exit();
+    }
+    elseif ($ope == "VERIFICAR_CORREOUSU") {
+        $correoUsu = trim($_POST['correoUsu']);
+        $existe = $usu->validarCorreoUsuario($correoUsu);
+    
+        $info = array(
+            "success" => true,
+            "existe" => $existe 
+        );
+    
+        echo json_encode($info);
+        exit();
+    }
     // listar 
     elseif ($ope == "LISTAUSUARIOS") {
         $lista = $usu->ListarTODOS();

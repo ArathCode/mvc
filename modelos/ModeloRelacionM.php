@@ -24,6 +24,7 @@ class Usuarios
             JOIN miembros m ON mm.ID_Miembro = m.ID_Miembro
             JOIN membresias mem ON mm.ID_Membresia = mem.ID_Membresia
             JOIN usuarios u ON mm.ID_Usuario = u.ID_Usuario
+            ORDER BY mm.FechaFin DESC
              LIMIT ?, ?";
 
         $countSql = "SELECT COUNT(*) as total FROM miembro_membresia";

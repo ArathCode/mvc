@@ -105,6 +105,12 @@ function mostrarMensaje(elemento, mensaje, esValido) {
     let mensajeElemento = elemento.parentElement.querySelector(esValido ? ".valid-feedback" : ".invalid-feedback");
     mensajeElemento.innerText = mensaje;
     
-    elemento.classList.remove(esValido ? "is-invalid" : "is-valid");
-    elemento.classList.add(esValido ? "is-valid" : "is-invalid");
+    elemento.classList.remove("is-invalid", "is-valid");
+    
+    if (esValido) {
+        elemento.classList.add("is-valid");
+        
+    } else {
+        elemento.classList.add("is-invalid");
+    }
 }

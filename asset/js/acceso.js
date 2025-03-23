@@ -1,4 +1,4 @@
-import { validaNumero } from "./validaciones.js?v=4.8";
+import { validaNumero } from "./validaciones.js?v=4.9";
 document.addEventListener("DOMContentLoaded", () => {
     // Asignar la fecha actual
     const inputFecha = document.getElementById("fecha");
