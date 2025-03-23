@@ -1,7 +1,9 @@
-    import { validaCorreo, validaLargo, validaRango, validaSoloLetras, validaContrasena } from "./validaciones.js?v=3.7";
+    import { validaCorreo, validaLargo, validaRango, validaSoloLetras, validaContrasena } from "./validaciones.js?v=3.8.1";
     document.addEventListener("DOMContentLoaded", () => {
         listarUsuarios();
-
+        NomUsuRep();
+        CorreoUsuRep();
+        
         // agregar usuario
         const formUsuario = document.querySelector("#formAgregar");
         if (formUsuario) {
@@ -30,6 +32,7 @@
                     
                     if(errores==0)
                         agregarUsuario();
+                   
             });
         }
 
@@ -97,7 +100,74 @@
         
         
     });
-
+    function NomUsuRep(){
+        document.getElementById("NombreUsu").addEventListener("blur", function () {
+            let nombreUsu = this.value.trim();
+            let mensajeError = document.getElementById("errorNombreUsu");
+        
+            if (nombreUsu === "") {
+                mensajeError.textContent = ""; // Limpia el mensaje si el campo está vacío
+                return;
+            }
+        
+            fetch("controlador/controladorUsuarios.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams({
+                    "ope": "VERIFICAR_NOMBREUSU",
+                    "nombreUsu": nombreUsu
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    if (data.existe) {
+                        mensajeError.textContent = "⚠️ El nombre de usuario ya está en uso.";
+                        mensajeError.style.color = "red";
+                    } else {
+                        mensajeError.textContent = "";
+                    }
+                } else {
+                    console.error("Error en la validación:", data.msg);
+                }
+            })
+            .catch(error => console.error("Error en la solicitud:", error));
+        });
+    }
+    function CorreoUsuRep(){
+        document.getElementById("CorreoUsu").addEventListener("blur", function () {
+            let correoUsu = this.value.trim();
+            let mensajeError = document.getElementById("errorCorreoUsu");
+        
+            if (correoUsu === "") {
+                mensajeError.textContent = ""; // Limpia el mensaje si el campo está vacío
+                return;
+            }
+        
+            fetch("controlador/controladorUsuarios.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams({
+                    "ope": "VERIFICAR_CORREOUSU",
+                    "correoUsu": correoUsu
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    if (data.existe) {
+                        mensajeError.textContent = "El correo ya está en uso.";
+                        mensajeError.style.color = "red";
+                    } else {
+                        mensajeError.textContent = "";
+                    }
+                } else {
+                    console.error("Error en la validación:", data.msg);
+                }
+            })
+            .catch(error => console.error("Error en la solicitud:", error));
+        });
+    }
     // Función para listar usuarios
     function listarUsuarios() {
         fetch('controlador/controladorUsuarios.php', {
@@ -150,7 +220,7 @@
                 form.reset();
                 document.querySelector("#modalAgregar .btn-close").click(); 
                 listarUsuarios();
-                
+               
             } else {
                 Swal.fire("Error", data.msg, "error");
             }

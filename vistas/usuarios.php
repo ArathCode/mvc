@@ -6,12 +6,12 @@
     <?php
     include_once("head.php");
     ?>
-    <script type="module" src="asset/js/funcionesUsu.js?v=3.5"></script>
+    <script type="module" src="asset/js/funcionesUsu.js?v=3.6.5"></script>
     <link rel="stylesheet" href="../asset/css/usuarios.css">
 </head>
 
 <body class="bg-light">
-<div class="navigation">
+    <div class="navigation">
         <?php
         include_once("encabezado.php")
         ?>
@@ -23,7 +23,7 @@
             </div>
             <div class="subMenu">
                 <?php
-                    include_once("submenu.php")
+                include_once("submenu.php")
                 ?>
             </div>
 
@@ -34,270 +34,244 @@
             </div>
         </div>
 
-    <div class="container mt-5">
+        <div class="container mt-5">
 
-        <div class="gB">
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregar">
-                Agregar Usuario
-            </button>
-        </div>
-        
+            <div class="gB">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregar">
+                    Agregar Usuario
+                </button>
+            </div>
 
-        <!-- Modal AGREGAR -->
-        <div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalAgregarLabel">Agregar Usuario</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="formAgregar">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="Nombre" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="Nombre" name="Nombre" maxlength="30" required>
-                                    <div class="invalid-feedback">
-                                        Password is required
+
+            <!-- Modal AGREGAR -->
+            <div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalAgregarLabel">Agregar Usuario</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="formAgregar">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="Nombre" class="form-label">Nombre</label>
+                                        <input type="text" class="form-control" id="Nombre" name="Nombre" maxlength="30" required>
+                                        <div class="invalid-feedback"></div>
+                                        <div class="valid-feedback"></div>
                                     </div>
-                                    <div class="valid-feedback">
-                                        Looks good!
+                                    <div class="col-md-6">
+                                        <label for="ApellidoP" class="form-label">Apellido Paterno</label>
+                                        <input type="text" class="form-control" id="ApellidoP" name="ApellidoP" maxlength="30" required>
+                                        <div class="invalid-feedback"></div>
+                                        <div class="valid-feedback"></div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="ApellidoP" class="form-label">Apellido Paterno</label>
-                                    <input type="text" class="form-control" id="ApellidoP" name="ApellidoP" maxlength="30" required>
-                                    <div class="invalid-feedback">
-                                        Password is required
+                                    <div class="col-md-6">
+                                        <label for="ApellidoM" class="form-label">Apellido Materno</label>
+                                        <input type="text" class="form-control" id="ApellidoM" name="ApellidoM" maxlength="30" required>
+                                        <div class="invalid-feedback"></div>
+                                        <div class="valid-feedback"></div>
                                     </div>
-                                    <div class="valid-feedback">
-                                        Looks good!
+                                    <div class="col-md-12">
+                                        <label for="CorreoUsu" class="form-label">Correo</label>
+                                        <input type="email" class="form-control" id="CorreoUsu" name="CorreoUsu" maxlength="70" required>
+                                        <span id="errorCorreoUsu"></span>
+                                        <div class="invalid-feedback"></div>
+                                        <div class="valid-feedback"></div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="ApellidoM" class="form-label">Apellido Materno</label>
-                                    <input type="text" class="form-control" id="ApellidoM" name="ApellidoM" maxlength="30" required>
-                                    <div class="invalid-feedback">
-                                        Password is required
+                                    <div class="col-md-6">
+                                        <label for="NombreUsu" class="form-label">Usuario</label>
+                                        <input type="text" class="form-control" id="NombreUsu" name="NombreUsu" maxlength="50" required>
+                                        <span id="errorNombreUsu"></span>
+                                        <div class="invalid-feedback"></div>
+                                        <div class="valid-feedback"></div>
                                     </div>
-                                    <div class="valid-feedback">
-                                        Looks good!
+                                    <div class="col-md-6">
+                                        <label for="Contra" class="form-label">Contraseña</label>
+                                        <input type="password" class="form-control" id="Contra" name="Contra" maxlength="16" required>
+                                        <div class="invalid-feedback"></div>
+                                        <div class="valid-feedback"></div>
                                     </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <label for="CorreoUsu" class="form-label">Correo</label>
-                                    <input type="email" class="form-control" id="CorreoUsu" name="CorreoUsu" maxlength="70" required>
-                                    <div class="invalid-feedback">
-                                        Password is required
+                                    <div class="col-md-6">
+                                        <label for="Salario" class="form-label">Salario</label>
+                                        <input type="number" class="form-control" id="Salario" name="Salario" min="0" max="1000000" placeholder="Ingrese un número" required>
+                                        <div class="invalid-feedback"></div>
+                                        <div class="valid-feedback"></div>
                                     </div>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="NombreUsu" class="form-label">Usuario</label>
-                                    <input type="text" class="form-control" id="NombreUsu" name="NombreUsu" maxlength="50" required>
-                                    <div class="invalid-feedback">
-                                        Password is required
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="Contra" class="form-label">Contraseña</label>
-                                    <input type="password" class="form-control" id="Contra" name="Contra" maxlength="16" required>
-                                    <div class="invalid-feedback">
-                                        Password is required
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Looks good!
+                                    <div class="col-md-6">
+                                        <label for="usutip" class="form-label">Tipo de Usuario</label>
+                                        <select class="form-control" id="usutip" name="usutip">
+                                            <option value="admin">Admin</option>
+                                            <option value="coach">Coach</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="Salario" class="form-label">Salario</label>
-                                    <input type="number" class="form-control" id="Salario" name="Salario" min="0" max="1000000" placeholder="Ingrese un número" required>
-                                    <div class="invalid-feedback">
-                                        Password is required
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
+                                <div class="text-end mt-3">
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="usutip" class="form-label">Tipo de Usuario</label>
-                                    <select class="form-control" id="usutip" name="usutip">
-                                        <option value="admin">Admin</option>
-                                        <option value="coach">Coach</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="text-end mt-3">
-                                <button type="submit" class="btn btn-primary">Guardar</button>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Modal EDITAR -->
-        <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalEditarLabel">Editar Usuario</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="formEditar">
-                            <input type="hidden" id="ID_Usuario" name="ID_Usuario">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="NombreEdit" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="NombreEdit" name="NombreEdit" maxlength="30" required>
-                                    <div class="invalid-feedback">
-                                        Password is required
+            <!-- Modal EDITAR -->
+            <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalEditarLabel">Editar Usuario</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="formEditar">
+                                <input type="hidden" id="ID_Usuario" name="ID_Usuario">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="NombreEdit" class="form-label">Nombre</label>
+                                        <input type="text" class="form-control" id="NombreEdit" name="NombreEdit" maxlength="30" required>
+                                        <div class="invalid-feedback">
+                                            Password is required
+                                        </div>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
                                     </div>
-                                    <div class="valid-feedback">
-                                        Looks good!
+                                    <div class="col-md-6">
+                                        <label for="ApellidoPEdit" class="form-label">Apellido Paterno</label>
+                                        <input type="text" class="form-control" id="ApellidoPEdit" name="ApellidoPEdit" maxlength="30" required>
+                                        <div class="invalid-feedback">
+                                            Password is required
+                                        </div>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="ApellidoMEdit" class="form-label">Apellido Materno</label>
+                                        <input type="text" class="form-control" id="ApellidoMEdit" name="ApellidoMEdit" maxlength="30" required>
+                                        <div class="invalid-feedback">
+                                            Password is required
+                                        </div>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="CorreoUsuEdit" class="form-label">Correo</label>
+                                        <input type="email" class="form-control" id="CorreoUsuEdit" name="CorreoUsuEdit" maxlength="70" required>
+                                        <div class="invalid-feedback">
+                                            Password is required
+                                        </div>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="NombreUsuEdit" class="form-label">Usuario</label>
+                                        <input type="text" class="form-control" id="NombreUsuEdit" name="NombreUsuEdit" maxlength="50" required>
+                                        <div class="invalid-feedback">
+                                            Password is required
+                                        </div>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="SalarioEdit" class="form-label">Salario</label>
+                                        <input type="number" class="form-control" id="SalarioEdit" name="SalarioEdit" min="0" max="1000000" placeholder="Ingrese un número" required>
+                                        <div class="invalid-feedback">
+                                            Password is required
+                                        </div>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="usutipEdit" class="form-label">Tipo de Usuario</label>
+                                        <select class="form-control" id="usutipEdit" name="usutipEdit">
+                                            <option value="admin">Admin</option>
+                                            <option value="coach">Coach</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="ApellidoPEdit" class="form-label">Apellido Paterno</label>
-                                    <input type="text" class="form-control" id="ApellidoPEdit" name="ApellidoPEdit" maxlength="30" required>
-                                    <div class="invalid-feedback">
-                                        Password is required
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
+                                <div class="text-end mt-3">
+                                    <button type="submit" class="btn btn-primary">Actualizar</button>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="ApellidoMEdit" class="form-label">Apellido Materno</label>
-                                    <input type="text" class="form-control" id="ApellidoMEdit" name="ApellidoMEdit" maxlength="30" required>
-                                    <div class="invalid-feedback">
-                                        Password is required
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <label for="CorreoUsuEdit" class="form-label">Correo</label>
-                                    <input type="email" class="form-control" id="CorreoUsuEdit" name="CorreoUsuEdit" maxlength="70" required>
-                                    <div class="invalid-feedback">
-                                        Password is required
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="NombreUsuEdit" class="form-label">Usuario</label>
-                                    <input type="text" class="form-control" id="NombreUsuEdit" name="NombreUsuEdit" maxlength="50" required>
-                                    <div class="invalid-feedback">
-                                        Password is required
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="SalarioEdit" class="form-label">Salario</label>
-                                    <input type="number" class="form-control" id="SalarioEdit" name="SalarioEdit" min="0" max="1000000" placeholder="Ingrese un número" required>
-                                    <div class="invalid-feedback">
-                                        Password is required
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="usutipEdit" class="form-label">Tipo de Usuario</label>
-                                    <select class="form-control" id="usutipEdit" name="usutipEdit">
-                                        <option value="admin">Admin</option>
-                                        <option value="coach">Coach</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="text-end mt-3">
-                                <button type="submit" class="btn btn-primary">Actualizar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal para cambiar contraseña -->
-        <div class="modal fade" id="modalEditarClave" tabindex="-1" aria-labelledby="modalEditarClaveLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalEditarClaveLabel">Cambiar Contraseña</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="formEditarClave">
-                            <input type="hidden" id="ID_UsuarioClave" name="ID_Usuario">
-
-                            <div class="mb-3">
-                                <label for="ClaveNueva" class="form-label">Nueva Contraseña</label>
-                                <input type="password" class="form-control" id="ClaveNueva" name="ClaveNueva" maxlength="16" required>
-                                <div class="invalid-feedback">
-                                    Password is required
-                                </div>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="ConfirmarClave" class="form-label">Confirmar Contraseña</label>
-                                <input type="password" class="form-control" id="ConfirmarClave" name="ConfirmarClave" maxlength="16" required>
-                                <div class="invalid-feedback">
-                                    Password is required
-                                </div>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Tabla de Usuarios -->
-        <div class="mt-5">
-            <h4 class="text-center">Lista de Usuarios</h4>
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped" id="ListaUsuarios">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Apellido Paterno</th>
-                            <th>Apellido Materno</th>
-                            <th>Usuario</th>
+            <!-- Modal para cambiar contraseña -->
+            <div class="modal fade" id="modalEditarClave" tabindex="-1" aria-labelledby="modalEditarClaveLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalEditarClaveLabel">Cambiar Contraseña</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="formEditarClave">
+                                <input type="hidden" id="ID_UsuarioClave" name="ID_Usuario">
 
-                            <th>Salario</th>
-                            <th>Tipo</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
+                                <div class="mb-3">
+                                    <label for="ClaveNueva" class="form-label">Nueva Contraseña</label>
+                                    <input type="password" class="form-control" id="ClaveNueva" name="ClaveNueva" maxlength="16" required>
+                                    <div class="invalid-feedback">
+                                        Password is required
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="ConfirmarClave" class="form-label">Confirmar Contraseña</label>
+                                    <input type="password" class="form-control" id="ConfirmarClave" name="ConfirmarClave" maxlength="16" required>
+                                    <div class="invalid-feedback">
+                                        Password is required
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!-- Tabla de Usuarios -->
+            <div class="mt-5">
+                <h4 class="text-center">Lista de Usuarios</h4>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped" id="ListaUsuarios">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Apellido Paterno</th>
+                                <th>Apellido Materno</th>
+                                <th>Usuario</th>
+
+                                <th>Salario</th>
+                                <th>Tipo</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
 
-    </div>
 
-
-    <script src="../asset/js/main.js"></script>
+        <script src="../asset/js/main.js"></script>
 </body>
 
 </html>
