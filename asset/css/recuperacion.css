@@ -74,7 +74,20 @@
   pointer-events: none;
   transition: .2s;
 }
-  
+.custom-btn-danger {
+  background-color: #000000; /* Cambiar color de fondo */
+  border-color: #000000;     /* Cambiar color de borde */
+  color: white;              /* Cambiar color del texto */
+  font-weight: bold;         /* Hacer el texto en negrita */
+  border-radius: 10px;       /* Hacer los bordes más redondeados */
+  padding: 10px 20px;        /* Ajustar el padding */
+  transition: background-color 0.3s ease; /* Añadir una transición suave */
+}
+
+.custom-btn-danger:hover {
+  background-color: #000000; /* Cambiar color de fondo al hacer hover */
+  border-color: #000000;     /* Cambiar color de borde al hacer hover */
+}
 .input-group input {
   width: 220px;
   height: 40px;
