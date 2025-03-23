@@ -40,6 +40,7 @@
         elseif($pag == "relacion" && ($tipoUsuario == "admin" || $tipoUsuario == "coach")) {
             include_once("vistas/relacionMembresias.php");
         }
+        
         else {
             include_once("vistas/acceso_denegado.php");
             exit();

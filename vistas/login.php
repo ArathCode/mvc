@@ -46,7 +46,7 @@
                         Looks good!
                     </div>
                 </div>
-                <a href="views/recuperacion.php">¿Olvidó la contraseña?</a>
+                <a href="vistas/recuperacion.php">¿Olvidó la contraseña?</a>
                 <button type="submit" class="login">
                     <span>Ingresar</span>
                 </button>
