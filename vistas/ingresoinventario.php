@@ -2,7 +2,7 @@
 <html>
 
     <head>
-        <link rel="stylesheet" href="../asset/css/iinventario.css">
+        <link rel="stylesheet" href="../asset/css/inventario.css">
         <title>Inventario DragonGym</title>
         <?php
             include_once("head.php");

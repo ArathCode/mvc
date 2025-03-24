@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
     listarProductos();
 
-    document.querySelector("#ListaProductosventas tbody").addEventListener("click", (event) => {
-        if (event.target.tagName === "TD") {
-            const fila = event.target.parentElement;
-            agregarProductoAVenta(fila);
+    document.querySelector("#ListaProductosventas").addEventListener("click", (event) => {
+        if (event.target.closest(".productoC")) {
+            const divProducto = event.target.closest(".productoC");
+            agregarProductoAVenta(divProducto);
         }
     });
 
@@ -20,18 +20,24 @@ function listarProductos() {
     })
     .then(response => response.json())
     .then(data => {
-        const tbody = document.querySelector("#ListaProductosventas tbody");
-        tbody.innerHTML = "";
+        const contenedor = document.querySelector("#ListaProductosventas");
+        contenedor.innerHTML = "";
         data.lista.forEach(producto => {
-            tbody.innerHTML += `
-            <tr data-id="${producto.ID_Producto}" data-desc="${producto.Descripcion}" data-precio="${producto.Precio}">
-                <td>${producto.ID_Producto}</td>
-                <td><img src="${producto.img}" width="50" height="50"></td>
-                <td>${producto.Descripcion}</td>
-                <td>${producto.Precio}</td>
-                <td>${producto.Disponible}</td>
-                <td>${producto.TipoProducto}</td>
-            </tr>`;
+            contenedor.innerHTML += `
+            <div class="productoC" data-id="${producto.ID_Producto}" data-desc="${producto.Descripcion}" data-precio="${producto.Precio}">
+                <div class="imgP">
+                    <img src="${producto.img}" >
+                </div>
+                <div class="descP">
+                    <p id="DescripcionyId">#${producto.ID_Producto} ${producto.Descripcion}</p> 
+                </div>
+                <div class="precioC">
+                    <p id="Precio">$${producto.Precio}</p>
+                </div>
+                <div class="restanteC">
+                    <p id="Disponible">${producto.Disponible} restantes</p>
+                </div>
+            </div>`;
         });
     })
     .catch(error => {
@@ -39,12 +45,12 @@ function listarProductos() {
     });
 }
 
-function agregarProductoAVenta(fila) {
-    const id = fila.getAttribute("data-id");
+function agregarProductoAVenta(divProducto) {
+    const id = divProducto.getAttribute("data-id");
     if (productosSeleccionados.find(p => p.id === id)) return;
 
-    const descripcion = fila.getAttribute("data-desc");
-    const precio = parseFloat(fila.getAttribute("data-precio"));
+    const descripcion = divProducto.getAttribute("data-desc");
+    const precio = parseFloat(divProducto.getAttribute("data-precio"));
 
     const producto = { id, descripcion, precio, cantidad: 1 };
     productosSeleccionados.push(producto);
@@ -68,7 +74,6 @@ function actualizarTablaVenta() {
             <td><button onclick="eliminarProducto(${index})">Borrar</button></td>
         </tr>`;
     });
-    listarProductos();
 }
 
 function modificarCantidad(index, delta) {
@@ -125,4 +130,3 @@ function registrarVenta() {
         Swal.fire("Error", "No se pudo registrar la venta: " + error.message, "error");
     });
 }
-
