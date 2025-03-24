@@ -25,6 +25,12 @@
         elseif($pag == "corte" && ($tipoUsuario == "admin"  )) {
             include_once("vistas/corte.php");
         }
+        elseif($pag == "inventario" && ($tipoUsuario == "admin"  )) {
+            include_once("vistas/ingresoinventario.php");
+        }
+        elseif($pag == "ventas" && ($tipoUsuario == "admin"  )) {
+            include_once("vistas/ventas.php");
+        }
         elseif($pag == "usuarios" && $tipoUsuario == "admin") {
             include_once("vistas/usuarios.php");
         }
