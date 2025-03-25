@@ -36,10 +36,13 @@
                 </a>
             </div>
             <div class="contenedor">
+                <div class="notificacion" onclick="toggleNotifi()">
+                    <ion-icon name="file-tray-full-outline"></ion-icon>
+                </div>
                 <div class="usuario">
                     <img src="https://i.pinimg.com/originals/a0/14/7a/a0147adf0a983ab87e86626f774785cf.gif" alt="">
                 </div>
-
+                
             </div>
         </div>
 
@@ -215,8 +218,9 @@
 
 
     </div>
+    <script src="../asset/js/notificaciones.js"></script>
     <script src="../asset/js/main.js"></script>
-
+    <script src="../asset/js/calendario.js"></script>
 </body>
 
 </html>

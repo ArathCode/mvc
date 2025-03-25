@@ -29,7 +29,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="index.php?pag=ventas">
                         <span class="icon">
                             <ion-icon name="pricetag-outline"></ion-icon>
                         </span>

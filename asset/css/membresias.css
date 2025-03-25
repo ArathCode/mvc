@@ -221,11 +221,12 @@ body {
   
   .inventario:hover .enlace a,
   .adminUsuarios:hover .enlace a,
+  .gastos:hover .enlace a,
   .reportes:hover .enlace a{
     color: black;
   }
   .inventario:hover, 
-  .adminUsuarios:hover, .reportes:hover{
+  .adminUsuarios:hover,.gastos:hover, .reportes:hover{
     background-color:  rgb(187, 187, 187);
     color: var(--red);
   }

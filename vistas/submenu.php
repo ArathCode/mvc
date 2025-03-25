@@ -11,7 +11,7 @@
                         <ion-icon name="archive-outline"></ion-icon>
                     </div>
                     <div class="enlace">
-                        <a href="inventario.php">Inventario</a>
+                        <a href="index.php?pag=inventario">Inventario</a>
                     </div>
                 </div>
                 <div class="adminUsuarios">
