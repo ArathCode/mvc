@@ -13,30 +13,91 @@
 
     <body>
 
-        <div class="container mx-auto p-3 w-100 w-md-75 w-lg-50" style="border: 5px solid red">
-            <div class="row" style="border: 5px solid black">
-                <h1>Inventario</h1>
-                <div aria-label="Basic outlined example" class="botonesa" id="botonesa">
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregarProducto">Nuevo producto</button>
+        <div class="navigation">
+            <?php
+            include_once("encabezado.php")
+            ?>
+        </div>
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
                 </div>
-                <div class="col" style="min-height:750px; overflow-y:auto; overflow-x:hidden; max-height:790px">
-                    <table class="table table-striped table-bordered table-hover text-center" id="ListaProductos">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>ID</th>
-                                <th>Imagen</th>
-                                <th>Descripcion</th>
-                                <th>Precio</th>
-                                <th>Disponible</th>
-                                <th>Tipo producto</th>
-                                <th>Accion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Contenido dinamico -->
-                        </tbody>
-                    </table>
+                <div class="subMenu">
+                    <?php
+                        include_once("submenu.php")
+                    ?>
                 </div>
+                <div class="contenedor">
+                    <div class="notificacion" onclick="toggleNotifi()">
+                        <ion-icon name="file-tray-full-outline"></ion-icon>
+                    </div>
+                    <div class="usuario">
+                        <img src="https://i.pinimg.com/originals/a0/14/7a/a0147adf0a983ab87e86626f774785cf.gif" alt="">
+                    </div>
+
+                    <div class="notifi-box" id="box">
+                        <p class="calendario"></p>
+                        <div class="notifi-item">
+                            <div class="text">
+                                <h4>Notificaciones</h4>
+                            </div>
+                            <div class="calend">
+                                <div class="calend">
+                                    <div class="calendar">
+                                        <div class="calendar-header">
+                                            <button id="prev">&lt;</button>
+                                            <h3></h3>
+                                            <button id="next">&gt;</button>
+                                        </div>
+                                        <ul class="weekdays">
+                                            <li>Dom</li>
+                                            <li>Lun</li>
+                                            <li>Mar</li>
+                                            <li>Mié</li>
+                                            <li>Jue</li>
+                                            <li>Vie</li>
+                                            <li>Sáb</li>
+                                        </ul>
+                                        <ul class="dates"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="noti">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <h4>Sin notificaciones...<br></h4>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gB" id="botonesa">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregarProducto">Nuevo producto</button>
+            </div>
+            <div class="tablaI">
+                <table class="table table-striped" id="ListaProductos">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Imagen</th>
+                            <th>Descripcion</th>
+                            <th>Precio</th>
+                            <th>Disponible</th>
+                            <th>Tipo producto</th>
+                            <th>Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Contenido dinamico -->
+                    </tbody>
+                </table>
             </div>
 
 
@@ -72,7 +133,7 @@
                                     <!-- Opciones cargadas dinámicamente -->
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" id="btnP" class="btn btn-primary">Guardar</button>
                         </form>
                     </div>
                 </div>
@@ -113,7 +174,7 @@
                                     Opciones cargadas dinámicamente -->
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" id="btnP" class="btn btn-primary">Guardar</button>
                         </form>
                     </div>
                 </div>
@@ -145,13 +206,16 @@
                                 <label for="Fecha" class="form-label">Fecha</label>
                                 <input type="date" class="form-control" id="Fecha" name="Fecha" required>
                             </div>
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" id="btnP" class="btn btn-primary">Guardar</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
 
+        <script src="../asset/js/notificaciones.js"></script>
+        <script src="../asset/js/main.js"></script>
+        <script src="../asset/js/calendario.js"></script>
     </body>
 </html>
 

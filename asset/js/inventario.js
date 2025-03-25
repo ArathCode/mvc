@@ -70,8 +70,8 @@ function listarProductos() {
                 <td>${producto.Disponible}</td>
                 <td>${producto.TipoProducto}</td>
                 <td>
-                    <button type="button" class="btn btn-success btn-editar" data-bs-toggle="modal" data-bs-target="#modalEditarProducto" data-id="${producto.ID_Producto}">Editar</button>
-                    <button type="button" class="btn btn-primary btn-agregar" 
+                    <button type="button"id="btnE" class="btn btn-success btn-editar" data-bs-toggle="modal" data-bs-target="#modalEditarProducto" data-id="${producto.ID_Producto}">Editar</button>
+                    <button type="button" id="btnP" class="btn btn-primary btn-agregar" 
                         data-bs-toggle="modal" 
                         data-bs-target="#modalAgregarCantidad" 
                         data-id="${producto.ID_Producto}" 

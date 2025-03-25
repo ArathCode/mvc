@@ -74,43 +74,46 @@
                 </div>
             </div>
 
-            <h1>Ventas</h1>
-            <div  id="ListaProductosventas">
-                
-            </div>
+            <h2>Ventas</h2>
+            <div class="divisionC">
+                <div class="izq">
+                    <div  id="ListaProductosventas"> 
+                    </div>
+                    
 
-            <div >
-                <div >
-                    <h2>Hacer venta</h2>
-                    <table id="tablaVenta" class="table">
-                        <thead>
-                            <tr>
-                                <th>Descripción</th>
-                                <th>Precio</th>
-                                <th>Cantidad</th>
-                                <th>Eliminar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Se llenará dinámicamente -->
-                        </tbody>
-                    </table>
-                    <button id="btnConfirmarVenta" class="btn btn-success">Confirmar Venta</button>
 
+                    <div class="row">
+                        <h2>Ventas del dia</h2>
+                    </div>
                 </div>
-                <div class="row">
-                    <h2>Ventas del dia</h2>
-                
+                <div class="der">
+                    <div >
+                        <h2>Hacer venta</h2>
+                        <table id="tablaVenta" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Descripción</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Se llenará dinámicamente -->
+                            </tbody>
+                        </table>
+                        <button id="btnConfirmarVenta" class="btn btn-success">Confirmar Venta</button>
+
+                    </div>
                 </div>
             </div>
-
             
-
         </div>
 
 
-        <script src="../asset/js/notificaciones.js"></script>
-        <script src="../asset/js/calendario.js"></script>
-    </body>
+    <script src="../asset/js/notificaciones.js"></script>
+    <script src="../asset/js/main.js"></script>
+    <script src="../asset/js/calendario.js"></script>
 
+    </body>
 </html>  

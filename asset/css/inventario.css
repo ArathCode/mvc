@@ -402,50 +402,104 @@ body {
   max-width: 250px; 
   overflow: hidden;
 }
-/* ====== Contenedor de producto =======*/
-#ListaProductosventas{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+/* ================ Sub menu ==========================*/
+.subMenu{
+  display: flex;
+  width: 550px;
+  justify-content: space-around;
+  gap: 15px;
 }
-.listarP{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+.gastos, .inventario, 
+.adminUsuarios, .reportes, .membresias{
+  padding: 10px 15px;
+  border-radius: 30px;
+  background-color: var(--black1);
+  display: flex;
+  gap: 5px;
+  transition: .2s ease all;
 }
-.productoC{
-    background: #ffffff;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 250px;
-    text-align: center;
-    transition: transform 0.3s;
+.gastos{
+  color: rgb(12, 189, 80);
 }
-.productoC:hover{
-    transform: scale(1.05);
+.inventario{
+  background-color: var(--red);
+  color: white;
 }
-.imgP{
+.adminUsuarios{
+  color: rgb(49, 133, 229);
+}
+.reportes{
+  color: rgb(248, 144, 32);
+}
+.subMenu .enlace a{
+  text-decoration: none;
+  color: white;
+}
+.membresias{
+  color: #999;
+}
 
+.gastos:hover .enlace a,
+.adminUsuarios:hover .enlace a,
+.reportes:hover .enlace a,
+.membresias:hover .enlace a{
+  color: black;
 }
-.imgP img{
-    width: 100px;
+.gastos:hover, 
+.adminUsuarios:hover, .reportes:hover,
+.membresias:hover{
+  background-color:  rgb(187, 187, 187);
+  color: var(--red);
 }
-.descP{
-    font-weight: 600;
+.inventario:hover{
+  background-color: var(--black1);
+  color: rgb(241, 241, 18);
 }
-.descP p{
-    margin-bottom: 0px;
+
+/*  ================= Boton de inventario =======*/
+.gB{
+  margin: auto;
+  width: 150px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
-.precioC{
-    font-size: 20px;
-    font-weight: 600;
+.gB button{
+  padding: 10px;
+  background-color:var(--red);
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 20px;
+  border: transparent;
+  cursor: pointer;
 }
-.precioC p{
-    margin-bottom: 0px;
+.btn .btn-primary,#act{
+padding: 10px;
+background-color:var(--red);
+color: white;
+font-size: 15px;
+font-weight: 500;
+border-radius: 20px;
+border: transparent;
+cursor: pointer;
 }
-.restanteC{
-    
+
+.tablaI{
+  margin: auto;
+  width: 90%;
+}
+
+
+#btnP{
+  padding: 10px;
+  background-color:var(--red);
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 10px;
+  border: transparent;
+  cursor: pointer;
+}
+#btnE{
+  background-color: black;
 }
