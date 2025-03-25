@@ -9,7 +9,7 @@
     <?php
     include_once("head.php");
     ?>
-    <script type="module" src="asset/js/funciones.js?v=2.4"></script>
+    <script type="module" src="asset/js/funciones.js?v=2.5"></script>
 </head>
 
 <body>

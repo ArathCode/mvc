@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", (event)=>
                     .then(data => {
                         if(data.success)
                         {
+                            localStorage.setItem("tipo_usuario", data.tipo);
                             Swal.fire({
                                 title: "¡Bienvenid@! a DragonGym",
                                 text: "La página se actualizará automáticamente, favor de esperar...",

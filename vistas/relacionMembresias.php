@@ -87,7 +87,7 @@
                             <div class="mb-3">
                                 <label for="ID_Membresia" class="form-label">Tipo de Membresía</label>
                                 <select class="form-control" id="ID_Membresia" name="ID_Membresia" required>
-                                    <!-- Las opciones se llenarán dinámicamente con JS -->
+                                  
                                 </select>
                             </div>
 

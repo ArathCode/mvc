@@ -1,4 +1,5 @@
 
+            <script src="../asset/js/tipousu.js?v=4.9.5"></script>
             <ul>
                 <li>
                     <a href="">
@@ -38,8 +39,8 @@
 
 
 
-                <li>
-                    <a href="index.php?pag=corte">
+                <li >
+                    <a href="index.php?pag=corte" class="admin-only">
                         <span class="icon">
                             <ion-icon name="newspaper-outline"></ion-icon>
                         </span>
@@ -47,8 +48,8 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="index.php?pag=gastos" class="admin">
+                <li class="admin-only">
+                    <a href="index.php?pag=gastos" class="admin-only">
                         <span class="icon">
                             <ion-icon name="lock-closed-outline"></ion-icon>
                         </span>

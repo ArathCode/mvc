@@ -15,8 +15,10 @@
             $status = $usu->Login($correo,$pass);
             if($status[0])
             {
+                $tipoUsuario = $status[1];
                 $info = array(
                     "success"=>true,
+                    "tipo" => $tipoUsuario,
                     "ruta"=> RUTA."/?pag=".$status[1]
                 );
             }
