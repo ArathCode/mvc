@@ -11,6 +11,22 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("fecha").value = fechaFormateada;
     }
 
+    const idMiembro = document.getElementById('idMiembro');
+    const precio = document.getElementById('precio');
+
+    function limitarEntrada(event) {
+        const input = event.target; 
+        const maxLength = 4; 
+
+        input.value = input.value.replace(/[^0-9]/g, ''); 
+        if (input.value.length > maxLength) {
+            input.value = input.value.slice(0, maxLength); 
+        }
+    }
+
+    // Agregar los eventos a los inputs
+    idMiembro.addEventListener('input', limitarEntrada);
+    precio.addEventListener('input', limitarEntrada);
 
     const modal = document.getElementById("miModal");
     modal.addEventListener("show.bs.modal", () => {

@@ -214,34 +214,34 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                     </div>
                     <div class="modal-body">
-                    <form id="formAgregarAcceso">
-                        <div class="mb-3 d-flex align-items-center">
-                            <div class="me-3 flex-grow-1">
-                                <label for="idMiembro" class="form-label">ID Miembro</label>
-                                <input type="number" class="form-control" id="idMiembro" name="ID_Miembro" placeholder="Escriba el ID" required>
-                            </div>
-                            <div class="flex-grow-2">
-                                <label for="nombreMiembro" class="form-label">Nombre del Miembro</label>
-                                <input type="text" class="form-control" id="nombreMiembro" placeholder="Nombre" readonly>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="fecha" class="form-label">Fecha</label>
-                            <input type="date" class="form-control" id="fecha" name="Fecha" required readonly>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="precio" class="form-label">Precio</label>
-                            <input type="number" class="form-control" id="precio" name="Precio" placeholder="Ingrese el precio" min="0" max="300" required>
-                            <div class="invalid-feedback">
-                                    Password is required
+                        <form id="formAgregarAcceso">
+                            <div class="mb-3 d-flex align-items-center">
+                                <div class="me-3 flex-grow-1">
+                                    <label for="idMiembro" class="form-label">ID Miembro</label>
+                                    <input type="number" class="form-control" id="idMiembro" name="ID_Miembro" placeholder="Escriba el ID" required>
                                 </div>
-                                <div class="valid-feedback">
-                                    Looks good!
+                                <div class="flex-grow-2">
+                                    <label for="nombreMiembro" class="form-label">Nombre del Miembro</label>
+                                    <input type="text" class="form-control" id="nombreMiembro" placeholder="Nombre" readonly>
                                 </div>
-                        </div>
-                        <input type="hidden" value="Visita" id="Tipo" name="Tipo">
-                    </form>
+                            </div>
+                            <div class="mb-3">
+                                <label for="fecha" class="form-label">Fecha</label>
+                                <input type="date" class="form-control" id="fecha" name="Fecha" required readonly>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="precio" class="form-label">Precio</label>
+                                <input type="number" class="form-control" id="precio" name="Precio" placeholder="Ingrese el precio" min="0" max="300" required>
+                                <div class="invalid-feedback">
+                                        Password is required
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                            </div>
+                            <input type="hidden" value="Visita" id="Tipo" name="Tipo">
+                        </form>
 
                     </div>
                     <div class="modal-footer">

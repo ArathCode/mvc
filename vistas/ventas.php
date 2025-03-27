@@ -25,7 +25,7 @@
                 <div class="toggle">
                     <ion-icon name="menu-outline"></ion-icon>
                 </div>
-
+                
                 <div class="contenedor">
                     <div class="notificacion" onclick="toggleNotifi()">
                         <ion-icon name="file-tray-full-outline"></ion-icon>
@@ -74,16 +74,19 @@
                 </div>
             </div>
 
-            <h2>Ventas</h2>
             <div class="divisionC">
                 <div class="izq">
+                    <div class="tit">
+                        <h3>Lista de productos</h3>
+                    </div>
+                        
                     <div  id="ListaProductosventas"> 
                     </div>
                     
 
 
-                    <div class="row">
-                        <h2>Ventas del dia</h2>
+                    <div class="ventasD">
+                        <h3>Ventas del día</h3>
                     </div>
                 </div>
                 <div class="der">

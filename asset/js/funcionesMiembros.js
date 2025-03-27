@@ -17,7 +17,34 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             
         }
-    
+        
+    //Validaciones
+    const nombre = document.getElementById('Nombre');
+    const apellidoP = document.getElementById('ApellidoP');
+    const apellidoM = document.getElementById('ApellidoM');
+
+    function limitarEntradaLetras(event) {
+        const input = event.target;
+        const maxLength = 30;
+
+        input.value = input.value.replace(/[^a-zA-ZÁÉÍÓÚáéíóú\s]/g, ''); 
+        if (input.value.length > maxLength) {
+            input.value = input.value.slice(0, maxLength); 
+        }
+    }
+    function limitAp(event) {
+        const input = event.target;
+        const maxLength = 15;
+
+        input.value = input.value.replace(/[^a-zA-ZÁÉÍÓÚáéíóú\s]/g, ''); 
+        if (input.value.length > maxLength) {
+            input.value = input.value.slice(0, maxLength); 
+        }
+    }
+
+    nombre.addEventListener('input', limitarEntradaLetras);
+    apellidoP.addEventListener('input', limitAp);
+    apellidoM.addEventListener('input', limitAp);
         
         const formEditarUsuario = document.querySelector("#formEditarMiembro");
         if (formEditarUsuario) {
