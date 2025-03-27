@@ -103,26 +103,17 @@
                                     Looks good!
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="ApellidoP" class="form-label">Apellido Paterno</label>
-                                <input type="text" class="form-control" id="ApellidoP" name="ApellidoP" required>
-                                <div class="invalid-feedback">
-                                    Password is required
+                            <div class="apellidos">
+                                <div class="apa">
+                                    <label for="ApellidoP" class="form-label">Apellido Paterno</label>
+                                    <input type="text" class="form-control" id="ApellidoP" name="ApellidoP" required>
                                 </div>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="ApellidoM" class="form-label">Apellido Materno</label>
-                                <input type="text" class="form-control" id="ApellidoM" name="ApellidoM">
-                                <div class="invalid-feedback">
-                                    Password is required
-                                </div>
-                                <div class="valid-feedback">
-                                    Looks good!
+                                <div class="ama">
+                                    <label for="ApellidoM" class="form-label">Apellido Materno</label>
+                                    <input type="text" class="form-control" id="ApellidoM" name="ApellidoM">
                                 </div>
                             </div>
+                            
                             <div class="mb-3">
                                 <label for="Sexo" class="form-label">Sexo</label>
                                 <select class="form-control" id="Sexo" name="Sexo" required>
@@ -170,26 +161,29 @@
                                     Looks good!
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="ApellidoPEdit" class="form-label">Apellido Paterno</label>
-                                <input type="text" class="form-control" id="ApellidoPEdit" name="ApellidoPEdit" required>
-                                <div class="invalid-feedback">
-                                    Password is required
+                            <div class="apellidos">
+                                <div class="apa">
+                                    <label for="ApellidoPEdit" class="form-label">Apellido Paterno</label>
+                                    <input type="text" class="form-control" id="ApellidoPEdit" name="ApellidoPEdit" required>
+                                    <div class="invalid-feedback">
+                                        Password is required
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
                                 </div>
-                                <div class="valid-feedback">
-                                    Looks good!
+                                <div class="ama">
+                                    <label for="ApellidoMEdit" class="form-label">Apellido Materno</label>
+                                    <input type="text" class="form-control" id="ApellidoMEdit" name="ApellidoMEdit">
+                                    <div class="invalid-feedback">
+                                        Password is required
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="ApellidoMEdit" class="form-label">Apellido Materno</label>
-                                <input type="text" class="form-control" id="ApellidoMEdit" name="ApellidoMEdit">
-                                <div class="invalid-feedback">
-                                    Password is required
-                                </div>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                            </div>
+                            
                             <div class="mb-3">
                                 <label for="SexoEdit" class="form-label">Sexo</label>
                                 <select class="form-control" id="SexoEdit" name="SexoEdit" required>

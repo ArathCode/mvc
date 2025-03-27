@@ -363,6 +363,7 @@ body {
     display: flex;
     gap: 10px;
     padding: 10px;
+    padding-left: 20px;
     width: 100%;
 }
 
@@ -447,3 +448,13 @@ body {
   border: solid 1px black;
 }
 
+.apellidos{
+  display: flex;
+  gap: 10px;
+}
+.apa{
+  width: 50%;
+}
+.ama{
+  width: 50%;
+}

@@ -409,10 +409,12 @@ body {
   height: 650px;
 }
 .izq{
-  width: 70%;
+  width: 65%;
+  padding: 20px;
 }
 .der{
-  width: 30%;
+  width: 35%;
+  padding: 20px;
 }
 
 #ListaProductosventas{
@@ -439,9 +441,7 @@ body {
 .productoC:hover{
     transform: scale(1.05);
 }
-.imgP{
 
-}
 .imgP img{
     width: 100px;
 }
@@ -460,6 +460,13 @@ body {
 }
 .restanteC{
     
+}
+#tablaVenta button{
+  background-color: var(--red);
+  color: white;
+  border-radius: 10px;
+  padding: 5px;
+  border: transparent;
 }
 
 
