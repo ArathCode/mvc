@@ -83,7 +83,43 @@ body {
 .navigation ul li.hovered a {
   color: var(--red);
 }
+.error-container {
+  background-color: var(--red);
+  color:var(--white);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #ffeeba;
+  font-weight: bold;
+  width: 80%;
+  margin: 15px auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
+.error-container h3 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.error-container p {
+  margin: 10px 0;
+  font-size: 1.1em;
+}
+
+.btn-renovar {
+  display: inline-block;
+  background-color: #000000;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn-renovar:hover {
+  background-color: #000000;
+}
 .navigation ul li a .icon {
   position: relative;
   display: block;

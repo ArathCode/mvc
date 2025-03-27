@@ -35,6 +35,6 @@
                         <ion-icon name="document-attach-outline"></ion-icon>
                     </div>
                     <div class="enlace">
-                        <a href="Reportes.php">Reportes</a>
+                        <a href="index.php?pag=reportes">Reportes</a>
                     </div>
                 </div>

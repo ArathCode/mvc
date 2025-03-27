@@ -28,7 +28,10 @@
         elseif($pag == "inventario" && ($tipoUsuario == "admin"  )) {
             include_once("vistas/ingresoinventario.php");
         }
-        elseif($pag == "ventas" && ($tipoUsuario == "admin"  )) {
+        elseif($pag == "reportes" && ($tipoUsuario == "admin"  )) {
+            include_once("vistas/reportes.php");
+        }
+        elseif($pag == "ventas" && ($tipoUsuario == "admin" || $tipoUsuario == "coach")) {
             include_once("vistas/ventas.php");
         }
         elseif($pag == "usuarios" && $tipoUsuario == "admin") {
