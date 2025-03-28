@@ -272,47 +272,46 @@ function buscarMiembro(id) {
     fetch('controlador/controladorAcceso.php', {
         method: 'POST',
         body: new URLSearchParams({ "ope": "BUSCAR_MIEMBROActivo", "ID_Miembro": id })
-    })//si
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                const miembro = data.miembro;
-                const contenidoM = document.querySelector(".contenidoM");
-                contenidoM.innerHTML = `
-                <p>#${miembro.ID_Miembro}</p>
-                <h3>${miembro.Nombre} ${miembro.ApellidoP} ${miembro.ApellidoM}</h3>
-                <p>Teléfono: ${miembro.Telefono}</p>
-                <p>Sexo: ${miembro.Sexo}</p>
-                
-                <div class="fechas">
-                    <div class="fechaI">
-                        F.Inicio: ${miembro.FechaInicio}
-                    </div>
-                    <div class="fechaF">
-                        F.Fin: ${miembro.FechaFin}
-                    </div>
+    })
+    .then(response => response.json())
+    .then(data => {
+        const contenidoM = document.querySelector(".contenidoM");
+
+        if (!data.miembro) { 
+            // Swal.fire("Sin Membresia", data.msg, "error");
+            contenidoM.innerHTML = `
+                <div class="error-container">
+                    <h3>⚠ Membresía no activa</h3>
+                    <p>¿Desea renovar?</p>
+                    <br>
+                    <a href="index.php?pag=relacion" class="btn-renovar">
+                        Renovar Membresía
+                    </a>
                 </div>
-                <div class="estadoM">
-                     Membresía Activa
-                </div>
-                <input type="hidden" id="miembroID" value="${miembro.ID_Miembro}">
-                <input type="hidden" id="precio" value="${0}">
-                <input type="hidden" id="tipo" value="Miembro">
-                 <button id="btnRegistrarAcceso" class="btn btn-success">
-                    Registrar Acceso
-                </button>
             `;
-            setTimeout(() => {
-                const btnAcceso = document.getElementById("btnRegistrarAcceso");
-                if (btnAcceso) {
-                    btnAcceso.addEventListener("click", function() {
-                        registrarAcceso();
-                    });
-                }
-            }, 100);
-            } else {
-                Swal.fire("Sin Membresia", data.msg, "error");
-            }
-        })
-        .catch(error => console.error("Error al buscar miembro:", error));
+            return;
+        }
+
+        const miembro = data.miembro;
+        contenidoM.innerHTML = `
+            <p>#${miembro.ID_Miembro}</p>
+            <h3>${miembro.Nombre} ${miembro.ApellidoP} ${miembro.ApellidoM}</h3>
+            <p>Teléfono: ${miembro.Telefono}</p>
+            <p>Sexo: ${miembro.Sexo}</p>
+            <div class="fechas">
+                <div class="fechaI">F.Inicio: ${miembro.FechaInicio}</div>
+                <div class="fechaF">F.Fin: ${miembro.FechaFin}</div>
+            </div>
+            <div class="estadoM">${data.success ? "Membresía Activa" : "<h3>Sin Membresía Activa</h3>"}</div>
+            <input type="hidden" id="miembroID" value="${miembro.ID_Miembro}">
+            <input type="hidden" id="precio" value="0">
+            <input type="hidden" id="tipo" value="Miembro">
+            ${data.success ? `<button id="btnRegistrarAcceso" class="btn btn-success">Registrar Acceso</button>` : ""}
+        `;
+
+        if (data.success) {
+            document.getElementById("btnRegistrarAcceso").addEventListener("click", registrarAcceso);
+        }
+    })
+    .catch(error => console.error("Error al buscar miembro:", error));
 }
