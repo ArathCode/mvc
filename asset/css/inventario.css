@@ -32,6 +32,10 @@ svg{
   height: 30px;
   
 }
+.subMenu svg{
+  width: 20px;
+  height: 20px;
+} 
 /* =============== Menu ================ */
 .navigation {
   position: fixed;

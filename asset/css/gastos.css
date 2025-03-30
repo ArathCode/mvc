@@ -460,6 +460,11 @@ svg{
   border: transparent;
   cursor: pointer;
 }
+
+.subMenu svg{
+  width: 20px;
+  height: 20px;
+} 
 /* =============== Filtros para gastos ==============*/
 
 .filter-container {

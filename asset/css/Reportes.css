@@ -428,7 +428,10 @@ svg{
   min-width: 180px; 
     
 }
-
+.subMenu svg{
+  width: 20px;
+  height: 20px;
+} 
 .dropdown:hover .dropdown-content {
   display: block;
 }
