@@ -22,19 +22,25 @@
         <div class="main">
             <div class="topbar">
                 <div class="toggle">
-                    <ion-icon name="menu-outline"></ion-icon>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
                 </div>
 
                 <div class="search">
                     <label>
-                        <input type="text" id="searchInput" placeholder="Buscar miembro" >
+                    
+                    <input type="text" id="searchInput" placeholder="Buscar miembro " >
+                    
                     </label>
                 </div>
 
 
                 <div class="contenedor">
                     <div class="notificacion" onclick="toggleNotifi()">
-                        <ion-icon name="file-tray-full-outline"></ion-icon>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 6.878V6a2.25 2.25 0 0 1 2.25-2.25h7.5A2.25 2.25 0 0 1 18 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 0 0 4.5 9v.878m13.5-3A2.25 2.25 0 0 1 19.5 9v.878m0 0a2.246 2.246 0 0 0-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0 1 21 12v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6c0-.98.626-1.813 1.5-2.122" />
+                        </svg>
                     </div>
                     <div class="usuario">
                         <img src="https://i.pinimg.com/originals/a0/14/7a/a0147adf0a983ab87e86626f774785cf.gif" alt="">
@@ -89,14 +95,18 @@
                     <div class="row w-100">
                         <!-- Columna 1 -->
                         <div class="col d-flex flex-column">
-                        <div class="numbers">12</div>
+                        <div class="numbers"></div>
                         <div class="cardName">Visitas</div>
                         </div>
 
                         <!-- Columna 2 -->
-                        <div class="col-auto d-flex align-items-center">
+                        <div class="col-auto d-flex align-items-center" id="iconOjo">
                         <div class="iconBx">
-                            <ion-icon name="eye-outline"></ion-icon>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            </svg>
+
                         </div>
                         </div>
                     </div>
@@ -107,14 +117,17 @@
                     <div class="row w-100">
                         <!-- Columna 1 -->
                         <div class="col d-flex flex-column">
-                        <div class="numbers">4</div>
+                        <div class="numbers"></div>
                         <div class="cardName">Miembros</div>
                         </div>
 
                         <!-- Columna 2 -->
-                        <div class="col-auto d-flex align-items-center">
+                        <div class="col-auto d-flex align-items-center"  id="iconOjo">
                         <div class="iconBx">
-                            <ion-icon name="eye-outline"></ion-icon>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            </svg>
                         </div>
                         </div>
                     </div>
@@ -177,7 +190,9 @@
                     <div class="titulo">
                         <h2>Miembros</h2>
                         <div class="huella">
-                            <ion-icon name="finger-print-outline"></ion-icon>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M7.864 4.243A7.5 7.5 0 0 1 19.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 0 0 4.5 10.5a7.464 7.464 0 0 1-1.15 3.993m1.989 3.559A11.209 11.209 0 0 0 8.25 10.5a3.75 3.75 0 1 1 7.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 0 1-3.6 9.75m6.633-4.596a18.666 18.666 0 0 1-2.485 5.33" />
+                            </svg>
                         </div>
 
                     </div>

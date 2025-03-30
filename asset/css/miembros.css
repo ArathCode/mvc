@@ -27,6 +27,11 @@ body {
   width: 100%;
 
 }
+svg{
+  width: 30px;
+  height: 30px;
+  
+}
 /* =============== Menu ================ */
 .navigation {
   position: fixed;
@@ -86,15 +91,15 @@ body {
 
 .navigation ul li a .icon {
   position: relative;
-  display: block;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
   min-width: 60px;
   height: 60px;
   line-height: 75px;
   text-align: center;
 }
-.navigation ul li a .icon ion-icon {
-  font-size: 1.75rem;
-}
+
 
 .navigation ul li a .title {
   position: relative;
@@ -192,12 +197,7 @@ body {
   border: 1px solid var(--black2);
 }
 
-.search label ion-icon {
-  position: absolute;
-  top: 0;
-  left: 10px;
-  font-size: 1.2rem;
-}
+
 .contenedor{
   display: flex;
   align-items: center;
@@ -230,7 +230,178 @@ body {
   height: 100%;
   object-fit: cover;
 }
+/* ======================= Caja de notificaciones ====================== */
+.notifi-box .text{
+  color: var(--red);
+  
+}
+.notifi-box {
+  width: 300px;
+  height: 0px;
+  opacity: 0;
+  position: absolute; 
+  top: 63px;
+  padding: 10px;
+  right: 50px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+  z-index: 9999; 
+  background-color: white; 
+  border-radius: 8px; 
+  transition: height 0.3s ease, opacity 0.3s ease; 
+  overflow: hidden;
+}
+.noti {
+  position: relative;
+  max-height: 300px;
+  padding: 20px;
+  background: var(--white);
+  overflow: auto; 
+}
+.noti::-webkit-scrollbar {
+  width: 10px; 
+  
+}
+.noti::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
 
+.noti::-webkit-scrollbar-thumb {
+  background-color: #888; 
+  border-radius: 10px; 
+  border: 2px solid #f1f1f1; 
+}
+
+.noti::-webkit-scrollbar-thumb:hover {
+  background: var(--red); 
+}
+.noti .imgBx {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.noti .imgBx img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.noti table tr td {
+  padding: 12px 10px;
+}
+
+.noti table tr td h4 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2rem;
+}
+
+.noti table tr td h4 span {
+  font-size: 14px;
+  color: var(--black2);
+}
+
+.noti table tr:hover {
+  background: var(--red);
+  color: var(--white);
+}
+
+.noti table tr:hover td h4 span {
+  color: var(--white);
+}
+/* ====== Calendario =======*/
+
+.calendar {
+  width: 100%;
+  max-width: 280px; 
+  padding: 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px; 
+}
+
+.calendar-header h3 {
+  font-size: 14px; 
+  margin: 0;
+}
+
+.calendar-header button {
+  background-color: #888;
+  border: none;
+  color: white;
+  padding: 3px 6px; 
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px; 
+}
+
+.calendar-header button:hover {
+  background-color: #555;
+}
+
+.weekdays {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.weekdays li {
+  width: 30px; 
+  text-align: center;
+  padding: 5px 0; 
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+}
+
+.dates {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.dates li {
+  width: 30px;
+  height: 30px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3px; 
+  font-size: 12px; 
+  cursor: pointer;
+}
+
+.dates li.today {
+  background-color: var(--red);
+  color: white;
+  border-radius: 50%;
+}
+
+.dates li.inactive {
+  color: #bbb;
+}
+
+.noti .calend {
+  max-width: 250px; 
+  overflow: hidden;
+}
   /*  ================= Boton de miembros =======*/
 .gB{
     margin: auto;
