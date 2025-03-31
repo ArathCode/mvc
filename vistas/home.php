@@ -8,6 +8,7 @@
         ?>
     <link rel="stylesheet" href="../asset/css/home.css">
     <script type="module" src="asset/js/acceso.js?v=1.8.3"></script>
+    <link href="../asset/images/logo.jpg" rel="icon" />
     </head>
 
     <body>

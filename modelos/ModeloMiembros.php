@@ -5,7 +5,7 @@ class Miembros {
         $enlace = dbConectar();
         $offset = ($pagina - 1) * $registrosPorPagina;
 
-        $sql = "SELECT ID_Miembro, Nombre, ApellidoP, ApellidoM, Sexo, Telefono FROM miembros WHERE 1=1";
+        $sql = "SELECT ID_Miembro, Nombre, ApellidoP, ApellidoM, Sexo, Telefono FROM miembros WHERE 1=1 AND Estatus=1";
 
         if (isset($filtros['ID_Miembro'])) {
             $sql .= " AND ID_Miembro LIKE ?";
@@ -113,7 +113,7 @@ class Miembros {
 
     public function Eliminar($ID_Miembro) {
         $enlace = dbConectar();
-        $sql = "DELETE FROM miembros WHERE ID_Miembro=?";
+        $sql = "UPDATE miembros SET Estatus = '0' WHERE ID_Miembro=?";
         $consulta = $enlace->prepare($sql);
 
         $consulta->bind_param("i", $ID_Miembro);

@@ -71,7 +71,7 @@ class Accesos
     public function buscarMiembroPorID($ID_Miembro)
     {
         $enlace = dbConectar();
-        $sql = "SELECT * FROM miembros WHERE ID_Miembro = ?";
+        $sql = "SELECT * FROM miembros WHERE ID_Miembro = ? AND Estatus=1";
         $consulta = $enlace->prepare($sql);
         $consulta->bind_param("i", $ID_Miembro);
         $consulta->execute();
@@ -97,7 +97,7 @@ class Accesos
                 mm.FechaPago
             FROM vista_membresias_vigentes mm
             JOIN miembros m ON mm.ID_Miembro = m.ID_Miembro
-            WHERE mm.ID_Miembro = ?";
+            WHERE mm.ID_Miembro = ? ";
         $consulta = $enlace->prepare($sql);
         $consulta->bind_param("i", $ID_Miembro);
         $consulta->execute();

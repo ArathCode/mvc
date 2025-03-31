@@ -4,7 +4,7 @@ class Membresias
     public function ListarTODOS()
     {
         $enlace = dbConectar();
-        $sql = "SELECT * FROM membresias";
+        $sql = "SELECT * FROM membresias Where Estatus = 1";
         $consulta = $enlace->prepare($sql);
         $consulta->execute();
         $result = $consulta->get_result();
@@ -55,7 +55,7 @@ class Membresias
     public function Eliminar($ID_Membresia)
     {
         $enlace = dbConectar();
-        $sql = "DELETE FROM membresias WHERE ID_Membresia=?";
+        $sql = "UPDATE membresias SET Estatus = '0' WHERE ID_Membresia=?";
         $consulta = $enlace->prepare($sql);
         $consulta->bind_param("i", $ID_Membresia);
 

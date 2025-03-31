@@ -57,7 +57,7 @@ class Usuarios
     public function ObtenerMembresias()
     {
         $enlace = dbConectar();
-        $sql = "SELECT ID_Membresia, Tipo, Costo,Duracion FROM membresias";  // Suponiendo que la tabla se llama 'membresias'
+        $sql = "SELECT ID_Membresia, Tipo, Costo,Duracion FROM membresias Where Estatus=1";  // Suponiendo que la tabla se llama 'membresias'
         $consulta = $enlace->prepare($sql);
         $consulta->execute();
         $result = $consulta->get_result();

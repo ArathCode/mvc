@@ -60,7 +60,10 @@
     } else {
         
         if ($tipoUsuario == "admin") {
-            header("Location: index.php?pag=admin");
+            session_unset();
+            session_destroy();
+            include_once("vistas/login.php");
+            exit();
         } elseif ($tipoUsuario == "gestor") {
             header("Location: index.php?pag=gestor");
         } elseif ($tipoUsuario == "general") {
@@ -71,7 +74,7 @@
         } else {
             session_unset();
             session_destroy();
-            include_once("vistas/login copy.php");
+            include_once("vistas/login.php");
             exit();
         }
     }

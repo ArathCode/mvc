@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-03-2025 a las 02:28:49
+-- Tiempo de generación: 31-03-2025 a las 17:05:21
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,16 +43,21 @@ CREATE TABLE `accesos` (
 INSERT INTO `accesos` (`ID_Acceso`, `Hora`, `Fecha`, `Precio`, `ID_Miembro`, `Tipo`) VALUES
 (21, '20:35:07', '2025-03-20', 0, 3, 'Miembro'),
 (22, '21:10:26', '2025-03-20', 45, 2, 'Visita'),
-(23, '21:12:26', '2025-03-20', 45, 5, 'Visita'),
 (24, '21:12:34', '2025-03-20', 0, 4, 'Miembro'),
-(25, '21:12:43', '2025-03-20', 0, 5, 'Miembro'),
 (26, '21:48:14', '2025-03-20', 0, 6, 'Miembro'),
 (27, '08:36:32', '2025-03-21', 45, 2, 'Visita'),
 (28, '08:36:47', '2025-03-21', 0, 6, 'Miembro'),
-(29, '08:43:46', '2025-03-21', 0, 6, 'Miembro'),
-(30, '15:42:34', '2025-03-22', 45, 45, 'Visita'),
-(31, '15:42:44', '2025-03-22', 46, 46, 'Visita'),
-(32, '15:42:54', '2025-03-22', 45, 47, 'Visita');
+(29, '08:49:12', '2025-03-21', 34, 3, 'Visita'),
+(30, '22:40:13', '2025-03-21', 0, 3, 'Miembro'),
+(31, '15:39:19', '2025-03-22', 45, 45, 'Visita'),
+(33, '21:43:26', '2025-03-22', 0, 3, 'Miembro'),
+(34, '23:23:51', '2025-03-22', 0, 3, 'Miembro'),
+(35, '07:38:05', '2025-03-24', 0, 3, 'Miembro'),
+(38, '14:24:50', '2025-03-25', 0, 3, 'Miembro'),
+(40, '21:47:42', '2025-03-26', 45, 3, 'Visita'),
+(41, '21:47:52', '2025-03-26', 0, 6, 'Miembro'),
+(42, '20:16:09', '2025-03-27', 0, 7, 'Miembro'),
+(43, '22:19:27', '2025-03-30', 45, 4, 'Visita');
 
 -- --------------------------------------------------------
 
@@ -124,17 +129,18 @@ CREATE TABLE `membresias` (
   `Tipo` varchar(30) NOT NULL,
   `Descripcion` varchar(100) NOT NULL,
   `Costo` int(5) NOT NULL,
-  `Duracion` enum('semana','mes') DEFAULT NULL
+  `Duracion` enum('semana','mes') DEFAULT NULL,
+  `Estatus` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `membresias`
 --
 
-INSERT INTO `membresias` (`ID_Membresia`, `Tipo`, `Descripcion`, `Costo`, `Duracion`) VALUES
-(1, 'Semana', 'Vigencia 7 dias el gimnasio', 150, 'semana'),
-(3, 'Mes', 'Vigencia 1 mes de gimnasio', 560, 'mes'),
-(4, 'Estudiante', 'Mes a precio de descuento', 380, 'mes');
+INSERT INTO `membresias` (`ID_Membresia`, `Tipo`, `Descripcion`, `Costo`, `Duracion`, `Estatus`) VALUES
+(1, 'Semana', 'Vigencia 7 dias el gimnasio', 150, 'semana', 0),
+(4, 'Estudiante', 'Mes a precio de descuento', 380, 'mes', 1),
+(7, 'Mes', 'Un mes de duracion', 420, 'mes', 1);
 
 -- --------------------------------------------------------
 
@@ -148,72 +154,72 @@ CREATE TABLE `miembros` (
   `ApellidoP` varchar(30) NOT NULL,
   `ApellidoM` varchar(30) NOT NULL,
   `Sexo` char(1) NOT NULL,
-  `Telefono` varchar(10) NOT NULL
+  `Telefono` varchar(10) NOT NULL,
+  `Estatus` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `miembros`
 --
 
-INSERT INTO `miembros` (`ID_Miembro`, `Nombre`, `ApellidoP`, `ApellidoM`, `Sexo`, `Telefono`) VALUES
-(1, 'Juan', 'Gómez', 'López', 'M', '5551234567'),
-(2, 'María', 'Martínez', 'González', 'F', '5559876543'),
-(3, 'Carlos', 'Hernández', 'Díaz', 'M', '5552345678'),
-(4, 'Ana', 'Pérez', 'Ramírez', 'F', '5558765432'),
-(5, 'Luis', 'Sánchez', 'Torres', 'M', '5553456789'),
-(6, 'Laura', 'Ramírez', 'Vargas', 'F', '5557654321'),
-(7, 'Miguel', 'Díaz', 'Ortega', 'M', '5554567890'),
-(8, 'Andrea', 'Torres', 'Mendoza', 'F', '5556543210'),
-(9, 'Fernando', 'López', 'Castro', 'M', '5555678901'),
-(10, 'Sofía', 'Vargas', 'Morales', 'F', '5554321098'),
-(11, 'Ricardo', 'Ortega', 'Núñez', 'M', '5556789012'),
-(12, 'Valeria', 'Mendoza', 'Reyes', 'F', '5553210987'),
-(13, 'Diego', 'Castro', 'Flores', 'M', '5557890123'),
-(14, 'Gabriela', 'Morales', 'Herrera', 'F', '5552109876'),
-(15, 'Jorge', 'Núñez', 'Gutiérrez', 'M', '5558901234'),
-(16, 'Patricia', 'Reyes', 'Jiménez', 'F', '5551098765'),
-(17, 'Roberto', 'Flores', 'Rojas', 'M', '5559012345'),
-(18, 'Isabel', 'Herrera', 'Cabrera', 'F', '5550987654'),
-(19, 'Héctor', 'Gutiérrez', 'Delgado', 'M', '5550123456'),
-(20, 'Claudia', 'Jiménez', 'Acosta', 'F', '5558765430'),
-(21, 'Alejandro', 'Rojas', 'Campos', 'M', '5551345678'),
-(22, 'Daniela', 'Cabrera', 'Paredes', 'F', '5557654309'),
-(23, 'Emilio', 'Delgado', 'Peña', 'M', '5551472583'),
-(24, 'Lucía', 'Acosta', 'Navarro', 'F', '5553698520'),
-(25, 'Manuel', 'Campos', 'Silva', 'M', '5552583697'),
-(26, 'Renata', 'Paredes', 'Ibarra', 'F', '5558527410'),
-(27, 'Felipe', 'Peña', 'Luna', 'M', '5559638527'),
-(28, 'Camila', 'Navarro', 'Escobar', 'F', '5557412589'),
-(29, 'Oscar', 'Silva', 'Maldonado', 'M', '5557896541'),
-(30, 'Adriana', 'Ibarra', 'Solís', 'F', '5553216549'),
-(31, 'Pablo', 'Luna', 'Guzmán', 'M', '5556549871'),
-(32, 'Elena', 'Escobar', 'León', 'F', '5551597538'),
-(33, 'Guillermo', 'Maldonado', 'Estrada', 'M', '5557531594'),
-(34, 'Verónica', 'Solís', 'Meza', 'F', '5558529631'),
-(35, 'Sebastián', 'Guzmán', 'Cortés', 'M', '5554561239'),
-(36, 'Natalia', 'León', 'Aguilar', 'F', '5559631472'),
-(37, 'Mario', 'Estrada', 'Beltrán', 'M', '5553571596'),
-(38, 'Paula', 'Meza', 'Esquivel', 'F', '5559513574'),
-(39, 'Esteban', 'Cortés', 'Méndez', 'M', '5557538529'),
-(40, 'Carla', 'Aguilar', 'Castañeda', 'F', '5552587413'),
-(41, 'Rodrigo', 'Beltrán', 'Ramos', 'M', '5558521479'),
-(42, 'Beatriz', 'Esquivel', 'Salazar', 'F', '5556542581'),
-(43, 'Hugo', 'Méndez', 'Cordero', 'M', '5553697412'),
-(44, 'Florencia', 'Castañeda', 'Vega', 'F', '5557413698'),
-(45, 'Germán', 'Ramos', 'Valencia', 'M', '5558529637'),
-(46, 'Lorena', 'Salazar', 'Carranza', 'F', '5559637418'),
-(47, 'Ángel', 'Cordero', 'Bautista', 'M', '5557418523'),
-(48, 'Mónica', 'Vega', 'Cervantes', 'F', '5558521476'),
-(49, 'Rafael', 'Valencia', 'Rosales', 'M', '5559632587'),
-(50, 'Jessica', 'Carranza', 'Bravo', 'F', '5553698524'),
-(51, 'Francisco', 'Bautista', 'Escalante', 'M', '5551478529'),
-(52, 'Daniela', 'Cervantes', 'Tapia', 'F', '5559632581'),
-(53, 'Sergio', 'Rosales', 'Chávez', 'M', '5557534562'),
-(54, 'Cecilia', 'Bravo', 'Del Valle', 'F', '5558527531'),
-(55, 'Armando', 'Escalante', 'Arellano', 'M', '5554569517'),
-(56, 'Fabiola', 'Tapia', 'Medina', 'F', '5557413695'),
-(57, 'Julio', 'Chávez', 'Estrada', 'M', '5559517536'),
-(61, 'Miguel', 'Menza', 'Mendez', 'M', '2481822198');
+INSERT INTO `miembros` (`ID_Miembro`, `Nombre`, `ApellidoP`, `ApellidoM`, `Sexo`, `Telefono`, `Estatus`) VALUES
+(1, 'Juan', 'Gómez', 'López', 'M', '5551234567', 1),
+(2, 'María', 'Martínez', 'González', 'F', '5559876543', 1),
+(3, 'Carlos', 'Hernández', 'Díaz', 'M', '5552345678', 1),
+(4, 'Ana', 'Pérez', 'Ramírez', 'F', '5558765432', 1),
+(6, 'Laura', 'Ramírez', 'Vargas', 'F', '5557654321', 1),
+(7, 'Miguel', 'Díaz', 'Ortega', 'M', '5554567890', 1),
+(8, 'Andrea', 'Torres', 'Mendoza', 'F', '5556543210', 1),
+(9, 'Fernando', 'López', 'Castro', 'M', '5555678901', 0),
+(10, 'Sofía', 'Vargas', 'Morales', 'F', '5554321098', 1),
+(11, 'Ricardo', 'Ortega', 'Núñez', 'M', '5556789012', 1),
+(12, 'Valeria', 'Mendoza', 'Reyes', 'F', '5553210987', 1),
+(13, 'Diego', 'Castro', 'Flores', 'M', '5557890123', 1),
+(14, 'Gabriela', 'Morales', 'Herrera', 'F', '5552109876', 1),
+(15, 'Jorge', 'Núñez', 'Gutiérrez', 'M', '5558901234', 1),
+(16, 'Patricia', 'Reyes', 'Jiménez', 'F', '5551098765', 1),
+(17, 'Roberto', 'Flores', 'Rojas', 'M', '5559012345', 1),
+(18, 'Isabel', 'Herrera', 'Cabrera', 'F', '5550987654', 1),
+(19, 'Héctor', 'Gutiérrez', 'Delgado', 'M', '5550123456', 1),
+(20, 'Claudia', 'Jiménez', 'Acosta', 'F', '5558765430', 1),
+(21, 'Alejandro', 'Rojas', 'Campos', 'M', '5551345678', 1),
+(22, 'Daniela', 'Cabrera', 'Paredes', 'F', '5557654309', 1),
+(23, 'Emilio', 'Delgado', 'Peña', 'M', '5551472583', 1),
+(24, 'Lucía', 'Acosta', 'Navarro', 'F', '5553698520', 1),
+(25, 'Manuel', 'Campos', 'Silva', 'M', '5552583697', 1),
+(26, 'Renata', 'Paredes', 'Ibarra', 'F', '5558527410', 1),
+(27, 'Felipe', 'Peña', 'Luna', 'M', '5559638527', 1),
+(28, 'Camila', 'Navarro', 'Escobar', 'F', '5557412589', 1),
+(29, 'Oscar', 'Silva', 'Maldonado', 'M', '5557896541', 1),
+(30, 'Adriana', 'Ibarra', 'Solís', 'F', '5553216549', 1),
+(31, 'Pablo', 'Luna', 'Guzmán', 'M', '5556549871', 1),
+(32, 'Elena', 'Escobar', 'León', 'F', '5551597538', 1),
+(33, 'Guillermo', 'Maldonado', 'Estrada', 'M', '5557531594', 1),
+(34, 'Verónica', 'Solís', 'Meza', 'F', '5558529631', 1),
+(35, 'Sebastián', 'Guzmán', 'Cortés', 'M', '5554561239', 1),
+(36, 'Natalia', 'León', 'Aguilar', 'F', '5559631472', 1),
+(37, 'Mario', 'Estrada', 'Beltrán', 'M', '5553571596', 1),
+(38, 'Paula', 'Meza', 'Esquivel', 'F', '5559513574', 1),
+(39, 'Esteban', 'Cortés', 'Méndez', 'M', '5557538529', 1),
+(40, 'Carla', 'Aguilar', 'Castañeda', 'F', '5552587413', 1),
+(41, 'Rodrigo', 'Beltrán', 'Ramos', 'M', '5558521479', 1),
+(42, 'Beatriz', 'Esquivel', 'Salazar', 'F', '5556542581', 1),
+(43, 'Hugo', 'Méndez', 'Cordero', 'M', '5553697412', 1),
+(44, 'Florencia', 'Castañeda', 'Vega', 'F', '5557413698', 1),
+(45, 'Germán', 'Ramos', 'Valencia', 'M', '5558529637', 1),
+(46, 'Lorena', 'Salazar', 'Carranza', 'F', '5559637418', 1),
+(47, 'Ángel', 'Cordero', 'Bautista', 'M', '5557418523', 1),
+(48, 'Mónica', 'Vega', 'Cervantes', 'F', '5558521476', 1),
+(49, 'Rafael', 'Valencia', 'Rosales', 'M', '5559632587', 1),
+(50, 'Jessica', 'Carranza', 'Bravo', 'F', '5553698524', 1),
+(51, 'Francisco', 'Bautista', 'Escalante', 'M', '5551478529', 1),
+(52, 'Daniela', 'Cervantes', 'Tapia', 'F', '5559632581', 1),
+(53, 'Sergio', 'Rosales', 'Chávez', 'M', '5557534562', 1),
+(54, 'Cecilia', 'Bravo', 'Del Valle', 'F', '5558527531', 1),
+(55, 'Armando', 'Escalante', 'Arellano', 'M', '5554569517', 1),
+(56, 'Fabiola', 'Tapia', 'Medina', 'F', '5557413695', 1),
+(57, 'Julio', 'Chávez', 'Estrada', 'M', '5559517536', 0),
+(61, 'Miguel', 'Menza', 'Mendez', 'M', '2481822198', 0);
 
 -- --------------------------------------------------------
 
@@ -238,18 +244,8 @@ CREATE TABLE `miembro_membresia` (
 --
 
 INSERT INTO `miembro_membresia` (`ID_MiemMiembro`, `FechaInicio`, `FechaFin`, `Costo`, `Cantidad`, `FechaPago`, `ID_Miembro`, `ID_Membresia`, `ID_Usuario`) VALUES
-(3, '2025-03-17', '2025-04-17', 560, 1, '2025-03-16', 8, 3, 27),
 (7, '2025-03-18', '2025-03-25', 150, 1, '2025-03-16', 3, 1, 27),
-(8, '2025-03-10', '2025-04-10', 560, 1, '2025-03-16', 6, 3, 27),
-(9, '2025-03-18', '2025-04-18', 560, 1, '2025-03-16', 7, 3, 27),
-(10, '2025-03-10', '2025-03-17', 150, 1, '2025-03-16', 9, 1, 27),
-(11, '2025-03-17', '2025-04-17', 560, 1, '2025-03-16', 50, 3, 27),
-(12, '2025-03-02', '2025-03-09', 150, 1, '2025-03-17', 8, 1, 27),
-(15, '2025-03-11', '2025-04-11', 380, 1, '2025-03-20', 5, 4, 27),
-(16, '2025-03-21', '2025-04-21', 560, 1, '2025-03-21', 56, 3, 27),
-(17, '2025-03-22', '2025-03-29', 150, 1, '2025-03-21', 53, 1, 27),
-(18, '2025-03-21', '2025-04-21', 560, 1, '2025-03-21', 2, 3, 27),
-(19, '2025-03-22', '2025-06-22', 1680, 3, '2025-03-22', 50, 3, 27);
+(17, '2025-03-22', '2025-03-29', 150, 1, '2025-03-22', 9, 1, 27);
 
 -- --------------------------------------------------------
 
@@ -271,7 +267,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`ID_Producto`, `img`, `Descripcion`, `Precio`, `Disponible`, `ID_TipoProducto`) VALUES
-(1, 'inventarioImg/clorets.png', 'clorets', 2, 1, 2);
+(1, 'inventarioImg/clorets.png', 'clorets', 2, -1, 2);
 
 -- --------------------------------------------------------
 
@@ -316,9 +312,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`ID_Usuario`, `Nombre`, `ApellidoP`, `ApellidoM`, `CorreoUsu`, `NombreUsu`, `Contra`, `Salario`, `Foto`, `usutip`) VALUES
-(27, 'Arath', 'Saavedra', 'Cabrera', 'sii@gmail.com', 'Admin', '$2y$10$rXEWT0yyCO/AzEqsW.pKnOj/b9V2KNOHcNGmnhoEqOj4c2gEqGmQi', 1500, '', 'admin'),
-(40, 'Miguel', 'Cabrera', 'Saavedra', 'sii@gmail.com', 'Mike22', '$2y$10$1aa.Xug2r9RGPAb.sBrm9eMYrkCqGfiCrtdaBSwJRA50CWYZ4G.26', 100000, '', 'coach'),
-(41, 'Kevin', 'Roldan', 'Cervantes', 'sii@gmail.com', 'Admin', '$2y$10$Mp4diWaxtCJR2t.srV7So.Hl3T7MXg6HgM4zcEhggJYizh41Svdfu', 100000, '', 'admin');
+(27, 'Arath', 'Saavedra', 'Cabrera', 'saavedraarath@gmail.com', 'Admin', '$2y$10$RHyWQh2iY0tuz9kR7/xCl.vpnz5IDN393DMmnxWYgKflas6S2pBvK', 1500, '', 'admin'),
+(60, 'Kevin', 'Rolcer', 'Salazar', 'arathsaavedracabrera96@gmail.com', 'Kevin', '$2y$10$A9Db4GulkWi.2YtkvMAaaujaMYwR5VbhPEQO6Jcu5pxnMIBaS3uKS', 2, '', 'coach');
 
 -- --------------------------------------------------------
 
@@ -488,7 +483,9 @@ ALTER TABLE `tipoi`
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`ID_Usuario`);
+  ADD PRIMARY KEY (`ID_Usuario`),
+  ADD UNIQUE KEY `unique_nombreUsu` (`NombreUsu`),
+  ADD UNIQUE KEY `unique_correoUsu` (`CorreoUsu`);
 
 --
 -- Indices de la tabla `ventas`
@@ -505,13 +502,13 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `accesos`
 --
 ALTER TABLE `accesos`
-  MODIFY `ID_Acceso` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `ID_Acceso` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `ID_DetalleVenta` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_DetalleVenta` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `gastos`
@@ -529,7 +526,7 @@ ALTER TABLE `ingresos`
 -- AUTO_INCREMENT de la tabla `membresias`
 --
 ALTER TABLE `membresias`
-  MODIFY `ID_Membresia` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_Membresia` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `miembros`
@@ -541,7 +538,7 @@ ALTER TABLE `miembros`
 -- AUTO_INCREMENT de la tabla `miembro_membresia`
 --
 ALTER TABLE `miembro_membresia`
-  MODIFY `ID_MiemMiembro` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ID_MiemMiembro` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
@@ -559,13 +556,13 @@ ALTER TABLE `tipoi`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `ID_Usuario` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `ID_Usuario` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `ID_Venta` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_Venta` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
