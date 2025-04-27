@@ -33,9 +33,11 @@
     </div>
     <div class="main">
         <div class="topbar">
-            <div class="toggle">
-                <ion-icon name="menu-outline"></ion-icon>
-            </div>
+        <div class="toggle">
+                    <svg class="svg "xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </div>
             <div class="subMenu">
                 <?php
                 include_once("submenu.php")
@@ -159,7 +161,9 @@
         </div>
     </div>
    
-    
+    <script src="../asset/js/notificaciones.js"></script>
+        <script src="../asset/js/main.js"></script>
+        <script src="../asset/js/calendario.js"></script>
 
 </body>
 
