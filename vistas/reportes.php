@@ -2,13 +2,27 @@
 <html lang="es">
 
 <head>
-    <title>Usuarios-DragonGym</title>
+    <title>Reportes-DragonGym</title>
     <?php
     include_once("head.php");
     ?>
+   
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="../asset/js/estadisticas.js?v=1.4.9.3"></script>
+   
+    <script type="text/javascript">
     
-    <link rel="stylesheet" href="../asset/css/usuarios.css">
-    <link rel="stylesheet" href="../asset/css/Reportes.css">
+        google.charts.load('current', {
+            'packages': ['corechart' ]
+        });
+
+        google.charts.setOnLoadCallback(cargarMiembrosPorSexo);
+        google.charts.setOnLoadCallback(cargarEstadoMembresias);
+        google.charts.setOnLoadCallback(cargarGastosMensuales);
+    </script>
+   <link rel="stylesheet" href="../asset/css/usuarios.css">
+   <link rel="stylesheet" href="../asset/css/Reportes.css">
+    
 </head>
 
 <body class="bg-light">
@@ -30,7 +44,7 @@
 
             <div class="contenedor">
                 <div class="notificacion" onclick="toggleNotifi()">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <svg class ="svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 6.878V6a2.25 2.25 0 0 1 2.25-2.25h7.5A2.25 2.25 0 0 1 18 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 0 0 4.5 9v.878m13.5-3A2.25 2.25 0 0 1 19.5 9v.878m0 0a2.246 2.246 0 0 0-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0 1 21 12v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6c0-.98.626-1.813 1.5-2.122" />
                     </svg>
                 </div>
@@ -113,29 +127,40 @@
                 <h2>
                     Estadísticas
                 </h2>
-            </div>
-
-            <div class="graficosR" style="text-align:center;">
+                <div class="graficosR" style="text-align:center;">
                 <div class="gra12">
                     <div class="gra1">
                         <div id="chart_div2" ></div>
                     </div>
                     <div class="gra2">
-                        <div id="chart_div" ></div>
+                    <div id="chart_div" style="width: 600px; height: 400px;"></div>
+
                     </div>
                 </div>
                 <div class="gra3">
                     <div id="chart_div3" ></div>
                 </div>
             </div>
+            <table>
+            <thead>
+                <tr>
+                    <th>Tipo de Usuario</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+                <tbody id="tbodySexo">
+
+                </tbody>
+            </table>
+            <div id="chart_div2"></div>
+            <div id="chart_div3"></div>
+            </div>
 
         </div>
     </div>
+   
+    
 
-
-    <script src="../asset/js/notificaciones.js"></script>
-    <script src="../asset/js/main.js"></script>
-    <script src="../asset/js/calendario.js"></script>
 </body>
 
 </html>

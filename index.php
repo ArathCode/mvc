@@ -11,6 +11,7 @@
 
     
     $tipoUsuario = $_SESSION["tipo"];
+    
 
     if(isset($_GET["pag"])) {
         $pag = $_GET["pag"];

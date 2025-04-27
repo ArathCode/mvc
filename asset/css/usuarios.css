@@ -28,7 +28,7 @@ body {
   width: 100%;
 
 }
-svg{
+.svg{
   width: 30px;
   height: 30px;
   
@@ -140,7 +140,10 @@ svg{
 }
 
 
-
+#chart_div {
+    width: 100% !important;
+    height: 400px !important;
+}
 /* ===================== contenido principal ===================== */
 .main {
   position: absolute;
