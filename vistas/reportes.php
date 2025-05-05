@@ -108,7 +108,7 @@
                     <div class="col dropdown">
                         <a href="#"><img src="../asset/images/pdfRR.png" alt="" width="200px" height="200px"></a>
                         <div class="dropdown-content">
-                            <a href="R_usu_pdf.php">Miembros PDF</a>
+                            <a href="controlador/ReporteMiemPdf.php">Miembros PDF</a>
                             <a href="R_prod_pdf.php">Productos PDF</a>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                     <div class="col dropdown">
                         <a href="#"><img src="../asset/images/excel.png" alt="" width="200px" height="200px"></a>
                         <div class="dropdown-content">
-                            <a href="R_usu_excel.php">Miembros Excel</a>
+                            <a href="controlador/ReporteMiemExcel.php">Miembros Excel</a>
                             <a href="R_prod_excel.php">Productos Excel</a>
                         </div>
                     </div>
