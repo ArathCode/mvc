@@ -7,7 +7,9 @@
         include_once("head.php");
         ?>
     <link rel="stylesheet" href="../asset/css/home.css">
+    
     <script type="module" src="asset/js/acceso.js?v=1.8.3"></script>
+    <link rel="stylesheet" href="../asset/css/style-cha-ia.css">
     <link href="../asset/images/logo.jpg" rel="icon" />
     </head>
 
@@ -269,7 +271,54 @@
             </div>
         </div>
 
+        <!-- Boton asistente ia -->
+  <button id="chat-button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bot-icon lucide-bot"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+  </button>
 
+  <div id="chat-box">
+    <div id="chat-header">
+      <div class="header-title-chat">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;">
+          <path d="M4 7.5V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3.5"></path>
+          <path d="M8 7.5V4"></path>
+          <path d="M16 7.5V4"></path>
+          <rect width="20" height="14" x="2" y="7.5" rx="2" ry="2"></rect>
+          <path d="M12 12v.01"></path>
+        </svg>
+        Asistente de Portafolio
+      </div>
+      <button id="close-chat">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div id="chat-messages"></div>
+    <div id="prompt-suggestions"></div>
+    <div id="chat-input-container">
+      <div id="chat-input">
+        <input type="text" id="user-input" placeholder="Escribe tu mensaje..." autocomplete="off">
+        <button id="send-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="modalOverlay" class="window-overlay"></div>
+
+  <script src="../asset/js/script-ia.js?v=1.2"></script>
+  <!-- Enlace al script de AOS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script> 
+       AOS.init();
+  </script>   
 
         <script src="../asset/js/notificaciones.js"></script>
         <script src="../asset/js/main.js"></script>
