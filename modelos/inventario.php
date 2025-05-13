@@ -7,10 +7,10 @@ class inventario
     public function ListarPRODUCTOS()
     {
         $enlace = dbConectar();
-        $sql = "SELECT p.ID_Producto, p.img, p.Descripcion, p.Precio, p.Disponible, t.Descripcion AS TipoProducto 
+        $sql = "SELECT p.ID_Producto, p.img, p.Descripcion, p.Precio, p.Disponible, p.ID_TipoProducto, t.Descripcion AS TipoProducto 
                 FROM productos p
                 LEFT JOIN tipoi t ON p.ID_TipoProducto = t.ID_TipoProducto";
-        
+
         $consulta = $enlace->prepare($sql);
         $consulta->execute();
         $result = $consulta->get_result();
@@ -41,7 +41,6 @@ class inventario
         return $consulta->execute();
     }
 
-
     //editar
     public function Editar($datos)
     {
@@ -60,7 +59,6 @@ class inventario
         return $consulta->execute();
     }
     
-
     public function ObtenerProducto($ID_Producto)
     {
         $enlace = dbConectar();
@@ -76,7 +74,6 @@ class inventario
             return null;
         }
     }    
-
 
     //agregar ingreso
     public function AgregarIngreso($datos) {
@@ -98,7 +95,5 @@ class inventario
     
         return false;
     }
-    
-
 }
 ?>

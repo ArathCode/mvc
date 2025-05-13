@@ -8,7 +8,7 @@
             include_once("head.php");
         ?>
         
-        <script src="asset/js/inventario.js?v=2.6"></script>
+        <script src="asset/js/inventario.js?v=2.6.2"></script>
     </head>
 
     <body>
@@ -80,32 +80,63 @@
                 </div>
             </div>
 
-            <div class="gB" id="botonesa">
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregarProducto">Nuevo producto</button>
-            </div>
-            <div class="tablaI">
-                <table class="table table-striped" id="ListaProductos">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>ID</th>
-                            <th>Imagen</th>
-                            <th>Descripcion</th>
-                            <th>Precio</th>
-                            <th>Disponible</th>
-                            <th>Tipo producto</th>
-                            <th>Accion</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Contenido dinamico -->
-                    </tbody>
-                </table>
+           
+            <div class="container mx-auto p-3 w-100 w-md-75 w-lg-50" >
+            <div class="row" >
+                <h1>Inventario</h1>
+
+                <!-- Filtros -->
+                <div aria-label="Basic outlined example" class="botonesa d-flex align-items-start gap-3 flex-wrap" id="botonesa">
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregarProducto">Nuevo producto</button>
+                    
+                    <label for="filtroNombre" class="form-label">Nombre:</label>
+                    <input type="text" class="" id="filtroNombre" placeholder="Buscar por nombre">
+
+                    <label for="filtroDisponible" class="form-label">Disponibilidad:</label>
+                    <select class="" id="filtroDisponible">
+                        <option value="">-- Seleccione --</option>
+                        <option value="disponible">Disponible</option>
+                        <option value="nodisponible">No disponible</option>
+                    </select>
+
+                    <label for="filtroTipo" class="form-label">Tipo de Producto:</label>
+                        <select class="" id="filtroTipo">
+                            <option value="">-- Seleccione un tipo --</option>
+                                <!-- Opciones dinámicas -->
+                        </select>
+
+                    <button type="button" class="" id="resetFiltros">Resetear filtros</button>
+                </div>
+
+                <div class="col" style="min-height:750px; overflow-y:auto; overflow-x:hidden; max-height:790px">
+                    <table class="table table-striped table-bordered table-hover text-center" id="ListaProductos">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Imagen</th>
+                                <th>Descripcion</th>
+                                <th>Precio</th>
+                                <th>Disponible</th>
+                                <th>Tipo producto</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Contenido dinamico -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
 
         </div>
 
+
+
+        </div>
+
         <!-- Modal AGREGAR -->
+         <!-- Modal AGREGAR -->
         <div class="modal fade" id="modalAgregarProducto" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -135,7 +166,7 @@
                                     <!-- Opciones cargadas dinámicamente -->
                                 </select>
                             </div>
-                            <button type="submit" id="btnP" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
                         </form>
                     </div>
                 </div>
@@ -171,12 +202,10 @@
                             <div class="mb-3">
                                 <label for="ID_TipoProductoe" class="form-label">Tipo de Producto</label>
                                 <input type="number" id="ID_TipoProductoe" name="ID_TipoProductoe">
-                                <!--  <select class="form-control" id="ID_TipoProductoe" name="ID_TipoProductoe" required>
-                                    <option value="">Seleccione un tipo</option>
-                                    Opciones cargadas dinámicamente -->
+                                <!-- Opciones cargadas dinámicamente -->
                                 </select>
                             </div>
-                            <button type="submit" id="btnP" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
                         </form>
                     </div>
                 </div>
@@ -208,7 +237,7 @@
                                 <label for="Fecha" class="form-label">Fecha</label>
                                 <input type="date" class="form-control" id="Fecha" name="Fecha" required>
                             </div>
-                            <button type="submit" id="btnP" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
                         </form>
                     </div>
                 </div>

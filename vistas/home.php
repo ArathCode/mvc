@@ -286,7 +286,7 @@
           <rect width="20" height="14" x="2" y="7.5" rx="2" ry="2"></rect>
           <path d="M12 12v.01"></path>
         </svg>
-        Asistente de Portafolio
+        Asistente Virtual DragonGym
       </div>
       <button id="close-chat">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -313,7 +313,7 @@
 
   <div id="modalOverlay" class="window-overlay"></div>
 
-  <script src="../asset/js/script-ia.js?v=1.2"></script>
+  <script src="../asset/js/scriptIA.js"></script>
   <!-- Enlace al script de AOS -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script> 

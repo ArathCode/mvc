@@ -47,9 +47,24 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector("#productoDescripcion").value = productoDescripcion;
     });
 
+
+    //filtros
+    document.querySelector("#filtroNombre").addEventListener("input", mostrarProductosFiltrados);
+    document.querySelector("#filtroDisponible").addEventListener("change", mostrarProductosFiltrados);
+    document.querySelector("#filtroTipo").addEventListener("change", mostrarProductosFiltrados);
+    document.querySelector("#resetFiltros").addEventListener("click", () => {
+        document.querySelector("#filtroNombre").value = "";
+        document.querySelector("#filtroDisponible").value = "";
+        document.querySelector("#filtroTipo").value = "";
+        mostrarProductosFiltrados();
+
+    });
+
 });
 
-// Función para listar productos
+//Listar productos
+let productosGlobal = [];
+
 function listarProductos() {
     fetch('controlador/controladorinventario.php', {
         method: 'POST',
@@ -57,39 +72,17 @@ function listarProductos() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
-        const tbody = document.querySelector("#ListaProductos tbody");
-        tbody.innerHTML = "";
-        data.lista.forEach(producto => {
-            tbody.innerHTML += `
-            <tr>
-                <td>${producto.ID_Producto}</td>
-                <td><img src="${producto.img}" width="50" height="50"></td>
-                <td>${producto.Descripcion}</td>
-                <td>${producto.Precio}</td>
-                <td>${producto.Disponible}</td>
-                <td>${producto.TipoProducto}</td>
-                <td>
-                    <button type="button"id="btnE" class="btn btn-success btn-editar" data-bs-toggle="modal" data-bs-target="#modalEditarProducto" data-id="${producto.ID_Producto}">Editar</button>
-                    <button type="button" id="btnP" class="btn btn-primary btn-agregar" 
-                        data-bs-toggle="modal" 
-                        data-bs-target="#modalAgregarCantidad" 
-                        data-id="${producto.ID_Producto}" 
-                        data-descripcion="${producto.Descripcion}">
-                        Agregar
-                    </button>
-            </tr>
-        `;
-        });
+        productosGlobal = data.lista;
+        mostrarProductosFiltrados(); // Nuevo render con filtros aplicados
     })
     .catch(error => {
         Swal.fire("Error", "No se pudo cargar la lista de productos: " + error.message, "error");
     });
 }
 
-
 //agregar nuevo
 function agregarProducto() {
+    cargarTiposProducto();
     const form = document.querySelector("#formAgregarProducto");
     const datos = new FormData(form); // Captura el archivo y demás datos
     datos.append("ope", "AGREGAR");
@@ -115,26 +108,31 @@ function agregarProducto() {
     });
 }
 
-
 // select nuevo producto
 function cargarTiposProducto() {
+
     fetch('controlador/obtener_tipos.php')
         .then(response => response.json())
         .then(data => {
             const selectTipo = document.querySelector("#ID_TipoProducto");
             const selectTipoe = document.querySelector("#ID_TipoProductoe");
-            selectTipo.innerHTML = '<option value="">Seleccione un tipo</option>'; // Opción por defecto
+            const selectFiltroTipo = document.querySelector("#filtroTipo");
+
+            selectTipo.innerHTML = '<option value="">Seleccione un tipo</option>'; 
             selectTipoe.innerHTML = '<option value="">Seleccione un tipo</option>';
+            selectFiltroTipo.innerHTML = '<option value="">Seleccione un tipo</option>';
+
             data.forEach(tipo => {
                 selectTipo.innerHTML += `<option value="${tipo.ID_TipoProducto}">${tipo.Descripcion}</option>`;
                 selectTipoe.innerHTML += `<option value="${tipo.ID_TipoProductoe}">${tipo.Descripcion}</option>`;
+                selectFiltroTipo.innerHTML += `<option value="${tipo.ID_TipoProducto}">${tipo.Descripcion}</option>`;
+
             });
         })
         .catch(error => {
             console.error("Error cargando tipos de producto:", error);
         });
 }
-
 
 //editar
 function editarProducto() {
@@ -171,8 +169,6 @@ function editarProducto() {
         Swal.fire("Error", "No se pudo actualizar el producto: " + error.message, "error");
     });
 }
-
-
 
 //cargar
 function cargarProducto(id) {
@@ -214,7 +210,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-
 // Función agregar ingreso
 function agregarIngreso() {
     const form = document.querySelector("#formAgregarCantidad");
@@ -251,3 +246,48 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+//filtros
+function mostrarProductosFiltrados() {
+    const nombreFiltro = document.querySelector("#filtroNombre").value.toLowerCase();
+    const disponibilidadFiltro = document.querySelector("#filtroDisponible").value;
+    const tipoFiltro = document.querySelector("#filtroTipo").value;
+
+    const tbody = document.querySelector("#ListaProductos tbody");
+    tbody.innerHTML = "";
+
+    const filtrados = productosGlobal.filter(producto => {
+        const nombreCoincide = producto.Descripcion.toLowerCase().includes(nombreFiltro);
+        const disponibleCoincide = 
+            disponibilidadFiltro === "" || 
+            (disponibilidadFiltro === "disponible" && parseFloat(producto.Disponible) > 0) ||
+            (disponibilidadFiltro === "nodisponible" && parseFloat(producto.Disponible) <= 0);
+
+        const tipoCoincide = tipoFiltro === "" || producto.ID_TipoProducto == tipoFiltro;
+
+        return nombreCoincide && disponibleCoincide && tipoCoincide;
+    });
+
+    filtrados.forEach(producto => {
+        tbody.innerHTML += `
+        <tr>
+            <td>${producto.ID_Producto}</td>
+            <td><img src="${producto.img}" width="50" height="50"></td>
+            <td>${producto.Descripcion}</td>
+            <td>${producto.Precio}</td>
+            <td>${producto.Disponible}</td>
+            <td>${producto.TipoProducto}</td>
+            <td>
+                <button type="button" class="btn btn-success btn-editar" data-bs-toggle="modal" data-bs-target="#modalEditarProducto" data-id="${producto.ID_Producto}">Editar</button>
+                <button type="button" class="btn btn-primary btn-agregar" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#modalAgregarCantidad" 
+                    data-id="${producto.ID_Producto}" 
+                    data-descripcion="${producto.Descripcion}">
+                    Agregar
+                </button>
+            </td>
+        </tr>
+        `;
+    });
+}

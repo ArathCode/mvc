@@ -10,14 +10,23 @@ if (isset($_POST["ope"])) {
         $lista = $pro->ListarPRODUCTOS();
         echo json_encode(["success" => true, "lista" => $lista]);
     } 
+
     elseif ($ope == "CONFIRMARVENTA") {
         $productos = json_decode($_POST["productos"], true);
-        $resultado = $pro->RegistrarVenta($productos);
+        $idUsuario = $_POST["ID_Usuario"];
+        $resultado = $pro->RegistrarVenta($productos, $idUsuario);
         echo json_encode($resultado);
-    } 
+    }
+     
+    elseif ($ope == "VENTAS_DE_HOY") {
+        $lista = $pro->ListarVentasDelDia();
+        echo json_encode(["success" => true, "lista" => $lista]);
+    }
+    
     else {
         echo json_encode(["success" => false, "msg" => "Operación no válida"]);
     }
 }
 ?>
+
 

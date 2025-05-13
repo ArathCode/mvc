@@ -8,7 +8,7 @@
             include_once("head.php");
         ?>
         
-        <script src="asset/js/ventas.js?v=2.8"></script>
+        <script src="asset/js/ventas.js?v=2.8.2"></script>
     </head>
     
     <body>
@@ -78,23 +78,50 @@
                 </div>
             </div>
 
-            <div class="divisionC">
-                <div class="izq">
-                    <div class="tit">
-                        <h3>Lista de productos</h3>
-                    </div>
-                        
-                    <div  id="ListaProductosventas"> 
-                    </div>
-                    
+            <div class="container mx-auto p-3 w-100 w-md-75 w-lg-50" >
+            <div class="row" >
+                <h1>Ventas</h1>
+                <div class="col" style=" min-height:750px; overflow-y:auto; overflow-x:hidden; max-height:790px">
 
+                    <!-- Filtros -->
+                    <div aria-label="Filtros" class="botonesa d-flex align-items-start gap-3 flex-wrap" id="botonesa">
+                        <label for="filtroNombreVenta" class="form-label">Nombre:</label>
+                        <input type="text" id="filtroNombreVenta" placeholder="Buscar por nombre">
 
-                    <div class="ventasD">
-                        <h3>Ventas del día</h3>
+                        <label for="filtroDisponibleVenta" class="form-label">Disponibilidad:</label>
+                        <select id="filtroDisponibleVenta">
+                            <option value="">-- Seleccione --</option>
+                            <option value="disponible">Disponible</option>
+                            <option value="nodisponible">No disponible</option>
+                        </select>
+
+                        <label for="filtroTipoVenta" class="form-label">Tipo de Producto:</label>
+                        <select id="filtroTipoVenta">
+                            <option value="">-- Seleccione un tipo --</option>
+                        </select>
+
+                        <button type="button" id="resetFiltrosVenta">Resetear filtros</button>
                     </div>
+
+                    <table class="table table-striped table-bordered table-hover text-center" id="ListaProductosventas">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Imagen</th>
+                                <th>Descripcion</th>
+                                <th>Precio</th>
+                                <th>Disponible</th>
+                                <th>Tipo producto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Contenido dinamico -->
+                        </tbody>
+                    </table>
                 </div>
-                <div class="der">
-                    <div >
+
+                <div class="col" style=" min-height:750px; overflow-y:auto; overflow-x:hidden; max-height:790px">
+                    <div class="row" style=" min-height:260px; overflow-y:auto; overflow-x:hidden; max-height:300px">
                         <h2>Hacer venta</h2>
                         <table id="tablaVenta" class="table">
                             <thead>
@@ -109,11 +136,34 @@
                                 <!-- Se llenará dinámicamente -->
                             </tbody>
                         </table>
-                        <button id="btnConfirmarVenta" class="btn btn-success">Confirmar Venta</button>
 
+                        <div>
+                            <button id="btnConfirmarVenta" class="btn btn-success">Confirmar Venta</button>
+                            <input type="hidden" name="ID_UsuarioVenta" id="ID_UsuarioVenta" value="<?php echo $_SESSION['ID_Usuario']; ?>">
+                        </div>
+                        
+                    </div>
+                    <div class="row" style="min-height:430px; overflow-y:auto; overflow-x:hidden; max-height:480px">
+                        <h2>Ventas del día</h2>
+                        <table class="table table-striped table-bordered table-hover text-center" id="VentasDelDia">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>ID Venta</th>
+                                    <th>Fecha</th>
+                                    <th>Usuario</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Contenido dinámico -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
+        </div>
             
         </div>
 

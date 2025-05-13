@@ -7,20 +7,45 @@ const chatMessages = document.getElementById('chat-messages');
 const promptSuggestions = document.getElementById('prompt-suggestions');
 
 const prompts = [
-  "Cuéntame sobre el proyecto CasiSAT.",
-  "¿Qué retos enfrentó Jonathan en el proyecto Movie Explorer?",
-  "¿Qué tecnologías se usaron en Gemini Writer API?",
-  "¿Cuál es el proyecto más visual de Jonathan?",
-  "¿Cómo puedo contactar a Jonathan para una colaboración?",
-  "¿Tiene Jonathan proyectos en GitHub?",
-  "¿Jonathan acepta trabajos freelance o colaboraciones externas?",
-  "¿Quién es Jonathan Caballero y qué experiencia tiene en desarrollo?",
-  "¿Dónde puedo ver el portafolio de Jonathan?",
-  "¿Cuál es la especialidad principal de Jonathan?",
-  "¿En qué tecnologías se siente más cómodo trabajando?"
-];
+    "Ubicación",
+    "¿Dónde están ubicados?",
+    "¿Cuál es la dirección del gimnasio?",
+    "¿Dónde está Dragon Gym?",
+  
+    "Ayuda",
+    "Necesito ayuda",
+    "¿Con quién puedo hablar?",
+    "Soporte",
+    "Atención al cliente",
+  
+    "Horarios del gimnasio",
+    "¿A qué hora abren?",
+    "¿A qué hora cierran?",
+    "¿Cuáles son sus horarios?",
+    "¿Están abiertos los domingos?",
+  
+    "Precios",
+    "¿Cuánto cuesta la mensualidad?",
+    "Precios de suscripciones",
+    "¿Tienen pago semanal?",
+    "¿Cuánto cuesta entrar?",
+  
+    "Clases",
+    "¿Qué clases ofrecen?",
+    "Horario de clases",
+    "Clases de box",
+    "¿Tienen funcional?",
+  
+    "Servicios",
+    "¿Tienen regaderas?",
+    "¿Hay entrenadores?",
+    "¿Tienen baños?",
+    "Servicios disponibles",
+  
+    
+  ];
 
-const welcomeMessage = "¡Hola! Soy el asistente del portafolio de Arath Saavedra . Puedo contarte sobre sus proyectos, habilidades y experiencia. Aquí tienes algunas preguntas que podrías hacerme:";
+const welcomeMessage = "¡Hola! Soy el asistente virtual de DragonGym . Puedo contarte sobre snuestros horarios, precios, etc. Aquí tienes algunas preguntas que podrías hacerme:";
 let hasShownWelcome = false;
 let isFirstInteraction = true;
 
@@ -86,7 +111,7 @@ async function sendMessage() {
   
   showTypingIndicator();
 
-  const url = 'http://localhost/mvc/controlador/chatbo.php';
+  const url = 'http://localhost/mvc/controlador/chatbot.php';
   
   try {
     const response = await fetch(url, {
