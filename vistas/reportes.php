@@ -129,21 +129,26 @@
                 <h2>
                     Estadísticas
                 </h2>
-                <div class="graficosR" style="text-align:center;">
+                <div class="graficosR" >
                 <div class="gra12">
                     <div class="gra1">
                         <div id="chart_div2" ></div>
                     </div>
                     <div class="gra2">
-                    <div id="chart_div" style="width: 600px; height: 400px;"></div>
+                    <div id="chart_div" ></div>
 
                     </div>
                 </div>
+                <div class="gra12">
                 <div class="gra3">
                     <div id="chart_div3" ></div>
                 </div>
+                <div class="gra3">
+                    <div id="chart_div4" ></div>
+                </div>
+                </div>
             </div>
-            <table>
+            <table class="oculto">
             <thead>
                 <tr>
                     <th>Tipo de Usuario</th>
@@ -154,8 +159,7 @@
 
                 </tbody>
             </table>
-            <div id="chart_div2"></div>
-            <div id="chart_div3"></div>
+           
             </div>
 
         </div>

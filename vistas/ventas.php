@@ -84,24 +84,39 @@
                 <div class="col" style=" min-height:750px; overflow-y:auto; overflow-x:hidden; max-height:790px">
 
                     <!-- Filtros -->
-                    <div aria-label="Filtros" class="botonesa d-flex align-items-start gap-3 flex-wrap" id="botonesa">
-                        <label for="filtroNombreVenta" class="form-label">Nombre:</label>
-                        <input type="text" id="filtroNombreVenta" placeholder="Buscar por nombre">
+                    <div aria-label="Filtros" class="container my-3">
+  <div class="card p-3 shadow-sm">
+    <div class="row g-3 align-items-end">
+      
+      <div class="col-md-4">
+        <label for="filtroNombreVenta" class="form-label">Nombre:</label>
+        <input type="text" class="form-control" id="filtroNombreVenta" placeholder="Buscar por nombre">
+      </div>
 
-                        <label for="filtroDisponibleVenta" class="form-label">Disponibilidad:</label>
-                        <select id="filtroDisponibleVenta">
-                            <option value="">-- Seleccione --</option>
-                            <option value="disponible">Disponible</option>
-                            <option value="nodisponible">No disponible</option>
-                        </select>
+      <div class="col-md-4">
+        <label for="filtroDisponibleVenta" class="form-label">Disponibilidad:</label>
+        <select id="filtroDisponibleVenta" class="form-select">
+          <option value="">-- Seleccione --</option>
+          <option value="disponible">Disponible</option>
+          <option value="nodisponible">No disponible</option>
+        </select>
+      </div>
 
-                        <label for="filtroTipoVenta" class="form-label">Tipo de Producto:</label>
-                        <select id="filtroTipoVenta">
-                            <option value="">-- Seleccione un tipo --</option>
-                        </select>
+      <div class="col-md-4">
+        <label for="filtroTipoVenta" class="form-label">Tipo de Producto:</label>
+        <select id="filtroTipoVenta" class="form-select">
+          <option value="">-- Seleccione un tipo --</option>
+        </select>
+      </div>
 
-                        <button type="button" id="resetFiltrosVenta">Resetear filtros</button>
-                    </div>
+      <div class="col-12 text-end">
+        <button type="button" id="resetFiltrosVenta" class="btn btn-secondary">Resetear filtros</button>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
 
                     <table class="table table-striped table-bordered table-hover text-center" id="ListaProductosventas">
                         <thead class="table-dark">

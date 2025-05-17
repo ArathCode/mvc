@@ -74,6 +74,7 @@ function cargarGastosMensuales() {
             return;
         }
         dibujarGraficaGastosMensuales(data.gastos_mensuales);
+        dibujarGraficaGastosMensualess(data.gastos_mensuales);
     })
     .catch(error => {
         console.error("Error en la solicitud:", error);
@@ -97,10 +98,13 @@ function dibujarGraficaMiembrosSexo(miembros_sexo) {
     // Opciones de la gráfica
     var options = {
         title: 'Conteo de Miembros por Sexo',
-        width: 600,
         height: 400,
         pieHole: 0.5,
         colors: ['#67b4f5', '#d823a7'],
+        chartArea: {
+        width: '90%',  // Esto ayuda a que la gráfica use mejor el espacio
+        height: '80%'
+    },
         legend: { position: 'bottom' }
     };
 
@@ -120,13 +124,18 @@ function dibujarGraficaEstadoMembresias(datos) {
     let data = google.visualization.arrayToDataTable(arrayData);
 
     let options = {
-        title: 'Estado de Membresías',
-        width: 600,
-        height: 400,
-        pieHole: 0.5,
-        colors: ['#2ECC71', '#E74C3C'],
-        legend: { position: 'bottom' }
-    };
+    title: 'Estado de Membresías',
+    height: 400, 
+     // Puedes ajustar la altura, pero no pongas width fijo
+    pieHole: 0.5,
+    colors: ['#2ECC71', '#E74C3C'],
+    legend: { position: 'bottom' },
+    chartArea: {
+        width: '90%',  // Esto ayuda a que la gráfica use mejor el espacio
+        height: '80%'
+    }
+};
+
 
     let chart = new google.visualization.PieChart(document.getElementById('chart_div2'));
     chart.draw(data, options);
@@ -142,8 +151,7 @@ function dibujarGraficaGastosMensuales(lista) {
 
     let options = {
         title: 'Gasto Mensual',
-        width: 800,
-        height: 400,
+        width: 600,
         hAxis: {
             title: 'Mes',
             slantedText: true
@@ -151,10 +159,43 @@ function dibujarGraficaGastosMensuales(lista) {
         vAxis: {
             title: 'Total Gasto'
         },
-        legend: { position: 'none' },
+        legend: {  position: 'bottom'},
+        chartArea: {
+        width: '90%',  // Esto ayuda a que la gráfica use mejor el espacio
+        height: '80%'
+    },
         colors: ['#4285F4']
     };
 
     let chart = new google.visualization.ColumnChart(document.getElementById('chart_div3'));
+    chart.draw(data, options);
+}
+function dibujarGraficaGastosMensualess(lista) {
+    let arrayData = [['Mes', 'Total Gasto']];
+    lista.forEach(item => {
+        arrayData.push([item.Mes, parseFloat(item.Total)]);
+    });
+
+    let data = google.visualization.arrayToDataTable(arrayData);
+
+    let options = {
+        title: 'Gasto Mensual',
+        width: 600,
+        hAxis: {
+            title: 'Mes',
+            slantedText: true
+        },
+        vAxis: {
+            title: 'Total Gasto'
+        },
+        legend: {  position: 'bottom'},
+        chartArea: {
+        width: '90%',  // Esto ayuda a que la gráfica use mejor el espacio
+        height: '80%'
+    },
+        colors: ['#4285F4']
+    };
+
+    let chart = new google.visualization.ColumnChart(document.getElementById('chart_div4'));
     chart.draw(data, options);
 }

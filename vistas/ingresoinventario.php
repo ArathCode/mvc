@@ -86,27 +86,47 @@
                 <h1>Inventario</h1>
 
                 <!-- Filtros -->
-                <div aria-label="Basic outlined example" class="botonesa d-flex align-items-start gap-3 flex-wrap" id="botonesa">
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregarProducto">Nuevo producto</button>
-                    
-                    <label for="filtroNombre" class="form-label">Nombre:</label>
-                    <input type="text" class="" id="filtroNombre" placeholder="Buscar por nombre">
+                <div aria-label="Basic outlined example" class="container my-3">
+  <div class="card p-3 shadow-sm">
+    <div class="row gy-3 align-items-end">
+      
+      <div class="col-md-3">
+        <button type="button" class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#modalAgregarProducto">
+          Nuevo producto
+        </button>
+      </div>
 
-                    <label for="filtroDisponible" class="form-label">Disponibilidad:</label>
-                    <select class="" id="filtroDisponible">
-                        <option value="">-- Seleccione --</option>
-                        <option value="disponible">Disponible</option>
-                        <option value="nodisponible">No disponible</option>
-                    </select>
+      <div class="col-md-3">
+        <label for="filtroNombre" class="form-label">Nombre:</label>
+        <input type="text" class="form-control" id="filtroNombre" placeholder="Buscar por nombre">
+      </div>
 
-                    <label for="filtroTipo" class="form-label">Tipo de Producto:</label>
-                        <select class="" id="filtroTipo">
-                            <option value="">-- Seleccione un tipo --</option>
-                                <!-- Opciones dinámicas -->
-                        </select>
+      <div class="col-md-3">
+        <label for="filtroDisponible" class="form-label">Disponibilidad:</label>
+        <select class="form-select" id="filtroDisponible">
+          <option value="">-- Seleccione --</option>
+          <option value="disponible">Disponible</option>
+          <option value="nodisponible">No disponible</option>
+        </select>
+      </div>
 
-                    <button type="button" class="" id="resetFiltros">Resetear filtros</button>
-                </div>
+      <div class="col-md-3">
+        <label for="filtroTipo" class="form-label">Tipo de Producto:</label>
+        <select class="form-select" id="filtroTipo">
+          <option value="">-- Seleccione un tipo --</option>
+          <!-- Opciones dinámicas -->
+        </select>
+      </div>
+
+      <div class="col-12 text-end">
+        <button type="button" class="btn btn-secondary" id="resetFiltros">
+          Resetear filtros
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
                 <div class="col" style="min-height:750px; overflow-y:auto; overflow-x:hidden; max-height:790px">
                     <table class="table table-striped table-bordered table-hover text-center" id="ListaProductos">
