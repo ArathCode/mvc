@@ -34,9 +34,10 @@ class Accesos
     public function contarAccesos()
 {
     $enlace = dbConectar();
-    $sql = "SELECT a.Tipo, COUNT(*) as cantidad 
-            FROM vista_accesos_hoy a 
-            GROUP BY a.Tipo";
+    $sql = "SELECT Tipo, COUNT(*) AS cantidad 
+        FROM accesos 
+        WHERE Fecha = CURDATE() 
+        GROUP BY Tipo";
     
     $consulta = $enlace->prepare($sql);
     $consulta->execute();
@@ -54,9 +55,10 @@ class Accesos
     {
         $enlace = dbConectar();
         $sql = "SELECT a.ID_Acceso, a.Hora, a.Fecha, a.Precio, a.ID_Miembro, 
-                       m.Nombre, m.ApellidoP, m.ApellidoM 
-                FROM vista_accesos_hoy a 
-                JOIN miembros m ON a.ID_Miembro = m.ID_Miembro";
+               m.Nombre, m.ApellidoP, m.ApellidoM 
+        FROM accesos a 
+        JOIN miembros m ON a.ID_Miembro = m.ID_Miembro 
+        WHERE a.Fecha = CURDATE()";
         $consulta = $enlace->prepare($sql);
         $consulta->execute();
         $result = $consulta->get_result();
@@ -83,21 +85,23 @@ class Accesos
     {
         $enlace = dbConectar();
         $sql = "SELECT 
-                mm.ID_Miembro, 
-                m.Nombre, 
-                m.ApellidoP, 
-                m.ApellidoM, 
-                m.Telefono, 
-                m.Sexo,
-                mm.ID_MiemMiembro,
-                mm.FechaInicio,
-                mm.FechaFin,
-                mm.Costo,
-                mm.Cantidad,
-                mm.FechaPago
-            FROM vista_membresias_vigentes mm
-            JOIN miembros m ON mm.ID_Miembro = m.ID_Miembro
-            WHERE mm.ID_Miembro = ? ";
+            mm.ID_Miembro, 
+            m.Nombre, 
+            m.ApellidoP, 
+            m.ApellidoM, 
+            m.Telefono, 
+            m.Sexo,
+            mm.ID_MiemMiembro,
+            mm.FechaInicio,
+            mm.FechaFin,
+            mm.Costo,
+            mm.Cantidad,
+            mm.FechaPago
+        FROM miembro_membresia mm
+        JOIN miembros m ON mm.ID_Miembro = m.ID_Miembro
+        WHERE mm.FechaFin >= CURDATE()
+          AND mm.ID_Miembro = ?";
+
         $consulta = $enlace->prepare($sql);
         $consulta->bind_param("i", $ID_Miembro);
         $consulta->execute();
