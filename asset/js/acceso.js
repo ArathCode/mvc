@@ -394,9 +394,9 @@ function buscarMiembro(id) {
 
             // Llenar la foto con el ícono correspondiente
             const fotoDiv = document.querySelector(".fotoM");
-            if (miembro.Sexo === "M") {
-                fotoDiv.innerHTML = '<video width="130" height="130" autoplay loop muted> <source src="../asset/images/vf.mp4" type="video/mp4"> Tu navegador no soporta la reproducción de videos.</video>';
-            } else if (miembro.Sexo === "F") {
+            if (miembro.Sexo === "F") {
+                fotoDiv.innerHTML = '<img  width="130" height="130" src="../asset/images/m.gif"></img>';
+            } else if (miembro.Sexo === "M") {
                 fotoDiv.innerHTML = '<img  width="130" height="130" src="../asset/images/h.gif"></img>';
             } else {
                 fotoDiv.innerHTML = '<i class="fas fa-user fa-4x" style="color: gray;"></i>'; // Por si acaso
