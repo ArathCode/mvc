@@ -117,7 +117,14 @@ if (isset($_POST["ope"])) {
         );
         echo json_encode($info);
     }
-    
+    elseif ($ope == "OBTENERCLASESDIA") {
+        $membresias = $usu->ObtenerClasesDia();  // Llamar a la función en el modelo
+        $info = array(
+            "success" => true,
+            "membresias" => $membresias
+        );
+        echo json_encode($info);
+    }
     else {
         echo json_encode(array("success" => false, "msg" => "Operación no válida o parámetros insuficientes"));
     }

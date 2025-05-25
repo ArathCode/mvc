@@ -109,7 +109,7 @@
                         <a href="#"><img src="../asset/images/pdfRR.png" alt="" width="200px" height="200px"></a>
                         <div class="dropdown-content">
                             <a href="controlador/ReporteMiemPdf.php">Miembros PDF</a>
-                            <a href="R_prod_pdf.php">Productos PDF</a>
+                            <a href="controlador/ReporteProdPdf.php">Productos PDF</a>
                         </div>
                     </div>
 
@@ -117,6 +117,7 @@
                         <a href="#"><img src="../asset/images/excel.png" alt="" width="200px" height="200px"></a>
                         <div class="dropdown-content">
                             <a href="controlador/ReporteMiemExcel.php">Miembros Excel</a>
+                            <a href="controlador/ReporteVentasExcel.php">Ventas Excel</a>
                             <a href="R_prod_excel.php">Productos Excel</a>
                         </div>
                     </div>

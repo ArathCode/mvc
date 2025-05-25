@@ -137,7 +137,7 @@
 
                 <div class="col" style=" min-height:750px; overflow-y:auto; overflow-x:hidden; max-height:790px">
                     <div class="row" style=" min-height:260px; overflow-y:auto; overflow-x:hidden; max-height:300px">
-                        <h2>Hacer venta</h2>
+                        <h2>Carrito</h2>
                         <table id="tablaVenta" class="table">
                             <thead>
                                 <tr>
@@ -153,7 +153,9 @@
                         </table>
 
                         <div>
-                            <button id="btnConfirmarVenta" class="btn btn-success">Confirmar Venta</button>
+                            <div class="gB">
+                            <button id="btnConfirmarVenta" type="button"  class="btn btn-success">Confirmar Venta</button>
+                            </div>
                             <input type="hidden" name="ID_UsuarioVenta" id="ID_UsuarioVenta" value="<?php echo $_SESSION['ID_Usuario']; ?>">
                         </div>
                         

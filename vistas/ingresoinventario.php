@@ -8,7 +8,7 @@
             include_once("head.php");
         ?>
         
-        <script src="asset/js/inventario.js?v=2.6.2"></script>
+        <script src="asset/js/inventario.js?v=2.6.3"></script>
     </head>
 
     <body>
@@ -90,10 +90,12 @@
   <div class="card p-3 shadow-sm">
     <div class="row gy-3 align-items-end">
       
-      <div class="col-md-3">
+      <div class="col-md-3 ">
+        <div class="gB">
         <button type="button" class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#modalAgregarProducto">
           Nuevo producto
         </button>
+        </div>
       </div>
 
       <div class="col-md-3">

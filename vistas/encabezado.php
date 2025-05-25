@@ -1,6 +1,6 @@
 <!-- Scripts y estilos -->
 
- 
+
 <script src="../asset/js/tipousu.js?v=4.9.5"></script>
 
 
@@ -54,10 +54,11 @@
   <li>
     <a href="index.php?pag=corte" class="admin-only">
       <span class="icon">
-        <svg class="svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-            d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5A3.375 3.375 0 0 0 6.375 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 0 0-9-9Z" />
+        <svg class="svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 7.5v9.75a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 17.25V7.5M4.5 7.5V6a2.25 2.25 0 012.25-2.25h10.5A2.25 2.25 0 0119.5 6v1.5M4.5 7.5h15" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12h3m-3 3h3m3-3h3m-3 3h3" />
         </svg>
+
       </span>
       <span class="title">Corte de cuenta</span>
     </a>
@@ -87,9 +88,7 @@
     </a>
   </li>
 
-  
+
 </ul>
 
 <!-- Chatbox -->
- 
-

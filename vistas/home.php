@@ -7,8 +7,9 @@
         include_once("head.php");
         ?>
     <link rel="stylesheet" href="../asset/css/home.css">
-    
-    <script type="module" src="asset/js/acceso.js?v=1.8.3"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="module" src="asset/js/acceso.js?v=1.8.8"></script>
+    <script src="js/bodymovin.js" type="text/javascript"></script>
     <link rel="stylesheet" href="../asset/css/style-cha-ia.css">
     <link href="../asset/images/logo.jpg" rel="icon" />
     </head>
@@ -177,6 +178,7 @@
                                 <td>Nombre</td>
                                 <td>Hora Entrada</td>
                                 <td>Precio</td>
+                                <td>Tipo</td>
                                 <td>Fecha</td>
                             </tr>
                         </thead>
@@ -250,13 +252,19 @@
                             
                             <div class="mb-3">
                                 <label for="precio" class="form-label">Precio</label>
-                                <input type="number" class="form-control" id="precio" name="Precio" placeholder="Ingrese el precio" min="0" max="300" required>
+                                <input type="number" class="form-control" id="precio" name="Precio" placeholder="Ingrese el precio" min="0" max="300" required readonly>
                                 <div class="invalid-feedback">
                                         Password is required
                                     </div>
                                     <div class="valid-feedback">
                                         Looks good!
                                     </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ID_Membresia" class="form-label">Tipo de Membresía</label>
+                                <select class="form-control" id="ID_Membresia" name="ID_Membresia" required>
+                                  
+                                </select>
                             </div>
                             <input type="hidden" value="Visita" id="Tipo" name="Tipo">
                         </form>

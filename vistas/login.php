@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Dragon Gym</title>
     <link rel="stylesheet" href="asset/css/login.css">
+    <link href="asset/images/logo.jpg" rel="icon" />
     <?php
     include_once("head.php");
     ?>

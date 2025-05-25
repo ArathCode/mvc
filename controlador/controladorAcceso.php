@@ -31,6 +31,14 @@ if (isset($_POST["ope"])) {
         $conteo = $acceso->contarAccesos();
         echo json_encode($conteo);
     }
+    elseif ($ope == "OBTENERMEMBRESIAS") {
+        $membresias = $usu->ObtenerMembresias();  // Llamar a la función en el modelo
+        $info = array(
+            "success" => true,
+            "membresias" => $membresias
+        );
+        echo json_encode($info);
+    }
     elseif ($ope === "AGREGAR_ACCESOM") {
         if (!isset($_POST["Precio"], $_POST["ID_Miembro"], $_POST["Tipo"])) {
             echo json_encode(["success" => false, "msg" => "Datos incompletos."]);

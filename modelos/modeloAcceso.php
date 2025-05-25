@@ -54,7 +54,7 @@ class Accesos
     public function listarAccesos()
     {
         $enlace = dbConectar();
-        $sql = "SELECT a.ID_Acceso, a.Hora, a.Fecha, a.Precio, a.ID_Miembro, 
+        $sql = "SELECT a.ID_Acceso, a.Hora, a.Fecha, a.Precio, a.ID_Miembro, a.Tipo, 
                m.Nombre, m.ApellidoP, m.ApellidoM 
         FROM accesos a 
         JOIN miembros m ON a.ID_Miembro = m.ID_Miembro 
@@ -70,6 +70,7 @@ class Accesos
 
         return $accesos;
     }
+    
     public function buscarMiembroPorID($ID_Miembro)
     {
         $enlace = dbConectar();
@@ -100,7 +101,7 @@ class Accesos
         FROM miembro_membresia mm
         JOIN miembros m ON mm.ID_Miembro = m.ID_Miembro
         WHERE mm.FechaFin >= CURDATE()
-          AND mm.ID_Miembro = ?";
+          AND mm.ID_Miembro = ? AND Estatus=1";
 
         $consulta = $enlace->prepare($sql);
         $consulta->bind_param("i", $ID_Miembro);

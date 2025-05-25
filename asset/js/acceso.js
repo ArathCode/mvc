@@ -15,12 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const precio = document.getElementById('precio');
 
     function limitarEntrada(event) {
-        const input = event.target; 
-        const maxLength = 4; 
+        const input = event.target;
+        const maxLength = 4;
 
-        input.value = input.value.replace(/[^0-9]/g, ''); 
+        input.value = input.value.replace(/[^0-9]/g, '');
         if (input.value.length > maxLength) {
-            input.value = input.value.slice(0, maxLength); 
+            input.value = input.value.slice(0, maxLength);
         }
     }
 
@@ -30,7 +30,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const modal = document.getElementById("miModal");
     modal.addEventListener("show.bs.modal", () => {
+        cargarMembresias();
         establecerFechaActual();
+       
+        
     });
 
 
@@ -38,35 +41,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Evento para el formulario de agregar acceso
     const formAgregar = document.querySelector("#formAgregarAcceso");
-    if(formAgregar){
-    formAgregar.addEventListener("submit", (event) => {
-        event.preventDefault();
-        let errores = 0; 
-        let Precio = document.getElementById("precio");
-        if (!validaNumero(Precio)) {
-            errores++; // Sumar error si la validación falla
-            return;  // Opcional: para evitar que siga ejecutándose el código
-        }
-        if(errores==0){
-            agregarAcceso();}
-    });
+    if (formAgregar) {
+        formAgregar.addEventListener("submit", (event) => {
+            event.preventDefault();
+            let errores = 0;
+            let Precio = document.getElementById("precio");
+            if (!validaNumero(Precio)) {
+                errores++; // Sumar error si la validación falla
+                return;  // Opcional: para evitar que siga ejecutándose el código
+            }
+            if (errores == 0) {
+                agregarAcceso();
+            }
+        });
     }
     // Evento para el botón de guardar acceso en el modal
     const btnGuardarAcceso = document.querySelector("#btnGuardarAcceso");
-    if(btnGuardarAcceso){
-    btnGuardarAcceso.addEventListener("click", () => {
-        event.preventDefault();
-        let errores = 0; 
-        let Precio = document.getElementById("precio");
-        if (!validaNumero(Precio)) {
-            errores++; // Sumar error si la validación falla
-            return;  // Opcional: para evitar que siga ejecutándose el código
-        }
-        if(errores==0){
-            agregarAcceso();}
-    });
+    if (btnGuardarAcceso) {
+        btnGuardarAcceso.addEventListener("click", () => {
+            event.preventDefault();
+            let errores = 0;
+            let Precio = document.getElementById("precio");
+            if (!validaNumero(Precio)) {
+                errores++; // Sumar error si la validación falla
+                return;  // Opcional: para evitar que siga ejecutándose el código
+            }
+            if (errores == 0) {
+                agregarAcceso();
+            }
+        });
     }
-  
+
 
     // Buscar miembro en el modal
     const idMiembroInput = document.querySelector("#idMiembro");
@@ -123,6 +128,17 @@ document.querySelectorAll(".filter .close").forEach(button => {
         listarGastos();
     });
 });
+function actualizarCosto() {
+    
+    
+    const costoInput = document.getElementById("precio");
+
+    const precioMembresia = selectMembresia.selectedOptions[0]?.getAttribute("data-precio") || 0;
+    
+
+    // Calcular costo total
+    costoInput.value = (precioMembresia);
+}
 // Función para listar accesos
 function listarAccesos() {
     fetch('controlador/controladorAcceso.php', {
@@ -141,7 +157,9 @@ function listarAccesos() {
                     <td>${acceso.Nombre} ${acceso.ApellidoP} ${acceso.ApellidoM}</td>
                     <td>${acceso.Hora}</td>
                     <td>${acceso.Precio}</td>
+                    <td>${acceso.Tipo}</td>
                     <td>${acceso.Fecha}</td>
+
                 </tr>
                 `;
                 });
@@ -214,23 +232,23 @@ function actualizarContadores() {
         method: 'POST',
         body: new URLSearchParams({ "ope": "CONTAR_ACCESOS" })
     })
-    .then(response => response.json())
-    .then(data => {
-        let visitas = 0;
-        let membresias = 0;
+        .then(response => response.json())
+        .then(data => {
+            let visitas = 0;
+            let membresias = 0;
 
-        data.forEach(item => {
-            if (item.Tipo === "Visita") {
-                visitas = item.cantidad;
-            } else if (item.Tipo === "Miembro") {
-                membresias = item.cantidad;
-            }
-        });
+            data.forEach(item => {
+                if (item.Tipo === "Visita") {
+                    visitas = item.cantidad;
+                } else if (item.Tipo === "Miembro") {
+                    membresias = item.cantidad;
+                }
+            });
 
-        document.querySelector(".contadores .card:nth-child(1) .numbers").textContent = visitas;
-        document.querySelector(".contadores .card:nth-child(2) .numbers").textContent = membresias;
-    })
-    .catch(error => console.error("Error al obtener conteo:", error));
+            document.querySelector(".contadores .card:nth-child(1) .numbers").textContent = visitas;
+            document.querySelector(".contadores .card:nth-child(2) .numbers").textContent = membresias;
+        })
+        .catch(error => console.error("Error al obtener conteo:", error));
 }
 function registrarAcceso() {
     const ID_Miembro = document.getElementById("miembroID").value;
@@ -252,19 +270,78 @@ function registrarAcceso() {
         method: 'POST',
         body: datos
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            Swal.fire("Éxito", "Acceso registrado correctamente", "success");
-            listarAccesos();
-            actualizarContadores();
-        } else {
-            Swal.fire("Error", "No se pudo registrar el acceso", "error");
-        }
-    })
-    .catch(error => console.error("Error al registrar acceso:", error));
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                Swal.fire("Éxito", "Acceso registrado correctamente", "success");
+                listarAccesos();
+                actualizarContadores();
+            } else {
+                Swal.fire("Error", "No se pudo registrar el acceso", "error");
+            }
+        })
+        .catch(error => console.error("Error al registrar acceso:", error));
 }
+function cargarMembresias() {
+    fetch('controlador/controladorRelacionM.php', {
+        method: 'POST',
+        body: new URLSearchParams({ "ope": "OBTENERCLASESDIA" })
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const selectMembresias = document.getElementById("ID_Membresia");
+                selectMembresias.innerHTML = "<option value=''>Seleccione una membresía</option>";
 
+                data.membresias.forEach(membresia => {
+                    const option = document.createElement("option");
+                    option.value = membresia.ID_Membresia;
+                    option.setAttribute("data-precio", membresia.Costo);
+                    option.textContent = membresia.Tipo;
+                    selectMembresias.appendChild(option);
+                });
+
+                // Asignar evento para actualizar el precio
+                selectMembresias.addEventListener("change", function () {
+                    const selectedOption = this.options[this.selectedIndex];
+                    const precio = selectedOption.getAttribute("data-precio");
+                    document.getElementById("precio").value = precio ? `${precio}` : "";
+                });
+            } else {
+                Swal.fire("Error", "No se pudieron cargar las membresías", "error");
+            }
+        })
+        .catch(error => {
+            Swal.fire("Error", "No se pudo cargar la lista de membresías: " + error.message, "error");
+        });
+}
+const searchInput = document.getElementById("searchInput");
+const contenidoM = document.querySelector(".contenidoM");
+const fotoM = document.querySelector(".fotoM");
+
+searchInput.addEventListener("input", () => {
+    if (searchInput.value.trim() === "") {
+        // Limpiar contenido cuando no hay texto
+        contenidoM.innerHTML = "";
+        fotoM.innerHTML = "";
+
+        // Opcional: mostrar estado inicial
+        contenidoM.innerHTML = `<p>#ID de miembro</p>
+                        <h3>Nombre</h2>
+                            <p>Número: </p>
+                            <div class="fechas">
+                                <div class="fechaI">
+                                    dd/mm/yyyy
+                                </div>
+                                <div class="fechaF">
+                                    dd/mm/yyyy
+                                </div>
+                            </div>
+                            <div class="estadoM">
+                                Membresía Activa
+                            </div>`;
+    }
+});
 // Función para buscar un miembro en el contenedor principal
 function buscarMiembro(id) {
     if (id.trim() === "") return;
@@ -273,13 +350,17 @@ function buscarMiembro(id) {
         method: 'POST',
         body: new URLSearchParams({ "ope": "BUSCAR_MIEMBROActivo", "ID_Miembro": id })
     })
-    .then(response => response.json())
-    .then(data => {
-        const contenidoM = document.querySelector(".contenidoM");
+        .then(response => response.json())
+        .then(data => {
+            const contenidoM = document.querySelector(".contenidoM");
 
-        if (!data.miembro) { 
-            // Swal.fire("Sin Membresia", data.msg, "error");
-            contenidoM.innerHTML = `
+            if (!data.miembro) {
+                // Swal.fire("Sin Membresia", data.msg, "error");
+             
+                const fotoDiv = document.querySelector(".fotoM");
+    fotoDiv.innerHTML = "";
+
+                contenidoM.innerHTML = `
                 <div class="error-container">
                     <h3>⚠ Membresía no activa</h3>
                     <p>¿Desea renovar?</p>
@@ -289,29 +370,41 @@ function buscarMiembro(id) {
                     </a>
                 </div>
             `;
-            return;
-        }
+                return;
+            }
 
-        const miembro = data.miembro;
-        contenidoM.innerHTML = `
-            <p>#${miembro.ID_Miembro}</p>
-            <h3>${miembro.Nombre} ${miembro.ApellidoP} ${miembro.ApellidoM}</h3>
-            <p>Teléfono: ${miembro.Telefono}</p>
-            <p>Sexo: ${miembro.Sexo}</p>
-            <div class="fechas">
-                <div class="fechaI">F.Inicio: ${miembro.FechaInicio}</div>
-                <div class="fechaF">F.Fin: ${miembro.FechaFin}</div>
-            </div>
-            <div class="estadoM">${data.success ? "Membresía Activa" : "<h3>Sin Membresía Activa</h3>"}</div>
-            <input type="hidden" id="miembroID" value="${miembro.ID_Miembro}">
-            <input type="hidden" id="precio" value="0">
-            <input type="hidden" id="tipo" value="Miembro">
-            ${data.success ? `<button id="btnRegistrarAcceso" class="btn btn-success">Registrar Acceso</button>` : ""}
-        `;
+            const miembro = data.miembro;
+            
+            // Llenar contenido textual
+            contenidoM.innerHTML = `
+                <p>#${miembro.ID_Miembro}</p>
+                <h3>${miembro.Nombre} ${miembro.ApellidoP} ${miembro.ApellidoM}</h3>
+                <p>Teléfono: ${miembro.Telefono}</p>
+                <p>Sexo: ${miembro.Sexo}</p>
+                <div class="fechas">
+                    <div class="fechaI">F.Inicio: ${miembro.FechaInicio}</div>
+                    <div class="fechaF">F.Fin: ${miembro.FechaFin}</div>
+                </div>
+                <div class="estadoM">${data.success ? "Membresía Activa" : "<h3>Sin Membresía Activa</h3>"}</div>
+                <input type="hidden" id="miembroID" value="${miembro.ID_Miembro}">
+                <input type="hidden" id="precio" value="0">
+                <input type="hidden" id="tipo" value="Miembro">
+                ${data.success ? `<button id="btnRegistrarAcceso" class="btn btn-success">Registrar Acceso</button>` : ""}
+            `;
 
-        if (data.success) {
-            document.getElementById("btnRegistrarAcceso").addEventListener("click", registrarAcceso);
-        }
-    })
-    .catch(error => console.error("Error al buscar miembro:", error));
+            // Llenar la foto con el ícono correspondiente
+            const fotoDiv = document.querySelector(".fotoM");
+            if (miembro.Sexo === "M") {
+                fotoDiv.innerHTML = '<video width="130" height="130" autoplay loop muted> <source src="../asset/images/vf.mp4" type="video/mp4"> Tu navegador no soporta la reproducción de videos.</video>';
+            } else if (miembro.Sexo === "F") {
+                fotoDiv.innerHTML = '<img  width="130" height="130" src="../asset/images/h.gif"></img>';
+            } else {
+                fotoDiv.innerHTML = '<i class="fas fa-user fa-4x" style="color: gray;"></i>'; // Por si acaso
+            }
+
+            if (data.success) {
+                document.getElementById("btnRegistrarAcceso").addEventListener("click", registrarAcceso);
+            }
+        })
+        .catch(error => console.error("Error al buscar miembro:", error));
 }

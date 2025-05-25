@@ -546,9 +546,11 @@ svg{
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 250px;
-  height: 220px;
+  min-height: 220px;
   text-align: center;
   transition: transform 0.3s;
+  align-self: flex-start;
+  align-items: flex-start;
 }
 
 .gasto-card:hover {

@@ -278,7 +278,7 @@ function mostrarProductosFiltrados() {
             <td>${producto.Disponible}</td>
             <td>${producto.TipoProducto}</td>
             <td>
-                <button type="button" class="btn btn-success btn-editar" data-bs-toggle="modal" data-bs-target="#modalEditarProducto" data-id="${producto.ID_Producto}">Editar</button>
+                <button type="button" class="btn btn-secondary btn-editar" data-bs-toggle="modal" data-bs-target="#modalEditarProducto" data-id="${producto.ID_Producto}">Editar</button>
                 <button type="button" class="btn btn-primary btn-agregar" 
                     data-bs-toggle="modal" 
                     data-bs-target="#modalAgregarCantidad" 

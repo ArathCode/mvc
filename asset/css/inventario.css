@@ -464,22 +464,7 @@ svg{
 }
 
 /*  ================= Boton de inventario =======*/
-.gB{
-  margin: auto;
-  width: 150px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-}
-.gB button{
-  padding: 10px;
-  background-color:var(--red);
-  color: white;
-  font-size: 15px;
-  font-weight: 500;
-  border-radius: 20px;
-  border: transparent;
-  cursor: pointer;
-}
+
 .btn .btn-primary,#act{
 padding: 10px;
 background-color:var(--red);
@@ -509,4 +494,19 @@ cursor: pointer;
 }
 #btnE{
   background-color: black;
+}
+.gB{
+    margin: auto;
+
+
+    
+}
+.gB button{
+    background-color:var(--red);
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 10px;
+    border: transparent;
+    cursor: pointer;
 }

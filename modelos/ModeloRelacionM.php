@@ -57,7 +57,7 @@ class Usuarios
     public function ObtenerMembresias()
     {
         $enlace = dbConectar();
-        $sql = "SELECT ID_Membresia, Tipo, Costo,Duracion FROM membresias Where Estatus=1";  // Suponiendo que la tabla se llama 'membresias'
+        $sql = "SELECT ID_Membresia, Tipo, Costo,Duracion FROM membresias Where Estatus=1 AND Duracion != 'dia'";  // Suponiendo que la tabla se llama 'membresias'
         $consulta = $enlace->prepare($sql);
         $consulta->execute();
         $result = $consulta->get_result();
@@ -70,7 +70,21 @@ class Usuarios
         return $membresias;
     }
 
+    public function ObtenerClasesDia()
+    {
+        $enlace = dbConectar();
+        $sql = "SELECT ID_Membresia, Tipo, Costo,Duracion FROM membresias Where Estatus=1 AND Duracion = 'dia'";  // Suponiendo que la tabla se llama 'membresias'
+        $consulta = $enlace->prepare($sql);
+        $consulta->execute();
+        $result = $consulta->get_result();
 
+        $membresias = [];
+        while ($membresia = $result->fetch_assoc()) {
+            $membresias[] = $membresia;
+        }
+
+        return $membresias;
+    }
     public function Agregar($datos)
     {
         $enlace = dbConectar();

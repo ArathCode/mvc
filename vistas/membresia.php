@@ -131,6 +131,7 @@
                                     <select class="form-control" id="Duracion" name="Duracion">
                                         <option value="mes">Mes</option>
                                         <option value="semana">Semana</option>
+                                        <option value="dia">Dia/Visita</option>
                                     </select>
                                 </div>
                             

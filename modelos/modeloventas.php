@@ -97,6 +97,28 @@ class ventas
 
         return $ventas;
     }
+    public function ListarVentas()
+    {
+        $enlace = dbConectar();
+        $sql = "SELECT v.ID_Venta, v.Fecha, u.Nombre AS Usuario, p.Descripcion AS Producto, 
+                    dv.Cantidad, dv.Subtotal
+                FROM detalle_venta dv
+                INNER JOIN ventas v ON dv.ID_Venta = v.ID_Venta
+                INNER JOIN usuarios u ON v.ID_Usuario = u.ID_Usuario
+                INNER JOIN productos p ON dv.ID_Producto = p.ID_Producto
+              ";
+
+        $consulta = $enlace->prepare($sql);
+        $consulta->execute();
+        $result = $consulta->get_result();
+
+        $ventas = [];
+        while ($venta = $result->fetch_assoc()) {
+            $ventas[] = $venta;
+        }
+
+        return $ventas;
+    }
 }
 ?>
 
