@@ -44,6 +44,12 @@
         elseif($pag == "home" && ($tipoUsuario == "admin" || $tipoUsuario == "coach")) {
             include_once("vistas/home.php");
         }
+        elseif($pag == "movil" && ($tipoUsuario == "admin" || $tipoUsuario == "coach")) {
+            include_once("vistas/movil.php");
+        }
+        elseif($pag == "rutinas" && ($tipoUsuario == "admin" || $tipoUsuario == "coach")) {
+            include_once("vistas/rutinas.php");
+        }
         elseif($pag == "membresias" && ($tipoUsuario == "admin")) {
             include_once("vistas/membresia.php");
         }

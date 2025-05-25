@@ -1,0 +1,445 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+
+* {
+  font-family: "Ubuntu", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --red: #8d2e27;
+  --white: #fff;
+  --gray: #f5f5f5;
+  --black1: #222;
+  --black2: #999;
+  --estado: rgb(40, 99, 46);
+  --verde:#108d08;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+
+}
+svg{
+  width: 30px;
+  height: 30px;
+}
+/* =============== Menu ================ */
+.navigation {
+  position: fixed;
+  width: 300px;
+  height: 100%;
+  background: black;
+  border-left: 10px solid black;
+  transition: 0.5s;
+  overflow: hidden;
+}
+.navigation.active {
+  width: 80px;
+}
+
+.navigation ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+.navigation ul li {
+  position: relative;
+  width: 100%;
+  list-style: none;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+.logo{
+  width: 40px;
+  border-radius: 10px;
+}
+.navigation ul li:hover,
+.navigation ul li.hovered {
+  background-color: var(--white);
+}
+
+.navigation ul li:nth-child(1) {
+  margin-bottom: 40px;
+  pointer-events: none;
+}
+
+.navigation ul li a {
+  position: relative;
+  display: block;
+  width: 100%;
+  display: flex;
+  text-decoration: none;
+  color: var(--white);
+}
+.navigation ul li:hover a,
+.navigation ul li.hovered a {
+  color: var(--red);
+}
+.navigation ul li a .icon {
+  position: relative;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  min-width: 60px;
+  height: 60px;
+  line-height: 75px;
+  text-align: center;
+}
+
+.navigation ul li a .title {
+  position: relative;
+  display: block;
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  text-align: start;
+  white-space: nowrap;
+}
+
+/* --------- curva fuera ---------- */
+.navigation ul li:hover a::before,
+.navigation ul li.hovered a::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -50px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 35px 35px 0 10px var(--white);
+  pointer-events: none;
+}
+.navigation ul li:hover a::after,
+.navigation ul li.hovered a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -50px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 35px -35px 0 10px var(--white);
+  pointer-events: none;
+}
+
+
+
+/* ===================== contenido principal ===================== */
+.main {
+  position: absolute;
+  width: calc(100% - 300px);
+  left: 300px;
+  min-height: 100vh;
+  background: var(--white);
+  transition: 0.5s;
+}
+.main.active {
+  width: calc(100% - 80px);
+  left: 80px;
+}
+
+.main {
+  position: absolute;
+  width: calc(100% - 300px);
+  left: 300px;
+  min-height: 100vh;
+  background: var(--white);
+  transition: 0.5s;
+}
+.main.active {
+  width: calc(100% - 80px);
+  left: 80px;
+}
+
+.topbar {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+}
+
+.toggle {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+.subMenu{
+  display: flex;
+  width: 550px;
+  justify-content: space-around;
+  gap: 15px;
+}
+.gastos, .inventario, 
+.adminUsuarios, .reportes, .membresias{
+  padding: 10px 15px;
+  border-radius: 30px;
+  background-color: var(--black1);
+  display: flex;
+  gap: 5px;
+  transition: .2s ease all;
+}
+.membresias{
+  background-color: var(--red);
+  color: white;
+}
+.gastos{
+  color: rgb(12, 189, 80);
+}
+.inventario{
+  color: rgb(241, 241, 18);
+}
+.adminUsuarios{
+  color: rgb(49, 133, 229);
+}
+.reportes{
+  color: rgb(248, 144, 32);
+}
+.subMenu .enlace a{
+  text-decoration: none;
+  color: white;
+}
+
+.inventario:hover .enlace a,
+.adminUsuarios:hover .enlace a,
+.gastos:hover .enlace a,
+.reportes:hover .enlace a{
+  color: black;
+}
+.inventario:hover, 
+.adminUsuarios:hover,.gastos:hover, .reportes:hover{
+  background-color:  rgb(187, 187, 187);
+  color: var(--red);
+}
+.membresias:hover{
+  background-color: var(--black1);
+  color:  #999;
+}
+.contenedor{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  
+}
+.usuario {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.usuario img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.notificacion{
+  cursor: pointer;
+}
+.notificacion:hover{
+  color: var(--red);
+}
+
+/* ======================= Caja de notificaciones ====================== */
+.notifi-box .text{
+  color: var(--red);
+  
+}
+.notifi-box {
+  width: 300px;
+  height: 0px;
+  opacity: 0;
+  position: absolute; 
+  top: 63px;
+  padding: 10px;
+  right: 50px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+  z-index: 9999; 
+  background-color: white; 
+  border-radius: 8px; 
+  transition: height 0.3s ease, opacity 0.3s ease; 
+  overflow: hidden;
+}
+.noti {
+  position: relative;
+  max-height: 300px;
+  padding: 20px;
+  background: var(--white);
+  overflow: auto; 
+}
+.noti::-webkit-scrollbar {
+  width: 10px; 
+  
+}
+.noti::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+.noti::-webkit-scrollbar-thumb {
+  background-color: #888; 
+  border-radius: 10px; 
+  border: 2px solid #f1f1f1; 
+}
+
+.noti::-webkit-scrollbar-thumb:hover {
+  background: var(--red); 
+}
+.noti .imgBx {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.noti .imgBx img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.noti table tr td {
+  padding: 12px 10px;
+}
+
+.noti table tr td h4 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2rem;
+}
+
+.noti table tr td h4 span {
+  font-size: 14px;
+  color: var(--black2);
+}
+
+.noti table tr:hover {
+  background: var(--red);
+  color: var(--white);
+}
+
+.noti table tr:hover td h4 span {
+  color: var(--white);
+}
+/* ====== Calendario =======*/
+
+.calendar {
+  width: 100%;
+  max-width: 280px; 
+  padding: 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px; 
+}
+
+.calendar-header h3 {
+  font-size: 14px; 
+  margin: 0;
+}
+
+.calendar-header button {
+  background-color: #888;
+  border: none;
+  color: white;
+  padding: 3px 6px; 
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px; 
+}
+
+.calendar-header button:hover {
+  background-color: #555;
+}
+
+.weekdays {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.weekdays li {
+  width: 30px; 
+  text-align: center;
+  padding: 5px 0; 
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+}
+
+.dates {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.dates li {
+  width: 30px;
+  height: 30px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3px; 
+  font-size: 12px; 
+  cursor: pointer;
+}
+
+.dates li.today {
+  background-color: var(--red);
+  color: white;
+  border-radius: 50%;
+}
+
+.dates li.inactive {
+  color: #bbb;
+}
+
+.noti .calend {
+  max-width: 250px; 
+  overflow: hidden;
+}
+
+
