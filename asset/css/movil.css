@@ -1,0 +1,712 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+
+* {
+  font-family: "Ubuntu", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --red: #8d2e27;
+  --white: #fff;
+  --gray: #f5f5f5;
+  --black1: #222;
+  --black2: #999;
+  --estado: rgb(40, 99, 46);
+  --verde:#108d08;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+
+}
+svg{
+  width: 30px;
+  height: 30px;
+}
+/* =============== Menu ================ */
+.navigation {
+  position: fixed;
+  width: 300px;
+  height: 100%;
+  background: black;
+  border-left: 10px solid black;
+  transition: 0.5s;
+  overflow: hidden;
+}
+.navigation.active {
+  width: 80px;
+}
+
+.navigation ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+.navigation ul li {
+  position: relative;
+  width: 100%;
+  list-style: none;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+.logo{
+  width: 40px;
+  border-radius: 10px;
+}
+.navigation ul li:hover,
+.navigation ul li.hovered {
+  background-color: var(--white);
+}
+
+.navigation ul li:nth-child(1) {
+  margin-bottom: 40px;
+  pointer-events: none;
+}
+
+.navigation ul li a {
+  position: relative;
+  display: block;
+  width: 100%;
+  display: flex;
+  text-decoration: none;
+  color: var(--white);
+}
+.navigation ul li:hover a,
+.navigation ul li.hovered a {
+  color: var(--red);
+}
+.navigation ul li a .icon {
+  position: relative;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  min-width: 60px;
+  height: 60px;
+  line-height: 75px;
+  text-align: center;
+}
+
+.navigation ul li a .title {
+  position: relative;
+  display: block;
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  text-align: start;
+  white-space: nowrap;
+}
+
+/* --------- curva fuera ---------- */
+.navigation ul li:hover a::before,
+.navigation ul li.hovered a::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -50px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 35px 35px 0 10px var(--white);
+  pointer-events: none;
+}
+.navigation ul li:hover a::after,
+.navigation ul li.hovered a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -50px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 35px -35px 0 10px var(--white);
+  pointer-events: none;
+}
+
+
+
+/* ===================== contenido principal ===================== */
+.main {
+  position: absolute;
+  width: calc(100% - 300px);
+  left: 300px;
+  min-height: 100vh;
+  background: var(--white);
+  transition: 0.5s;
+}
+.main.active {
+  width: calc(100% - 80px);
+  left: 80px;
+}
+
+.main {
+  position: absolute;
+  width: calc(100% - 300px);
+  left: 300px;
+  min-height: 100vh;
+  background: var(--white);
+  transition: 0.5s;
+}
+.main.active {
+  width: calc(100% - 80px);
+  left: 80px;
+}
+
+.topbar {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+}
+
+.toggle {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+.subMenu{
+  display: flex;
+  width: 550px;
+  justify-content: space-around;
+  gap: 15px;
+}
+.promos, .rutina{
+  padding: 10px 15px;
+  border-radius: 30px;
+  background-color: var(--black1);
+  display: flex;
+  gap: 5px;
+  transition: .2s ease all;
+}
+.promos{
+  background-color: var(--red);
+  color: white;
+}
+.rutina{
+  color: rgb(12, 189, 80);
+}
+
+.subMenu .enlace a{
+  text-decoration: none;
+  color: white;
+}
+
+.promos:hover .enlace a{
+  color: white;
+}
+.rutina:hover{
+  background-color:  rgb(187, 187, 187);
+  color: var(--red);
+}
+.promos:hover{
+  background-color: var(--black1);
+  color:  #999;
+}
+
+
+.iconoPro svg{
+    width: 25px;
+    height: 25px;
+}
+
+.iconoRu svg{
+    width: 25px;
+    height: 25px;
+}
+.contenedor{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  
+}
+.usuario {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.usuario img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.notificacion{
+  cursor: pointer;
+}
+.notificacion:hover{
+  color: var(--red);
+}
+
+/* ======================= Caja de notificaciones ====================== */
+.notifi-box .text{
+  color: var(--red);
+  
+}
+.notifi-box {
+  width: 300px;
+  height: 0px;
+  opacity: 0;
+  position: absolute; 
+  top: 63px;
+  padding: 10px;
+  right: 50px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+  z-index: 9999; 
+  background-color: white; 
+  border-radius: 8px; 
+  transition: height 0.3s ease, opacity 0.3s ease; 
+  overflow: hidden;
+}
+.noti {
+  position: relative;
+  max-height: 300px;
+  padding: 20px;
+  background: var(--white);
+  overflow: auto; 
+}
+.noti::-webkit-scrollbar {
+  width: 10px; 
+  
+}
+.noti::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+.noti::-webkit-scrollbar-thumb {
+  background-color: #888; 
+  border-radius: 10px; 
+  border: 2px solid #f1f1f1; 
+}
+
+.noti::-webkit-scrollbar-thumb:hover {
+  background: var(--red); 
+}
+.noti .imgBx {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.noti .imgBx img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.noti table tr td {
+  padding: 12px 10px;
+}
+
+.noti table tr td h4 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2rem;
+}
+
+.noti table tr td h4 span {
+  font-size: 14px;
+  color: var(--black2);
+}
+
+.noti table tr:hover {
+  background: var(--red);
+  color: var(--white);
+}
+
+.noti table tr:hover td h4 span {
+  color: var(--white);
+}
+/* ====== Calendario =======*/
+
+.calendar {
+  width: 100%;
+  max-width: 280px; 
+  padding: 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px; 
+}
+
+.calendar-header h3 {
+  font-size: 14px; 
+  margin: 0;
+}
+
+.calendar-header button {
+  background-color: #888;
+  border: none;
+  color: white;
+  padding: 3px 6px; 
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px; 
+}
+
+.calendar-header button:hover {
+  background-color: #555;
+}
+
+.weekdays {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.weekdays li {
+  width: 30px; 
+  text-align: center;
+  padding: 5px 0; 
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+}
+
+.dates {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.dates li {
+  width: 30px;
+  height: 30px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3px; 
+  font-size: 12px; 
+  cursor: pointer;
+}
+
+.dates li.today {
+  background-color: var(--red);
+  color: white;
+  border-radius: 50%;
+}
+
+.dates li.inactive {
+  color: #bbb;
+}
+
+.noti .calend {
+  max-width: 250px; 
+  overflow: hidden;
+}
+
+
+/* ====== Contenido izquierdo =======*/
+.contenido{
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    margin-top: 15px;
+}
+.promocionesL {
+    width: 60%;
+    height: 100%;
+}
+
+
+/* ====== Vista Móvil =======*/
+.vistaMovil{
+    width: 40%; 
+    height: 100%;
+
+}
+.tituloM h2{
+    font-size: 26px;
+    text-align: center;
+    color: var(--red);
+}
+.dispositivo {
+  width: 400px;
+  height: 550px;
+  border-radius: 30px;
+  background: linear-gradient(180deg, #f7f7f7, #ffffff);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1),
+              0 0 20px rgba(150, 100, 255, 0.1),
+              0 0 10px rgba(0, 255, 200, 0.1);
+  margin: 20px auto;
+}
+
+
+
+/* Contenido móvil */
+.mobile-content {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    border-radius: 15px;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Status bar */
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 16px;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.status-icons {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-bottom: 1px solid #333;
+}
+
+.menu-icon {
+    width: 24px;
+    height: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+}
+
+
+/* Contenido de la promocion */
+.main-content {
+    padding: 20px 16px;
+}
+
+
+/* Promo card */
+.promo-card {
+    background: #333;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.promo-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.promo-badge {
+    width: 60px;
+    height: 60px;
+    background: #ff4444;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.promo-info h3 {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.promo-info p {
+    color: #ff4444;
+    font-size: 14px;
+}
+
+.description h4, .terms h4 {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.description p, .terms p {
+    color: #999;
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+}
+
+.validity {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.clock-icon {
+    color: #ff4444;
+    font-size: 16px;
+}
+
+.validity span {
+    color: white;
+    font-size: 14px;
+}
+
+/* Barcode */
+.barcode-container {
+    background: white;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.barcode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    margin-bottom: 8px;
+    gap: 1px;
+}
+
+.line {
+    background: #000;
+    height: 40px;
+}
+
+.line.thin { width: 1px; }
+.line.medium { width: 2px; }
+.line.thick { width: 3px; }
+
+.barcode-number {
+    color: #999;
+    font-size: 12px;
+}
+
+/* Close button */
+.close-button {
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    width: 100%;
+    cursor: pointer;
+}
+
+/* Pill indicator */
+.pill-indicator {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    background: #333;
+    border-radius: 2px;
+}
+
+
+/* ====================== Todo lo responsivo ========================== */
+@media (max-width: 991px) {
+  .navigation {
+    left: -300px;
+  }
+  .navigation.active {
+    width: 300px;
+    left: 0;
+  }
+  .main {
+    width: 100%;
+    left: 0;
+  }
+  .main.active {
+    left: 300px;
+  }
+
+}
+
+
+
+@media (max-width: 480px) {
+  .contadores {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .cardHeader h2 {
+    font-size: 20px;
+  }
+  .usuario {
+    min-width: 40px;
+  }
+  .navigation {
+    width: 100%;
+    left: -100%;
+    z-index: 1000;
+  }
+  .navigation.active {
+    width: 100%;
+    left: 0;
+  }
+  .toggle {
+    z-index: 10001;
+  }
+  .main.active .toggle {
+    color: #fff;
+    position: fixed;
+    right: 0;
+    left: initial;
+  }
+}
