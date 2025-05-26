@@ -59,6 +59,9 @@
         elseif($pag == "relacion" && ($tipoUsuario == "admin" || $tipoUsuario == "coach")) {
             include_once("vistas/relacionMembresias.php");
         }
+         elseif($pag == "rutinas" && ($tipoUsuario == "admin" || $tipoUsuario == "coach")) {
+            include_once("vistas/rutinas.php");
+        }
         
         else {
             include_once("vistas/acceso_denegado.php");

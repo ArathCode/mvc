@@ -154,10 +154,22 @@
                                 <div class="apa">
                                     <label for="ApellidoP" class="form-label">Apellido Paterno</label>
                                     <input type="text" class="form-control" id="ApellidoP" name="ApellidoP" required>
+                                    <div class="invalid-feedback">
+                                    Password is required
+                                </div>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                                 </div>
                                 <div class="ama">
                                     <label for="ApellidoM" class="form-label">Apellido Materno</label>
                                     <input type="text" class="form-control" id="ApellidoM" name="ApellidoM">
+                                    <div class="invalid-feedback">
+                                    Password is required
+                                </div>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                                 </div>
                             </div>
                             
