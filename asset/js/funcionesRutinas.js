@@ -1,38 +1,62 @@
 $(document).ready(function () {
     // Al hacer clic en el botón de guardar rutina
     $('#btnGuardarRutina').on('click', function (e) {
-        e.preventDefault();
+    e.preventDefault();
 
-        const ID_Miembro = $('#ID_MiembroRutina').val();
+    const ID_Miembro = $('#busquedaID').val();
 
-        let datosCompletos = true;
-        const dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+    if (ID_Miembro === "") {
+        Swal.fire("Atención", "Ingresa el ID del miembro", "warning");
+        return;
+    }
 
-        dias.forEach(function (dia) {
-            const entrenamientoID = $(`#${dia}`).val();
+    const dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+    const promesas = [];
 
-            if (entrenamientoID !== "") {
-                $.post('controlador/controladorRutinas.php', {
-                    ope: 'ASIGNAR',
-                    ID_Miembro: ID_Miembro,
-                    Dia: dia,
-                    ID_Entrenamiento: entrenamientoID
-                }, function (respuesta) {
-                    if (!respuesta.success) {
-                        datosCompletos = false;
-                        console.error("Error asignando rutina para " + dia);
-                    }
-                }, 'json');
-            }
-        });
+    dias.forEach(function (dia) {
+        const entrenamientoID = $(`#${dia}`).val();
 
-        Swal.fire({
-            icon: 'success',
-            title: 'Rutina guardada',
-            showConfirmButton: false,
-            timer: 1500
-        });
+        if (entrenamientoID !== "") {
+            const promesa = $.post('controlador/controladorRutinas.php', {
+                ope: 'ASIGNAR',
+                ID_Miembro: ID_Miembro,
+                Dia: dia,
+                ID_Entrenamiento: entrenamientoID
+            }, 'json');
+
+            promesas.push(promesa);
+        }
     });
+
+    // Espera a que todas las asignaciones terminen
+    Promise.all(promesas)
+        .then(function (respuestas) {
+            let huboError = false;
+
+            respuestas.forEach(function (respuesta) {
+                if (!respuesta.success) {
+                    huboError = true;
+                    console.error("Error en asignación:", respuesta);
+                }
+            });
+
+            if (huboError) {
+                Swal.fire("Error", "Ocurrió un error al guardar alguna rutina", "error");
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Rutina guardada',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        })
+        .catch(function (error) {
+            console.error("Error general:", error);
+            Swal.fire("Error", "No se pudo completar la operación", "error");
+        });
+});
+
 
     // Buscar rutinas existentes al seleccionar miembro
     $("#buscarMiembro").click(function () {
@@ -52,8 +76,10 @@ $(document).ready(function () {
         },
         dataType: "json",
         success: function (res) {
+            $("#NombreMiembro").text("Miembro: " + res.nombre).show();
             if (res.success && res.rutina) {
                 $("#ID_MiembroRutina").val(id);
+                
                 // Llena todos los días
                 $("#Lunes").val(res.rutina.Lunes);
                 $("#Martes").val(res.rutina.Martes);
@@ -61,6 +87,7 @@ $(document).ready(function () {
                 $("#Jueves").val(res.rutina.Jueves);
                 $("#Viernes").val(res.rutina.Viernes);
                 $("#Sabado").val(res.rutina.Sabado);
+                 
             } else {
                 Swal.fire("Error", "No se encontró la rutina", "error");
             }

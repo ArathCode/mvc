@@ -13,7 +13,7 @@ if (isset($_POST["ope"])) {
             if (isset($_POST["ID_Miembro"], $_POST["Dia"], $_POST["ID_Entrenamiento"])) {
                 $datos = [
                     "ID_Miembro" => intval($_POST["ID_Miembro"]),
-                    "Dia" => $_POST["Dia"],
+                    "DiaSemana" => $_POST["Dia"],
                     "ID_Entrenamiento" => intval($_POST["ID_Entrenamiento"])
                 ];
 
@@ -34,16 +34,26 @@ if (isset($_POST["ope"])) {
             break;
 
         case "OBTENER_RUTINA":
-            if (isset($_POST["ID_Miembro"])) {
-                $resultado = $rutina->ObtenerPorMiembro($_POST["ID_Miembro"]);
-                echo json_encode([
-                    "success" => true,
-                    "rutina" => $resultado
-                ]);
-            } else {
-                echo json_encode(["success" => false, "msg" => "Falta ID del miembro."]);
-            }
-            break;
+    if (isset($_POST["ID_Miembro"])) {
+        $datos = $rutina->ObtenerPorMiembro($_POST["ID_Miembro"]);
+        
+        if ($datos !== null) {
+            echo json_encode([
+                "success" => true,
+                "nombre" => $datos["nombre"],
+                "rutina" => $datos["rutina"] // puede estar vacío
+            ]);
+        } else {
+            echo json_encode([
+                "success" => false,
+                "msg" => "Miembro no encontrado."
+            ]);
+        }
+    } else {
+        echo json_encode(["success" => false, "msg" => "Falta ID del miembro."]);
+    }
+    break;
+
 
         default:
             echo json_encode(["success" => false, "msg" => "Operación no válida o parámetros insuficientes."]);
@@ -51,4 +61,3 @@ if (isset($_POST["ope"])) {
 } else {
     echo json_encode(["success" => false, "msg" => "Sin operación válida."]);
 }
-?>

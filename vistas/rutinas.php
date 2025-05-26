@@ -10,6 +10,7 @@
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="../asset/css/rutinas.css">
     
 </head>
 <body>
@@ -29,7 +30,32 @@
                 </svg>
             </div>
 
-            
+             <div class="subMenu">
+
+
+                <div class="promos">
+                    <div class="iconoPro">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m9 14.25 6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0c1.1.128 1.907 1.077 1.907 2.185ZM9.75 9h.008v.008H9.75V9Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm4.125 4.5h.008v.008h-.008V13.5Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                        </svg>
+                    </div>
+                    <div class="enlace">
+                        <a href="index.php?pag=movil">Promociones</a>
+                    </div>
+                </div>
+
+
+                <div class="rutina">
+                    <div class="iconoRu">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23H5.904m10.598-9.75H14.25M5.904 18.5c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 0 1-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 9.953 4.167 9.5 5 9.5h1.053c.472 0 .745.556.5.96a8.958 8.958 0 0 0-1.302 4.665c0 1.194.232 2.333.654 3.375Z" />
+                        </svg>
+                    </div>
+                    <div class="enlace">
+                        <a href="index.php?pag=rutinas">Rutinas</a>
+                    </div>
+                </div>
+            </div>
 
 
             <div class="contenedor">
@@ -84,11 +110,11 @@
             </div>
 
         </div>
-        <h2>Corte de Caja - Dragon's Gym</h2>
+        <h2>Asignación de rutinas - Dragon's Gym</h2>
         <div class="centrar">
             <div class="container mt-4">
     <div class="card shadow">
-        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <div class="card-header bg-black text-white d-flex justify-content-between align-items-center">
             <h5 class="mb-0">Asignar Rutinas a Miembros</h5>
             <div class="input-group w-50">
                 <input type="text" class="form-control" id="busquedaID" placeholder="Buscar por ID del miembro">
@@ -98,7 +124,10 @@
         <div class="card-body">
             <form id="formRutina">
                 <input type="hidden" id="ID_MiembroRutina" name="ID_Miembro">
-
+                <div class="col-md-4">
+                        <label id="NombreMiembro" class="form-label">Miembro:</label>
+                      
+                    </div>
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="Lunes" class="form-label">Lunes</label>
@@ -139,7 +168,7 @@
 
 <!-- Script para cargar entrenamientos y lógica -->
 <script>
-    // Cargar opciones desde PHP (puedes reemplazar con AJAX si quieres que sea dinámico)
+ 
     const cargarEntrenamientos = () => {
         $.ajax({
             url: "controlador/controladorEntrenamientos.php", // debes crear este para listar
@@ -166,7 +195,7 @@
     });
 </script>
 
-<script src="../asset/js/funcionesRutinas.js?v=4.9.4"></script>
+<script src="../asset/js/funcionesRutinas.js?v=4.9.5"></script>
         </div>
         
         
