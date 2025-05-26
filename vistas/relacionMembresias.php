@@ -6,7 +6,7 @@
     <?php
     include_once("head.php");
     ?>
-    <script type="module" src="asset/js/funcionesRelacionM.js?v=1.9.7"></script>
+    <script type="module" src="asset/js/funcionesRelacionM.js?v=1.9.8"></script>
     
 </head>
 
