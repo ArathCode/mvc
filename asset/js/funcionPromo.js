@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     
     function listarPromociones() {
+        
         fetch('../controlador/controladorPromo.php', {
             method: 'POST',
             body: new URLSearchParams({ "ope": "LISTAR_TODAS" })
@@ -38,9 +39,10 @@ document.addEventListener("DOMContentLoaded", () => {
                                             Activar
                                         </button>`
                                     }
-                                    <button class="btn btn-delete" onclick="deletePromo(${promo.id})">
+                                    <button class="btn btn-delete" onclick="deletePromo('${promo.id}')">
                                         Eliminar
                                     </button>
+
                                 </div>
                                 <p class="status-text">
                                     <strong>Estado:</strong> ${promo.is_active == 1 ? 'Activa' : 'Inactiva'}
@@ -58,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    
 
 
     function agregarPromocion() {
@@ -85,6 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
             Swal.fire("Éxito", "Promoción agregada correctamente", "success");
             form.reset();
             document.querySelector("#agregarPromo .btn-close").click();
+
         } else {
             Swal.fire("Error", data.msg || "No se pudo agregar la promoción", "error");
         }
@@ -121,9 +125,57 @@ document.querySelector("#agregarPromo").addEventListener("show.bs.modal", cargar
 document.querySelector("#promoForm").addEventListener("submit", function(e) {
     e.preventDefault();
     agregarPromocion();
-    listarPromociones(); 
+    location.reload();
 });
     
     listarPromociones(); 
 
 });
+
+function deletePromo(id) {
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: "Esta acción eliminará la promoción.",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, eliminar',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      fetch('../controlador/controladorPromo.php', {
+        method: 'POST',
+        body: new URLSearchParams({ "ope": "ELIMINAR", "id": id })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          Swal.fire(
+            '¡Eliminado!',
+            'Promoción eliminada correctamente.',
+            'success'
+          ).then(() => {
+            location.reload();
+          });
+        } else {
+          Swal.fire(
+            'Error',
+            'Error al eliminar la promoción.',
+            'error'
+          );
+        }
+      })
+      .catch(error => {
+        console.error("Error al eliminar:", error);
+        Swal.fire(
+          'Error',
+          'Ocurrió un error al eliminar.',
+          'error'
+        );
+      });
+    }
+  });
+}
+
+

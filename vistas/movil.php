@@ -209,8 +209,8 @@
                                 <div class="col-md-3">
                                     <label for="estado" class="form-label">Estado inicial</label>
                                     <select class="form-select" id="estado">
-                                        <option value="activa" selected>Inactiva</option>
-                                        <option value="inactiva">Activa</option>
+                                        <option value="0" selected>Inactiva</option>
+                                        <option value="1">Activa</option>
                                     </select>
                                 </div>
                             </div>
