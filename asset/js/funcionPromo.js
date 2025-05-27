@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 data.lista.forEach(promo => {
                     contenedor.innerHTML += `
                         <div class="promo-item">
+                        <h3>Codigo:  ${promo.id}</h3>
                             <h3>${promo.title}</h3>
                             <h4>${promo.subtitle}</h4>
                             <p><strong>Oferta:</strong> ${promo.offer_text}</p>

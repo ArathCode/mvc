@@ -47,6 +47,25 @@ export function validaTelefono(elemento) {
         return true;
     }
 }
+
+export function validaPin(elemento) {
+    let validTelefono = /^\d{4}$/; // Solo acepta 4 dígitos numéricos
+    let repetidos = /^(\d)\1{9}$/; // Detecta números con todos los dígitos iguales
+
+    if (elemento.value === "") {
+        mostrarMensaje(elemento, "El campo es obligatorio", false);
+        return false;
+    } else if (!validTelefono.test(elemento.value.trim())) {
+        mostrarMensaje(elemento, "El número debe tener exactamente 4 dígitos numéricos.", false);
+        return false;
+    } else if (repetidos.test(elemento.value.trim())) {
+        mostrarMensaje(elemento, "El número no puede contener solo dígitos repetidos.", false);
+        return false;
+    } else {
+        mostrarMensaje(elemento, "Número válido!", true);
+        return true;
+    }
+}
 export function validaLargo(elemento, largo) {
     if (elemento.value === "") {
         mostrarMensaje(elemento, "El campo es obligatorio", false);
