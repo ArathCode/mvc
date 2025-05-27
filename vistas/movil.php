@@ -105,15 +105,22 @@
 
         <div class="contenido">
             <div class="promocionesL">
-
-                <div class="filtroPromos">
+                <div class="gB">
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#agregarPromo">
+                        Agregar Promoción
+                    </button>
+                </div>
+                <div class="filter-container">
                     <button class="promosAct">Activas</button>
                     <button class="promosInact">Inactivas</button>
-                    <button class="promosTodas">x</button>
+                    <button class="promosTodas">Todo</button>
                 </div>
-                <div class="promoCard">
+                <div class="listaP">
+                    <div class="promoCard">
 
-                </div>
+                    </div>
+                </div>   
+                
             </div>
 
             <div class="vistaMovil">
@@ -173,6 +180,78 @@
 
         </div>
         
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="agregarPromo" tabindex="-1" aria-labelledby="agregarPromo" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="promoModalLabel">Agregar Promoción</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="promoForm">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="nombrePromo" class="form-label">Nombre de la promoción</label>
+                                    <input type="text" class="form-control" id="nombrePromo" placeholder="Ej. Promo Friends">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="usuarioAsignado" class="form-label">Usuario</label>
+                                    <select class="form-select" id="usuarioAsignado">
+                                        <option value="">Seleccionar...</option>
+                                        
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="estado" class="form-label">Estado inicial</label>
+                                    <select class="form-select" id="estado">
+                                        <option value="activa" selected>Inactiva</option>
+                                        <option value="inactiva">Activa</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="descripcion" class="form-label">Descripción</label>
+                                <input type="text" class="form-control" id="descripcion" placeholder="Ej. Paga 700 por ti y tu bestfriend">
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="oferta" class="form-label">Oferta</label>
+                                    <input type="text" class="form-control" id="oferta" placeholder="Ej. 2x1">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="categoria" class="form-label">Categoría</label>
+                                    <input type="text" class="form-control" id="categoria" placeholder="Ej. Membresía">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="fechaValidez" class="form-label">Válido hasta</label>
+                                    <input type="date" class="form-control" id="fechaValidez">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="terminos" class="form-label">Términos y condiciones</label>
+                                <textarea class="form-control" id="terminos" rows="2" placeholder="Ej. Oferta válida hasta fin de mes. Incluye acceso a todas las áreas."></textarea>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" form="promoForm" class="btn btn-primary">Guardar</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
 
     </div>
 

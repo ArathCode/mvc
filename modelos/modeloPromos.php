@@ -45,11 +45,13 @@ class Promos {
 
     public function Agregar($datos) {
         $enlace = dbConectar();
-        $sql = "INSERT INTO promo (title, subtitle, offer_text, description, terms, valid_until, category, is_active, ID_Usuario) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO promo (id, title, subtitle, offer_text, description, terms, valid_until, category, is_active, ID_Usuario) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
         $consulta = $enlace->prepare($sql);
         $consulta->bind_param(
-            "sssssssii",
+            "ssssssssii",
+            $datos["id"],
             $datos["title"],
             $datos["subtitle"],
             $datos["offer_text"],
@@ -67,6 +69,7 @@ class Promos {
 
         return $resultado;
     }
+
 
     public function Editar($datos) {
         $enlace = dbConectar();
@@ -106,6 +109,21 @@ class Promos {
 
         return $resultado;
     }
+    public function ListarUsuarios() {
+        $enlace = dbConectar();
+        $sql = "SELECT ID_Usuario, CONCAT(Nombre, ' ', ApellidoP) AS nombre_completo FROM usuarios";
+        $resultado = $enlace->query($sql);
+
+        $usuarios = [];
+        while ($fila = $resultado->fetch_assoc()) {
+            $usuarios[] = $fila;
+        }
+
+        $enlace->close();
+        return $usuarios;
+    }
+
+
 
     public function ObtenerPromo($id) {
         $enlace = dbConectar();

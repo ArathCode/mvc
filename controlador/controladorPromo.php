@@ -8,6 +8,17 @@ if (isset($_POST["ope"])) {
 
     header('Content-Type: application/json');
 
+    function generarUUID() {
+        return sprintf(
+            '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0x0fff) | 0x4000,
+            mt_rand(0, 0x3fff) | 0x8000,
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+        );
+    }
+
     switch ($ope) {
 
         case "LISTAR_ACTIVAS":
@@ -52,7 +63,10 @@ if (isset($_POST["ope"])) {
                 isset($_POST["title"], $_POST["subtitle"], $_POST["offer_text"], $_POST["description"],
                     $_POST["terms"], $_POST["valid_until"], $_POST["category"], $_POST["is_active"], $_POST["ID_Usuario"])
             ) {
+                $uuid = generarUUID(); 
+
                 $datos = [
+                    "id" => $uuid,
                     "title" => $_POST["title"],
                     "subtitle" => $_POST["subtitle"],
                     "offer_text" => $_POST["offer_text"],
@@ -68,6 +82,11 @@ if (isset($_POST["ope"])) {
             } else {
                 echo json_encode(["success" => false, "msg" => "Faltan datos para agregar la promo."]);
             }
+            break;
+
+        case "LISTAR_USUARIOS":
+            $resultado = $promo->ListarUsuarios(); 
+            echo json_encode($resultado);
             break;
 
         case "EDITAR":
