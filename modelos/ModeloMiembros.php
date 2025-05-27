@@ -5,7 +5,7 @@ class Miembros {
         $enlace = dbConectar();
         $offset = ($pagina - 1) * $registrosPorPagina;
 
-        $sql = "SELECT ID_Miembro, Nombre, ApellidoP, ApellidoM, Sexo, Telefono FROM miembros WHERE 1=1 AND Estatus=1";
+        $sql = "SELECT ID_Miembro, Nombre, ApellidoP, ApellidoM, Sexo, Telefono,pin FROM miembros WHERE 1=1 AND Estatus=1";
 
         if (isset($filtros['ID_Miembro'])) {
             $sql .= " AND ID_Miembro LIKE ?";
@@ -79,7 +79,7 @@ class Miembros {
             $datos["ApellidoP"],
             $datos["ApellidoM"],
             $datos["Sexo"],
-            $datos["Telefono"]
+            $datos["Telefono"],
         );
 
         $resultado = $consulta->execute();
@@ -91,16 +91,17 @@ class Miembros {
 
     public function Editar($datos) {
         $enlace = dbConectar();
-        $sql = "UPDATE miembros SET Nombre=?, ApellidoP=?, ApellidoM=?, Sexo=?, Telefono=? WHERE ID_Miembro=?";
+        $sql = "UPDATE miembros SET Nombre=?, ApellidoP=?, ApellidoM=?, Sexo=?, Telefono=?,pin=? WHERE ID_Miembro=?";
         $consulta = $enlace->prepare($sql);
 
         $consulta->bind_param(
-            "sssssi",
+            "sssssii",
             $datos["Nombre"],
             $datos["ApellidoP"],
             $datos["ApellidoM"],
             $datos["Sexo"],
             $datos["Telefono"],
+            $datos["pin"],
             $datos["ID_Miembro"]
         );
 
@@ -127,7 +128,7 @@ class Miembros {
 
     public function ObtenerMiembro($ID_Miembro) {
         $enlace = dbConectar();
-        $sql = "SELECT ID_Miembro, Nombre, ApellidoP, ApellidoM, Sexo, Telefono FROM miembros WHERE ID_Miembro=?";
+        $sql = "SELECT ID_Miembro, Nombre, ApellidoP, ApellidoM, Sexo, Telefono, pin FROM miembros WHERE ID_Miembro=?";
         $consulta = $enlace->prepare($sql);
 
         $consulta->bind_param("i", $ID_Miembro);

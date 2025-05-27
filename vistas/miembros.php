@@ -192,6 +192,7 @@
                                 </div>
                             </div>
 
+
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </form>
                     </div>
@@ -253,6 +254,16 @@
                             <div class="mb-3">
                                 <label for="TelefonoEdit" class="form-label">Teléfono</label>
                                 <input type="text" class="form-control" id="TelefonoEdit" name="TelefonoEdit" maxlength="10" required>
+                                <div class="invalid-feedback">
+                                    Password is required
+                                </div>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pinEdit" class="form-label">PIN</label>
+                                <input type="text" class="form-control" id="pinEdit" name="pinEdit" maxlength="4" required>
                                 <div class="invalid-feedback">
                                     Password is required
                                 </div>

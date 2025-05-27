@@ -1,4 +1,4 @@
-import { validaLargo, validaRango, validaSoloLetras, validaTelefono } from "./validaciones.js?v=3.9.1";
+import { validaLargo, validaRango, validaSoloLetras, validaTelefono,validaPin } from "./validaciones.js?v=3.9.1";
 
 document.addEventListener("DOMContentLoaded", () => {
     let filtros = document.querySelectorAll(".filter");
@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 let ApellidoPE = document.querySelector("#ApellidoPEdit");
                 let ApellidoME = document.querySelector("#ApellidoMEdit");
                 let telE = document.querySelector("#TelefonoEdit");
+                let pinE = document.querySelector("#pinEdit");
                 
                 if(!validaSoloLetras(nombreE))
                     erroresE++;
@@ -64,7 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     erroresE++;
                 if(!validaTelefono(telE))
                     erroresE++;
-
+                if(!validaPin(pinE))
+                    erroresE++;
                 if(erroresE==0)
                     editarUsuario();
             });
@@ -82,7 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     let ApellidoM = document.querySelector("#ApellidoM");
                     let correo = document.querySelector("#Sexo");
                     let tel = document.querySelector("#Telefono");
-    
                     if(!validaSoloLetras(nombre))
                         errores++;
                     if(!validaSoloLetras(ApellidoP))
@@ -91,7 +92,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         errores++;
                     if(!validaTelefono(tel))
                         errores++;
-                    
                     if(errores==0)
                         agregarUsuario();
             });
@@ -159,6 +159,7 @@ function renderizarMiembros(lista) {
                 <p># ${miembro.ID_Miembro}</p>
                 <h3>${miembro.Nombre} ${miembro.ApellidoP} ${miembro.ApellidoM}</h3>
                 <p><strong>Teléfono:</strong> ${miembro.Telefono}</p>
+                <p><strong>PIN:</strong> ${miembro.pin}</p>
                 <p><strong>Sexo:</strong> ${miembro.Sexo}</p>
                 <div class="card-buttons">
                     <button class="btn btn-warning btn-editar" id="btnEd" data-id="${miembro.ID_Miembro}" data-bs-toggle="modal" data-bs-target="#modalEditar">Editar</button>
@@ -388,6 +389,7 @@ function cargarMiembro(id) {
             document.querySelector("#ApellidoMEdit").value = data.miembro.ApellidoM;
             document.querySelector("#SexoEdit").value = data.miembro.Sexo;
             document.querySelector("#TelefonoEdit").value = data.miembro.Telefono;
+             document.querySelector("#pinEdit").value = data.miembro.pin;
 
         } else {
             Swal.fire("Error", "No se pudo obtener la información del usuario", "error");
