@@ -1,4 +1,13 @@
+google.charts.load('current', {
+            'packages': ['corechart' ]
+        });
 
+        google.charts.setOnLoadCallback(cargarMiembrosPorSexo);
+        google.charts.setOnLoadCallback(cargarEstadoMembresias);
+        google.charts.setOnLoadCallback(cargarActivasTipo);
+        google.charts.setOnLoadCallback(cargarAccesos);
+        google.charts.setOnLoadCallback(cargarComparativa);
+        google.charts.setOnLoadCallback(cargarIngresos);
 
 function cargarMiembrosPorSexo() {
     
@@ -36,6 +45,75 @@ function llenarTablaSexo(miembros_sexo) {
         tbody.appendChild(tr);
     });
 }
+function cargarAccesos() {
+    let params = new URLSearchParams();
+    params.append("ope", "OBTENER_Accesos_Diarios");
+
+    fetch("../controlador/controladorEstadisticas.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: params.toString(),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (!data.success) {
+            console.error("Error al cargar accesos diarios:", data.msg);
+            return;
+        }
+
+        // Dibujar la gráfica con los datos
+        dibujarGraficaAccesosDiarios(data.accesos_diarios);
+    })
+    .catch(error => {
+        console.error("Error en la solicitud:", error);
+    });
+}
+function cargarComparativa() {
+    let params = new URLSearchParams();
+    params.append("ope", "OBTENER_Comparativa_Ingresos_Gastos");
+
+    fetch("../controlador/controladorEstadisticas.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: params.toString(),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (!data.success) {
+            console.error("Error al cargar comparativa ingresos vs gastos:", data.msg);
+            return;
+        }
+
+        // Dibujar la gráfica
+        dibujarGraficaComparativaIngresosGastos(data.comparativa_ingresos_gastos);
+    })
+    .catch(error => {
+        console.error("Error en la solicitud:", error);
+    });
+}
+function cargarIngresos() {
+    let params = new URLSearchParams();
+    params.append("ope", "OBTENER_Ingresos_Mensuales");
+
+    fetch("../controlador/controladorEstadisticas.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: params.toString(),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (!data.success) {
+            console.error("Error al cargar ingresos mensuales:", data.msg);
+            return;
+        }
+
+        // Dibujar la gráfica con los datos
+        dibujarGraficaIngresosMensuales(data.ingresos_mensuales);
+    })
+    .catch(error => {
+        console.error("Error en la solicitud:", error);
+    });
+}
 function cargarEstadoMembresias() {
     let params = new URLSearchParams();
     params.append("ope", "OBTENER_Estado_Membresias");
@@ -57,10 +135,9 @@ function cargarEstadoMembresias() {
         console.error("Error en la solicitud:", error);
     });
 }
-
-function cargarGastosMensuales() {
+function cargarActivasTipo() {
     let params = new URLSearchParams();
-    params.append("ope", "OBTENER_Gastos_Mensuales");
+    params.append("ope", "OBTENER_Membresias_Activas_Tipo");
 
     fetch("../controlador/controladorEstadisticas.php", {
         method: "POST",
@@ -70,11 +147,12 @@ function cargarGastosMensuales() {
     .then(response => response.json())
     .then(data => {
         if (!data.success) {
-            console.error("Error al cargar gastos mensuales:", data.msg);
+            console.error("Error al cargar membresías activas por tipo:", data.msg);
             return;
         }
-        dibujarGraficaGastosMensuales(data.gastos_mensuales);
-        dibujarGraficaGastosMensualess(data.gastos_mensuales);
+
+        // Llamar a la función que dibuja la gráfica
+        dibujarGraficaMembresiasActivasTipo(data.membresias_activas_tipo);
     })
     .catch(error => {
         console.error("Error en la solicitud:", error);
@@ -197,5 +275,88 @@ function dibujarGraficaGastosMensualess(lista) {
     };
 
     let chart = new google.visualization.ColumnChart(document.getElementById('chart_div4'));
+    chart.draw(data, options);
+}
+function dibujarGraficaMembresiasActivasTipo(membresias_activas_tipo) {
+    const datosTransformados = membresias_activas_tipo.map(item => [item.tipousu, parseInt(item.sum)]);
+    
+    const data = google.visualization.arrayToDataTable([
+        ['Tipo de Membresía', 'Cantidad Activa'],
+        ...datosTransformados
+    ]);
+
+    const options = {
+        title: 'Membresías Activas por Tipo',
+        height: 400,
+        pieHole: 0.4,
+        colors: ['#4caf50', '#ff9800', '#00bcd4'],
+        chartArea: { width: '90%', height: '80%' },
+        legend: { position: 'bottom' }
+    };
+
+    const chart = new google.visualization.PieChart(document.getElementById('chart_membresias'));
+    chart.draw(data, options);
+}
+function dibujarGraficaAccesosDiarios(accesos_diarios) {
+    const datosTransformados = accesos_diarios.map(item => [item.tipousu, parseInt(item.sum)]);
+
+    const data = google.visualization.arrayToDataTable([
+        ['Fecha', 'Accesos'],
+        ...datosTransformados
+    ]);
+
+    const options = {
+        title: 'Accesos Diarios (últimos 30 días)',
+        curveType: 'function',
+        legend: { position: 'bottom' },
+        height: 400,
+        chartArea: { width: '85%', height: '75%' },
+        colors: ['#1976d2']
+    };
+
+    const chart = new google.visualization.LineChart(document.getElementById('chart_accesos'));
+    chart.draw(data, options);
+}
+function dibujarGraficaIngresosMensuales(ingresos_mensuales) {
+    const datosTransformados = ingresos_mensuales.map(item => [item.tipousu, parseFloat(item.sum)]);
+
+    const data = google.visualization.arrayToDataTable([
+        ['Mes', 'Ingresos'],
+        ...datosTransformados
+    ]);
+
+    const options = {
+        title: 'Ingresos Mensuales por Ventas',
+        height: 400,
+        chartArea: { width: '85%', height: '75%' },
+        legend: { position: 'none' },
+        colors: ['#009688']
+    };
+
+    const chart = new google.visualization.ColumnChart(document.getElementById('chart_ingresos'));
+    chart.draw(data, options);
+}
+function dibujarGraficaComparativaIngresosGastos(data_comp) {
+    const datosTransformados = data_comp.map(item => [
+        item.tipousu,
+        parseFloat(item.ingresos),
+        parseFloat(item.gastos)
+    ]);
+
+    const data = google.visualization.arrayToDataTable([
+        ['Mes', 'Ingresos', 'Gastos'],
+        ...datosTransformados
+    ]);
+
+    const options = {
+        title: 'Comparativa de Ingresos vs Gastos Mensuales',
+        height: 400,
+        chartArea: { width: '85%', height: '75%' },
+        bars: 'group',
+        legend: { position: 'bottom' },
+        colors: ['#4caf50', '#f44336']
+    };
+
+    const chart = new google.visualization.ColumnChart(document.getElementById('chart_comparativa'));
     chart.draw(data, options);
 }

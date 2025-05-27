@@ -13,24 +13,24 @@ $respuesta = "Lo siento, no entendí tu pregunta.";
 if (strpos($pregunta, "horario") !== false) {
     $respuesta = "Nuestro horario es de lunes a sábado de 6 AM a 10 PM.";
 } elseif (strpos($pregunta, "precio") !== false || strpos($pregunta, "membresía") !== false) {
-    $respuesta = "La mensualidad es de $500 MXN. También hay opciones semanales y trimestrales.";
+    $respuesta = "La mensualidad es de $420 MXN. También hay opciones semanales y trimestrales.";
 } elseif (strpos($pregunta, "registro") !== false) {
     $respuesta = "Puedes registrarte directamente en recepción ";
 } elseif (strpos($pregunta, "dónde están") !== false || strpos($pregunta, "ubicación") !== false || strpos($pregunta, "dirección") !== false) {
-    $respuesta = "Estamos ubicados en Calle Ejemplo #123, Colonia Centro. ¡Te esperamos!";
+    $respuesta = "Estamos ubicados en Calle Allende #73, Colonia El Barrio. ¡Te esperamos!";
 } elseif (strpos($pregunta, "qué es dragon gym") !== false || strpos($pregunta, "quiénes son") !== false) {
-    $respuesta = "Dragon Gym es un gimnasio completo con áreas de pesas, clases funcionales, boxeo y más.";
+    $respuesta = "Dragon Gym es un gimnasio completo con áreas de pesas, clases zumba, box y más.";
 }
  elseif (strpos($pregunta, "clases") !== false || strpos($pregunta, "qué clases hay") !== false) {
-    $respuesta = "Tenemos clases de box, funcional, y entrenamiento personalizado.";
+    $respuesta = "Tenemos clases de zumba, funcional, y entrenamiento personalizado.";
 } elseif (strpos($pregunta, "horario de box") !== false) {
-    $respuesta = "Las clases de box son de lunes a viernes a las 7:00 p.m.";
+    $respuesta = "Las clases de zumba son de lunes a viernes a las 7:00 p.m.";
 } elseif (strpos($pregunta, "entrenador") !== false || strpos($pregunta, "entrenadores") !== false) {
     $respuesta = "Contamos con entrenadores certificados para ayudarte en tu rutina y objetivos.";
 } elseif (strpos($pregunta, "regadera") !== false || strpos($pregunta, "baño") !== false) {
-    $respuesta = "Sí, contamos con regaderas y baños para hombres y mujeres.";
+    $respuesta = "No, contamos con baños para hombres y mujeres.";
 } elseif (strpos($pregunta, "ayuda") !== false || strpos($pregunta, "soporte") !== false) {
-    $respuesta = "Puedes hablar con el personal en recepción o escribirnos por WhatsApp para atención directa.";
+    $respuesta = "Puedes hablar con el personal en recepción o escribirnos por WhatsApp 2481557389 para atención directa.";
 }
 
 // Responder en formato JSON
