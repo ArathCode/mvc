@@ -125,7 +125,7 @@
 
             <div class="vistaMovil">
                 <div class="tituloM">
-                    <h2>Vista previa</h2>
+                    <h2>Vista móvil</h2>
                 </div>
                 <div class="dispositivo">
                     <div class="mobile-content">
@@ -144,35 +144,37 @@
                                 <div class="promo-header">
                                     <div class="promo-badge">2x1</div>
                                     <div class="promo-info">
-                                        <h3>Promo Friends</h3>
-                                        <p>Paga 700 por ti y tu bestfriend</p>
+                                        <h3>Título de la promo</h3>
+                                        <p>Subtítulo</p>
                                     </div>
                                 </div>
                                 
                                 <div class="description">
                                     <h4>Descripción</h4>
-                                    <p>Paga 700 por una mensualidad doble antes de la fecha establecida.</p>
+                                    <p>Descripción de la promoción.</p>
                                 </div>
                                 
                                 <div class="terms">
                                     <h4>Términos y Condiciones</h4>
-                                    <p>Oferta válida hasta fin de mes. Incluye acceso a todas las áreas.</p>
+                                    <p>Oferta válida hasta..</p>
                                 </div>
                                 
                                 <div class="validity">
                                     <span class="clock-icon"></span>
-                                    <span>Válido hasta: 30/5/2025</span>
+                                    <span>Válido hasta: dd/mm/yy</span>
                                 </div>
                                 
                                 <div class="barcode-container">
                                     <div class="barcode" id="barcode"></div>
-                                    <div class="barcode-number">#1071780a-3768-11f0-93d3-525400dc2c04</div>
+                                    <div class="barcode-number">  #1071780a-3768-11f0-93d3-525400dc2c04</div>
                                 </div>
                                 
                                 <button class="close-button">
                                     Cerrar promoción
                                 </button>
                             </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -182,7 +184,7 @@
         
 
 
-        <!-- Modal -->
+        <!-- Modal agregar -->
         <div class="modal fade" id="agregarPromo" tabindex="-1" aria-labelledby="agregarPromo" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -244,13 +246,86 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" form="promoForm" class="btn btn-primary">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnCancelar">Cancelar</button>
+                        <button type="submit" form="promoForm" class="btn btn-primary" id="btnGuardar">Guardar</button>
                     </div>
 
                 </div>
             </div>
         </div>
+
+
+
+         <!-- Modal editar -->
+        <div class="modal fade" id="editarPromo" tabindex="-1" aria-labelledby="editarPromo" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="promoModalLabel">Editar Promoción</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="promoFormE">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="nombrePromoE" class="form-label">Nombre de la promoción</label>
+                                    <input type="text" class="form-control" id="nombrePromoE" placeholder="Ej. Promo Friends">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="usuarioAsignadoE" class="form-label">Usuario</label>
+                                    <select class="form-select" id="usuarioAsignadoE">
+                                        <option value="">Seleccionar...</option>
+                                        
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="estadoE" class="form-label">Estado inicial</label>
+                                    <select class="form-select" id="estadoE">
+                                        <option value="0" selected>Inactiva</option>
+                                        <option value="1">Activa</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="descripcionE" class="form-label">Descripción</label>
+                                <input type="text" class="form-control" id="descripcionE" placeholder="Ej. Paga 700 por ti y tu bestfriend">
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="ofertaE" class="form-label">Oferta</label>
+                                    <input type="text" class="form-control" id="ofertaE" placeholder="Ej. 2x1">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="categoriaE" class="form-label">Categoría</label>
+                                    <input type="text" class="form-control" id="categoriaE" placeholder="Ej. Membresía">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="fechaValidezE" class="form-label">Válido hasta</label>
+                                    <input type="date" class="form-control" id="fechaValidezE">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="terminosE" class="form-label">Términos y condiciones</label>
+                                <textarea class="form-control" id="terminosE" rows="2" placeholder="Ej. Oferta válida hasta fin de mes. Incluye acceso a todas las áreas."></textarea>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  id="btnCancelar">Cancelar</button>
+                        <button id="btnGuardarE" type="button" class="btn btn-success">Guardar</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
 
 
     </div>

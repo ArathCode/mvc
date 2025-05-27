@@ -499,6 +499,22 @@ svg{
     border: transparent;
     cursor: pointer;
 }
+
+#promoModalLabel{
+  color: var(--red);
+}
+#btnGuardar, #btnGuardarE{
+  background-color: var(--verde);
+  border: transparent;
+
+}
+
+
+#btnCancelar{
+  background-color: var(--red);
+    border: transparent;
+
+}
 .listaP{
   width: 100%;
   margin: 20px;
