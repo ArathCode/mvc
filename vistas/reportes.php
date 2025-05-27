@@ -8,17 +8,11 @@
     ?>
    
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript" src="../asset/js/estadisticas.js?v=1.4.9.3"></script>
+    <script type="text/javascript" src="../asset/js/estadisticas.js?v=1.4.9.9"></script>
    
     <script type="text/javascript">
     
-        google.charts.load('current', {
-            'packages': ['corechart' ]
-        });
-
-        google.charts.setOnLoadCallback(cargarMiembrosPorSexo);
-        google.charts.setOnLoadCallback(cargarEstadoMembresias);
-        google.charts.setOnLoadCallback(cargarGastosMensuales);
+        
     </script>
    <link rel="stylesheet" href="../asset/css/usuarios.css">
    <link rel="stylesheet" href="../asset/css/Reportes.css">
@@ -133,7 +127,7 @@
                 <div class="graficosR" >
                 <div class="gra12">
                     <div class="gra1">
-                        <div id="chart_div2" ></div>
+                        <div id="chart_membresias" ></div>
                     </div>
                     <div class="gra2">
                     <div id="chart_div" ></div>
@@ -142,10 +136,18 @@
                 </div>
                 <div class="gra12">
                 <div class="gra3">
-                    <div id="chart_div3" ></div>
+                    <div id="chart_accesos" ></div>
                 </div>
                 <div class="gra3">
-                    <div id="chart_div4" ></div>
+                    <div id="chart_div2" ></div>
+                </div>
+                </div>
+                <div class="gra12">
+                <div class="gra3">
+                    <div id="chart_comparativa" ></div>
+                </div>
+                <div class="gra3">
+                    <div id="chart_ingresos" ></div>
                 </div>
                 </div>
             </div>
