@@ -111,9 +111,9 @@
                     </button>
                 </div>
                 <div class="filter-container">
-                    <button class="promosAct">Activas</button>
-                    <button class="promosInact">Inactivas</button>
-                    <button class="promosTodas">Todo</button>
+                    <button class="filter promosAct">Activas</button>
+                    <button class="filter promosInact">Inactivas</button>
+                    <button class="filter promosTodas">Todo</button>
                 </div>
                 <div class="listaP">
                     <div class="promoCard">

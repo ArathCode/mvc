@@ -1,5 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
+    const botones = document.querySelectorAll('.filter-container .filter');
+
+    botones.forEach(boton => {
+        boton.addEventListener('click', () => {
+            botones.forEach(b => b.classList.remove('active'));
+
+            boton.classList.add('active');
+
+            if (boton.classList.contains('promosAct')) {
+                listarPromocionesActivas();
+            } else if (boton.classList.contains('promosInact')) {
+                listarPromocionesInactivas();
+            } else {
+                listarPromociones(); 
+            }
+        });
+    });
+    document.querySelector('.promosTodas').click();
     
     
     function listarPromociones() {
@@ -60,7 +77,71 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    
+    function listarPromocionesActivas() {
+        fetch('../controlador/controladorPromo.php', {
+            method: 'POST',
+            body: new URLSearchParams({ "ope": "LISTAR_ACTIVAS" })
+        })
+        .then(response => response.json())
+        .then(data => renderizarPromos(data))
+        .catch(error => console.error("Error al cargar promociones activas:", error));
+    }
+
+    function listarPromocionesInactivas() {
+        fetch('../controlador/controladorPromo.php', {
+            method: 'POST',
+            body: new URLSearchParams({ "ope": "LISTAR_INACTIVAS" })
+        })
+        .then(response => response.json())
+        .then(data => renderizarPromos(data))
+        .catch(error => console.error("Error al cargar promociones inactivas:", error));
+    }
+
+    function renderizarPromos(data) {
+        const contenedor = document.querySelector(".promoCard");
+        contenedor.innerHTML = "";
+
+        if (data.success && data.lista.length > 0) {
+            data.lista.forEach(promo => {
+                contenedor.innerHTML += `
+                    <div class="promo-item ${promo.is_active == 1 ? '' : 'inactive'}">
+                        <h3>${promo.title}</h3>
+                        <h4>${promo.subtitle}</h4>
+                        <p>Codigo: ${promo.id}</p>
+                        <p><strong>Oferta:</strong> ${promo.offer_text}</p>
+                        <p>${promo.description}</p>
+                        <p><strong>Términos:</strong> ${promo.terms}</p>
+                        <p><strong>Válido hasta:</strong> ${promo.valid_until}</p>
+                        <p><strong>Categoría:</strong> ${promo.category}</p>
+                        
+                        <div class="status-container">
+                            <div class="action-buttons">
+                                <button class="btn btn-edit" onclick="editPromo(${promo.id})">
+                                    Editar
+                                </button>
+                                ${promo.is_active == 1 ? 
+                                    `<button class="btn btn-deactivate" onclick="togglePromo(${promo.id}, 0)">
+                                        Desactivar
+                                    </button>` : 
+                                    `<button class="btn btn-activate" onclick="togglePromo(${promo.id}, 1)">
+                                        Activar
+                                    </button>`
+                                }
+                                <button class="btn btn-delete" onclick="deletePromo('${promo.id}')">
+                                    Eliminar
+                                </button>
+                            </div>
+                            <p class="status-text">
+                                <strong>Estado:</strong> ${promo.is_active == 1 ? 'Activa' : 'Inactiva'}
+                            </p>
+                        </div>
+                    </div>
+                `;
+            });
+        } else {
+            contenedor.innerHTML = "<p>No hay promociones disponibles.</p>";
+        }
+    }
 
 
     function agregarPromocion() {

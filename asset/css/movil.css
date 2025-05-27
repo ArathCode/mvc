@@ -476,7 +476,7 @@ svg{
 }
 
 .filter.active {
-    background-color: var(--red);
+    background-color: var(--black1);
     color: white;
     border-color: var(--red);
 }
@@ -502,6 +502,7 @@ svg{
 .listaP{
   width: 100%;
   margin: 20px;
+  padding-bottom: 60px;
   height: 650px;
   display: flex;
   flex-direction: column; 
