@@ -42,64 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector('.promosTodas').click();
     
     
-    function listarPromociones() {
-        
-        fetch('../controlador/controladorPromo.php', {
-            method: 'POST',
-            body: new URLSearchParams({ "ope": "LISTAR_TODAS" })
-        })
-        .then(response => response.json())
-        .then(data => {
-            const contenedor = document.querySelector(".promoCard");
-            contenedor.innerHTML = "";
-
-            if (data.success && data.lista.length > 0) {
-                data.lista.forEach(promo => {
-                    contenedor.innerHTML += `
-                        <div class="promo-item ${promo.is_active == 1 ? '' : 'inactive'}" 
-                            onclick="handlePromoClick(this, ${JSON.stringify(promo).replace(/"/g, '&quot;')})">
-                            <h3>${promo.title}</h3>
-                            <h4>${promo.subtitle}</h4>
-                            <p>Codigo: ${promo.id}</p>
-                            <p><strong>Oferta:</strong> ${promo.offer_text}</p>
-                            <p>${promo.description}</p>
-                            <p><strong>Términos:</strong> ${promo.terms}</p>
-                            <p><strong>Válido hasta:</strong> ${promo.valid_until}</p>
-                            <p><strong>Categoría:</strong> ${promo.category}</p>
-                            
-                            <div class="status-container">
-                                <div class="action-buttons">
-                                    <button class="btn btn-edit" onclick="event.stopPropagation(); editPromo('${promo.id}')" 
-                                    data-bs-toggle="modal" data-bs-target="#editarPromo">
-                                        Editar
-                                    </button>
-                                    ${promo.is_active == 1 ? 
-                                        `<button class="btn btn-deactivate" onclick="event.stopPropagation(); togglePromo('${promo.id}', 0)">
-                                            Desactivar
-                                        </button>` : 
-                                        `<button class="btn btn-activate" onclick="event.stopPropagation(); togglePromo('${promo.id}', 1)">
-                                            Activar
-                                        </button>`
-                                    }
-                                    <button class="btn btn-delete" onclick="event.stopPropagation(); deletePromo('${promo.id}')">
-                                        Eliminar
-                                    </button>
-                                </div>
-                                <p class="status-text">
-                                    <strong>Estado:</strong> ${promo.is_active == 1 ? 'Activa' : 'Inactiva'}
-                                </p>
-                            </div>
-                        </div>
-                    `;
-                });
-            } else {
-                contenedor.innerHTML = "<p>No hay promociones disponibles.</p>";
-            }
-        })
-        .catch(error => {
-            console.error("Error al cargar promociones:", error);
-        });
-    }
+    
 
     function listarPromocionesActivas() {
         fetch('../controlador/controladorPromo.php', {
@@ -237,6 +180,107 @@ document.querySelector("#promoForm").addEventListener("submit", function(e) {
     listarPromociones(); 
 
 });
+function listarPromociones() {
+        
+        fetch('../controlador/controladorPromo.php', {
+            method: 'POST',
+            body: new URLSearchParams({ "ope": "LISTAR_TODAS" })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const contenedor = document.querySelector(".promoCard");
+            contenedor.innerHTML = "";
+
+            if (data.success && data.lista.length > 0) {
+                data.lista.forEach(promo => {
+                    contenedor.innerHTML += `
+                        <div class="promo-item ${promo.is_active == 1 ? '' : 'inactive'}" 
+                            onclick="handlePromoClick(this, ${JSON.stringify(promo).replace(/"/g, '&quot;')})">
+                            <h3>${promo.title}</h3>
+                            <h4>${promo.subtitle}</h4>
+                            <p>Codigo: ${promo.id}</p>
+                            <p><strong>Oferta:</strong> ${promo.offer_text}</p>
+                            <p>${promo.description}</p>
+                            <p><strong>Términos:</strong> ${promo.terms}</p>
+                            <p><strong>Válido hasta:</strong> ${promo.valid_until}</p>
+                            <p><strong>Categoría:</strong> ${promo.category}</p>
+                            
+                            <div class="status-container">
+                                <div class="action-buttons">
+                                    <button class="btn btn-edit" onclick="event.stopPropagation(); editPromo('${promo.id}')" 
+                                    data-bs-toggle="modal" data-bs-target="#editarPromo">
+                                        Editar
+                                    </button>
+                                    ${promo.is_active == 1 ? 
+                                        `<button class="btn btn-deactivate" onclick="event.stopPropagation(); togglePromo('${promo.id}', 0)">
+                                            Desactivar
+                                        </button>` : 
+                                        `<button class="btn btn-activate" onclick="event.stopPropagation(); togglePromo('${promo.id}', 1)">
+                                            Activar
+                                        </button>`
+                                    }
+                                    <button class="btn btn-delete" onclick="event.stopPropagation(); deletePromo('${promo.id}')">
+                                        Eliminar
+                                    </button>
+                                </div>
+                                <p class="status-text">
+                                    <strong>Estado:</strong> ${promo.is_active == 1 ? 'Activa' : 'Inactiva'}
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                contenedor.innerHTML = "<p>No hay promociones disponibles.</p>";
+            }
+        })
+        .catch(error => {
+            console.error("Error al cargar promociones:", error);
+        });
+    }
+
+function togglePromo(id, nuevoEstado) {
+    fetch("../controlador/controladorPromo.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: new URLSearchParams({
+            ope: "CAMBIAR_ESTADO",
+            id: id,
+            is_active: nuevoEstado
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Estado actualizado',
+                text: `La promoción fue ${nuevoEstado == 1 ? 'activada' : 'desactivada'} correctamente.`,
+                timer: 1500,
+                showConfirmButton: false
+            });
+            listarPromociones();  
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.msg || 'Ocurrió un error al cambiar el estado.'
+            });
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'No se pudo conectar con el servidor.'
+        });
+    });
+}
+
+
 
 //Editar promos
 function editPromo(promoId) {

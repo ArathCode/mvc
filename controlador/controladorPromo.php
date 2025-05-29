@@ -113,6 +113,26 @@ if (isset($_POST["ope"])) {
             }
             break;
 
+        case "CAMBIAR_ESTADO":
+            if (isset($_POST["id"], $_POST["is_active"])) {
+                $id = $_POST["id"];
+                $estado = $_POST["is_active"]; 
+
+                if ($estado !== "0" && $estado !== "1") {
+                    echo json_encode(["success" => false, "msg" => "El estado debe ser 0 o 1."]);
+                    break;
+                }
+
+                $estado = intval($estado);
+                $status = $promo->CambiarEstado($id, $estado);
+
+                echo json_encode(["success" => $status]);
+            } else {
+                echo json_encode(["success" => false, "msg" => "Faltan datos para cambiar el estado de la promo."]);
+            }
+        break;
+
+
         case "ELIMINAR":
             if (isset($_POST["id"])) {
                 $status = $promo->Eliminar($_POST["id"]);

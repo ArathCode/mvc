@@ -124,6 +124,20 @@ class Promos {
     }
 
 
+    public function CambiarEstado($id, $estado) {
+        $enlace = dbConectar();
+        $sql = "UPDATE promo SET is_active = ? WHERE id = ?";
+        $consulta = $enlace->prepare($sql);
+        $consulta->bind_param("is", $estado, $id);
+
+        $resultado = $consulta->execute();
+        $consulta->close();
+        $enlace->close();
+
+        return $resultado;
+    }
+
+
 
     public function ObtenerPromo($id) {
         $enlace = dbConectar();
