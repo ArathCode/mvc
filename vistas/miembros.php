@@ -4,7 +4,7 @@
 <head>
     <title>Miembros - DragonGym</title>
     <?php include_once("head.php"); ?>
-    <script type="module" src="../asset/js/funcionesMiembros.js?v=2.0.6"></script>
+    <script type="module" src="../asset/js/funcionesMiembros.js?v=2.0.9"></script>
 
     <link rel="stylesheet" href="../asset/css/miembros.css">
 </head>

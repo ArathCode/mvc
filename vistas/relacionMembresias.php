@@ -123,7 +123,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="formAgregar">
+                        <form id="formAgregar" class="row g-3">
                             <div class="mb-3 d-flex align-items-center">
                                 <div class="me-3 flex-grow-1">
                                     <label for="ID_Miembro" class="form-label">ID Miembro</label>
@@ -145,22 +145,22 @@
                                 <input type="hidden" name="ID_Usuario" id="ID_Usuario" value="<?php echo $_SESSION['ID_Usuario']; ?>">
                         
 
-                            <div class="mb-3">
+                            <div class="col-md-6">
                                 <label for="FechaInicio" class="form-label">Fecha de Inicio</label>
                                 <input type="date" class="form-control" id="FechaInicio" name="FechaInicio" required>
                             </div>
 
-                            <div class="mb-3">
+                            <div class="col-md-6">
                                 <label for="FechaFin" class="form-label">Fecha de Fin</label>
                                 <input type="date" class="form-control" id="FechaFin" name="FechaFin" readonly>
                             </div>
 
-                            <div class="mb-3">
+                            <div class="col-md-6">
                                 <label for="Costo" class="form-label">Costo</label>
                                 <input type="number" class="form-control" id="Costo" name="Costo" min="1"  readonly>
                             </div>
 
-                            <div class="mb-3">
+                            <div class="col-md-6">
                                 <label for="Cantidad" class="form-label">Cantidad</label>
                                 <input type="number" class="form-control" id="Cantidad" name="Cantidad" min="1" value="1" required>
                             </div>

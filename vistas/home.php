@@ -174,7 +174,7 @@
                     <table  id="tablaAccesos">
                         <thead>
                             <tr>
-                                <td>ID_Miembro</td>
+                                <td>No_Miembro</td>
                                 <td>Nombre</td>
                                 <td>Hora Entrada</td>
                                 <td>Precio</td>
