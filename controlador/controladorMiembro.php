@@ -60,7 +60,7 @@ if (isset($_POST["ope"])) {
             break;
 
         case "EDITAR":
-            if (isset($_POST["ID_Miembro"], $_POST["NombreEdit"], $_POST["ApellidoPEdit"], $_POST["ApellidoMEdit"], $_POST["SexoEdit"], $_POST["TelefonoEdit"],$_POST["pinEdit"])) {
+            if (isset($_POST["ID_Miembro"], $_POST["NombreEdit"], $_POST["ApellidoPEdit"], $_POST["ApellidoMEdit"], $_POST["SexoEdit"], $_POST["TelefonoEdit"])) {
                 $datos = [
                     "ID_Miembro" => $_POST["ID_Miembro"],
                     "Nombre" => $_POST["NombreEdit"],
@@ -68,7 +68,6 @@ if (isset($_POST["ope"])) {
                     "ApellidoM" => $_POST["ApellidoMEdit"],
                     "Sexo" => $_POST["SexoEdit"],
                     "Telefono" => $_POST["TelefonoEdit"],
-                    "pin" => $_POST["pinEdit"],
                 ];
                 $status = $miembro->Editar($datos);
                 echo json_encode(["success" => $status]);

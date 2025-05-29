@@ -55,7 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 let ApellidoPE = document.querySelector("#ApellidoPEdit");
                 let ApellidoME = document.querySelector("#ApellidoMEdit");
                 let telE = document.querySelector("#TelefonoEdit");
-                let pinE = document.querySelector("#pinEdit");
                 
                 if(!validaSoloLetras(nombreE))
                     erroresE++;
@@ -64,8 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 if(!validaSoloLetras(ApellidoME))
                     erroresE++;
                 if(!validaTelefono(telE))
-                    erroresE++;
-                if(!validaPin(pinE))
                     erroresE++;
                 if(erroresE==0)
                     editarUsuario();
@@ -103,14 +100,12 @@ document.addEventListener("DOMContentLoaded", () => {
 let paginaActual = 1;
 const registrosPorPagina = 10;
 
-// Función para listar miembros (con o sin filtros)
 export function listarMiembros(filtros = {}) {
     let params = new URLSearchParams();
     params.append("ope", "LISTARMIEMBROS");
     params.append("pagina", paginaActual);
     params.append("registrosPorPagina", registrosPorPagina);
 
-    // Añadir filtros si están activos
     if (filtros.ID_Miembro) params.append("id", filtros.ID_Miembro);
     if (filtros.Nombre) params.append("nombre", filtros.Nombre);
     if (filtros.Apellidos) params.append("apellidos", filtros.Apellidos);
@@ -128,8 +123,8 @@ export function listarMiembros(filtros = {}) {
                 renderizarError("No se pudieron cargar los miembros.");
                 return;
             }
-            renderizarMiembros(data.lista); // Renderizar lista
-            actualizarPaginacion(data.totalPaginas); // Actualizar paginación
+            renderizarMiembros(data.lista);
+            actualizarPaginacion(data.totalPaginas); 
         })
         .catch((error) => {
             console.error("Error en la solicitud:", error);
@@ -137,13 +132,11 @@ export function listarMiembros(filtros = {}) {
         });
 }
 
-// Renderizar miembros o mostrar mensaje si no hay resultados
 function renderizarMiembros(lista) {
     const contenedor = document.querySelector("#ListaMiembros");
     contenedor.innerHTML = "";
 
     if (!lista || lista.length === 0) {
-        // Mostrar mensaje de "No se encuentra ningún miembro"
         contenedor.innerHTML = `
             <div class="no-results">
                 <p>No se encuentra ningún miembro con los filtros aplicados.</p>
@@ -152,14 +145,21 @@ function renderizarMiembros(lista) {
         return;
     }
 
-    // Renderizar las tarjetas de los miembros
+    const validarPin = (pin) => {
+        if (pin === null || pin === undefined) {
+            return "Sin PIN";
+        } else {
+             return "****";
+        }
+    };
+
     lista.forEach((miembro) => {
         contenedor.innerHTML += `
             <div class="gasto-card">
                 <p># ${miembro.ID_Miembro}</p>
                 <h3>${miembro.Nombre} ${miembro.ApellidoP} ${miembro.ApellidoM}</h3>
                 <p><strong>Teléfono:</strong> ${miembro.Telefono}</p>
-                <p><strong>PIN:</strong> ${miembro.pin}</p>
+                <p><strong>PIN:</strong> ${validarPin(miembro.pin)}</p>
                 <p><strong>Sexo:</strong> ${miembro.Sexo}</p>
                 <div class="card-buttons">
                     <button class="btn btn-warning btn-editar" id="btnEd" data-id="${miembro.ID_Miembro}" data-bs-toggle="modal" data-bs-target="#modalEditar">Editar</button>
@@ -170,7 +170,6 @@ function renderizarMiembros(lista) {
     });
 }
 
-// Renderizar mensaje de error
 function renderizarError(mensaje) {
     const contenedor = document.querySelector("#ListaMiembros");
     contenedor.innerHTML = `
@@ -180,7 +179,6 @@ function renderizarError(mensaje) {
     `;
 }
 
-// Actualizar la paginación
 function actualizarPaginacion(totalPaginas) {
     const paginacion = document.querySelector("#paginacion");
 
@@ -206,7 +204,7 @@ function actualizarPaginacion(totalPaginas) {
 
 function aplicarFiltros() {
     const filtros = {
-        ID_Miembro: document.getElementById("idM").value.trim(),
+        //ID_Miembro: document.getElementById("idM").value.trim(),
         Nombre: document.getElementById("nombreM").value.trim(),
         Apellidos: document.getElementById("apeP").value.trim(),
         Telefono: document.getElementById("numM").value.trim(),

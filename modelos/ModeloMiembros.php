@@ -91,17 +91,16 @@ class Miembros {
 
     public function Editar($datos) {
         $enlace = dbConectar();
-        $sql = "UPDATE miembros SET Nombre=?, ApellidoP=?, ApellidoM=?, Sexo=?, Telefono=?,pin=? WHERE ID_Miembro=?";
+        $sql = "UPDATE miembros SET Nombre=?, ApellidoP=?, ApellidoM=?, Sexo=?, Telefono=?, WHERE ID_Miembro=?";
         $consulta = $enlace->prepare($sql);
 
         $consulta->bind_param(
-            "sssssii",
+            "sssssi",
             $datos["Nombre"],
             $datos["ApellidoP"],
             $datos["ApellidoM"],
             $datos["Sexo"],
             $datos["Telefono"],
-            $datos["pin"],
             $datos["ID_Miembro"]
         );
 
