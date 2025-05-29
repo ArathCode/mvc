@@ -105,9 +105,11 @@
         </div>
 
         <div class="filter-container">
+            <!--
             <div class="filter" data-filter="id">
                 <span>ID</span><input type="number" id="idM" class="hidden" placeholder="Escribe aquí.."> <button class="close"></button> <button class="close">✖</button>
             </div>
+            -->
             <div class="filter" data-filter="nombre">
                 <span>Nombre</span> <input type="text" id="nombreM" class="hidden" placeholder="Escribe aquí.."> <button class="close"></button> <button class="close">✖</button>
             </div>
@@ -254,16 +256,6 @@
                             <div class="mb-3">
                                 <label for="TelefonoEdit" class="form-label">Teléfono</label>
                                 <input type="text" class="form-control" id="TelefonoEdit" name="TelefonoEdit" maxlength="10" required>
-                                <div class="invalid-feedback">
-                                    Password is required
-                                </div>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="pinEdit" class="form-label">PIN</label>
-                                <input type="text" class="form-control" id="pinEdit" name="pinEdit" maxlength="4" required>
                                 <div class="invalid-feedback">
                                     Password is required
                                 </div>
