@@ -321,7 +321,7 @@
 
   <div id="modalOverlay" class="window-overlay"></div>
 
-  <script src="../asset/js/scriptIA.js"></script>
+  <script src="../asset/js/scriptIA.js?v=2.3"></script>
   <!-- Enlace al script de AOS -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script> 

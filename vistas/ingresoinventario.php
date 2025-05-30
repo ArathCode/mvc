@@ -134,7 +134,7 @@
                     <table class="table table-striped table-bordered table-hover text-center" id="ListaProductos">
                         <thead class="table-dark">
                             <tr>
-                                <th>ID</th>
+                                <th>#</th>
                                 <th>Imagen</th>
                                 <th>Descripcion</th>
                                 <th>Precio</th>

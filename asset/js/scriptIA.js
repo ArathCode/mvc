@@ -45,7 +45,7 @@ const prompts = [
     
   ];
 
-const welcomeMessage = "¡Hola! Soy el asistente virtual de DragonGym . Puedo contarte sobre snuestros horarios, precios, etc. Aquí tienes algunas preguntas que podrías hacerme:";
+const welcomeMessage = "¡Hola! Soy el asistente virtual de DragonGym . Puedo contarte sobre nuestros horarios, precios, etc. Aquí tienes algunas preguntas que podrías hacerme:";
 let hasShownWelcome = false;
 let isFirstInteraction = true;
 

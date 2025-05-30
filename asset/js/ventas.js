@@ -69,7 +69,11 @@ function actualizarTablaVenta() {
     const tbody = document.querySelector("#tablaVenta tbody");
     tbody.innerHTML = "";
 
+    let total = 0;
+
     productosSeleccionados.forEach((producto, index) => {
+        total += producto.precio * producto.cantidad;
+
         tbody.innerHTML += `
         <tr>
             <td>${producto.descripcion}</td>
@@ -82,8 +86,13 @@ function actualizarTablaVenta() {
             <td><button onclick="eliminarProducto(${index})">Borrar</button></td>
         </tr>`;
     });
+
+    // Actualizar el total en la interfaz
+    document.getElementById("totalCarrito").textContent = total.toFixed(2);
+
     listarProductos();
 }
+
 
 //cantidad a vender
 function modificarCantidad(index, delta) {

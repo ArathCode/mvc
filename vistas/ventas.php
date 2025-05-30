@@ -8,7 +8,7 @@
             include_once("head.php");
         ?>
         
-        <script src="asset/js/ventas.js?v=2.8.2"></script>
+        <script src="asset/js/ventas.js?v=3.8.2"></script>
     </head>
     
     <body>
@@ -121,7 +121,7 @@
                     <table class="table table-striped table-bordered table-hover text-center" id="ListaProductosventas">
                         <thead class="table-dark">
                             <tr>
-                                <th>ID</th>
+                                <th>#</th>
                                 <th>Imagen</th>
                                 <th>Descripcion</th>
                                 <th>Precio</th>
@@ -138,6 +138,7 @@
                 <div class="col" style=" min-height:750px; overflow-y:auto; overflow-x:hidden; max-height:790px">
                     <div class="row" style=" min-height:260px; overflow-y:auto; overflow-x:hidden; max-height:300px">
                         <h2>Carrito</h2>
+                        <h5>Total de venta: $<span id="totalCarrito">0.00</span></h5>
                         <table id="tablaVenta" class="table">
                             <thead>
                                 <tr>
@@ -151,6 +152,7 @@
                                 <!-- Se llenará dinámicamente -->
                             </tbody>
                         </table>
+                        
 
                         <div>
                             <div class="gB">
@@ -165,7 +167,7 @@
                         <table class="table table-striped table-bordered table-hover text-center" id="VentasDelDia">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>ID Venta</th>
+                                    <th># Venta</th>
                                     <th>Fecha</th>
                                     <th>Usuario</th>
                                     <th>Producto</th>
