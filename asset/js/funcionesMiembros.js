@@ -17,6 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             
         }
+
+
+        
         
     //Validaciones
     const nombre = document.getElementById('Nombre');
@@ -387,7 +390,6 @@ function cargarMiembro(id) {
             document.querySelector("#ApellidoMEdit").value = data.miembro.ApellidoM;
             document.querySelector("#SexoEdit").value = data.miembro.Sexo;
             document.querySelector("#TelefonoEdit").value = data.miembro.Telefono;
-             document.querySelector("#pinEdit").value = data.miembro.pin;
 
         } else {
             Swal.fire("Error", "No se pudo obtener la información del usuario", "error");
