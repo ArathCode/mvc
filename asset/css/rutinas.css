@@ -10,6 +10,7 @@
 
 :root {
   --red: #8d2e27;
+  --red-hover: #751e1a;
   --white: #fff;
   --gray: #f5f5f5;
   --black1: #222;
@@ -636,7 +637,50 @@ svg{
     color: #999;
     font-size: 12px;
 }
+.btn-custom-red {
+  background-color: var(--red);
+  color: white; /* Para contraste */
+  border: none;
+}
 
+.btn-custom-red:hover {
+  background-color: #751e1a; /* Un tono más oscuro para el hover */
+}
+.btn-custom-red {
+        background-color: var(--red);
+        color: #fff;
+        border: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-custom-red:hover {
+        background-color: var(--red-hover);
+    }
+
+    .card-header h5 {
+        font-weight: bold;
+    }
+
+    .form-select {
+        border-radius: 0.5rem;
+    }
+
+    #NombreMiembro {
+        font-size: 1.1rem;
+        font-weight: 600;
+        padding: 0.5rem 0;
+    }
+
+    .input-group input {
+        border-radius: 0.5rem 0 0 0.5rem;
+    }
+
+    .input-group button {
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .text-p{
+      color: var(--red);
+    }
 /* Close button */
 .close-button {
     background: #ff4444;

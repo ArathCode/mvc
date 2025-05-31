@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Corte de Caja - Dragon's Gym</title>
     <?php include_once("head.php"); ?>
-    
+
     <link rel="stylesheet" href="../asset/css/corte.css">
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="../asset/css/rutinas.css">
-    
+
 </head>
+
 <body>
 
     <!-- =============== Barra de navegacion ================ -->
     <div class="navigation">
         <?php
         include_once("encabezado.php")
-            ?>
+        ?>
     </div>
 
-    <div class="main">  
+    <div class="main">
         <div class="topbar">
             <div class="toggle">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -30,7 +32,7 @@
                 </svg>
             </div>
 
-             <div class="subMenu">
+            <div class="subMenu">
 
 
                 <div class="promos">
@@ -101,8 +103,8 @@
                                         <h4>Sin notificaciones...<br></h4>
                                     </td>
                                 </tr>
-                                
-                                
+
+
                             </table>
                         </div>
                     </div>
@@ -110,97 +112,78 @@
             </div>
 
         </div>
+        <br><br>
         <h2>Asignación de rutinas - Dragon's Gym</h2>
         <div class="centrar">
-            <div class="container mt-4">
-    <div class="card shadow">
-        <div class="card-header bg-black text-white d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Asignar Rutinas a Miembros</h5>
-            <div class="input-group w-50">
-                <input type="text" class="form-control" id="busquedaID" placeholder="Buscar por ID del miembro">
-                <button class="btn btn-light" id="buscarMiembro">Buscar</button>
+            <div class="container mt-5">
+                <div class="card shadow-lg rounded-4">
+                    <div class="card-header bg-dark text-white py-3 rounded-top-4 d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0"><svg fill="#ffffff" width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22,3H19V2a1,1,0,0,0-1-1H6A1,1,0,0,0,5,2V3H2A1,1,0,0,0,1,4V6a4.994,4.994,0,0,0,4.276,4.927A7.009,7.009,0,0,0,11,15.92V18H7a1,1,0,0,0-.949.684l-1,3A1,1,0,0,0,6,23H18a1,1,0,0,0,.948-1.316l-1-3A1,1,0,0,0,17,18H13V15.92a7.009,7.009,0,0,0,5.724-4.993A4.994,4.994,0,0,0,23,6V4A1,1,0,0,0,22,3ZM5,8.829A3.006,3.006,0,0,1,3,6V5H5ZM16.279,20l.333,1H7.387l.334-1ZM17,9A5,5,0,0,1,7,9V3H17Zm4-3a3.006,3.006,0,0,1-2,2.829V5h2ZM10.667,8.667,9,7.292,11,7l1-2,1,2,2,.292L13.333,8.667,13.854,11,12,9.667,10.146,11Z" />
+                            </svg> Asignar Rutinas a Miembros</h5>
+                        <div class="input-group w-50">
+                            <input type="text" class="form-control" id="busquedaID" placeholder="Buscar por # del miembro">
+                            <button class="btn btn-light" id="buscarMiembro">Buscar</button>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <form id="formRutina">
+                            <input type="hidden" id="ID_MiembroRutina" name="ID_Miembro">
+
+                            <div class="mb-4">
+                                <label id="NombreMiembro" class="form-label text-p">Miembro:</label>
+                            </div>
+
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-4">
+                                    <label for="Lunes" class="form-label">Lunes</label>
+                                    <select class="form-select rutina-select" id="Lunes"></select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="Martes" class="form-label">Martes</label>
+                                    <select class="form-select rutina-select" id="Martes"></select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="Miercoles" class="form-label">Miércoles</label>
+                                    <select class="form-select rutina-select" id="Miercoles"></select>
+                                </div>
+                            </div>
+
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-4">
+                                    <label for="Jueves" class="form-label">Jueves</label>
+                                    <select class="form-select rutina-select" id="Jueves"></select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="Viernes" class="form-label">Viernes</label>
+                                    <select class="form-select rutina-select" id="Viernes"></select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="Sabado" class="form-label">Sábado</label>
+                                    <select class="form-select rutina-select" id="Sabado"></select>
+                                </div>
+                            </div>
+
+                            <div class="text-end">
+                                <button type="submit" id="btnGuardarRutina" class="btn btn-custom-red px-4 py-2 rounded-pill">
+                                    Guardar Rutina
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="card-body">
-            <form id="formRutina">
-                <input type="hidden" id="ID_MiembroRutina" name="ID_Miembro">
-                <div class="col-md-4">
-                        <label id="NombreMiembro" class="form-label">Miembro:</label>
-                      
-                    </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="Lunes" class="form-label">Lunes</label>
-                        <select class="form-select rutina-select" id="Lunes"></select>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="Martes" class="form-label">Martes</label>
-                        <select class="form-select rutina-select" id="Martes"></select>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="Miercoles" class="form-label">Miércoles</label>
-                        <select class="form-select rutina-select" id="Miercoles"></select>
-                    </div>
-                </div>
+            <script src="../asset/js/cargarEntrenamientos.js?v=1.2">
 
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="Jueves" class="form-label">Jueves</label>
-                        <select class="form-select rutina-select" id="Jueves"></select>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="Viernes" class="form-label">Viernes</label>
-                        <select class="form-select rutina-select" id="Viernes"></select>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="Sabado" class="form-label">Sábado</label>
-                        <select class="form-select rutina-select" id="Sabado"></select>
-                    </div>
-                </div>
 
-                <div class="text-end">
-                    <button type="submit" id="btnGuardarRutina" class="btn btn-success">Guardar Rutina</button>
-                </div>
-            </form>
+            </script>
+
+            <script src="../asset/js/funcionesRutinas.js?v=4.9.5"></script>
         </div>
+
+
     </div>
-</div>
 
-<!-- Script para cargar entrenamientos y lógica -->
-<script>
- 
-    const cargarEntrenamientos = () => {
-        $.ajax({
-            url: "controlador/controladorEntrenamientos.php", // debes crear este para listar
-            type: "POST",
-            data: { ope: "LISTAR_ENTRENAMIENTOS" },
-            dataType: "json",
-            success: function (respuesta) {
-                if (respuesta.success && respuesta.lista) {
-                    $(".rutina-select").each(function () {
-                        const select = $(this);
-                        select.empty();
-                        select.append('<option value="">Seleccione...</option>');
-                        respuesta.lista.forEach(ent => {
-                            select.append(`<option value="${ent.ID_Entrenamiento}">${ent.Nombre}</option>`);
-                        });
-                    });
-                }
-            }
-        });
-    };
-
-    $(document).ready(function () {
-        cargarEntrenamientos();
-    });
-</script>
-
-<script src="../asset/js/funcionesRutinas.js?v=4.9.5"></script>
-        </div>
-        
-        
-    </div>
-    
 
     <script src="../asset/js/notificaciones.js"></script>
     <script src="../asset/js/main.js"></script>
@@ -209,4 +192,5 @@
 
 
 </body>
+
 </html>

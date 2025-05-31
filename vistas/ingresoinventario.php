@@ -136,11 +136,11 @@
                             <tr>
                                 <th>#</th>
                                 <th>Imagen</th>
-                                <th>Descripcion</th>
+                                <th>Descripción</th>
                                 <th>Precio</th>
                                 <th>Disponible</th>
                                 <th>Tipo producto</th>
-                                <th>Accion</th>
+                                <th>Acción</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -6,17 +6,17 @@
     <?php
     include_once("head.php");
     ?>
-    <script type="module" src="asset/js/funcionesMembresia.js?v=1.8.2"></script>
+    <script type="module" src="asset/js/funcionesMembresia.js?v=1.8.3"></script>
     <link rel="stylesheet" href="../asset/css/membresias.css">
 </head>
 
-<body >
+<body>
 
     <!-- =============== Barra de navegacion ================ -->
     <div class="navigation">
         <?php
         include_once("encabezado.php")
-            ?>
+        ?>
     </div>
 
     <div class="main">
@@ -28,7 +28,7 @@
             </div>
             <div class="subMenu">
                 <?php
-                    include_once("submenu.php")
+                include_once("submenu.php")
                 ?>
             </div>
 
@@ -75,8 +75,8 @@
                                         <h4>Sin notificaciones...<br></h4>
                                     </td>
                                 </tr>
-                                
-                                
+
+
                             </table>
                         </div>
                     </div>
@@ -86,10 +86,10 @@
 
         <div class="gB">
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregar">
-                    Nueva Membresia
+                Nueva Membresia
             </button>
         </div>
-        
+
         <!-- Modal AGREGAR -->
         <div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -120,21 +120,21 @@
                                     Looks good!
                                 </div>
                             </div>
-                         
-            
+
+
                             <div class="mb-3">
                                 <label for="Costo" class="form-label">Costo</label>
                                 <input type="number" class="form-control" id="Costo" name="Costo" min="0" max="1000000" placeholder="Ingrese un número" required>
                             </div>
                             <div class="mb-3">
-                                    <label for="Duracion" class="form-label">Duracion</label>
-                                    <select class="form-control" id="Duracion" name="Duracion">
-                                        <option value="mes">Mes</option>
-                                        <option value="semana">Semana</option>
-                                        <option value="dia">Dia/Visita</option>
-                                    </select>
-                                </div>
-                            
+                                <label for="Duracion" class="form-label">Duracion</label>
+                                <select class="form-control" id="Duracion" name="Duracion">
+                                    <option value="mes">Mes</option>
+                                    <option value="semana">Semana</option>
+                                    <option value="dia">Dia/Visita</option>
+                                </select>
+                            </div>
+
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </form>
                     </div>
@@ -173,20 +173,20 @@
                                     Looks good!
                                 </div>
                             </div>
-                         
-            
+
+
                             <div class="mb-3">
                                 <label for="CostoEdit" class="form-label">Costo</label>
                                 <input type="number" class="form-control" id="CostoEdit" name="CostoEdit" min="0" max="1000000" placeholder="Ingrese un número" required>
                             </div>
                             <div class="mb-3">
-                                    <label for="DuracionEdit" class="form-label">Duracion</label>
-                                    <select class="form-control" id="DuracionEdit" name="DuracionEdit">
-                                        <option value="mes">Mes</option>
-                                        <option value="semana">Semana</option>
-                                    </select>
-                                </div>
-                            <button type="submit" id ="act" class="btn btn-primary">Actualizar</button>
+                                <label for="DuracionEdit" class="form-label">Duracion</label>
+                                <select class="form-control" id="DuracionEdit" name="DuracionEdit">
+                                    <option value="mes">Mes</option>
+                                    <option value="semana">Semana</option>
+                                </select>
+                            </div>
+                            <button type="submit" id="act" class="btn btn-primary">Actualizar</button>
                         </form>
                     </div>
                 </div>
@@ -197,8 +197,8 @@
 
         <!-- Tabla de Usuarios -->
         <div class="mt-5">
-                <h4 class="text-center">Lista de Membresías</h4>
-                <div class="row" id="ListaMembresias"></div>  
+            <h4 class="text-center">Lista de Membresías</h4>
+            <div class="row" id="ListaMembresias"></div>
         </div>
 
     </div>

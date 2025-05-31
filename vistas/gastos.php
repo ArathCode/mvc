@@ -26,7 +26,7 @@
             </div>
             <div class="subMenu">
                 <?php
-                    include_once("submenu.php")
+                include_once("submenu.php")
                 ?>
             </div>
 
@@ -73,8 +73,8 @@
                                         <h4>Sin notificaciones...<br></h4>
                                     </td>
                                 </tr>
-                                
-                                
+
+
                             </table>
                         </div>
                     </div>
@@ -148,8 +148,8 @@
                 <div id="paginacion" class="mt-3"></div>
             </div>
 
-            
-    </div>
+
+        </div>
 
         <!-- Modal AGREGAR -->
         <div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
@@ -174,7 +174,7 @@
                                 <input type="number" class="form-control" id="Precio" name="Precio" min="0" max="1000000" required>
                             </div>
                             <input type="hidden" name="ID_Usuario" id="ID_Usuario" value="<?php echo $_SESSION['ID_Usuario']; ?>">
-                            
+
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </form>
                     </div>

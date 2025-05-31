@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +8,19 @@
     <?php include_once("head.php"); ?>
     <script type="module" src="../asset/js/corte.js?v=4.9.3"></script>
     <link rel="stylesheet" href="../asset/css/corte.css">
-    
+
 </head>
+
 <body>
 
     <!-- =============== Barra de navegacion ================ -->
     <div class="navigation">
         <?php
         include_once("encabezado.php")
-            ?>
+        ?>
     </div>
 
-    <div class="main">  
+    <div class="main">
         <div class="topbar">
             <div class="toggle">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -26,7 +28,7 @@
                 </svg>
             </div>
 
-            
+
 
 
             <div class="contenedor">
@@ -72,8 +74,8 @@
                                         <h4>Sin notificaciones...<br></h4>
                                     </td>
                                 </tr>
-                                
-                                
+
+
                             </table>
                         </div>
                     </div>
@@ -102,10 +104,10 @@
                 </div>
             </div>
         </div>
-        
-        
+
+
     </div>
-    
+
 
     <script src="../asset/js/notificaciones.js"></script>
     <script src="../asset/js/main.js"></script>
@@ -114,4 +116,5 @@
 
 
 </body>
+
 </html>

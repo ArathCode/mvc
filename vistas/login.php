@@ -28,7 +28,7 @@
                     <?php echo isset($alert) ? $alert : ""; ?>
                 </div>
                 <div class="input-group">
-                    <input type="text" id="nombre" name="nombre"  minlength="5" maxlength="10" pattern=".{5,10}" required>
+                    <input type="text" id="nombre" name="nombre" minlength="5" maxlength="10" pattern=".{5,10}" required>
                     <label for="nombre">Usuario</label>
                     <div class="invalid-feedback">
                         Email is invalid

@@ -25,7 +25,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
             </div>
-            <div class="adminUsuarios" >
+            <div class="adminUsuarios">
                 <a href="index.php?pag=miembros">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
@@ -33,7 +33,7 @@
                     <span>Miembros</span>
                 </a>
             </div>
-            <div class="adminMemb" >
+            <div class="adminMemb">
                 <a href="index.php?pag=relacion">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
@@ -84,8 +84,8 @@
                                         <h4>Sin notificaciones...<br></h4>
                                     </td>
                                 </tr>
-                                
-                                
+
+
                             </table>
                         </div>
                     </div>
@@ -93,14 +93,14 @@
             </div>
         </div>
 
-        
+
         <div class="gB">
-            
+
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregar">
                 Agregar Miembro
             </button>
 
-            
+
 
         </div>
 
@@ -157,24 +157,24 @@
                                     <label for="ApellidoP" class="form-label">Apellido Paterno</label>
                                     <input type="text" class="form-control" id="ApellidoP" name="ApellidoP" required>
                                     <div class="invalid-feedback">
-                                    Password is required
-                                </div>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
+                                        Password is required
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
                                 </div>
                                 <div class="ama">
                                     <label for="ApellidoM" class="form-label">Apellido Materno</label>
                                     <input type="text" class="form-control" id="ApellidoM" name="ApellidoM">
                                     <div class="invalid-feedback">
-                                    Password is required
-                                </div>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
+                                        Password is required
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6">
                                 <label for="Sexo" class="form-label">Sexo</label>
                                 <select class="form-control" id="Sexo" name="Sexo" required>
@@ -245,7 +245,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="mb-3">
                                 <label for="SexoEdit" class="form-label">Sexo</label>
                                 <select class="form-control" id="SexoEdit" name="SexoEdit" required>
@@ -277,7 +277,7 @@
     <script src="../asset/js/notificaciones.js"></script>
     <script src="../asset/js/main.js"></script>
     <script src="../asset/js/calendario.js"></script>
-    
+
 </body>
 
 </html>

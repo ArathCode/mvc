@@ -273,7 +273,7 @@
                 <table class="table table-bordered table-striped" id="ListaUsuarios">
                     <thead class="table-dark">
                         <tr>
-                            <th>ID</th>
+                            <th>#</th>
                             <th>Nombre</th>
                             <th>Tipo Membresia</th>
                             <th>Usuario Asignado</th>
