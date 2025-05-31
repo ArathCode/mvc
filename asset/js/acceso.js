@@ -55,6 +55,25 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+    const fechayHora = () => {
+        const fecha = new Date();
+
+        const opcionesMes = { month: 'numeric', year: 'numeric' };
+        let mesAño = fecha.toLocaleString("es-ES", opcionesMes);
+        mesAño = mesAño.charAt(0).toUpperCase() + mesAño.slice(1); 
+
+        const opcionesDia = { weekday: 'long', day: 'numeric' };
+        let dia = fecha.toLocaleString("es-ES", opcionesDia);
+        dia = dia.charAt(0).toUpperCase() + dia.slice(1);
+        const opcionesHora = { hour: '2-digit', minute: '2-digit', hour12: true };
+        const hora = fecha.toLocaleString("es-ES", opcionesHora);
+
+        //document.getElementById("MesAct").textContent = mesAño;
+        document.getElementById("DiaAct").textContent = dia+"/"+mesAño;
+       // document.getElementById("horaAct").textContent = hora;
+    };
+    setInterval(fechayHora, 1000);
+    fechayHora();
     // Evento para el botón de guardar acceso en el modal
     const btnGuardarAcceso = document.querySelector("#btnGuardarAcceso");
     if (btnGuardarAcceso) {
@@ -158,7 +177,7 @@ function listarAccesos() {
                     <td>${acceso.Hora}</td>
                     <td>${acceso.Precio}</td>
                     <td>${acceso.Tipo}</td>
-                    <td>${acceso.Fecha}</td>
+                   
 
                 </tr>
                 `;
@@ -301,7 +320,6 @@ function cargarMembresias() {
                     selectMembresias.appendChild(option);
                 });
 
-                // Asignar evento para actualizar el precio
                 selectMembresias.addEventListener("change", function () {
                     const selectedOption = this.options[this.selectedIndex];
                     const precio = selectedOption.getAttribute("data-precio");
@@ -321,11 +339,9 @@ const fotoM = document.querySelector(".fotoM");
 
 searchInput.addEventListener("input", () => {
     if (searchInput.value.trim() === "") {
-        // Limpiar contenido cuando no hay texto
         contenidoM.innerHTML = "";
         fotoM.innerHTML = "";
 
-        // Opcional: mostrar estado inicial
         contenidoM.innerHTML = `<p>#ID de miembro</p>
                         <h3>Nombre</h2>
                             <p>Número: </p>
@@ -342,7 +358,6 @@ searchInput.addEventListener("input", () => {
                             </div>`;
     }
 });
-// Función para buscar un miembro en el contenedor principal
 function buscarMiembro(id) {
     if (id.trim() === "") return;
 
@@ -355,7 +370,6 @@ function buscarMiembro(id) {
             const contenidoM = document.querySelector(".contenidoM");
 
             if (!data.miembro) {
-                // Swal.fire("Sin Membresia", data.msg, "error");
              
                 const fotoDiv = document.querySelector(".fotoM");
     fotoDiv.innerHTML = "";
@@ -375,7 +389,6 @@ function buscarMiembro(id) {
 
             const miembro = data.miembro;
             
-            // Llenar contenido textual
             contenidoM.innerHTML = `
                 <p>#${miembro.ID_Miembro}</p>
                 <h3>${miembro.Nombre} ${miembro.ApellidoP} ${miembro.ApellidoM}</h3>
@@ -392,7 +405,6 @@ function buscarMiembro(id) {
                 ${data.success ? `<button id="btnRegistrarAcceso" class="btn btn-success">Registrar Acceso</button>` : ""}
             `;
 
-            // Llenar la foto con el ícono correspondiente
             const fotoDiv = document.querySelector(".fotoM");
             if (miembro.Sexo === "F") {
                 fotoDiv.innerHTML = '<img  width="130" height="130" src="../asset/images/m.gif"></img>';

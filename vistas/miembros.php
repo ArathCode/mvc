@@ -141,7 +141,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="formAgregarMiembro">
+                        <form id="formAgregarMiembro" class="row g-3">
                             <div class="mb-3">
                                 <label for="Nombre" class="form-label">Nombre</label>
                                 <input type="text" class="form-control" id="Nombre" name="Nombre" required>
@@ -175,7 +175,7 @@
                                 </div>
                             </div>
                             
-                            <div class="mb-3">
+                            <div class="col-md-6">
                                 <label for="Sexo" class="form-label">Sexo</label>
                                 <select class="form-control" id="Sexo" name="Sexo" required>
                                     <option value="M">Masculino</option>
@@ -183,7 +183,7 @@
                                 </select>
 
                             </div>
-                            <div class="mb-3">
+                            <div class="col-md-6">
                                 <label for="Telefono" class="form-label">Teléfono</label>
                                 <input type="text" class="form-control" id="Telefono" name="Telefono" maxlength="10" required>
                                 <div class="invalid-feedback">

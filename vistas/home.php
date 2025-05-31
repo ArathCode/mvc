@@ -8,7 +8,7 @@
         ?>
     <link rel="stylesheet" href="../asset/css/home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script type="module" src="asset/js/acceso.js?v=1.8.8"></script>
+    <script type="module" src="asset/js/acceso.js?v=1.9.1"></script>
     <script src="js/bodymovin.js" type="text/javascript"></script>
     <link rel="stylesheet" href="../asset/css/style-cha-ia.css">
     <link href="../asset/images/logo.jpg" rel="icon" />
@@ -152,7 +152,7 @@
                 <div class="registro">
                     <div class="cardHeader">
                         <h2>Lista de accesos</h2>
-                        <a href="#" id="estadisticasBtn" class="btn">Gráfica</a>
+                        <a href="#" id="DiaAct"class="btn">Gráfica</a>
                     </div>
                     <!-- ================ Modal de estadísticas ================= -->
                     <dialog id="modalEstadisticas">
@@ -179,7 +179,7 @@
                                 <td>Hora Entrada</td>
                                 <td>Precio</td>
                                 <td>Tipo</td>
-                                <td>Fecha</td>
+                               
                             </tr>
                         </thead>
 
@@ -195,9 +195,7 @@
                     <div class="titulo">
                         <h2>Miembros</h2>
                         <div class="huella">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M7.864 4.243A7.5 7.5 0 0 1 19.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 0 0 4.5 10.5a7.464 7.464 0 0 1-1.15 3.993m1.989 3.559A11.209 11.209 0 0 0 8.25 10.5a3.75 3.75 0 1 1 7.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 0 1-3.6 9.75m6.633-4.596a18.666 18.666 0 0 1-2.485 5.33" />
-                            </svg>
+                            <svg fill="#000000" width="800px"  height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22,3H19V2a1,1,0,0,0-1-1H6A1,1,0,0,0,5,2V3H2A1,1,0,0,0,1,4V6a4.994,4.994,0,0,0,4.276,4.927A7.009,7.009,0,0,0,11,15.92V18H7a1,1,0,0,0-.949.684l-1,3A1,1,0,0,0,6,23H18a1,1,0,0,0,.948-1.316l-1-3A1,1,0,0,0,17,18H13V15.92a7.009,7.009,0,0,0,5.724-4.993A4.994,4.994,0,0,0,23,6V4A1,1,0,0,0,22,3ZM5,8.829A3.006,3.006,0,0,1,3,6V5H5ZM16.279,20l.333,1H7.387l.334-1ZM17,9A5,5,0,0,1,7,9V3H17Zm4-3a3.006,3.006,0,0,1-2,2.829V5h2ZM10.667,8.667,9,7.292,11,7l1-2,1,2,2,.292L13.333,8.667,13.854,11,12,9.667,10.146,11Z"/></svg>
                         </div>
 
                     </div>
