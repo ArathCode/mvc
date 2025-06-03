@@ -477,6 +477,12 @@ svg{
   min-height: 490px; 
   overflow-y: auto;
 }
+.btn-custom-red {
+        background-color: var(--red);
+        color: #fff;
+        border: none;
+        transition: background-color 0.3s ease;
+    }
 #relT button{
   background-color: var(--red);
 }
