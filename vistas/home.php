@@ -237,8 +237,8 @@
                     <form id="formAgregarAcceso">
                         <div class="mb-3 d-flex align-items-center">
                             <div class="me-3 flex-grow-1">
-                                <label for="idMiembro" class="form-label">ID Miembro</label>
-                                <input type="number" class="form-control" id="idMiembro" name="ID_Miembro" placeholder="Escriba el ID" required>
+                                <label for="idMiembro" class="form-label"># Miembro</label>
+                                <input type="number" class="form-control" id="idMiembro" name="ID_Miembro" placeholder="Escriba el número" required>
                             </div>
                             <div class="flex-grow-2">
                                 <label for="nombreMiembro" class="form-label">Nombre del Miembro</label>

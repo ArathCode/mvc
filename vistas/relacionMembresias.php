@@ -126,8 +126,8 @@
                         <form id="formAgregar" class="row g-3">
                             <div class="mb-3 d-flex align-items-center">
                                 <div class="me-3 flex-grow-1">
-                                    <label for="ID_Miembro" class="form-label">ID Miembro</label>
-                                    <input type="number" class="form-control" id="ID_Miembro" name="ID_Miembro" placeholder="Escriba el ID" required>
+                                    <label for="ID_Miembro" class="form-label"># Miembro</label>
+                                    <input type="number" class="form-control" id="ID_Miembro" name="ID_Miembro" placeholder="Escriba el número" required>
                                 </div>
                                 <div class="flex-grow-2">
                                     <label for="nombreMiembro" class="form-label">Nombre del Miembro</label>
@@ -170,7 +170,7 @@
                                 <input type="date" class="form-control" id="FechaPago" name="FechaPago" readonly>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-custom-red">Guardar</button>
                         </form>
                     </div>
                 </div>
